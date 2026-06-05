@@ -463,7 +463,7 @@ Pass12 (3x3 conv) -> Scatter
 Postpass (ML composite + conventional math -> 7 output planes)
 ```
 
-The architecture resembles a **U-Net**: features processed through progressively deeper layers then reconstructed.
+The architecture has a **bottleneck structure with symmetric pass layout**: features processed through progressively deeper layers then reconstructed.
 
 ### CBV Register Semantics
 
