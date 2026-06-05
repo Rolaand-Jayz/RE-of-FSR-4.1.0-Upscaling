@@ -1,0 +1,1242 @@
+{
+  "pipeline": {
+    "name": "AMD FSR 4.1.0",
+    "dll": "amd_fidelityfx_upscaler_dx12.dll",
+    "total_passes": 30,
+    "main_loop_passes": 27,
+    "conditional_passes": [
+      "rcas",
+      "spd_autoexposure",
+      "debug_view"
+    ],
+    "thread_group": [
+      32,
+      1,
+      1
+    ],
+    "quality_presets": [
+      "quality",
+      "balanced",
+      "performance",
+      "ultra_performance",
+      "ulra_quality",
+      "drs"
+    ],
+    "shared_weights": true,
+    "weight_presets": 2
+  },
+  "pass_structure": {
+    "prepass": {
+      "indices": [],
+      "note": "pass 0 is the first main pass"
+    },
+    "main_passes": {
+      "pairs": 13,
+      "even": "pre-transform pass (5 CBV regs: [0,1,2,4,5])",
+      "odd": "post-transform pass (6 CBV regs: [0,1,2,3,4,5])"
+    }
+  },
+  "resource_spaces": {
+    "0": {
+      "name": "color",
+      "usage": "Input/Output color",
+      "srv_reg": 1,
+      "uav_reg": 1
+    },
+    "1": {
+      "name": "motion",
+      "usage": "Motion vectors/reprojection",
+      "srv_reg": 2,
+      "uav_reg": null
+    },
+    "2": {
+      "name": "luma_mask",
+      "usage": "Luma/mask data",
+      "srv_reg": 3,
+      "uav_reg": null
+    },
+    "3": {
+      "name": "history",
+      "usage": "History/temporal",
+      "srv_reg": 4,
+      "uav_reg": 2
+    },
+    "4": {
+      "name": "exposure",
+      "usage": "Exposure/luma mip",
+      "srv_reg": 5,
+      "uav_reg": null
+    },
+    "6": {
+      "name": "feature_extra",
+      "usage": "Extra feature map (passes 8,9,18,19,28,29)",
+      "srv_reg": 6,
+      "uav_reg": null
+    },
+    "11": {
+      "name": "scratch",
+      "usage": "Scratch buffer (resolution-dependent)",
+      "srv_reg": null,
+      "uav_reg": 0
+    },
+    "17": {
+      "name": "intermediate",
+      "usage": "Extra intermediate (7+ SRV passes)",
+      "srv_reg": "top",
+      "uav_reg": null
+    },
+    "18": {
+      "name": "weights",
+      "usage": "Neural network weights from fsr_data.dll",
+      "srv_reg": 0,
+      "uav_reg": null
+    }
+  },
+  "constant_buffer": {
+    "register": 0,
+    "space": 1,
+    "registers_used": {
+      "0": "dispatch dimensions / inverse resolution",
+      "1": "jitter / subpixel offset",
+      "2": "scaling / transform params",
+      "3": "extra params (odd/post passes only)",
+      "4": "additional config",
+      "5": "additional config"
+    },
+    "total_bytes_even": 80,
+    "total_bytes_odd": 96
+  },
+  "passes": [
+    {
+      "index": 0,
+      "name": "pass_0",
+      "ffx_name": "FFX_FSR4_PASS_0",
+      "type": "main",
+      "pair": "pair_0",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 1,
+      "name": "pass_1",
+      "ffx_name": "FFX_FSR4_PASS_1",
+      "type": "post",
+      "pair": "pair_0",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 2,
+      "name": "pass_2",
+      "ffx_name": "FFX_FSR4_PASS_2",
+      "type": "main",
+      "pair": "pair_1",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 7,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        17
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 3,
+      "name": "pass_3",
+      "ffx_name": "FFX_FSR4_PASS_3",
+      "type": "post",
+      "pair": "pair_1",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 7,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        17
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 4,
+      "name": "pass_4",
+      "ffx_name": "FFX_FSR4_PASS_4",
+      "type": "main",
+      "pair": "pair_2",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 5,
+      "name": "pass_5",
+      "ffx_name": "FFX_FSR4_PASS_5",
+      "type": "post",
+      "pair": "pair_2",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 6,
+      "name": "pass_6",
+      "ffx_name": "FFX_FSR4_PASS_6",
+      "type": "main",
+      "pair": "pair_3",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 7,
+      "name": "pass_7",
+      "ffx_name": "FFX_FSR4_PASS_7",
+      "type": "post",
+      "pair": "pair_3",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 8,
+      "name": "pass_8",
+      "ffx_name": "FFX_FSR4_PASS_8",
+      "type": "main",
+      "pair": "pair_4",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 8,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 9,
+      "name": "pass_9",
+      "ffx_name": "FFX_FSR4_PASS_9",
+      "type": "post",
+      "pair": "pair_4",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 8,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 10,
+      "name": "pass_10",
+      "ffx_name": "FFX_FSR4_PASS_10",
+      "type": "main",
+      "pair": "pair_5",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 5,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 11,
+      "name": "pass_11",
+      "ffx_name": "FFX_FSR4_PASS_11",
+      "type": "post",
+      "pair": "pair_5",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 5,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 12,
+      "name": "pass_12",
+      "ffx_name": "FFX_FSR4_PASS_12",
+      "type": "main",
+      "pair": "pair_6",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 5,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 13,
+      "name": "pass_13",
+      "ffx_name": "FFX_FSR4_PASS_13",
+      "type": "post",
+      "pair": "pair_6",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 5,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 14,
+      "name": "pass_14",
+      "ffx_name": "FFX_FSR4_PASS_14",
+      "type": "main",
+      "pair": "pair_7",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 5,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 15,
+      "name": "pass_15",
+      "ffx_name": "FFX_FSR4_PASS_15",
+      "type": "post",
+      "pair": "pair_7",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 5,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 16,
+      "name": "pass_16",
+      "ffx_name": "FFX_FSR4_PASS_16",
+      "type": "main",
+      "pair": "pair_8",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 17,
+      "name": "pass_17",
+      "ffx_name": "FFX_FSR4_PASS_17",
+      "type": "post",
+      "pair": "pair_8",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 18,
+      "name": "pass_18",
+      "ffx_name": "FFX_FSR4_PASS_18",
+      "type": "main",
+      "pair": "pair_9",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 7,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 19,
+      "name": "pass_19",
+      "ffx_name": "FFX_FSR4_PASS_19",
+      "type": "post",
+      "pair": "pair_9",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 7,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 20,
+      "name": "pass_20",
+      "ffx_name": "FFX_FSR4_PASS_20",
+      "type": "main",
+      "pair": "pair_10",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 21,
+      "name": "pass_21",
+      "ffx_name": "FFX_FSR4_PASS_21",
+      "type": "post",
+      "pair": "pair_10",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 22,
+      "name": "pass_22",
+      "ffx_name": "FFX_FSR4_PASS_22",
+      "type": "main",
+      "pair": "pair_11",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 23,
+      "name": "pass_23",
+      "ffx_name": "FFX_FSR4_PASS_23",
+      "type": "post",
+      "pair": "pair_11",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 24,
+      "name": "pass_24",
+      "ffx_name": "FFX_FSR4_PASS_24",
+      "type": "main",
+      "pair": "pair_12",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 25,
+      "name": "pass_25",
+      "ffx_name": "FFX_FSR4_PASS_25",
+      "type": "post",
+      "pair": "pair_12",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 6,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 26,
+      "name": "pass_26",
+      "ffx_name": "FFX_FSR4_PASS_26",
+      "type": "main",
+      "pair": "pair_13",
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 7,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        17
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 27,
+      "name": "rcas",
+      "ffx_name": "FFX_FSR4_RCAS_PASS",
+      "type": "rcas",
+      "pair": null,
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 7,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        17
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 28,
+      "name": "spd_autoexposure",
+      "ffx_name": "FFX_FSR4_SPD_AUTOEXPOSURE_PASS",
+      "type": "spd_autoexposure",
+      "pair": null,
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 8,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        17
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    },
+    {
+      "index": 29,
+      "name": "debug_view",
+      "ffx_name": "FFX_FSR4_DEBUG_VIEW_PASS",
+      "type": "debug_view",
+      "pair": null,
+      "thread_group": [
+        32,
+        1,
+        1
+      ],
+      "srv_count": 8,
+      "uav_count": 3,
+      "cbv_count": 1,
+      "sampler_count": 1,
+      "cbv_registers": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "srv_spaces": [
+        18,
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        17
+      ],
+      "uav_spaces": [
+        11,
+        0,
+        3
+      ],
+      "unique_blob": true
+    }
+  ]
+}
