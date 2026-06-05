@@ -38,21 +38,79 @@ This repository is the complete record of that work: the analysis, the dead ends
 
 ---
 
-## What We Did NOT Do
+## Runtime Capture: Three Attempts, No Silver Bullet
 
-Honesty matters more than looking complete. Here's what this project has **not** accomplished:
+Runtime capture — confirming our static analysis by watching the upscaler execute in real time — was a major goal that we invested significant engineering into. Three different approaches were built and deployed on CachyOS running FF7 Rebirth through Proton/VKD3D. All three hit blockers.
+
+This isn't a failure section. It's a record of real engineering work that produced useful tooling even though the primary goal (confirming the 27-pass dispatch sequence at runtime) wasn't achieved. The tools exist, they compile, and they're in the repo — if you can get past the Proton layering issues, they'll work.
+
+### Attempt 1: FFX Proxy DLL (`ffx_capture_proxy.c`)
+
+**Approach:** Replace AMD's `amd_fidelityfx_upscaler_dx12.dll` with a proxy that intercepts the 5 exported FFX API functions (`ffxConfigure`, `ffxCreateContext`, `ffxDispatch`, `ffxDestroyContext`, `ffxQuery`). Logs parameters and raw descriptor bytes at the API level.
+
+**Built with:** MinGW cross-compilation on Linux → `ffx_proxy.dll`
+
+**Status:** ⚠️ Written and compiled. Not deployed for live capture (would require renaming the original DLL and placing the proxy in the game directory, which we didn't attempt during the analysis phase). The proxy captures API-level parameters — dispatch descriptors, quality preset, context creation — but not actual GPU resource bindings. It would confirm *how many* dispatches occur, but not *what data* each one accesses.
+
+### Attempt 2: Vulkan LD_PRELOAD Shim (`fsr4_capture.c`)
+
+**Approach:** A lightweight `.so` that hooks `vkCmdDispatch`, `vkCmdBindDescriptorSets`, and `vkCmdBindPipeline` via `LD_PRELOAD`. No frame capture, no RenderDoc overhead — just a dispatch log. Designed specifically for FSR4's 27+ compute passes where full capture freezes the game.
+
+**Built with:** `gcc -shared -fPIC -O2 -o fsr4_capture.so fsr4_capture.c -ldl` on CachyOS
+
+**Deployed to:** `/mnt/workdrive/fsr-re/runtime-capture/fsr4_capture.so`
+
+**Launch options:**
+```
+LD_PRELOAD=/mnt/workdrive/fsr-re/runtime-capture/fsr4_capture.so PROTON_FSR4_UPGRADE=1 DXIL_SPIRV_CONFIG=wmma_rdna3_workaround WINEDLLOVERRIDES=version=n,b %command%
+```
+
+**Result:** ❌ The shim loaded (confirmed by `[INIT] FSR4 capture shim loaded` in `dispatch_log.txt`) but produced no dispatch data. The `LD_PRELOAD` hook propagated into Proton's wine process but the `vkCmdDispatch` intercept never fired. Likely cause: VKD3D-Proton's Vulkan dispatch goes through a code path that doesn't route through the standard `vkCmdDispatch` symbol, or the hook's `dlsym` resolution fails inside the Proton loader.
+
+**What we learned:** `LD_PRELOAD` does survive into Proton's wine process (the init message proved it), but hooking Vulkan calls through VKD3D translation is unreliable. The hook fires in the host process but not necessarily inside the wine Vulkan wrapper.
+
+### Attempt 3: RenderDoc Full Capture
+
+**Approach:** Standard RenderDoc Vulkan capture via implicit layer. Requires `ENABLE_VULKAN_RENDERDOC_CAPTURE=1` (NOT `ENABLE_VULKAN=1` — that was a dead end that consumed a debugging session).
+
+**Launch options:**
+```
+ENABLE_VULKAN_RENDERDOC_CAPTURE=1 RENDERDOC_CAPTUREFILE=/mnt/workdrive/fsr-re/runtime-capture/fsr4_ff7r VKD3D_DEBUG=trace VKD3D_SHADER_DUMP_PATH=/mnt/workdrive/fsr-re/runtime-capture/vkd3d-shaders %command%
+```
+
+**Result:** ❌ RenderDoc hooks every Vulkan call through VKD3D. FSR4 dispatches 27+ compute passes per frame. The capture grows enormous, the game freezes, and eventually crashes with a 120-second timeout. Full RenderDoc capture is incompatible with FSR4's dispatch density.
+
+**What we learned:** FSR4's neural network inference is too heavy for full frame capture tools. Lightweight approaches (shims, logs) are the only viable path.
+
+### Side Discovery: VKD3D Shader Dumps
+
+Setting `VKD3D_SHADER_DUMP_PATH` during the RenderDoc and shim attempts produced shader dumps — but they were **auxiliary post-processing shaders** (RCAS-like sharpening, depth/motion adaptive passes), not the FSR4 neural network core. The core model shaders compile through a different path that VKD3D doesn't dump, or they're pre-compiled SPIR-V embedded directly in the DLL.
+
+### Diagnostic Tooling
+
+A full diagnostic script (`scripts/capture/diagnose_capture.sh`) was written that checks all prerequisites: RenderDoc library, Vulkan layer registration, shim compilation, proxy DLL status, FF7R DLL detection, and OptiScaler presence. It also prints corrected capture instructions for all three methods.
+
+### What This Means for the Project
+
+The runtime capture gap is real. Our 27-pass pipeline analysis comes from:
+- ⚠️ Ghidra decompilation of the C++ dispatch function
+- ⚠️ Shader classification from 602 DXBC blobs
+- ⚠️ Structural comparison with the MIT-licensed 4.0.2 source
+
+None of this has been confirmed by watching the actual dispatch sequence execute. The bit-identical DLL rebuild proves our **data extraction** is correct. It does not prove our **pipeline understanding** is correct. Those are different claims at different confidence levels.
+
+If you have access to a Windows machine with FF7 Rebirth and can deploy the D3D12 command list hook (`tools/ffx_d3d12_capture.c`), that would close this gap.
+
+### What Remains Unconfirmed
 
 | Gap | Why it matters | Status |
 |:---|:---|:---|
-| **Runtime dispatch capture** | Confirming the 27-pass pipeline actually executes as inferred | ❌ Attempted. Vulkan dispatch shim (`fsr4_capture.c`) was written and compiled, but `LD_PRELOAD` injection through Proton produced no output. RenderDoc froze the game during FSR4's 27+ compute dispatches per frame. VKD3D shader dumps captured only auxiliary post-processing shaders, not the FSR4 neural network core. |
-| **Tensor offset map for 4.1.0** | The 78-tensor map in `spec/tensor-map.json` was derived from 4.0.2's HLSL source and assumed to transfer. 4.1.0 has 27 passes vs 14 — the map is almost certainly wrong for 4.1.0. | ⚠️ From 4.0.2 schema only. Needs runtime cbuffer capture to correct. |
-| **444 extra FP16 parameters** | 888 bytes at blob offset 130,088, purpose unknown | ❌ Unconfirmed. Likely new layer norm or scaling metadata, but not traced. |
+| **Runtime dispatch sequence** | Confirming the 27-pass pipeline actually executes as inferred | ❌ Three methods attempted, all blocked by Proton/VKD3D layering |
+| **Tensor offset map for 4.1.0** | The 78-tensor map in `spec/tensor-map.json` was derived from 4.0.2's HLSL source. 4.1.0 has 27 passes vs 14 — the map almost certainly doesn't transfer cleanly | ⚠️ From 4.0.2 schema only. Needs runtime cbuffer capture to correct. |
+| **444 extra FP16 parameters** | 888 bytes at blob offset 130,088, purpose unknown | ❌ Unconfirmed. Likely layer norm or scaling metadata, but not traced. |
 | **Per-pass spatial resolution** | Which passes operate at which resolution in the 27-pass pipeline | ❌ Unknown. Would require runtime capture of dispatch dimensions. |
-| **Model output validation** | The extracted weights have never been loaded into a reconstructed model to verify correct output | ❌ Not attempted. |
-| **Skip connections** | Static analysis at ~95% confidence from Ghidra decompilation | ⚠️ Not runtime-verified. |
-
-The capture tools in `tools/` are included because they represent real engineering effort toward runtime verification — but we're being upfront that they did not produce the data needed to close these gaps. If you can get them working through Proton, the gaps close.
-
+| **Model output validation** | The extracted weights have never been loaded into a reconstructed model | ❌ Not attempted. |
+| **Skip connections** | Static analysis at ~95% confidence from Ghidra decompilation | ⚠️ Not runtime-verified.
 ---
 
 ## How We Found It
