@@ -1,0 +1,5 @@
+=== FSR 4 Runtime Capture ===
+Started: Mon Jun  1 20:38:12 2026
+=============================
+
+[INIT] FSR4 capture shim loaded

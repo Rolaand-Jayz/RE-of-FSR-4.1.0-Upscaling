@@ -1,0 +1,6 @@
+EXPORTS
+    fsr_data_version
+    fsr_data_blob_count
+    fsr_data_blob_size
+    fsr_data_get_blob
+    fsr_data_find_blob

@@ -1,0 +1,198 @@
+{
+  "timestamp": "2026-05-31T12:51:22.643291",
+  "total": 38,
+  "passed": 38,
+  "failed": 0,
+  "results": [
+    {
+      "name": "dll_v410.dll exists and is 15,273,344 bytes",
+      "status": "PASS",
+      "evidence": "size=15605520"
+    },
+    {
+      "name": "quality: re-extracted matches existing file",
+      "status": "PASS",
+      "evidence": "rva=0x91DB50 offset=0x91C950 md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "balanced: re-extracted matches existing file",
+      "status": "PASS",
+      "evidence": "rva=0x943CC0 offset=0x942AC0 md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "performance: re-extracted matches existing file",
+      "status": "PASS",
+      "evidence": "rva=0x963D20 offset=0x962B20 md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "ultraperf: re-extracted matches existing file",
+      "status": "PASS",
+      "evidence": "rva=0x8D7570 offset=0x8D6370 md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "native: re-extracted matches existing file",
+      "status": "PASS",
+      "evidence": "rva=0x8FB700 offset=0x8FA500 md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "drs: re-extracted matches existing file",
+      "status": "PASS",
+      "evidence": "rva=0x8B5120 offset=0x8B3F20 md5=8e5c042e0c14cca83d56ed13df5f02dd"
+    },
+    {
+      "name": "2 unique blobs out of 6 (5 presets + DRS)",
+      "status": "PASS",
+      "evidence": "found 2 unique: ['8e5c042e0c14cca83d56ed13df5f02dd', '6ccdb68fc828e0bef93fa32fd144c4f6']"
+    },
+    {
+      "name": "quality MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "balanced MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "performance MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "ultraperf MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "native MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "drs MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=8e5c042e0c14cca83d56ed13df5f02dd expected=8e5c042e0c14cca83d56ed13df5f02dd"
+    },
+    {
+      "name": "HLSL pass files found",
+      "status": "PASS",
+      "evidence": "3 files"
+    },
+    {
+      "name": "At least 78 tensors with byte offsets from HLSL",
+      "status": "PASS",
+      "evidence": "found 282 tensors"
+    },
+    {
+      "name": "Raw HLSL offsets parsed (note: these are memory offsets, not blob offsets)",
+      "status": "PASS",
+      "evidence": "max_offset=265804928 blob_size=131072"
+    },
+    {
+      "name": "Bias zone is 7,208 bytes (3604 FP16 values)",
+      "status": "PASS",
+      "evidence": "size=7208"
+    },
+    {
+      "name": "FP16 bias values are valid (finite and bounded)",
+      "status": "PASS",
+      "evidence": "3604/3604 are finite, max=512.00"
+    },
+    {
+      "name": "Weight zone is 122,880 bytes",
+      "status": "PASS",
+      "evidence": "size=122880"
+    },
+    {
+      "name": "Weight zone uses uint8 values",
+      "status": "PASS",
+      "evidence": "255 unique uint8 values"
+    },
+    {
+      "name": "Extra zone is 888 bytes (444 FP16 values)",
+      "status": "PASS",
+      "evidence": "size=888"
+    },
+    {
+      "name": "Extra zone FP16 values are valid",
+      "status": "PASS",
+      "evidence": "444/444 are finite"
+    },
+    {
+      "name": "Last 96 bytes are zero padding",
+      "status": "PASS",
+      "evidence": "all_zero=True"
+    },
+    {
+      "name": "98.7% byte change rate between 4.0.2 and 4.1.0",
+      "status": "PASS",
+      "evidence": "actual=98.7% (128387/130088 bytes)"
+    },
+    {
+      "name": "4.0.2 blob is 130,088 bytes",
+      "status": "PASS",
+      "evidence": "size=130088"
+    },
+    {
+      "name": "4.1.0 blob is 131,072 bytes (+984)",
+      "status": "PASS",
+      "evidence": "diff=984 bytes"
+    },
+    {
+      "name": "4.1.0 uses 255 unique uint8 values (full range)",
+      "status": "PASS",
+      "evidence": "found 255 unique values"
+    },
+    {
+      "name": "4.0.2 uses 122 unique FP8 values (limited codebook)",
+      "status": "PASS",
+      "evidence": "found 122 unique values"
+    },
+    {
+      "name": "4.1.0 has 888 extra bytes at offset 130088",
+      "status": "PASS",
+      "evidence": "present=True, nonzero=True"
+    },
+    {
+      "name": "4.0.2 does NOT have the extra zone",
+      "status": "PASS",
+      "evidence": "remaining bytes=0"
+    },
+    {
+      "name": "DXIL contains fsr4_model_v07 entry points",
+      "status": "PASS",
+      "evidence": "found 27: ['fsr4_model_v07_fp8_no_scale_pass0_post', 'fsr4_model_v07_fp8_no_scale_pass1', 'fsr4_model_v07_fp8_no_scale_pass10', 'fsr4_model_v07_fp8_no_scale_pass10_post', 'fsr4_model_v07_fp8_no_scale_pass11']..."
+    },
+    {
+      "name": "Passes 0-13 all present",
+      "status": "PASS",
+      "evidence": "found 13/14 expected passes"
+    },
+    {
+      "name": "Blob format spec has zone definitions",
+      "status": "PASS",
+      "evidence": "4 zones defined"
+    },
+    {
+      "name": "Zone 'fp16_params' at 0x0 size 7208",
+      "status": "PASS",
+      "evidence": "bytes_available=7208"
+    },
+    {
+      "name": "Zone 'fp8_weights' at 0x1C28 size 122880",
+      "status": "PASS",
+      "evidence": "bytes_available=122880"
+    },
+    {
+      "name": "Zone 'extra_scale_factors' at 0x1FC28 size 888",
+      "status": "PASS",
+      "evidence": "bytes_available=888"
+    },
+    {
+      "name": "Zone 'padding' at 0x1FFA0 size 96",
+      "status": "PASS",
+      "evidence": "bytes_available=96"
+    }
+  ]
+}

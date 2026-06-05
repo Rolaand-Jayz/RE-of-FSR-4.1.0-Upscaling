@@ -1,0 +1,93 @@
+{
+  "title": "FSR4 InitializerBuffer Blob Format",
+  "description": "Binary layout of the neural network weight blob stored in the DLL",
+  "resource_name": "FSR4UPSCALER_InitializerBuffer",
+  "allocation_size": 131072,
+  "v402_size": 130088,
+  "v410_size": 131072,
+  "zones": [
+    {
+      "name": "fp16_params",
+      "offset": 0,
+      "size": 7208,
+      "dtype": "float16",
+      "element_count": 3604,
+      "tensor_count": 40,
+      "description": "FP16 values (39 biases + 1 encoder1 downscale conv weight)"
+    },
+    {
+      "name": "fp8_weights",
+      "offset": 7208,
+      "size": 122880,
+      "dtype": "uint8",
+      "element_count": 122880,
+      "tensor_count": 38,
+      "description": "Quantized FP8/INT8 weight data in HWNC or HWCN layout",
+      "v402_unique_values": 122,
+      "v410_unique_values": 255
+    },
+    {
+      "name": "extra_scale_factors",
+      "offset": 130088,
+      "size": 888,
+      "dtype": "float16",
+      "element_count": 444,
+      "tensor_count": null,
+      "description": "Additional FP16 parameters (v4.1.0 only). Likely per-layer quantization scale factors.",
+      "present_in": [
+        "4.1.0"
+      ],
+      "absent_in": [
+        "4.0.2"
+      ]
+    },
+    {
+      "name": "padding",
+      "offset": 130976,
+      "size": 96,
+      "dtype": "zeros",
+      "description": "Zero padding to align to 0x20000"
+    }
+  ],
+  "weight_locations_v410": {
+    "description": "RVAs where weight blobs are stored in dll_v410.dll .rdata section",
+    "rdata_section": {
+      "virtual_address": "0x3a000",
+      "raw_offset": "0x38e00"
+    },
+    "presets": {
+      "quality": {
+        "rva": "0x91db50",
+        "file_offset": "0x91c950",
+        "blob_id": "standard"
+      },
+      "balanced": {
+        "rva": "0x943cc0",
+        "file_offset": "0x942ac0",
+        "blob_id": "standard"
+      },
+      "performance": {
+        "rva": "0x963d20",
+        "file_offset": "0x962b20",
+        "blob_id": "standard"
+      },
+      "ultraperf": {
+        "rva": "0x8d7570",
+        "file_offset": "0x8d6370",
+        "blob_id": "standard"
+      },
+      "native": {
+        "rva": "0x8fb700",
+        "file_offset": "0x8fa500",
+        "blob_id": "standard"
+      },
+      "drs": {
+        "rva": "0x8b5120",
+        "file_offset": "0x8b3f20",
+        "blob_id": "drs"
+      }
+    },
+    "unique_blobs": 2,
+    "note": "5 presets share 'standard' blob; only DRS uses separate weights"
+  }
+}
