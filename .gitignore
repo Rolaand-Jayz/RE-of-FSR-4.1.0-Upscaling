@@ -1,0 +1,67 @@
+# FSR Reverse Engineering — .gitignore
+
+# ═══════════════════════════════════════════════
+# Proprietary binary data — NOT for redistribution
+# ═══════════════════════════════════════════════
+
+# Original AMD DLL (proprietary — do not redistribute)
+dist/
+
+# Build artifacts containing proprietary data
+build/
+
+# Ghidra project database (contains proprietary binary data)
+ghidra-project/
+ghidra-decompile/
+
+# DXIL disassembly (derived from proprietary shaders)
+*.ll
+
+# Runtime capture artifacts
+runtime-capture/vkd3d-shaders/
+
+# Compiled capture tools (rebuild from source)
+tools/*.so
+tools/*.dll
+tools/*.tar.gz
+tools/*.a
+
+# ═══════════════════════════════════════════════
+# Intermediate / working files
+# ═══════════════════════════════════════════════
+
+# Old report directory (superseded by docs/)
+reports/
+
+# Agent working directories
+_archive/
+
+# Scratch files
+*.log
+*.tmp
+*.bak
+*.o
+*.bin
+!extracted/**/*.bin
+
+# ═══════════════════════════════════════════════
+# Python
+# ═══════════════════════════════════════════════
+
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# ═══════════════════════════════════════════════
+# OS / Editor
+# ═══════════════════════════════════════════════
+
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

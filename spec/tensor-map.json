@@ -1,0 +1,814 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FSR4 Neural Network Tensor Map",
+  "description": "Complete tensor offset table for fsr4_model_v07_fp8_no_scale (78 tensors)",
+  "model": "fsr4_model_v07_fp8_no_scale",
+  "versions": [
+    "4.0.2",
+    "4.1.0"
+  ],
+  "blob_format": {
+    "v402": {
+      "total_size": 130088,
+      "zones": [
+        {
+          "name": "biases",
+          "offset": 0,
+          "size": 7208,
+          "dtype": "fp16",
+          "count": 40
+        },
+        {
+          "name": "fp8_weights",
+          "offset": 7208,
+          "size": 122880,
+          "dtype": "uint8",
+          "count": 38
+        }
+      ]
+    },
+    "v410": {
+      "total_size": 131072,
+      "zones": [
+        {
+          "name": "biases",
+          "offset": 0,
+          "size": 7208,
+          "dtype": "fp16",
+          "count": 40
+        },
+        {
+          "name": "fp8_weights",
+          "offset": 7208,
+          "size": 122880,
+          "dtype": "uint8",
+          "count": 38
+        },
+        {
+          "name": "extra_fp16",
+          "offset": 130088,
+          "size": 888,
+          "dtype": "fp16",
+          "count": 444
+        },
+        {
+          "name": "padding",
+          "offset": 130976,
+          "size": 96,
+          "dtype": "zeros"
+        }
+      ]
+    }
+  },
+  "tensors": [
+    {
+      "pass": "0",
+      "name": "encoder1_DownscaleStridedConv2x2_downscale_conv_weight",
+      "offset": 0,
+      "shape": "2, 2, 7, 16",
+      "storage_size": "2, 2, 8, 16",
+      "tensor_type": "Tensor4h_HNWC< BufferStorage >",
+      "byte_size": 1024
+    },
+    {
+      "pass": "0",
+      "name": "encoder1_DownscaleStridedConv2x2_downscale_conv_bias",
+      "offset": 1024,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "1",
+      "name": "encoder2_ResidualBlock_0_body_conv_dw_bias",
+      "offset": 1088,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "1",
+      "name": "encoder2_ResidualBlock_0_body_conv_pw_expand_bias",
+      "offset": 1152,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "1",
+      "name": "encoder2_ResidualBlock_0_body_conv_pw_contract_bias",
+      "offset": 1280,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "2",
+      "name": "encoder2_ResidualBlock_1_body_conv_dw_bias",
+      "offset": 1344,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "2",
+      "name": "encoder2_ResidualBlock_1_body_conv_pw_expand_bias",
+      "offset": 1408,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "2",
+      "name": "encoder2_ResidualBlock_1_body_conv_pw_contract_bias",
+      "offset": 1536,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "3",
+      "name": "encoder2_DownscaleStridedConv2x2_downscale_conv_bias",
+      "offset": 1600,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "4",
+      "name": "encoder3_ResidualBlock_0_body_spatial_mixing_partial_conv_bias",
+      "offset": 1728,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "4",
+      "name": "encoder3_ResidualBlock_0_body_pw_expand_bias",
+      "offset": 1792,
+      "shape": "128",
+      "storage_size": "128",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 256
+    },
+    {
+      "pass": "4",
+      "name": "encoder3_ResidualBlock_0_body_pw_contract_bias",
+      "offset": 2048,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "5",
+      "name": "encoder3_ResidualBlock_1_body_spatial_mixing_partial_conv_bias",
+      "offset": 2176,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "5",
+      "name": "encoder3_ResidualBlock_1_body_pw_expand_bias",
+      "offset": 2240,
+      "shape": "128",
+      "storage_size": "128",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 256
+    },
+    {
+      "pass": "5",
+      "name": "encoder3_ResidualBlock_1_body_pw_contract_bias",
+      "offset": 2496,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "6",
+      "name": "encoder3_DownscaleStridedConv2x2_downscale_conv_bias",
+      "offset": 2624,
+      "shape": "128",
+      "storage_size": "128",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 256
+    },
+    {
+      "pass": "7",
+      "name": "bottleneck_ResidualBlock_0_body_spatial_mixing_partial_conv_bias",
+      "offset": 2880,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "7",
+      "name": "bottleneck_ResidualBlock_0_body_pw_expand_bias",
+      "offset": 3008,
+      "shape": "256",
+      "storage_size": "256",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "7",
+      "name": "bottleneck_ResidualBlock_0_body_pw_contract_bias",
+      "offset": 3520,
+      "shape": "128",
+      "storage_size": "128",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 256
+    },
+    {
+      "pass": "8",
+      "name": "bottleneck_ResidualBlock_1_body_spatial_mixing_partial_conv_bias",
+      "offset": 3776,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "8",
+      "name": "bottleneck_ResidualBlock_1_body_pw_expand_bias",
+      "offset": 3904,
+      "shape": "256",
+      "storage_size": "256",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "8",
+      "name": "bottleneck_ResidualBlock_1_body_pw_contract_bias",
+      "offset": 4416,
+      "shape": "128",
+      "storage_size": "128",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 256
+    },
+    {
+      "pass": "9",
+      "name": "bottleneck_ResidualBlock_2_body_spatial_mixing_partial_conv_bias",
+      "offset": 4672,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "9",
+      "name": "bottleneck_ResidualBlock_2_body_pw_expand_bias",
+      "offset": 4800,
+      "shape": "256",
+      "storage_size": "256",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "9",
+      "name": "bottleneck_ResidualBlock_2_body_pw_contract_bias",
+      "offset": 5312,
+      "shape": "128",
+      "storage_size": "128",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 256
+    },
+    {
+      "pass": "9",
+      "name": "bottleneck_UpscaleConvTranspose2x2_upscale_conv_bias",
+      "offset": 5568,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "10",
+      "name": "decoder3_ResidualBlock_1_body_spatial_mixing_partial_conv_bias",
+      "offset": 5696,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "10",
+      "name": "decoder3_ResidualBlock_1_body_pw_expand_bias",
+      "offset": 5760,
+      "shape": "128",
+      "storage_size": "128",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 256
+    },
+    {
+      "pass": "10",
+      "name": "decoder3_ResidualBlock_1_body_pw_contract_bias",
+      "offset": 6016,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "11",
+      "name": "decoder3_ResidualBlock_2_body_spatial_mixing_partial_conv_bias",
+      "offset": 6144,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "11",
+      "name": "decoder3_ResidualBlock_2_body_pw_expand_bias",
+      "offset": 6208,
+      "shape": "128",
+      "storage_size": "128",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 256
+    },
+    {
+      "pass": "11",
+      "name": "decoder3_ResidualBlock_2_body_pw_contract_bias",
+      "offset": 6464,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "11",
+      "name": "decoder3_UpscaleConvTranspose2x2_upscale_conv_bias",
+      "offset": 6592,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "12",
+      "name": "decoder2_ResidualBlock_1_body_conv_dw_bias",
+      "offset": 6656,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "12",
+      "name": "decoder2_ResidualBlock_1_body_conv_pw_expand_bias",
+      "offset": 6720,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "12",
+      "name": "decoder2_ResidualBlock_1_body_conv_pw_contract_bias",
+      "offset": 6848,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "13",
+      "name": "decoder2_ResidualBlock_2_body_conv_dw_bias",
+      "offset": 6912,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "13",
+      "name": "decoder2_ResidualBlock_2_body_conv_pw_expand_bias",
+      "offset": 6976,
+      "shape": "64",
+      "storage_size": "64",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 128
+    },
+    {
+      "pass": "13",
+      "name": "decoder2_ResidualBlock_2_body_conv_pw_contract_bias",
+      "offset": 7104,
+      "shape": "32",
+      "storage_size": "32",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 64
+    },
+    {
+      "pass": "13",
+      "name": "decoder2_UpscaleConvTranspose2x2_upscale_conv_bias",
+      "offset": 7168,
+      "shape": "20",
+      "storage_size": "20",
+      "tensor_type": "Tensor1f< BufferStorage >",
+      "byte_size": 40
+    },
+    {
+      "pass": "1",
+      "name": "hwnc__encoder2_ResidualBlock_0_body_conv_dw_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 7208,
+      "shape": "3, 3, 16, 16",
+      "storage_size": "3, 3, 16, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2304
+    },
+    {
+      "pass": "1",
+      "name": "hwnc__encoder2_ResidualBlock_0_body_conv_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 9512,
+      "shape": "1, 1, 16, 32",
+      "storage_size": "1, 1, 16, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "1",
+      "name": "hwnc__encoder2_ResidualBlock_0_body_conv_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 10024,
+      "shape": "1, 1, 32, 16",
+      "storage_size": "1, 1, 32, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "2",
+      "name": "hwnc__encoder2_ResidualBlock_1_body_conv_dw_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 10536,
+      "shape": "3, 3, 16, 16",
+      "storage_size": "3, 3, 16, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2304
+    },
+    {
+      "pass": "2",
+      "name": "hwnc__encoder2_ResidualBlock_1_body_conv_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 12840,
+      "shape": "1, 1, 16, 32",
+      "storage_size": "1, 1, 16, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "2",
+      "name": "hwnc__encoder2_ResidualBlock_1_body_conv_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 13352,
+      "shape": "1, 1, 32, 16",
+      "storage_size": "1, 1, 32, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "3",
+      "name": "hwnc__encoder2_DownscaleStridedConv2x2_downscale_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 13864,
+      "shape": "2, 2, 16, 32",
+      "storage_size": "2, 2, 16, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "4",
+      "name": "hwnc__encoder3_ResidualBlock_0_body_spatial_mixing_partial_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 15912,
+      "shape": "3, 3, 16, 16",
+      "storage_size": "3, 3, 16, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2304
+    },
+    {
+      "pass": "4",
+      "name": "hwnc__encoder3_ResidualBlock_0_body_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 18216,
+      "shape": "1, 1, 32, 64",
+      "storage_size": "1, 1, 32, 64",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "4",
+      "name": "hwnc__encoder3_ResidualBlock_0_body_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 20264,
+      "shape": "1, 1, 64, 32",
+      "storage_size": "1, 1, 64, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "5",
+      "name": "hwnc__encoder3_ResidualBlock_1_body_spatial_mixing_partial_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 22312,
+      "shape": "3, 3, 16, 16",
+      "storage_size": "3, 3, 16, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2304
+    },
+    {
+      "pass": "5",
+      "name": "hwnc__encoder3_ResidualBlock_1_body_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 24616,
+      "shape": "1, 1, 32, 64",
+      "storage_size": "1, 1, 32, 64",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "5",
+      "name": "hwnc__encoder3_ResidualBlock_1_body_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 26664,
+      "shape": "1, 1, 64, 32",
+      "storage_size": "1, 1, 64, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "6",
+      "name": "hwnc__encoder3_DownscaleStridedConv2x2_downscale_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 28712,
+      "shape": "2, 2, 32, 64",
+      "storage_size": "2, 2, 32, 64",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 8192
+    },
+    {
+      "pass": "7",
+      "name": "hwnc__bottleneck_ResidualBlock_0_body_spatial_mixing_partial_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 36904,
+      "shape": "3, 3, 16, 32",
+      "storage_size": "3, 3, 16, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 4608
+    },
+    {
+      "pass": "7",
+      "name": "hwnc__bottleneck_ResidualBlock_0_body_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 41512,
+      "shape": "1, 1, 64, 128",
+      "storage_size": "1, 1, 64, 128",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 8192
+    },
+    {
+      "pass": "7",
+      "name": "hwnc__bottleneck_ResidualBlock_0_body_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 49704,
+      "shape": "1, 1, 128, 64",
+      "storage_size": "1, 1, 128, 64",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 8192
+    },
+    {
+      "pass": "8",
+      "name": "hwnc__bottleneck_ResidualBlock_1_body_spatial_mixing_partial_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 57896,
+      "shape": "3, 3, 16, 32",
+      "storage_size": "3, 3, 16, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 4608
+    },
+    {
+      "pass": "8",
+      "name": "hwnc__bottleneck_ResidualBlock_1_body_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 62504,
+      "shape": "1, 1, 64, 128",
+      "storage_size": "1, 1, 64, 128",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 8192
+    },
+    {
+      "pass": "8",
+      "name": "hwnc__bottleneck_ResidualBlock_1_body_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 70696,
+      "shape": "1, 1, 128, 64",
+      "storage_size": "1, 1, 128, 64",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 8192
+    },
+    {
+      "pass": "9",
+      "name": "hwnc__bottleneck_ResidualBlock_2_body_spatial_mixing_partial_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 78888,
+      "shape": "3, 3, 16, 32",
+      "storage_size": "3, 3, 16, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 4608
+    },
+    {
+      "pass": "9",
+      "name": "hwnc__bottleneck_ResidualBlock_2_body_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 83496,
+      "shape": "1, 1, 64, 128",
+      "storage_size": "1, 1, 64, 128",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 8192
+    },
+    {
+      "pass": "9",
+      "name": "hwnc__bottleneck_ResidualBlock_2_body_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 91688,
+      "shape": "1, 1, 128, 64",
+      "storage_size": "1, 1, 128, 64",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 8192
+    },
+    {
+      "pass": "10",
+      "name": "hwnc__decoder3_ResidualBlock_1_body_spatial_mixing_partial_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 99880,
+      "shape": "3, 3, 16, 16",
+      "storage_size": "3, 3, 16, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2304
+    },
+    {
+      "pass": "10",
+      "name": "hwnc__decoder3_ResidualBlock_1_body_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 102184,
+      "shape": "1, 1, 32, 64",
+      "storage_size": "1, 1, 32, 64",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "10",
+      "name": "hwnc__decoder3_ResidualBlock_1_body_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 104232,
+      "shape": "1, 1, 64, 32",
+      "storage_size": "1, 1, 64, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "11",
+      "name": "hwnc__decoder3_ResidualBlock_2_body_spatial_mixing_partial_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 106280,
+      "shape": "3, 3, 16, 16",
+      "storage_size": "3, 3, 16, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2304
+    },
+    {
+      "pass": "11",
+      "name": "hwnc__decoder3_ResidualBlock_2_body_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 108584,
+      "shape": "1, 1, 32, 64",
+      "storage_size": "1, 1, 32, 64",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "11",
+      "name": "hwnc__decoder3_ResidualBlock_2_body_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 110632,
+      "shape": "1, 1, 64, 32",
+      "storage_size": "1, 1, 64, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "12",
+      "name": "hwnc__decoder2_ResidualBlock_1_body_conv_dw_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 112680,
+      "shape": "3, 3, 16, 16",
+      "storage_size": "3, 3, 16, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2304
+    },
+    {
+      "pass": "12",
+      "name": "hwnc__decoder2_ResidualBlock_1_body_conv_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 114984,
+      "shape": "1, 1, 16, 32",
+      "storage_size": "1, 1, 16, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "12",
+      "name": "hwnc__decoder2_ResidualBlock_1_body_conv_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 115496,
+      "shape": "1, 1, 32, 16",
+      "storage_size": "1, 1, 32, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "13",
+      "name": "hwnc__decoder2_ResidualBlock_2_body_conv_dw_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 116008,
+      "shape": "3, 3, 16, 16",
+      "storage_size": "3, 3, 16, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 2304
+    },
+    {
+      "pass": "13",
+      "name": "hwnc__decoder2_ResidualBlock_2_body_conv_pw_expand_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 118312,
+      "shape": "1, 1, 16, 32",
+      "storage_size": "1, 1, 16, 32",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "13",
+      "name": "hwnc__decoder2_ResidualBlock_2_body_conv_pw_contract_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 118824,
+      "shape": "1, 1, 32, 16",
+      "storage_size": "1, 1, 32, 16",
+      "tensor_type": "QuantizedTensor4f8_HWNC< BufferStorage >",
+      "byte_size": 512
+    },
+    {
+      "pass": "9",
+      "name": "hwcn__bottleneck_UpscaleConvTranspose2x2_upscale_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 119336,
+      "shape": "2, 2, 32, 64",
+      "storage_size": "2, 2, 32, 64",
+      "tensor_type": "QuantizedTensor4f8_HWCN< BufferStorage >",
+      "byte_size": 8192
+    },
+    {
+      "pass": "11",
+      "name": "hwcn__decoder3_UpscaleConvTranspose2x2_upscale_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 127528,
+      "shape": "2, 2, 16, 32",
+      "storage_size": "2, 2, 16, 32",
+      "tensor_type": "QuantizedTensor4f8_HWCN< BufferStorage >",
+      "byte_size": 2048
+    },
+    {
+      "pass": "13",
+      "name": "hwcn__decoder2_UpscaleConvTranspose2x2_upscale_conv_weight_quant_export_handler_QuantizeLinear_output_0",
+      "offset": 129576,
+      "shape": "2, 2, 8, 16",
+      "storage_size": "2, 2, 8, 16",
+      "tensor_type": "QuantizedTensor4f8_HWCN< BufferStorage >",
+      "byte_size": 512
+    }
+  ],
+  "tensor_count": 78,
+  "blocks": {
+    "encoder1": {
+      "passes": [
+        0
+      ],
+      "description": "Input downscale (7\u219216ch, /2)"
+    },
+    "encoder2": {
+      "passes": [
+        1,
+        2,
+        3
+      ],
+      "description": "Mid features (16\u219232ch, MobileNet RB\u00d72 + downscale)"
+    },
+    "encoder3": {
+      "passes": [
+        4,
+        5,
+        6
+      ],
+      "description": "Deep features (32\u219264ch, spatial+pw RB\u00d72 + downscale)"
+    },
+    "bottleneck": {
+      "passes": [
+        7,
+        8,
+        9
+      ],
+      "description": "Deepest (64\u2192128\u219264ch, 3\u00d7 RB + upscale)"
+    },
+    "decoder3": {
+      "passes": [
+        10,
+        11
+      ],
+      "description": "Upscale (64\u219232ch, 2\u00d7 RB + transpose conv)"
+    },
+    "decoder2": {
+      "passes": [
+        12,
+        13
+      ],
+      "description": "Output (32\u219216\u21928ch, 2\u00d7 RB + transpose conv)"
+    }
+  }
+}
