@@ -301,7 +301,12 @@ fsr-re/
 ├── spec/
 │   ├── tensor-map.json            Complete tensor offset table (machine-readable).
 │   ├── blob-format.json           Binary layout specification.
-│   └── pipeline_spec.json         Full 30-pass pipeline spec (machine-readable).
+│   ├── pipeline_spec.json         Full 30-pass pipeline spec (machine-readable).
+│   └── shader_analysis.json       28-pass shader analysis (machine-readable).
+│
+├── docs/
+│   ├── pipeline-dispatch.md       Provider DLL dispatch analysis.
+│   └── shader-internals.md        Neural architecture + FP8 decode analysis.
 │
 ├── reports/
 │   ├── main_dll_analysis.md       Provider DLL dispatch analysis.
@@ -377,3 +382,105 @@ This project is released under the **MIT License** — the same license AMD chos
 
 *Built by Rolaand Jayz — The Shadow Librarian.*
 *If this work helped you understand something, pass it on. Knowledge compounds when it's shared.*
+
+---
+
+## Shader Internals: Neural Network Architecture
+
+Full disassembly of all 602 DXBC blobs revealed **28 unique FSR4 compute shaders** (named `fsr4_model_v07_fp8_no_scale_*`). The remaining 574 blobs are non-FSR utility shaders and parameterized variants.
+
+### Architecture: `fsr4_model_v07_fp8_no_scale`
+
+The name confirms:
+- **Model version 7** — AMDs internal iteration number
+
+---
+
+## Shader Internals: Neural Network Architecture
+
+Full disassembly of all 602 DXBC blobs revealed **28 unique FSR4 compute shaders** (named `fsr4_model_v07_fp8_no_scale_*`). The remaining 574 blobs are non-FSR utility shaders and parameterized variants.
+
+### Architecture: fsr4_model_v07_fp8_no_scale
+
+The name confirms:
+- **Model version 7** — AMD's internal iteration number
+- **FP8 weights, no per-tensor scale** — fixed shared exponent quantization
+- All quality presets share the **same neural architecture**, differing only in weight offsets
+
+### Weight Blob Analysis
+
+All 5 standard presets (Quality, Balanced, Performance, Ultra-Performance, Native) are **byte-identical** (MD5 `6ccdb68fc828e0bef93fa32fd144c4f6`). The quality selection is purely a dispatch/resolution parameter — not a different network.
+
+The DRS (Dynamic Resolution Scaling) blob is a **completely retrained network**:
+- 96.1% of bytes differ from standard (MD5 `8e5c042e0c14cca83d56ed13df5f02dd`)
+- 0 matching 4KB chunks
+- Same architecture (128KB, same FP8 value distribution)
+- Same quantization scheme applied to different trained parameters
+
+### FP8 Decode: LUT via Atomics
+
+The shaders decode FP8 weights through a **256-entry lookup table** in the ScratchBuffer, accessed via `atomicCompareExchange` as side-effect-free table reads:
+
+1. Read FP8 byte from weight SRV (space 0, register 18)
+2. Use fixed-offset LUT lookup in UAV (space 1, register 0)
+3. 256-byte stride between entries (0x100) — one entry per FP8 value
+4. Each byte decodes to 8 FP16 values via LUT
+5. Accumulate entirely in integer registers
+
+This avoids branching and uses GPU atomics idiomatically as LUT reads.
+
+### Layer Architecture
+
+| Tier | Passes | Role | IR Lines | LUT Ops | Kernel |
+|------|--------|------|----------|---------|--------|
+| Input | prepass | Feature extraction + bilinear sampling | 2,267 | 206 | N/A |
+| Small | pass1, pass2, pass12 | 3x3 convolution | ~4,900 | 1,989 | 3x3 |
+| Medium | pass4, pass5, pass10 | 4x4 convolution | ~8,000 | 3,296 | 4x4 |
+| Large | pass7, pass8 | 5x4 convolution (deepest) | ~20,750 | 9,088 | 5x4 |
+| Special | pass3, pass6, pass9, pass11 | Unique roles | varies | varies | varies |
+| Output | postpass | ML + conventional composite | 2,675 | 1,580 | mixed |
+| Scatter | pass*_post (x13) | Data rearrangement only | ~125 | 0 | N/A |
+
+**Post passes are trivial** — 2-5 `rawBufferStore` calls, no ML computation. They scatter accumulated results from scratch buffer to output planes.
+
+### Data Flow
+
+```
+Input Color + Motion + Depth
+    |
+    v
+Prepass (bilinear sampling -> 3 feature planes)
+    |
+    v
+Pass1 (3x3 conv) -> Scatter -> Pass2 (3x3 conv) -> Scatter -> ...
+    | (progressively deeper kernels)
+Pass7/8 (5x4 conv, deepest layers) -> Scatter
+    |
+    v
+Pass12 (3x3 conv) -> Scatter
+    |
+    v
+Postpass (ML composite + conventional math -> 7 output planes)
+```
+
+The architecture resembles a **U-Net**: features processed through progressively deeper layers then reconstructed.
+
+### CBV Register Semantics
+
+| Register | Type | Usage |
+|----------|------|-------|
+| 0 | f32/i32 | Dispatch dimensions (width, height) |
+| 1 | f32 | Jitter offset XY |
+| 2 | f32/i32 | Weight indexing strides / output scale |
+| 4 | i32 | Configuration flags (field 3) |
+| 5 | f32/i32 | Buffer stride (field 0) + blend/exposure (field 1) |
+| 7 | i32 | Extended dispatch params (specialized passes) |
+
+### What Remains Unknown
+
+- **Exact activation functions** — integer-only accumulation obscures whether LUT encodes activations
+- **Temporal state flow** — how frame N-1 feeds into frame N
+- **Skip connections** — pass symmetry suggests them, but unconfirmed
+- **Attention mechanisms** — no softmax/QKV patterns found; likely pure convolutional
+
+Full details: [docs/shader-internals.md](docs/shader-internals.md). Machine-readable analysis: [spec/shader_analysis.json](spec/shader_analysis.json).

@@ -1,0 +1,1248 @@
+{
+  "fsr4_model_v07_fp8_no_scale_pass0_post": {
+    "file": "blob_0098.ll",
+    "lines": 124,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 2,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass1": {
+    "file": "blob_0036.ll",
+    "lines": 4900,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      16,
+      16,
+      32,
+      32,
+      32,
+      64,
+      64,
+      72
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 12,
+    "atomics": 1989,
+    "loads": 58,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 1,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass10": {
+    "file": "blob_0053.ll",
+    "lines": 8006,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      32,
+      64,
+      64,
+      64,
+      64,
+      72,
+      128,
+      128
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 16,
+    "atomics": 3296,
+    "loads": 71,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 1,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass10_post": {
+    "file": "blob_0059.ll",
+    "lines": 127,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 3,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass11": {
+    "file": "blob_0030.ll",
+    "lines": 2598,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      32,
+      32
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 75,
+    "atomics": 1724,
+    "loads": 59,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 2,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass11_post": {
+    "file": "blob_0012.ll",
+    "lines": 125,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 2,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass12": {
+    "file": "blob_0054.ll",
+    "lines": 4918,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      16,
+      16,
+      32,
+      32,
+      32,
+      64,
+      64,
+      72
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 12,
+    "atomics": 1989,
+    "loads": 58,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 1,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass12_post": {
+    "file": "blob_0159.ll",
+    "lines": 124,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 2,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass1_post": {
+    "file": "blob_0109.ll",
+    "lines": 125,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 2,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass2": {
+    "file": "blob_0058.ll",
+    "lines": 4918,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      16,
+      16,
+      32,
+      32,
+      32,
+      64,
+      64,
+      72
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 12,
+    "atomics": 1989,
+    "loads": 58,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 1,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass2_post": {
+    "file": "blob_0055.ll",
+    "lines": 124,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 2,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass3": {
+    "file": "blob_0116.ll",
+    "lines": 1479,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      32
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 3,
+    "atomics": 782,
+    "loads": 38,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass3_post": {
+    "file": "blob_0041.ll",
+    "lines": 127,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 3,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass4": {
+    "file": "blob_0112.ll",
+    "lines": 8006,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      32,
+      64,
+      64,
+      64,
+      64,
+      72,
+      128,
+      128
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 16,
+    "atomics": 3296,
+    "loads": 71,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 1,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass4_post": {
+    "file": "blob_0023.ll",
+    "lines": 127,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 3,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass5": {
+    "file": "blob_0013.ll",
+    "lines": 8006,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      32,
+      64,
+      64,
+      64,
+      64,
+      72,
+      128,
+      128
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 16,
+    "atomics": 3296,
+    "loads": 71,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 1,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass5_post": {
+    "file": "blob_0087.ll",
+    "lines": 127,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 3,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass6": {
+    "file": "blob_0017.ll",
+    "lines": 4641,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      64
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 3,
+    "atomics": 2842,
+    "loads": 138,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass6_post": {
+    "file": "blob_0164.ll",
+    "lines": 131,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 5,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass7": {
+    "file": "blob_0079.ll",
+    "lines": 20753,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      64,
+      128,
+      128,
+      144,
+      256,
+      256,
+      256,
+      256
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 20,
+    "atomics": 9088,
+    "loads": 135,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 1,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass7_post": {
+    "file": "blob_0052.ll",
+    "lines": 131,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 5,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass8": {
+    "file": "blob_0108.ll",
+    "lines": 20753,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      64,
+      128,
+      128,
+      144,
+      256,
+      256,
+      256,
+      256
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 20,
+    "atomics": 9088,
+    "loads": 135,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 1,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass8_post": {
+    "file": "blob_0038.ll",
+    "lines": 131,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 5,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass9": {
+    "file": "blob_0104.ll",
+    "lines": 6909,
+    "handles": [
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [
+      32,
+      64,
+      64
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 132,
+    "atomics": 4839,
+    "loads": 162,
+    "stores": 0,
+    "fmul": 0,
+    "fadd": 4,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_pass9_post": {
+    "file": "blob_0021.ll",
+    "lines": 127,
+    "handles": [
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "CBV",
+        0,
+        0
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [],
+    "phi_count": 5,
+    "atomics": 0,
+    "loads": 0,
+    "stores": 3,
+    "fmul": 0,
+    "fadd": 0,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_postpass": {
+    "file": "blob_0007.ll",
+    "lines": 2675,
+    "handles": [
+      [
+        "UAV",
+        6,
+        12
+      ],
+      [
+        "UAV",
+        5,
+        9
+      ],
+      [
+        "UAV",
+        4,
+        6
+      ],
+      [
+        "UAV",
+        3,
+        2
+      ],
+      [
+        "UAV",
+        2,
+        1
+      ],
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        3,
+        9
+      ],
+      [
+        "SRV",
+        2,
+        6
+      ],
+      [
+        "SRV",
+        1,
+        3
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "CBV",
+        0,
+        1
+      ]
+    ],
+    "allocas": [
+      16
+    ],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1,
+      2
+    ],
+    "phi_count": 65,
+    "atomics": 1580,
+    "loads": 54,
+    "stores": 0,
+    "fmul": 146,
+    "fadd": 100,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  },
+  "fsr4_model_v07_fp8_no_scale_prepass": {
+    "file": "blob_0001.ll",
+    "lines": 2267,
+    "handles": [
+      [
+        "UAV",
+        2,
+        3
+      ],
+      [
+        "UAV",
+        1,
+        0
+      ],
+      [
+        "UAV",
+        0,
+        11
+      ],
+      [
+        "SRV",
+        5,
+        4
+      ],
+      [
+        "SRV",
+        4,
+        3
+      ],
+      [
+        "SRV",
+        3,
+        2
+      ],
+      [
+        "SRV",
+        2,
+        1
+      ],
+      [
+        "SRV",
+        1,
+        0
+      ],
+      [
+        "SRV",
+        0,
+        18
+      ],
+      [
+        "Sampler",
+        0,
+        0
+      ],
+      [
+        "CBV",
+        0,
+        1
+      ]
+    ],
+    "allocas": [],
+    "thread_groups": [
+      "32",
+      "1",
+      "1"
+    ],
+    "dispatch_dims": [
+      0,
+      1
+    ],
+    "phi_count": 1,
+    "atomics": 206,
+    "loads": 6,
+    "stores": 0,
+    "fmul": 466,
+    "fadd": 262,
+    "fma": 0,
+    "has_init": false,
+    "has_recurrent": false,
+    "has_history": false
+  }
+}
