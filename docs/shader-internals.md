@@ -74,7 +74,7 @@ idiomatic way to:
 - Since `compare` = 0 and `value` = 0, the exchange is a no-op on the buffer
 - The return value is the LUT entry
 
-This is AMD's optimization to avoid branching for FP8 decode.
+This appears to be AMD's optimization to avoid branching for FP8 decode, though the exact mechanism (LUT vs compiler artifact vs mixed read-write) has not been confirmed at runtime.
 
 ## Neural Architecture
 
@@ -173,7 +173,7 @@ likely the most computationally expensive layers in the network.
 | postpass | 65 | Moderate loop |
 | all post passes | 5 | Minimal loop (5 phis) |
 
-The nested loop counts directly correspond to the convolution kernel sizes:
+The nested loop counts are consistent with the following convolution kernel sizes (inferred from phi node counts, not proven from loop bounds):
 - 3×3 = 9 iterations (pass1/2/12 — small 3×3 convolutions)
 - 4×4 = 16 iterations (pass4/5/10 — medium convolutions)
 - 5×4 = 20 iterations (pass7/8 — large convolutions)
@@ -265,7 +265,7 @@ preset's weights.
    in i32 elements, but without knowing the packing (4 values per i32 for FP8,
    2 for FP16), the actual channel count is ambiguous.
 
-5. **Attention mechanism** — No clear attention patterns (softmax, QKV) visible
+5. **Attention mechanism** — Attention cannot be ruled out — integer-only computation could encode any operation through LUT values, including attention
    in the integer-only computation. The architecture may be purely convolutional.
 
 ## Data Flow Summary
