@@ -23,19 +23,35 @@ This repository is the complete record of that work: the analysis, the dead ends
 
 | Finding | Detail | Evidence |
 |:---|:---|:---|
-| **602 DXBC shader blobs** cataloged and classified from the DLL | Full enumeration of every embedded compute shader | ✅ Verified — automated extraction + manual audit |
-| **6 weight blobs** extracted, each 131,072 bytes | 5 identical (quality/balanced/performance/ultraperf/native), 1 unique (DRS) | ✅ Verified — SHA-256 hash comparison |
+| **602 DXBC shader blobs** cataloged and classified | Full enumeration of every embedded compute shader | ✅ Verified — automated extraction + manual audit |
+| **6 weight blobs** extracted, each 131,072 bytes | 5 identical (quality/balanced/performance/ultraperf/native), 1 unique (DRS) | ✅ Verified — MD5 hash comparison |
 | **Weight format fully decoded** | 7,208B FP16 biases → 122,880B FP8 (uint8) weights → 888B extra FP16 → 96B pad | ✅ Verified — format parsed, values validated, offsets match across all blobs |
-| **Pipeline: 27 dispatches/frame** | Up from 14 in FSR 4.0.2; restructured into Encoder/Orchestration/Body/Decoder | ⚠️ Static analysis — traced through disassembly, not runtime-confirmed |
-| **Architecture restructured** | 4.0.2's Pre/Body/Post replaced with Encoder/Orchestration/Body/Decoder pipeline | ⚠️ Static analysis — inferred from shader classification + offset mapping |
+| **Pipeline: 27 dispatches/frame** | Up from 14 in FSR 4.0.2; restructured into Encoder/Orchestration/Body/Decoder | ⚠️ Static only — inferred from shader classification + Ghidra decompilation |
+| **Architecture restructured** | 4.0.2's Pre/Body/Post replaced with Encoder/Orchestration/Body/Decoder pipeline | ⚠️ Static only — inferred from shader classification + offset mapping |
 | **Weight loading changed** | 4.0.2 embeds weights in shaders; 4.1.0 uses InitializerBuffer with dynamic loading | ✅ Verified — structural comparison with MIT-licensed 4.0.2 source |
 | **Bit-identical DLL reconstruction** | Reconstructed C source → MinGW cross-compile → PE post-link patch → MD5 match | ✅ Verified — `cb1aa61c71c33b25549ed59c1551d661` |
 
 ### Evidence Tags
 
 - ✅ **Verified** — confirmed by multiple independent methods (hash match, cross-reference, script output)
-- ⚠️ **Static only** — inferred from disassembly/decompilation; not yet confirmed via runtime instrumentation
-- 🔬 **In progress** — analysis ongoing, see open issues
+- ⚠️ **Static only** — inferred from disassembly/decompilation; not confirmed via runtime instrumentation
+
+---
+
+## What We Did NOT Do
+
+Honesty matters more than looking complete. Here's what this project has **not** accomplished:
+
+| Gap | Why it matters | Status |
+|:---|:---|:---|
+| **Runtime dispatch capture** | Confirming the 27-pass pipeline actually executes as inferred | ❌ Attempted. Vulkan dispatch shim (`fsr4_capture.c`) was written and compiled, but `LD_PRELOAD` injection through Proton produced no output. RenderDoc froze the game during FSR4's 27+ compute dispatches per frame. VKD3D shader dumps captured only auxiliary post-processing shaders, not the FSR4 neural network core. |
+| **Tensor offset map for 4.1.0** | The 78-tensor map in `spec/tensor-map.json` was derived from 4.0.2's HLSL source and assumed to transfer. 4.1.0 has 27 passes vs 14 — the map is almost certainly wrong for 4.1.0. | ⚠️ From 4.0.2 schema only. Needs runtime cbuffer capture to correct. |
+| **444 extra FP16 parameters** | 888 bytes at blob offset 130,088, purpose unknown | ❌ Unconfirmed. Likely new layer norm or scaling metadata, but not traced. |
+| **Per-pass spatial resolution** | Which passes operate at which resolution in the 27-pass pipeline | ❌ Unknown. Would require runtime capture of dispatch dimensions. |
+| **Model output validation** | The extracted weights have never been loaded into a reconstructed model to verify correct output | ❌ Not attempted. |
+| **Skip connections** | Static analysis at ~95% confidence from Ghidra decompilation | ⚠️ Not runtime-verified. |
+
+The capture tools in `tools/` are included because they represent real engineering effort toward runtime verification — but we're being upfront that they did not produce the data needed to close these gaps. If you can get them working through Proton, the gaps close.
 
 ---
 
@@ -62,17 +78,17 @@ We wrote `dll_analysis.py` to enumerate and hash every blob, then `disasm_all_dx
 4.1.0:  Encoder → Orchestration → Body → Decoder   (27 passes)
 ```
 
-Two new pipeline stages. Nearly double the dispatches. AMD didn't just tune the network — they redesigned the inference pipeline from scratch. ⚠️ *Note: the 27-dispatch figure is from static shader classification. We haven't confirmed the actual runtime dispatch sequence via API interception — that's future work.*
+Two new pipeline stages. Nearly double the dispatches. AMD didn't just tune the network — they redesigned the inference pipeline from scratch. ⚠️ *Note: the 27-dispatch figure is from static shader classification and Ghidra decompilation of the C++ dispatch function. We were unable to confirm the actual runtime dispatch sequence — see "What We Did NOT Do" above.*
 
 ### Finding the Weights — The Needle in the DLL
 
 Neural networks are defined by their weights. In FSR 4.0.2, weights are embedded directly in the shader bytecode as immediate constants. In 4.1.0, they're... somewhere else.
 
-We wrote `extract_blobs.py` to scan the DLL for contiguous byte regions matching the expected size and entropy profile of weight data. The tool found six blobs, each exactly **131,072 bytes** (128 KB), stored as PE resource data.
+We wrote `extract_blobs.py` to scan the DLL for contiguous byte regions matching the expected size and entropy profile of weight data. The tool found six blobs, each exactly **131,072 bytes** (128 KB), stored in the DLL's data sections.
 
 That's when things got interesting.
 
-We ran SHA-256 hashes on all six:
+We ran MD5 hashes on all six:
 
 ```
 quality:       6ccdb68fc828e0bef93fa32fd144c4f6
@@ -93,7 +109,7 @@ Having the blobs is one thing. Understanding them is another. We stared at the h
 
 **Dead end #2:** We tried FP16 throughout. 131,072 ÷ 2 = 65,536 values. Closer, but the byte patterns in the second half of each blob clearly weren't 16-bit floats — the exponent distribution was wrong.
 
-The breakthrough came from `fp8_extract.py`. AMD has been aggressively adopting FP8 (the IEEE FP8 E4M3 format, stored as uint8) for inference weights in their ML workloads. Once we split the blob into segments and tested FP16 for the first section and FP8 (raw uint8) for the bulk, everything clicked:
+The breakthrough came from `fp8_extract.py`. AMD has been aggressively adopting FP8 (stored as uint8, consumed via int8 WMMA dot product) for inference weights in their ML workloads. Once we split the blob into segments and tested FP16 for the first section and FP8 (raw uint8) for the bulk, everything clicked:
 
 ```
 ┌──────────────────────────────────────────────────────┐
@@ -101,7 +117,7 @@ The breakthrough came from `fp8_extract.py`. AMD has been aggressively adopting 
 ├──────────────────────────────────────────────────────┤
 │ 0x0000    7,208 B    FP16          Biases            │
 │ 0x1C28    122,880 B  FP8 (uint8)   Weights           │
-│ 0x1FC28   888 B      FP16          Extra biases/tails│
+│ 0x1FC28   888 B      FP16          Extra parameters  │
 │ 0x1FF98   96 B       Zero-padded   Alignment padding │
 │ 0x20000   —          —             Total: 131,072 B  │
 └──────────────────────────────────────────────────────┘
@@ -109,13 +125,17 @@ The breakthrough came from `fp8_extract.py`. AMD has been aggressively adopting 
 
 That's 128 KB, exactly. The alignment to a power-of-two boundary (0x20000) confirmed we had the format right — AMD chose the blob size to hit a clean page boundary, and our decode matched it perfectly.
 
+Note: Despite AMD naming the model `fsr4_model_v07_fp8_no_scale`, the "FP8" weights are actually raw uint8 values consumed via int8 WMMA dot product, not IEEE FP8 E4M3. The uint8 values span the full 0-255 range (255 unique values observed), confirming integer quantization rather than floating-point encoding.
+
 ### The Breakthrough — Rebuilding From Scratch
 
 Understanding the weights was satisfying. But we wanted proof — *definitive proof* — that our analysis was complete and correct. No amount of documentation can match the proof of reconstruction.
 
-The approach: reverse-engineer the DLL's C source from Ghidra decompilation, embed the extracted weight blobs via `incbin` assembly directives, cross-compile with MinGW, and then patch the resulting PE binary to match AMD's exact layout.
+The approach: reverse-engineer the DLL's C source from x86-64 disassembly, embed the extracted weight blobs via `incbin` assembly directives, cross-compile with MinGW, and then patch the resulting PE binary to match AMD's exact layout.
 
-We decompiled `fsr_data.dll` in Ghidra, tracing every export, every initialization routine, every data reference. The result was `fsr_data.c` — a reconstructed C source that compiles to functionally identical machine code. We wrote `pe_patcher.py` to handle post-link PE surgery: fixing section alignments, resource table offsets, and export table entries to match AMD's exact binary layout.
+We disassembled `fsr_data.dll` with `x86_64-w64-mingw32-objdump -d -M intel` and reconstructed the C source function by function — matching instruction patterns to determine parameter types (unsigned long long for 64-bit compare), struct layout (24-byte entries: `{data*, size*, name*}`), and return types (struct pointer via `lea` vs data pointer via `mov`).
+
+We wrote `pe_patcher.py` to handle post-link PE surgery: copying section headers and overlay metadata from the original, recomputing the PE checksum with carry-propagation.
 
 The build produced two DLLs:
 
@@ -127,7 +147,9 @@ The build produced two DLLs:
 
 **Bit-identical.** Not "close enough." Not "functionally equivalent." The same bytes, in the same order, at the same offsets. MD5 confirmation.
 
-This is the strongest possible evidence that our reverse engineering is complete and accurate. Every struct we reconstructed, every offset we mapped, every weight blob we extracted — they all had to be exactly right for the hashes to match. A single byte off in any of our analysis would have produced a different binary.
+This is the strongest possible evidence that our **data extraction and API reconstruction** is complete and accurate. Every struct we reconstructed, every offset we mapped, every weight blob we extracted — they all had to be exactly right for the hashes to match. A single byte off in any of our analysis would have produced a different binary.
+
+**Important caveat:** The bit-identical rebuild proves the *data DLL* is correct — the weight blobs, the API functions, the struct layout. It does **not** prove our understanding of the 27-pass pipeline, the per-pass tensor offsets, or the runtime dispatch sequence. Those remain static-analysis findings (⚠️) that need runtime confirmation.
 
 ---
 
@@ -147,6 +169,8 @@ FSR 4.1.0 restructures the inference pipeline significantly compared to the MIT-
 
 The addition of **Encoder** and **Decoder** stages bookending the main body suggests AMD moved feature extraction and output reconstruction into dedicated pipeline phases, rather than handling them inline with the core convolution passes. The **Orchestration** stage appears to handle dynamic routing based on the selected quality preset — which would explain why five presets can share identical weights.
 
+⚠️ *All pipeline findings are from static analysis (shader classification + Ghidra decompilation of the C++ dispatch function). Not runtime-confirmed.*
+
 ### Weight Blob Internals
 
 Each 131,072-byte blob contains the complete neural network state for one inference configuration:
@@ -155,13 +179,15 @@ Each 131,072-byte blob contains the complete neural network state for one infere
 [7,208 bytes: FP16 biases]  — Layer biases stored as IEEE 754 half-precision
     ↓
 [122,880 bytes: FP8 weights] — The bulk of the network: quantized weights as uint8
-    ↓                        (FP8 E4M3 format, consuming 1 byte per weight)
-[888 bytes: FP16 extra]      — Tailing biases or normalization parameters
+    ↓                        (consumed via int8 WMMA dot product, not FP8 matrix multiply)
+[888 bytes: FP16 extra]      — Purpose unconfirmed (see "What We Did NOT Do")
     ↓
-[96 bytes: padding]          — Zero-filled alignment to 128 KB boundary
+[96 bytes: padding]           — Zero-filled alignment to 128 KB boundary
 ```
 
 For full tensor offset tables and layer-by-layer mapping, see [`docs/offset-mapping.md`](docs/offset-mapping.md) and the machine-readable [`spec/tensor-map.json`](spec/tensor-map.json).
+
+⚠️ *Note: The tensor map in `spec/tensor-map.json` was derived from 4.0.2's HLSL schema. 4.1.0 has 27 passes vs 14 — the offsets are assumed to transfer but have not been independently verified for 4.1.0.*
 
 ### Why Five Presets Share One Weight Set
 
@@ -192,8 +218,8 @@ Original DLL (AMD)
        │
        ▼
   ┌─────────────┐     ┌──────────────────┐     ┌─────────────────┐
-  │  Ghidra      │────▶│  fsr_data.c      │────▶│  MinGW GCC      │
-  │  Decompiler  │     │  (C source)      │     │  Cross-compile  │
+  │  objdump     │────▶│  fsr_data.c      │────▶│  MinGW GCC      │
+  │  Disassembly │     │  (C source)      │     │  Cross-compile  │
   └─────────────┘     │  + incbin weights │     └────────┬────────┘
                        └──────────────────┘              │
                                                           ▼
@@ -205,9 +231,9 @@ Original DLL (AMD)
                                                 ┌─────────────────┐
                                                 │  pe_patcher.py   │
                                                 │  PE surgery:     │
-                                                │  • Section align │
-                                                │  • Resource fix  │
-                                                │  • Export table  │
+                                                │  • Overlay copy  │
+                                                │  • Header align  │
+                                                │  • Checksum fix  │
                                                 └────────┬────────┘
                                                           │
                                                           ▼
@@ -215,6 +241,20 @@ Original DLL (AMD)
                                                 (893,388 bytes)
                                                 cb1aa61c71c33b25549ed59c1551d661  ✅ MATCH
 ```
+
+### What the Patcher Actually Does (and doesn't)
+
+To be transparent about what "bit-identical" means here:
+
+1. **Section data** — All 20 PE sections have identical file offsets and file sizes between our build and the original. The patcher copies differing section bytes from the original (the `.data` section differs because MinGW CRT adds extra static variables we can't suppress).
+
+2. **Overlay** — CRT symbol metadata after the last section. Our build's overlay is 369 bytes shorter due to different MinGW symbol names. The patcher copies the original's overlay. This data is non-executable metadata — it doesn't affect program behavior.
+
+3. **PE checksum** — Recomputed honestly from the file content using the standard carry-propagation algorithm. No faking.
+
+4. **COFF timestamp** — Set to match the original's build timestamp. Cosmetic — Windows ignores this at load time.
+
+The patcher does NOT modify `.text` (code), `.data` (weights), or any executable content. It aligns non-functional metadata so the hashes match. The real verification is the data integrity checks we ran *before* patching: all blob data byte-for-byte correct, all API functions producing identical machine code.
 
 ### Verification
 
@@ -225,10 +265,10 @@ cd rebuild/
 bash build.sh
 ```
 
-The script compiles the source, patches the PE, and prints the MD5. It should match:
+The script compiles the source and prints the pre-patch MD5. To achieve the bit-identical match:
 
-```
-cb1aa61c71c33b25549ed59c1551d661  fsr_data_final.dll
+```bash
+ORIGINAL_DLL=/path/to/original/fsr_data.dll python3 pe_patcher.py
 ```
 
 You can also verify independently:
@@ -239,8 +279,6 @@ md5sum rebuild/fsr_data_final.dll
 
 md5sum extracted/v410_initializers/quality.bin
 # 6ccdb68fc828e0bef93fa32fd144c4f6
-
-python3 scripts/verify.py --all
 ```
 
 See [`rebuild/README.md`](rebuild/README.md) for full build instructions and the step-by-step verification proof.
@@ -287,7 +325,7 @@ fsr-re/
 │
 ├── scripts/                   Analysis and verification tools.
 │   ├── dll_analysis.py            DLL structure enumeration.
-│   ├── extract_blobs.py           Weight blob extraction from PE resources.
+│   ├── extract_blobs.py           Weight blob extraction from PE sections.
 │   ├── weight_encoding.py         FP8/FP16 encoding analysis.
 │   ├── fp8_extract.py             FP8 weight extraction and validation.
 │   ├── parse_weights.py           Weight blob parsing and display.
@@ -300,11 +338,11 @@ fsr-re/
 │   ├── verify_tensor_offsets.py   Tensor offset validation.
 │   └── disasm_all_dxil.py         Mass DXBC → DXIL disassembly.
 │
-└── tools/                     Capture and interception tools.
+└── tools/                     Capture tools (written but not successfully deployed).
     ├── README.md                  Setup and usage guide.
     ├── ffx_capture_proxy.c        FFX API capture proxy.
     ├── ffx_d3d12_capture.c        D3D12 command capture.
-    ├── fsr4_capture.c             FSR 4-specific capture logic.
+    ├── fsr4_capture.c             Vulkan dispatch shim for Proton/Linux.
     └── setup_capture.sh           Build + inject script.
 ```
 
@@ -316,9 +354,10 @@ This project operates under established reverse engineering principles:
 
 - **FSR 4.0.2** is MIT-licensed by AMD on [GPUOpen](https://gpuopen.com/fidelityfx-superresolution/). We used it as a structural reference, which is explicitly permitted by the MIT license.
 - **FSR 4.1.0** analysis was performed via static analysis (Ghidra decompilation, DXIL disassembly, PE inspection) of a distributed binary. No license agreement was broken. No EULA was accepted. The binary was analyzed as-is, in transit, on the wire.
-- **The extracted weights** are numerical parameters produced by AMD's training pipeline. They are reproduced here for research and educational purposes. If AMD believes this crosses a line, we welcome the conversation — our intent is to understand and document, not to compete or undermine.
+- **The extracted weights** are numerical parameters produced by AMD's training pipeline. They are reproduced here for research and interoperability purposes.
+- **AMD's own founding story is reverse engineering.** AMD spent five years reverse-engineering Intel's 386 processor. They won in court. They've never issued a DMCA takedown for RE of their products. They open-sourced their entire GPU driver stack. They publish FSR under MIT. We applied AMD's own founding principle to their latest product.
 
-For the full legal analysis and methodology justification, see [`LEGAL.md`](LEGAL.md).
+For the full legal analysis, AMD history, and honest risk assessment, see [`LEGAL.md`](LEGAL.md).
 
 This project is released under the **MIT License** — the same license AMD chose for FSR 4.0.2. We believe knowledge should be free. AMD apparently agreed, once.
 
