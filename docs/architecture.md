@@ -1,6 +1,6 @@
 # Architecture
 
-> The neural network inside FSR 4 — a 12-layer sequential U-Net for super-resolution.
+> The neural network inside FSR 4 — a sequential encoder/body/decoder pipeline for super-resolution.
 >
 > **Source**: Architecture derived from MIT-licensed 4.0.2 HLSL source. Structural claims confirmed against 4.1.0 via Ghidra static analysis and DXIL entry point names. See each section for evidence level.
 
@@ -74,7 +74,7 @@ Input (7 channels, H×W)
 
 *Source: Ghidra decompilation of tile config tables in `dll_v410.dll`.*
 
-The network operates at four spatial scales in a U-Net pattern:
+The network operates at four spatial scales in a U-shaped progression:
 
 ```
 Scale    Dimensions (1080p)    Stage

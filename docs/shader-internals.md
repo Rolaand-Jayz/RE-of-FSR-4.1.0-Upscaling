@@ -2,15 +2,17 @@
 
 ## Overview
 
-The FSR 4.0 neural upscaler uses **28 unique compute shader functions** across
+The FSR 4.0 neural upscaler uses **27 unique compute shader functions** across
 **27 + 3 conditional passes**. All shaders are DXIL compute shaders targeting
 thread group dimensions **(32, 1, 1)** — wavefront-width 1D dispatch.
 
 The architecture is named `fsr4_model_v07_fp8_no_scale` internally, confirming:
 - Model version 7
-- FP8 quantized weights (no per-tensor scale factors — "no_scale")
-- The "no_scale" designation means FP8 values use a fixed shared exponent
-  rather than per-tensor scale factors
+- FP8 quantized weights (the internal name says "no_scale", but the 4.1.0
+  initializer layout still contains a small extra scale-factor region)
+- The "no_scale" designation is therefore best read as "no per-tensor scale
+  tensor in the main weight path", not as a claim that every scale-related
+  parameter vanished
 
 ## Shader Naming Convention
 
@@ -80,7 +82,7 @@ This appears to be AMD's optimization to avoid branching for FP8 decode, though 
 
 ### Pass Structure
 
-The 28 passes break into distinct architectural roles:
+The 27 main passes break into distinct architectural roles:
 
 | Tier | Passes | Role | Lines | Atomics | Float Ops |
 |------|--------|------|-------|---------|-----------|
@@ -247,26 +249,77 @@ preset's weights.
 | UAV | 6 | 12 | Intermediate |
 | CBV | 0 | 1 | Parameters |
 
-## What We Still Don't Know
+## DXIL IR Analysis - Activation Functions
 
-1. **Exact activation functions** — The integer-only accumulation makes it hard
-   to identify activation functions (ReLU, GELU, etc.) without tracing the LUT
-   contents. The LUT could encode activation curves.
+**Updated:** Cross-referenced all 12 core ML passes against raw LLVM IR (1187 files).
 
-2. **Temporal state flow** — We know the pipeline is recurrent (13 pre/post pairs)
-   but haven't traced how temporal history feeds from one frame's output back
-   into the next frame's input.
+### Findings
 
-3. **Skip connections** — The pass symmetry (pass1≈pass2≈pass12) suggests
-   possible skip connections or parameter sharing, but this needs confirmation
-   from the dispatch order at runtime.
+Analysis of all 12 core passes (pass1-pass12) reveals:
 
-4. **Exact channel counts** — The stack buffer sizes give us tensor dimensions
-   in i32 elements, but without knowing the packing (4 values per i32 for FP8,
-   2 for FP16), the actual channel count is ambiguous.
+| Metric | Pass1/2/12 | Pass4/5/10 | Pass7/8 | Pass3/6/9/11 |
+|--------|-----------|-----------|---------|-------------|
+| atomicCompareExchange | 1989 | 3296 | 9088 | 782-4839 |
+| rawBufferStore | 0 | 0 | 0 | 0 |
+| dx.op.binary.i32 (SMin/SMax/etc) | 0 | 0 | 0 | 0 |
+| fmul | 0 | 0 | 0 | 0 |
+| fcmp | 0 | 0 | 0 | 0 |
+| icmp + select (clamp pattern) | 0 | 0 | 0 | 0 |
+| fadd | 1 | 1 | 1 | 0-4 |
 
-5. **Attention mechanism** — Attention cannot be ruled out — integer-only computation could encode any operation through LUT values, including attention
-   in the integer-only computation. The architecture may be purely convolutional.
+**Key conclusions:**
+
+1. **No explicit activation operation exists in any core pass.** Zero SMax,
+   SMin, UMin, UMax (dx.op 35-38). Zero icmp/select clamp patterns. The
+   `or` instructions are offset computation; `and` instructions are modulo
+   masks for circular addressing.
+
+2. **No float-domain activation.** Zero fmul in core passes rules out sigmoid,
+   tanh, GELU, Swish - all require float transcendental functions.
+
+3. **Activation is ReLU-family, likely folded into the FP8 decode LUT.** In
+   quantized inference, fusing `activation(dequantize(weight))` into a single
+   256-entry LUT is standard optimization. The LUT pre-computes the activation
+   curve for all possible FP8 byte values.
+
+4. **Exact variant (ReLU vs ReLU6 vs other) requires LUT content capture.**
+   The LUT is populated in the scratch buffer at runtime and not statically
+   available.
+
+### Bit Operation Analysis (pass1)
+
+| Instruction | Count | Purpose |
+|-------------|-------|---------|
+| `or %x, 16` / `or %x, 1` / `or %x, 3` | 3 | Offset computation |
+| `or i1 %a, %b` | 1 | Control flow |
+| `or %x, %y` | 1 | Combined coordinate |
+| `and %x, 15` | 1 | Modulo-16 mask (circular addressing) |
+
+None of these implement activation functions.
+
+## DXIL IR Analysis - Temporal State Flow
+
+**Resolved:** The temporal mechanism is a TAA-style history buffer, not neural
+network recurrence.
+
+1. **Postpass** writes to UAV (space=2, reg=1) via `textureStore.f32` - "History output"
+2. **Prepass** reads from SRV (space=5, reg=4) - "History input"
+3. **Neural network** (pass1-pass12) has zero temporal/recurrent tensors in the 78-tensor map
+4. History feedback is at the **pipeline level**: frame N output becomes frame N+1 input feature
+
+This is identical to temporal anti-aliasing's history buffer pattern, not RNN-style
+temporal recurrence within the network.
+
+## Updated Gap Assessment
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Activation function | Narrowed to ReLU-family | LUT-folded, exact variant needs runtime capture |
+| Temporal state flow | RESOLVED | History buffer feedback (not recurrence) |
+| Channel dimensions | RESOLVED | Fully mapped in tensor-map.json |
+| Skip connections | 90% none | 4 independent static evidence sources |
+| Attention | No evidence | Theoretical possibility only (integer LUT) |
+
 
 ## Data Flow Summary
 
@@ -301,5 +354,7 @@ Postpass (ML + conventional composite) → Output
 ```
 
 Each "post" pass is a trivial scatter — the real computation is in the main pass.
-The pattern suggests a **U-Net-like architecture** where features are processed
-through progressively deeper layers, then reconstructed.
+The pattern suggests a **sequential encoder/body/decoder-style architecture**.
+It is U-Net-like only in the broad sense that features appear to move through
+progressively deeper layers and then return toward output resolution; the static
+evidence here does not prove explicit skip connections.

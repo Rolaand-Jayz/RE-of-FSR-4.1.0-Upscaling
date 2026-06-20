@@ -387,7 +387,7 @@ This project is released under the **MIT License** — the same license AMD chos
 
 ## Shader Internals: Neural Network Architecture
 
-Full disassembly of all 602 DXBC blobs revealed **28 unique FSR4 compute shaders** (named `fsr4_model_v07_fp8_no_scale_*`). The remaining 574 blobs are non-FSR utility shaders and parameterized variants.
+Full disassembly of all 602 DXBC blobs revealed **27 unique FSR4 compute shaders** (named `fsr4_model_v07_fp8_no_scale_*`). The remaining 575 blobs are non-FSR utility shaders and parameterized variants.
 
 ### Architecture: `fsr4_model_v07_fp8_no_scale`
 
@@ -398,13 +398,13 @@ The name confirms:
 
 ## Shader Internals: Neural Network Architecture
 
-Full disassembly of all 602 DXBC blobs revealed **28 unique FSR4 compute shaders** (named `fsr4_model_v07_fp8_no_scale_*`). The remaining 574 blobs are non-FSR utility shaders and parameterized variants.
+Full disassembly of all 602 DXBC blobs revealed **27 unique FSR4 compute shaders** (named `fsr4_model_v07_fp8_no_scale_*`). The remaining 575 blobs are non-FSR utility shaders and parameterized variants.
 
 ### Architecture: fsr4_model_v07_fp8_no_scale
 
 The name confirms:
 - **Model version 7** — AMD's internal iteration number
-- **FP8 weights, no per-tensor scale** — fixed shared exponent quantization
+- **FP8 weights, no per-tensor scale** — mostly fixed shared-exponent quantization; the 4.1.0 initializer layout still includes a small extra scale-factor region
 - All quality presets share the **same neural architecture**, differing only in weight offsets
 
 ### Weight Blob Analysis
