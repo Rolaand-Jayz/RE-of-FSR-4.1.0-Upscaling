@@ -30,8 +30,6 @@ tools/*.a
 # Intermediate / working files
 # ═══════════════════════════════════════════════
 
-# Old report directory (superseded by docs/)
-reports/
 
 # Agent working directories
 _archive/

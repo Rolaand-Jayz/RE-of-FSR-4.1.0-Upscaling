@@ -282,54 +282,59 @@ Honest documentation means showing the gaps:
 
 ---
 
-## Project Structure
-
 ```
 fsr-re/
-├── README.md                  ← You are here. Narrative + findings.
+├── README.md                  You are here. Narrative + findings.
 ├── LEGAL.md                   RE methodology, AMD history, legal positioning.
 ├── LICENSE                    MIT License.
+├── VALIDATION_STATUS.md       Honest assessment of what is proven vs inferred.
+├── verification-report.json   Machine-readable verification results.
 ├── .gitignore
 │
-├── docs/
-│   ├── architecture.md            Network topology, layer details, channel flow.
-│   ├── methodology.md             Full methodology narrative — including dead ends.
-│   ├── offset-mapping.md          Complete tensor offset table.
-│   ├── static-analysis.md         Ghidra decompilation findings.
-│   └── weight-extraction.md       How weights were found and extracted.
+├── docs/                         Technical documentation.
+│   ├── IMPLEMENTATION_GUIDE.md   Complete implementation guide for the neural upscaler.
+│   ├── activation-lut-analysis.md FP8 decode and activation function analysis.
+│   ├── adversarial-review-2.md   Adversarial review — challenges assumptions.
+│   ├── architecture.md           Network topology, layer details, channel flow.
+│   ├── extra-params-analysis.md  Analysis of the 444 extra FP16 values.
+│   ├── methodology.md            Full methodology narrative — including dead ends.
+│   ├── offset-mapping.md         Complete tensor offset table.
+│   ├── pipeline-dispatch.md      Provider DLL dispatch analysis.
+│   ├── shader-internals.md       Neural architecture + FP8 decode analysis.
+│   ├── static-analysis.md        Ghidra decompilation findings.
+│   └── weight-extraction.md      How weights were found and extracted.
 │
-├── spec/
-│   ├── tensor-map.json            Complete tensor offset table (machine-readable).
-│   ├── blob-format.json           Binary layout specification.
-│   ├── pipeline_spec.json         Full 30-pass pipeline spec (machine-readable).
-│   └── shader_analysis.json       28-pass shader analysis (machine-readable).
+├── spec/                         Machine-readable specifications.
+│   ├── tensor-map.json           Complete tensor offset table (78 tensors).
+│   ├── blob-format.json          Binary layout specification.
+│   ├── pipeline_spec.json        Full 30-pass pipeline spec.
+│   └── shader_analysis.json      28-pass shader analysis.
 │
-├── docs/
-│   ├── pipeline-dispatch.md       Provider DLL dispatch analysis.
-│   └── shader-internals.md        Neural architecture + FP8 decode analysis.
-│
-├── reports/
-│   ├── main_dll_analysis.md       Provider DLL dispatch analysis.
-│   ├── architecture-map-v410.md   Architecture mapping.
-│   └── ...                        Additional analysis reports.
+├── reports/                     Analysis reports and data.
+│   ├── 00-final-re-report.md     Complete RE report — the authoritative document.
+│   ├── main_dll_analysis.md      Provider DLL dispatch analysis.
+│   ├── architecture-map-v410.md  Architecture mapping.
+│   ├── provider-diff-report.md   Provider layer diff (4.0.2 vs 4.1.0).
+│   ├── ml2code-runtime-diff.md   Operator comparison.
+│   ├── tensor-verification-report.md  Offset-map verification status.
+│   ├── pass-catalog.json         Full pass catalog (machine-readable).
+│   └── v410_independent_offsets.json  Independent offset map.
 │
 ├── rebuild/                   Bit-identical DLL reconstruction.
 │   ├── README.md                  Build instructions, verification proof.
 │   ├── fsr_data.c                 Reconstructed C source from disassembly.
 │   ├── fsr_data.def               PE export definitions.
 │   ├── pe_patcher.py              Post-link PE patcher.
+│   ├── pe_patcher_v2.py           Section-size-aware PE patcher.
 │   ├── build.sh                   Full build + verify script.
 │   ├── fsr_data_prepatch.dll      Before PE patching (893,019 bytes).
 │   └── fsr_data_final.dll         After patching — bit-identical (893,388 bytes).
 │
 ├── extracted/                 Weight blobs — the neural network data.
-│   └── v410_initializers/
-│       ├── quality.bin            131,072 bytes — 6ccdb68fc828e0bef93fa32fd144c4f6
-│       ├── balanced.bin           131,072 bytes — 6ccdb68fc828e0bef93fa32fd144c4f6
-│       ├── performance.bin        131,072 bytes — 6ccdb68fc828e0bef93fa32fd144c4f6
-│       ├── ultraperf.bin          131,072 bytes — 6ccdb68fc828e0bef93fa32fd144c4f6
-│       ├── native.bin             131,072 bytes — 6ccdb68fc828e0bef93fa32fd144c4f6
-│       └── drs.bin                131,072 bytes — 8e5c042e0c14cca83d56ed13df5f02dd
+│   ├── v410_initializers/         6 blobs × 131,072 bytes (4.1.0 weights).
+│   ├── v402_initializers/         7 blobs (4.0.2 weights for comparison).
+│   ├── fp8_initializers/          Raw FP8 initializer blobs.
+│   └── fp8_weights/               Per-tensor extracted weights (v402 + v410).
 │
 ├── scripts/                   Analysis and verification tools.
 │   ├── dll_analysis.py            DLL structure enumeration.
@@ -344,24 +349,47 @@ fsr-re/
 │   ├── trace_cbuffer.py           Constant buffer layout tracing.
 │   ├── verify.py                  Verification suite.
 │   ├── verify_tensor_offsets.py   Tensor offset validation.
-│   └── disasm_all_dxil.py         Mass DXBC → DXIL disassembly.
+│   ├── disasm_all_dxil.py         Mass DXBC → DXIL disassembly.
+│   └── capture/                   Runtime capture scripts.
 │
-├── ghidra-decompile/          344 Ghidra-decompiled C functions from the provider DLL.
+├── capture-tools/              Runtime capture tooling.
+│   ├── analyze_capture.py        Post-capture analysis pipeline.
+│   ├── extract_dispatches.py     Dispatch extraction from RenderDoc captures.
+│   └── capture-guide.md          Capture method documentation.
 │
-├── build/                     Extracted shader blobs and LLVM IR.
-│   ├── 4_1_0/                    603 DXBC blobs (v4.1.0).
-│   ├── 4_0_2/                    DXBC blobs (v4.0.2).
-│   └── llvm_ir/                  LLVM IR for all shader blobs.
-│       ├── 4_1_0/                602 .ll files.
-│       └── 4_0_2/                584 .ll files.
+├── runtime-capture/            Capture artifacts from runtime attempts.
+│   ├── dispatch_log.txt          Vulkan LD_PRELOAD shim log.
+│   └── fsr4_capture.so           Compiled dispatch shim.
 │
-└── tools/                     Capture tools (written but not successfully deployed).
-    ├── README.md                  Setup and usage guide.
-    ├── ffx_capture_proxy.c        FFX API capture proxy.
-    ├── ffx_d3d12_capture.c        D3D12 command capture.
-    ├── fsr4_capture.c             Vulkan dispatch shim for Proton/Linux.
-    └── setup_capture.sh           Build + inject script.
+├── tools/                     Capture tools (written, deployed, not fully successful).
+│   ├── README.md                  Setup and usage guide.
+│   ├── ffx_capture_proxy.c        FFX API capture proxy.
+│   ├── ffx_d3d12_capture.c        D3D12 command capture.
+│   ├── fsr4_capture.c             Vulkan dispatch shim for Proton/Linux.
+│   └── setup_capture.sh           Build + inject script.
+│
+└── Not in public repo (excluded via .gitignore — see LEGAL.md):
+    ├── build/                    DXBC blobs + LLVM IR (1187 .ll files). Derived
+    │                             from proprietary shaders.
+    ├── ghidra-decompile/         344 decompiled C functions. Proprietary data.
+    └── ghidra-project/           Ghidra project database. Proprietary data.
 ```
+
+---
+
+## FSR 4.0.2 Source Reference
+
+Our reverse engineering of FSR 4.1.0 used the MIT-licensed **FSR 4.0.2 source code** as a structural reference. AMD published this code on [GPUOpen](https://gpuopen.com/) under the MIT license — it is explicitly permitted for any use, including analysis and interoperability research.
+
+The 4.0.2 source was essential for:
+- Understanding the tensor schema (78 tensors mapped from HLSL source)
+- Identifying the neural network architecture (encoder → bottleneck → decoder)
+- Validating weight blob layout and FP8 quantization format
+- Establishing the provider-layer contract that 4.1.0 inherits
+
+**Repository:** [fsr4-sdk-402-source](https://github.com/rolaandjayz/fsr4-sdk-402-source) — AMD FidelityFX SDK 2.0.0, FSR 4.0.2 (ML-Upscaler), MIT-licensed.
+
+> The FSR 4.0.2 source and this RE project are separate repositories. The 4.0.2 source is AMD's original work, published under MIT. This RE project is our original analysis work, also released under MIT.
 
 ---
 
@@ -377,22 +405,6 @@ This project operates under established reverse engineering principles:
 For the full legal analysis, AMD history, and honest risk assessment, see [`LEGAL.md`](LEGAL.md).
 
 This project is released under the **MIT License** — the same license AMD chose for FSR 4.0.2. We believe knowledge should be free. AMD apparently agreed, once.
-
----
-
-*Built by Rolaand Jayz — The Shadow Librarian.*
-*If this work helped you understand something, pass it on. Knowledge compounds when it's shared.*
-
----
-
-## Shader Internals: Neural Network Architecture
-
-Full disassembly of all 602 DXBC blobs revealed **27 unique FSR4 compute shaders** (named `fsr4_model_v07_fp8_no_scale_*`). The remaining 575 blobs are non-FSR utility shaders and parameterized variants.
-
-### Architecture: `fsr4_model_v07_fp8_no_scale`
-
-The name confirms:
-- **Model version 7** — AMDs internal iteration number
 
 ---
 
@@ -484,3 +496,8 @@ The architecture has a **bottleneck structure with symmetric pass layout**: feat
 - **Attention mechanisms** — no softmax/QKV patterns found; likely pure convolutional
 
 Full details: [docs/shader-internals.md](docs/shader-internals.md). Machine-readable analysis: [spec/shader_analysis.json](spec/shader_analysis.json).
+
+---
+
+*Built by Rolaand Jayz — The Shadow Librarian.*
+*If this work helped you understand something, pass it on. Knowledge compounds when it's shared.*
