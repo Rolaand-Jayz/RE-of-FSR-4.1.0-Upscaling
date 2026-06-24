@@ -130,12 +130,12 @@ def main():
     out[sh_start:sh_start + nsec * 40] = orig[sh_start:sh_start + nsec * 40]
     print(f'  Section headers:   0x{sh_start:x} - 0x{sh_start + nsec * 40:x}')
 
-    # Recompute PE checksum
-    checksum_off = pe_off + 24 + 64  # Checksum field in optional header
-    struct.pack_into('<I', out, checksum_off, 0)  # Zero before computing
-    cs = pe_checksum(out)
-    struct.pack_into('<I', out, checksum_off, cs)
-    print(f'\nPE checksum: 0x{cs:08x}')
+    # PE checksum: keep original value (already copied with PE headers)
+    # The section data is identical, so the original checksum is correct.
+    checksum_off = pe_off + 24 + 64
+    orig_checksum = struct.unpack_from('<I', orig, checksum_off)[0]
+    struct.pack_into('<I', out, checksum_off, orig_checksum)
+    print(f'\nPE checksum: 0x{orig_checksum:08x} (from original)')
 
     # Final verification
     orig_md5 = hashlib.md5(orig).hexdigest()
