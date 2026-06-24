@@ -1,0 +1,1390 @@
+{
+  "version": "4.1.0_independent",
+  "method": "LLVM IR rawBufferLoad offset tracing from compiled shaders",
+  "blob_size": 131072,
+  "zones": [
+    {
+      "name": "biases_fp16",
+      "start": 0,
+      "end": 7208,
+      "dtype": "fp16"
+    },
+    {
+      "name": "fp8_weights",
+      "start": 7208,
+      "end": 130088,
+      "dtype": "uint8"
+    },
+    {
+      "name": "extra_fp16",
+      "start": 130088,
+      "end": 130976,
+      "dtype": "fp16"
+    },
+    {
+      "name": "padding",
+      "start": 130976,
+      "end": 131072,
+      "dtype": "zeros"
+    }
+  ],
+  "passes": {
+    "-2": {
+      "bias_offsets": [
+        16
+      ],
+      "weight_offsets": [],
+      "extra_offsets": [
+        130432
+      ],
+      "tertiary_strides": [
+        256,
+        15392,
+        30752,
+        61472
+      ],
+      "entries": [
+        {
+          "blob": "blob_0007",
+          "shader": "fsr4_model_v07_fp8_no_scale_postpass",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [],
+          "extra_offsets": [
+            130432
+          ],
+          "tertiary_strides": [
+            256,
+            61472
+          ],
+          "alloc_sizes": {
+            "16": 1
+          },
+          "constant_buffer_indices": [
+            0,
+            1,
+            4,
+            5
+          ]
+        },
+        {
+          "blob": "blob_0009",
+          "shader": "fsr4_model_v07_fp8_no_scale_postpass",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [],
+          "extra_offsets": [
+            130432
+          ],
+          "tertiary_strides": [
+            256,
+            15392
+          ],
+          "alloc_sizes": {
+            "16": 1
+          },
+          "constant_buffer_indices": [
+            0,
+            1,
+            4,
+            5
+          ]
+        },
+        {
+          "blob": "blob_0014",
+          "shader": "fsr4_model_v07_fp8_no_scale_postpass",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [],
+          "extra_offsets": [
+            130432
+          ],
+          "tertiary_strides": [
+            256,
+            30752
+          ],
+          "alloc_sizes": {
+            "16": 1
+          },
+          "constant_buffer_indices": [
+            0,
+            1,
+            4,
+            5
+          ]
+        }
+      ]
+    },
+    "-1": {
+      "bias_offsets": [],
+      "weight_offsets": [],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        15392,
+        30752,
+        61472
+      ],
+      "entries": [
+        {
+          "blob": "blob_0001",
+          "shader": "fsr4_model_v07_fp8_no_scale_prepass",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            61472
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            0,
+            1,
+            2,
+            4,
+            5
+          ]
+        },
+        {
+          "blob": "blob_0002",
+          "shader": "fsr4_model_v07_fp8_no_scale_prepass",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            30752
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            0,
+            1,
+            2,
+            4,
+            5
+          ]
+        },
+        {
+          "blob": "blob_0003",
+          "shader": "fsr4_model_v07_fp8_no_scale_prepass",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            30752
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            0,
+            1,
+            2,
+            4,
+            5
+          ]
+        }
+      ]
+    },
+    "0": {
+      "bias_offsets": [],
+      "weight_offsets": [],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        15392,
+        30752,
+        61472
+      ],
+      "entries": [
+        {
+          "blob": "blob_0098",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass0_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            30752
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            0
+          ]
+        },
+        {
+          "blob": "blob_0107",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass0_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            15392
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            0
+          ]
+        },
+        {
+          "blob": "blob_0182",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass0_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            61472
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            0
+          ]
+        }
+      ]
+    },
+    "1": {
+      "bias_offsets": [
+        16,
+        1152,
+        3456,
+        3584,
+        4096,
+        4160,
+        4224,
+        4736
+      ],
+      "weight_offsets": [],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        256,
+        768,
+        15392,
+        30752,
+        61472
+      ],
+      "entries": [
+        {
+          "blob": "blob_0036",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass1",
+          "bias_offsets": [
+            16,
+            1152,
+            3456,
+            3584,
+            4096,
+            4160,
+            4224,
+            4736
+          ],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            15392
+          ],
+          "alloc_sizes": {
+            "16": 2,
+            "32": 3,
+            "64": 2,
+            "72": 1
+          },
+          "constant_buffer_indices": [
+            2
+          ]
+        },
+        {
+          "blob": "blob_0066",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass1",
+          "bias_offsets": [
+            16,
+            1152,
+            3456,
+            3584,
+            4096,
+            4160,
+            4224,
+            4736
+          ],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            61472
+          ],
+          "alloc_sizes": {
+            "16": 2,
+            "32": 3,
+            "64": 2,
+            "72": 1
+          },
+          "constant_buffer_indices": [
+            2
+          ]
+        },
+        {
+          "blob": "blob_0068",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass1",
+          "bias_offsets": [
+            16,
+            1152,
+            3456,
+            3584,
+            4096,
+            4160,
+            4224,
+            4736
+          ],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            30752
+          ],
+          "alloc_sizes": {
+            "16": 2,
+            "32": 3,
+            "64": 2,
+            "72": 1
+          },
+          "constant_buffer_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    "2": {
+      "bias_offsets": [
+        16,
+        4864,
+        7168
+      ],
+      "weight_offsets": [
+        7296,
+        7808,
+        7872,
+        7936,
+        8448
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        256,
+        768,
+        15392,
+        30752,
+        61472
+      ],
+      "entries": [
+        {
+          "blob": "blob_0055",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass2_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            30752
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            3
+          ]
+        },
+        {
+          "blob": "blob_0058",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass2",
+          "bias_offsets": [
+            16,
+            4864,
+            7168
+          ],
+          "weight_offsets": [
+            7296,
+            7808,
+            7872,
+            7936,
+            8448
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            30752
+          ],
+          "alloc_sizes": {
+            "16": 2,
+            "32": 3,
+            "64": 2,
+            "72": 1
+          },
+          "constant_buffer_indices": [
+            3
+          ]
+        },
+        {
+          "blob": "blob_0102",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass2",
+          "bias_offsets": [
+            16,
+            4864,
+            7168
+          ],
+          "weight_offsets": [
+            7296,
+            7808,
+            7872,
+            7936,
+            8448
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            61472
+          ],
+          "alloc_sizes": {
+            "16": 2,
+            "32": 3,
+            "64": 2,
+            "72": 1
+          },
+          "constant_buffer_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    "3": {
+      "bias_offsets": [
+        16
+      ],
+      "weight_offsets": [
+        8576,
+        10624
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        1024,
+        7712,
+        15392,
+        30752,
+        61472,
+        2097664,
+        8342464,
+        33273664
+      ],
+      "entries": [
+        {
+          "blob": "blob_0041",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass3_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            7712
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            4
+          ]
+        },
+        {
+          "blob": "blob_0116",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass3",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            8576,
+            10624
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            1024,
+            7712,
+            15392,
+            2097664
+          ],
+          "alloc_sizes": {
+            "32": 1
+          },
+          "constant_buffer_indices": [
+            4
+          ]
+        },
+        {
+          "blob": "blob_0123",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass3",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            8576,
+            10624
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            1024,
+            30752,
+            61472,
+            33273664
+          ],
+          "alloc_sizes": {
+            "32": 1
+          },
+          "constant_buffer_indices": [
+            4
+          ]
+        }
+      ]
+    },
+    "4": {
+      "bias_offsets": [
+        16
+      ],
+      "weight_offsets": [
+        10752,
+        13056,
+        13184,
+        15232,
+        15360,
+        15424,
+        15488,
+        17536
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        256,
+        512,
+        768,
+        1024,
+        7712,
+        15392,
+        30752,
+        2097664,
+        8342464,
+        33273664
+      ],
+      "entries": [
+        {
+          "blob": "blob_0023",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass4_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            7712
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            5
+          ]
+        },
+        {
+          "blob": "blob_0024",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass4_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            15392
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            5
+          ]
+        },
+        {
+          "blob": "blob_0048",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass4_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            30752
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            5
+          ]
+        }
+      ]
+    },
+    "5": {
+      "bias_offsets": [
+        16
+      ],
+      "weight_offsets": [
+        17664,
+        19968,
+        20096,
+        22144,
+        22272,
+        22336,
+        22400,
+        24448
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        256,
+        512,
+        768,
+        1024,
+        7712,
+        15392,
+        30752,
+        2097664,
+        8342464,
+        33273664
+      ],
+      "entries": [
+        {
+          "blob": "blob_0013",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass5",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            17664,
+            19968,
+            20096,
+            22144,
+            22272,
+            22336,
+            22400,
+            24448
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            512,
+            768,
+            1024,
+            30752,
+            33273664
+          ],
+          "alloc_sizes": {
+            "32": 1,
+            "64": 4,
+            "72": 1,
+            "128": 2
+          },
+          "constant_buffer_indices": [
+            6
+          ]
+        },
+        {
+          "blob": "blob_0087",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass5_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            15392
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            6
+          ]
+        },
+        {
+          "blob": "blob_0099",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass5_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            30752
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            6
+          ]
+        }
+      ]
+    },
+    "6": {
+      "bias_offsets": [
+        16
+      ],
+      "weight_offsets": [
+        24576,
+        32768
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        2048,
+        4128,
+        7712,
+        15392,
+        30752,
+        565536,
+        2097664,
+        8342464
+      ],
+      "entries": [
+        {
+          "blob": "blob_0017",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass6",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            24576,
+            32768
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            2048,
+            15392,
+            30752,
+            8342464
+          ],
+          "alloc_sizes": {
+            "64": 1
+          },
+          "constant_buffer_indices": [
+            7
+          ]
+        },
+        {
+          "blob": "blob_0019",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass6",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            24576,
+            32768
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            2048,
+            4128,
+            7712,
+            565536
+          ],
+          "alloc_sizes": {
+            "64": 1
+          },
+          "constant_buffer_indices": [
+            7
+          ]
+        },
+        {
+          "blob": "blob_0085",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass6",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            24576,
+            32768
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            2048,
+            7712,
+            15392,
+            2097664
+          ],
+          "alloc_sizes": {
+            "64": 1
+          },
+          "constant_buffer_indices": [
+            7
+          ]
+        }
+      ]
+    },
+    "7": {
+      "bias_offsets": [
+        16
+      ],
+      "weight_offsets": [
+        33024,
+        37632,
+        37760,
+        45952,
+        46208,
+        46272,
+        46336,
+        46400,
+        46464,
+        54656
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        256,
+        768,
+        1024,
+        2048,
+        2304,
+        4128,
+        7712,
+        15392,
+        565536,
+        2097664,
+        8342464
+      ],
+      "entries": [
+        {
+          "blob": "blob_0052",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass7_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            7712
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            8
+          ]
+        },
+        {
+          "blob": "blob_0079",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass7",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            33024,
+            37632,
+            37760,
+            45952,
+            46208,
+            46272,
+            46336,
+            46400,
+            46464,
+            54656
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            1024,
+            2048,
+            2304,
+            15392,
+            8342464
+          ],
+          "alloc_sizes": {
+            "64": 1,
+            "128": 2,
+            "144": 1,
+            "256": 4
+          },
+          "constant_buffer_indices": [
+            8
+          ]
+        },
+        {
+          "blob": "blob_0082",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass7",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            33024,
+            37632,
+            37760,
+            45952,
+            46208,
+            46272,
+            46336,
+            46400,
+            46464,
+            54656
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            1024,
+            2048,
+            2304,
+            4128,
+            565536
+          ],
+          "alloc_sizes": {
+            "64": 1,
+            "128": 2,
+            "144": 1,
+            "256": 4
+          },
+          "constant_buffer_indices": [
+            8
+          ]
+        }
+      ]
+    },
+    "8": {
+      "bias_offsets": [
+        16
+      ],
+      "weight_offsets": [
+        54912,
+        59520,
+        59648,
+        67840,
+        68096,
+        68160,
+        68224,
+        68288,
+        68352,
+        76544
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        256,
+        768,
+        1024,
+        2048,
+        2304,
+        4128,
+        7712,
+        15392,
+        565536,
+        2097664,
+        8342464
+      ],
+      "entries": [
+        {
+          "blob": "blob_0038",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass8_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            15392
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            9
+          ]
+        },
+        {
+          "blob": "blob_0063",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass8_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            4128
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            9
+          ]
+        },
+        {
+          "blob": "blob_0108",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass8",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            54912,
+            59520,
+            59648,
+            67840,
+            68096,
+            68160,
+            68224,
+            68288,
+            68352,
+            76544
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            1024,
+            2048,
+            2304,
+            4128,
+            565536
+          ],
+          "alloc_sizes": {
+            "64": 1,
+            "128": 2,
+            "144": 1,
+            "256": 4
+          },
+          "constant_buffer_indices": [
+            9
+          ]
+        }
+      ]
+    },
+    "9": {
+      "bias_offsets": [],
+      "weight_offsets": [
+        81408,
+        89728,
+        89984,
+        90048,
+        90112,
+        90176,
+        98432
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        4128,
+        7712,
+        15392,
+        30752,
+        565536,
+        2097664,
+        8342464,
+        33273664
+      ],
+      "entries": [
+        {
+          "blob": "blob_0021",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass9_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            30752
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            10
+          ]
+        },
+        {
+          "blob": "blob_0039",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass9_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            15392
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            10
+          ]
+        },
+        {
+          "blob": "blob_0104",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass9",
+          "bias_offsets": [],
+          "weight_offsets": [
+            81408,
+            89728,
+            89984,
+            90048,
+            90112,
+            90176,
+            98432
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            15392,
+            30752,
+            8342464,
+            33273664
+          ],
+          "alloc_sizes": {
+            "32": 1,
+            "64": 2
+          },
+          "constant_buffer_indices": [
+            10
+          ]
+        }
+      ]
+    },
+    "10": {
+      "bias_offsets": [
+        16
+      ],
+      "weight_offsets": [
+        107008,
+        109312,
+        109440,
+        111488,
+        111616,
+        111680,
+        111744,
+        113792
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        256,
+        512,
+        768,
+        1024,
+        7712,
+        15392,
+        30752,
+        2097664,
+        8342464,
+        33273664
+      ],
+      "entries": [
+        {
+          "blob": "blob_0053",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass10",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            107008,
+            109312,
+            109440,
+            111488,
+            111616,
+            111680,
+            111744,
+            113792
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            512,
+            768,
+            1024,
+            7712,
+            2097664
+          ],
+          "alloc_sizes": {
+            "32": 1,
+            "64": 4,
+            "72": 1,
+            "128": 2
+          },
+          "constant_buffer_indices": [
+            11
+          ]
+        },
+        {
+          "blob": "blob_0059",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass10_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            15392
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            11
+          ]
+        },
+        {
+          "blob": "blob_0084",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass10_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            30752
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            11
+          ]
+        }
+      ]
+    },
+    "11": {
+      "bias_offsets": [],
+      "weight_offsets": [
+        116224,
+        118400,
+        118528,
+        118592,
+        120704
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        7712,
+        15392,
+        30752,
+        61472
+      ],
+      "entries": [
+        {
+          "blob": "blob_0012",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass11_post",
+          "bias_offsets": [],
+          "weight_offsets": [],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            61472
+          ],
+          "alloc_sizes": {},
+          "constant_buffer_indices": [
+            12
+          ]
+        },
+        {
+          "blob": "blob_0030",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass11",
+          "bias_offsets": [],
+          "weight_offsets": [
+            116224,
+            118400,
+            118528,
+            118592,
+            120704
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            30752,
+            61472
+          ],
+          "alloc_sizes": {
+            "32": 2
+          },
+          "constant_buffer_indices": [
+            12
+          ]
+        },
+        {
+          "blob": "blob_0117",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass11",
+          "bias_offsets": [],
+          "weight_offsets": [
+            116224,
+            118400,
+            118528,
+            118592,
+            120704
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            7712,
+            15392
+          ],
+          "alloc_sizes": {
+            "32": 2
+          },
+          "constant_buffer_indices": [
+            12
+          ]
+        }
+      ]
+    },
+    "12": {
+      "bias_offsets": [
+        16
+      ],
+      "weight_offsets": [
+        123008,
+        125312,
+        125440,
+        125952,
+        126016,
+        126080,
+        126592
+      ],
+      "extra_offsets": [],
+      "tertiary_strides": [
+        256,
+        768,
+        15392,
+        30752,
+        61472
+      ],
+      "entries": [
+        {
+          "blob": "blob_0054",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass12",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            123008,
+            125312,
+            125440,
+            125952,
+            126016,
+            126080,
+            126592
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            15392
+          ],
+          "alloc_sizes": {
+            "16": 2,
+            "32": 3,
+            "64": 2,
+            "72": 1
+          },
+          "constant_buffer_indices": [
+            13
+          ]
+        },
+        {
+          "blob": "blob_0088",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass12",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            123008,
+            125312,
+            125440,
+            125952,
+            126016,
+            126080,
+            126592
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            61472
+          ],
+          "alloc_sizes": {
+            "16": 2,
+            "32": 3,
+            "64": 2,
+            "72": 1
+          },
+          "constant_buffer_indices": [
+            13
+          ]
+        },
+        {
+          "blob": "blob_0129",
+          "shader": "fsr4_model_v07_fp8_no_scale_pass12",
+          "bias_offsets": [
+            16
+          ],
+          "weight_offsets": [
+            123008,
+            125312,
+            125440,
+            125952,
+            126016,
+            126080,
+            126592
+          ],
+          "extra_offsets": [],
+          "tertiary_strides": [
+            256,
+            768,
+            30752
+          ],
+          "alloc_sizes": {
+            "16": 2,
+            "32": 3,
+            "64": 2,
+            "72": 1
+          },
+          "constant_buffer_indices": [
+            13
+          ]
+        }
+      ]
+    }
+  }
+}

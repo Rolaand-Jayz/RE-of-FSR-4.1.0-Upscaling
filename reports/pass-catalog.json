@@ -1,0 +1,1257 @@
+{
+  "v410": {
+    "total_blobs": 602,
+    "categories": {
+      "encoder": 126,
+      "utility": 190,
+      "resource_init": 114,
+      "ml_body": 48,
+      "post_process": 123,
+      "debug_visualization": 1
+    },
+    "ml_passes": [
+      {
+        "name": "blob_0009.ll",
+        "size_kb": 290,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0090.ll",
+        "size_kb": 290,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0193.ll",
+        "size_kb": 290,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0014.ll",
+        "size_kb": 290,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0064.ll",
+        "size_kb": 290,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0096.ll",
+        "size_kb": 290,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0135.ll",
+        "size_kb": 289,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0149.ll",
+        "size_kb": 289,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0202.ll",
+        "size_kb": 289,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0025.ll",
+        "size_kb": 288,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0067.ll",
+        "size_kb": 288,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0080.ll",
+        "size_kb": 288,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 407,
+        "compute_intensity": 0.25,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0016.ll",
+        "size_kb": 275,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0103.ll",
+        "size_kb": 275,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0201.ll",
+        "size_kb": 275,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0081.ll",
+        "size_kb": 275,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0171.ll",
+        "size_kb": 275,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0180.ll",
+        "size_kb": 275,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0034.ll",
+        "size_kb": 274,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0042.ll",
+        "size_kb": 274,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0125.ll",
+        "size_kb": 274,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0044.ll",
+        "size_kb": 274,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0130.ll",
+        "size_kb": 274,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0144.ll",
+        "size_kb": 274,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 365,
+        "compute_intensity": 0.22,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0007.ll",
+        "size_kb": 263,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0037.ll",
+        "size_kb": 263,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0191.ll",
+        "size_kb": 263,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0069.ll",
+        "size_kb": 263,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0110.ll",
+        "size_kb": 263,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0111.ll",
+        "size_kb": 263,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0137.ll",
+        "size_kb": 262,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "17",
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0162.ll",
+        "size_kb": 262,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "17",
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0166.ll",
+        "size_kb": 262,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "17",
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0032.ll",
+        "size_kb": 262,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "17",
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0083.ll",
+        "size_kb": 262,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "17",
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0128.ll",
+        "size_kb": 262,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 246,
+        "compute_intensity": 0.15,
+        "srv_buf": [
+          "17",
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0072.ll",
+        "size_kb": 254,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0133.ll",
+        "size_kb": 254,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0188.ll",
+        "size_kb": 254,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0114.ll",
+        "size_kb": 254,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0152.ll",
+        "size_kb": 254,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0181.ll",
+        "size_kb": 254,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "6",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6",
+          "9"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0050.ll",
+        "size_kb": 253,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0078.ll",
+        "size_kb": 253,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0121.ll",
+        "size_kb": 253,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "12",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0143.ll",
+        "size_kb": 252,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0151.ll",
+        "size_kb": 252,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      },
+      {
+        "name": "blob_0157.ll",
+        "size_kb": 252,
+        "rbl": 54,
+        "ace": 1580,
+        "arith": 155,
+        "compute_intensity": 0.09,
+        "srv_buf": [
+          "18",
+          "3",
+          "9"
+        ],
+        "uav_buf": [
+          "0",
+          "1",
+          "11",
+          "2",
+          "6"
+        ],
+        "srv_tex": [
+          "1"
+        ],
+        "uav_tex": []
+      }
+    ]
+  },
+  "v402": {
+    "total_blobs": 584,
+    "categories": {
+      "debug_visualization": 1,
+      "utility": 190,
+      "resource_init": 114,
+      "post_process": 123,
+      "encoder": 90,
+      "unknown": 36,
+      "ml_body": 30
+    }
+  }
+}
