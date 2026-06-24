@@ -188,7 +188,9 @@ See docs/activation-lut-analysis.md for full analysis.
 | 4 | Provider DLL rebuild | ⚠️ Engineering task (~15.6MB C++), not an analysis gap |
 | ~~5~~ | ~~LUT mechanism~~ | ✅ **RESOLVED** — coherent atomic buffer I/O, not LUT (98%) |
 
-**Zero open analysis gaps.**
+**Static analysis gaps: closed.** All five original analysis gaps have been resolved through DXIL IR analysis, SPIR-V cross-validation, and 4.0.2 source comparison.
+
+**However:** Runtime validation remains an open credibility gap. The static analysis has not been confirmed by observing the upscaler execute in real time. This does not affect the correctness of the structural analysis (the bit-identical DLL rebuild is independent proof of data extraction accuracy), but it means the dispatch sequence and runtime resource bindings are inferred, not observed. See the README for details on what runtime validation would require.
 ---
 
 ## Previously Listed as Unresolved — Now Resolved
@@ -222,7 +224,9 @@ These items were listed as gaps in earlier documentation but are actually docume
 | Architecture unchanged 4.0.2→4.1.0 | 95% | Same entry points, same tensor count, same blob layout |
 | Weight retrain confirmation | 99% | 98.7% byte diff, uniform across layers |
 
-**Bottom line:** The RE is **complete**. All architecture and shader internals determined from static analysis. All 5 analysis gaps resolved. Zero runtime capture needed.
+**Bottom line:** The static analysis is **thorough** — all architecture and shader internals have been determined from binary analysis, all 5 original analysis gaps are resolved, and the bit-identical DLL rebuild independently proves the data extraction. However, **runtime validation has not been performed** and is the primary remaining credibility gap. The analysis is correct as far as static methods can prove; confirming it at runtime would require native Windows D3D12 capture (not possible through Proton). This is an acknowledged limitation, not a claim of completion.
+
+**Scope note:** This analysis covers the FSR 4 temporal **upscaler** only. FSR 4.1.0 also includes **frame generation**, which was not analyzed and is outside the scope of this project.
 
 ## DXIL IR Analysis Round 2 -- Additional Closures
 
