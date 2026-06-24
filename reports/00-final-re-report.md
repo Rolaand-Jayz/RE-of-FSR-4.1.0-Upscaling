@@ -27,6 +27,12 @@ This report is considered complete only if it answers all of the following:
 
 ---
 
+## 0.5. Scope
+
+This reverse engineering covers the FSR 4.1.0 **temporal upscaler** — the ML-based image reconstruction pipeline. FSR 4.1.0 as shipped also includes **frame generation**, which is a separate component and was **not** part of this analysis. The upscaler and frame generator share infrastructure (provider DLL, API surface) but are independent pipelines with distinct shader sets and dispatch logic. Only the upscaler was reverse-engineered.
+
+---
+
 ## 1. Executive Summary
 
 FSR 4.1.0 is a **27-dispatch compute pipeline** centered on the internal model name `fsr4_model_v07_fp8_no_scale`. The binary contains **6 initializer blobs** in `.rdata`, with **2 unique weight sets** after MD5 comparison. The provider layer, resource IDs, and constant-buffer layout are largely stable relative to 4.0.2, but the **weight-loading strategy changed fundamentally**: 4.1.0 uses a dynamic `InitializerBuffer` and runtime `rawBufferLoad`-based access rather than 4.0.2’s static embedded shader arrays.
@@ -231,5 +237,7 @@ The work was reproduced with:
 ## 10. Bottom Line
 
 The RE is **strongly complete at the provider + weight-layout + pass-identity level** and **intentionally honest about what remains unproven**. That is the difference between a flashy report and a gold-standard one.
+
+**What "strongly complete" means:** every structural claim is backed by binary evidence. The bit-identical DLL rebuild proves data extraction. The DXIL IR analysis proves architecture and activation functions. What it does **not** mean: the analysis has been confirmed at runtime. Runtime validation on native Windows D3D12 is the next step for full credibility, and a small number of contributors with the right hardware could close this gap.
 
 If this repo is going to be the new benchmark, this report is the contract: **verified facts first, static inference labeled, unresolved items never hidden**.

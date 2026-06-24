@@ -20,6 +20,8 @@ cb1aa61c71c33b25549ed59c1551d661  original            (AMD's binary)
 
 This repository is the complete record of that work: the analysis, the dead ends, the methodology, the extracted neural network weights, the full pipeline spec, and the tooling to verify everything independently.
 
+> **Scope:** This reverse engineering covers the FSR 4 **temporal upscaler** (the ML-based image reconstruction pipeline) only. FSR 4.1.0 as shipped also includes **frame generation** — that is a separate component and was **not** part of this analysis. If you're looking for frame generation RE, this is not it.
+
 ---
 
 ## The Short Version
@@ -270,7 +272,9 @@ The bit-identical DLL rebuild proves our **data extraction** is correct. The bin
 
 Honest documentation means showing the gaps:
 
-1. **No runtime verification.** The game requires Proton. Proton's VKD3D translation layer absorbs all hooks, shims, and capture tools. We cannot confirm the static analysis by watching the code execute.
+0. **No frame generation analysis.** FSR 4.1.0 ships with both a temporal upscaler and frame generation. This RE covers the **upscaler only**. Frame generation is a separate pipeline with its own shaders, its own dispatch logic, and its own resource management. We did not analyze it. The scope was deliberate: the upscaler is the ML component, and understanding it was the goal.
+
+1. **No runtime verification.** The game requires Proton. Proton's VKD3D translation layer absorbs all hooks, shims, and capture tools. We cannot confirm the static analysis by watching the code execute. This is the single largest credibility gap. Three independent capture methods were built and deployed — all blocked by Proton's Vulkan translation layer. **Runtime validation by someone with native Windows + D3D12 access is needed to close this gap.** See [Validation Status](#validation-status--call-for-collaborators) below.
 
 2. **No bit-identical rebuild of the provider DLL.** The 15.6MB provider DLL contains compiled C++ code, linked libraries, and DXBC shader containers. Reproducing it bit-for-bit would require AMD's exact build environment, compiler version, and shader compiler. We proved our understanding through structural analysis instead.
 
@@ -278,7 +282,7 @@ Honest documentation means showing the gaps:
 
 4. **Root signature binary format not fully decoded.** The binding groups in the descriptor entries are FFX-internal structures, not raw D3D12_ROOT_PARAMETER structs. We decoded the shader-level resource bindings instead.
 
-5. **Shader internals not decoded.** We mapped which resources each shader accesses. We did not decode the neural network inference operations (matrix multiply, activation functions, etc.) within each shader.
+5. **Per-instruction inference operations not fully decoded.** We decoded the activation function (ReLU, via FMax in DXIL IR), the FP8 weight decode mechanism (coherent atomic buffer I/O), pass complexity tiers, and temporal state flow (history buffer feedback). We did **not** decode every matrix multiply or convolution at the individual instruction level. The high-level architecture is understood; the per-pixel arithmetic within each pass is inferred from IR patterns, not traced instruction-by-instruction.
 
 ---
 
@@ -374,6 +378,34 @@ fsr-re/
     ├── ghidra-decompile/         344 decompiled C functions. Proprietary data.
     └── ghidra-project/           Ghidra project database. Proprietary data.
 ```
+
+---
+
+## Validation Status & Call for Collaborators
+
+This project is **statically complete** — every claim about architecture, weights, pass structure, and resource bindings is backed by binary analysis evidence in this repository. The bit-identical DLL reconstruction proves the data extraction is correct.
+
+But **static analysis is not runtime proof**. The 27-pass dispatch sequence, the constant buffer values, and the actual GPU resource bindings during execution have never been observed live. Three capture methods were attempted (FFX proxy DLL, Vulkan LD_PRELOAD shim, RenderDoc full capture) — all blocked by Proton's VKD3D translation layer on Linux.
+
+### What's needed
+
+Runtime validation on **native Windows with D3D12** would close the gap. Specifically:
+
+1. **Capture the 27-pass dispatch sequence** — confirm the loop count and pass order using PIX, RenderDoc, or a D3D12 capture tool on native Windows (no Proton layer).
+2. **Verify constant buffer contents** — confirm the per-pass CBV values match the static analysis.
+3. **Confirm weight buffer bindings** — verify that the InitializerBuffer is bound as predicted.
+
+This is not a huge effort — a few hours of capture work for someone with the right hardware and access. But it requires a Windows machine with an AMD GPU and a game running FSR 4.1.0.
+
+### Who we need
+
+A **small number of contributors** (2-3 people) with:
+- Native Windows + AMD RDNA 3/4 system
+- A game running FSR 4.1.0 (FF7 Rebirth, or any title using the standalone upscaler DLL)
+- Familiarity with RenderDoc or PIX on D3D12
+- Willingness to share capture data (not source code — just the dispatch logs and cbuffer dumps)
+
+If that's you, open an issue. This work deserves to be validated, and validation makes it stronger.
 
 ---
 
