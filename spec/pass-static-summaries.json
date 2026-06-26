@@ -169,11 +169,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0098.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass0_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0107.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass0_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0182.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass0_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 2161, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -635,11 +761,138 @@
           "count": 12
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 45,
+        "kind_counts": {
+          "llvm_icmp": 42,
+          "dxil_binary_extremum": 3
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 42,
+          "direct_relu_or_lower_clamp_zero": 3
+        },
+        "opcode_counts": {
+          "llvm.icmp:eq": 21,
+          "llvm.icmp:ult": 15,
+          "binary.f32:35": 3,
+          "llvm.icmp:uge": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0036.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1",
+            "line_no": 3609,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%3100",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%3100 = call float @dx.op.binary.f32(i32 35, float %3099, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 3607,
+                "text": "%3098 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %3034, i32 0)"
+              },
+              {
+                "line_no": 3608,
+                "text": "%3099 = bitcast i32 %3098 to float"
+              },
+              {
+                "line_no": 3609,
+                "text": "%3100 = call float @dx.op.binary.f32(i32 35, float %3099, float 0.000000e+00)"
+              },
+              {
+                "line_no": 3610,
+                "text": "%3101 = load i32, ptr %3042, align 4"
+              },
+              {
+                "line_no": 3611,
+                "text": "%3102 = load i32, ptr %3048, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0066.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1",
+            "line_no": 3609,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%3100",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%3100 = call float @dx.op.binary.f32(i32 35, float %3099, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 3607,
+                "text": "%3098 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %3034, i32 0)"
+              },
+              {
+                "line_no": 3608,
+                "text": "%3099 = bitcast i32 %3098 to float"
+              },
+              {
+                "line_no": 3609,
+                "text": "%3100 = call float @dx.op.binary.f32(i32 35, float %3099, float 0.000000e+00)"
+              },
+              {
+                "line_no": 3610,
+                "text": "%3101 = load i32, ptr %3042, align 4"
+              },
+              {
+                "line_no": 3611,
+                "text": "%3102 = load i32, ptr %3048, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0068.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1",
+            "line_no": 3609,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%3100",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%3100 = call float @dx.op.binary.f32(i32 35, float %3099, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 3607,
+                "text": "%3098 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %3034, i32 0)"
+              },
+              {
+                "line_no": 3608,
+                "text": "%3099 = bitcast i32 %3098 to float"
+              },
+              {
+                "line_no": 3609,
+                "text": "%3100 = call float @dx.op.binary.f32(i32 35, float %3099, float 0.000000e+00)"
+              },
+              {
+                "line_no": 3610,
+                "text": "%3101 = load i32, ptr %3042, align 4"
+              },
+              {
+                "line_no": 3611,
+                "text": "%3102 = load i32, ptr %3048, align 4"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -1101,11 +1354,138 @@
           "count": 87
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 57,
+        "kind_counts": {
+          "llvm_icmp": 54,
+          "dxil_binary_extremum": 3
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 54,
+          "direct_relu_or_lower_clamp_zero": 3
+        },
+        "opcode_counts": {
+          "llvm.icmp:eq": 27,
+          "llvm.icmp:ult": 21,
+          "binary.f32:35": 3,
+          "llvm.icmp:uge": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0053.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10",
+            "line_no": 5313,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%4528",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 5311,
+                "text": "%4526 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %4462, i32 0)"
+              },
+              {
+                "line_no": 5312,
+                "text": "%4527 = bitcast i32 %4526 to float"
+              },
+              {
+                "line_no": 5313,
+                "text": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)"
+              },
+              {
+                "line_no": 5314,
+                "text": "%4529 = load i32, ptr %4470, align 4"
+              },
+              {
+                "line_no": 5315,
+                "text": "%4530 = load i32, ptr %4476, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0156.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10",
+            "line_no": 5313,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%4528",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 5311,
+                "text": "%4526 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %4462, i32 0)"
+              },
+              {
+                "line_no": 5312,
+                "text": "%4527 = bitcast i32 %4526 to float"
+              },
+              {
+                "line_no": 5313,
+                "text": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)"
+              },
+              {
+                "line_no": 5314,
+                "text": "%4529 = load i32, ptr %4470, align 4"
+              },
+              {
+                "line_no": 5315,
+                "text": "%4530 = load i32, ptr %4476, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0174.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10",
+            "line_no": 5313,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%4528",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 5311,
+                "text": "%4526 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %4462, i32 0)"
+              },
+              {
+                "line_no": 5312,
+                "text": "%4527 = bitcast i32 %4526 to float"
+              },
+              {
+                "line_no": 5313,
+                "text": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)"
+              },
+              {
+                "line_no": 5314,
+                "text": "%4529 = load i32, ptr %4470, align 4"
+              },
+              {
+                "line_no": 5315,
+                "text": "%4530 = load i32, ptr %4476, align 4"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -1275,11 +1655,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0059.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0084.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0105.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 271, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -1741,11 +2247,313 @@
           "count": 57
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 51,
+        "kind_counts": {
+          "llvm_icmp": 39,
+          "dxil_binary_extremum": 12
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 39,
+          "direct_relu_or_lower_clamp_zero": 12
+        },
+        "opcode_counts": {
+          "llvm.icmp:ult": 21,
+          "binary.f32:35": 12,
+          "llvm.icmp:eq": 12,
+          "llvm.icmp:uge": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0030.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+            "line_no": 897,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%892",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%892 = call float @dx.op.binary.f32(i32 35, float %891, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 895,
+                "text": "%890 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %882, i32 0)"
+              },
+              {
+                "line_no": 896,
+                "text": "%891 = bitcast i32 %890 to float"
+              },
+              {
+                "line_no": 897,
+                "text": "%892 = call float @dx.op.binary.f32(i32 35, float %891, float 0.000000e+00)"
+              },
+              {
+                "line_no": 898,
+                "text": "%893 = bitcast float %892 to i32"
+              },
+              {
+                "line_no": 899,
+                "text": "%894 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %881, i32 %880)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0030.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+            "line_no": 936,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%927",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%927 = call float @dx.op.binary.f32(i32 35, float %926, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 934,
+                "text": "%925 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %917, i32 0)"
+              },
+              {
+                "line_no": 935,
+                "text": "%926 = bitcast i32 %925 to float"
+              },
+              {
+                "line_no": 936,
+                "text": "%927 = call float @dx.op.binary.f32(i32 35, float %926, float 0.000000e+00)"
+              },
+              {
+                "line_no": 937,
+                "text": "%928 = bitcast float %927 to i32"
+              },
+              {
+                "line_no": 938,
+                "text": "%929 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %916, i32 %915)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0030.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+            "line_no": 975,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%962",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%962 = call float @dx.op.binary.f32(i32 35, float %961, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 973,
+                "text": "%960 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %952, i32 0)"
+              },
+              {
+                "line_no": 974,
+                "text": "%961 = bitcast i32 %960 to float"
+              },
+              {
+                "line_no": 975,
+                "text": "%962 = call float @dx.op.binary.f32(i32 35, float %961, float 0.000000e+00)"
+              },
+              {
+                "line_no": 976,
+                "text": "%963 = bitcast float %962 to i32"
+              },
+              {
+                "line_no": 977,
+                "text": "%964 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %951, i32 %950)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0030.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+            "line_no": 1014,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%997",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%997 = call float @dx.op.binary.f32(i32 35, float %996, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 1012,
+                "text": "%995 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %987, i32 0)"
+              },
+              {
+                "line_no": 1013,
+                "text": "%996 = bitcast i32 %995 to float"
+              },
+              {
+                "line_no": 1014,
+                "text": "%997 = call float @dx.op.binary.f32(i32 35, float %996, float 0.000000e+00)"
+              },
+              {
+                "line_no": 1015,
+                "text": "%998 = bitcast float %997 to i32"
+              },
+              {
+                "line_no": 1016,
+                "text": "%999 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %986, i32 %985)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0117.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+            "line_no": 897,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%892",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%892 = call float @dx.op.binary.f32(i32 35, float %891, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 895,
+                "text": "%890 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %882, i32 0)"
+              },
+              {
+                "line_no": 896,
+                "text": "%891 = bitcast i32 %890 to float"
+              },
+              {
+                "line_no": 897,
+                "text": "%892 = call float @dx.op.binary.f32(i32 35, float %891, float 0.000000e+00)"
+              },
+              {
+                "line_no": 898,
+                "text": "%893 = bitcast float %892 to i32"
+              },
+              {
+                "line_no": 899,
+                "text": "%894 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %881, i32 %880)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0117.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+            "line_no": 936,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%927",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%927 = call float @dx.op.binary.f32(i32 35, float %926, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 934,
+                "text": "%925 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %917, i32 0)"
+              },
+              {
+                "line_no": 935,
+                "text": "%926 = bitcast i32 %925 to float"
+              },
+              {
+                "line_no": 936,
+                "text": "%927 = call float @dx.op.binary.f32(i32 35, float %926, float 0.000000e+00)"
+              },
+              {
+                "line_no": 937,
+                "text": "%928 = bitcast float %927 to i32"
+              },
+              {
+                "line_no": 938,
+                "text": "%929 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %916, i32 %915)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0117.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+            "line_no": 975,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%962",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%962 = call float @dx.op.binary.f32(i32 35, float %961, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 973,
+                "text": "%960 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %952, i32 0)"
+              },
+              {
+                "line_no": 974,
+                "text": "%961 = bitcast i32 %960 to float"
+              },
+              {
+                "line_no": 975,
+                "text": "%962 = call float @dx.op.binary.f32(i32 35, float %961, float 0.000000e+00)"
+              },
+              {
+                "line_no": 976,
+                "text": "%963 = bitcast float %962 to i32"
+              },
+              {
+                "line_no": 977,
+                "text": "%964 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %951, i32 %950)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0117.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+            "line_no": 1014,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%997",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%997 = call float @dx.op.binary.f32(i32 35, float %996, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 1012,
+                "text": "%995 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %987, i32 0)"
+              },
+              {
+                "line_no": 1013,
+                "text": "%996 = bitcast i32 %995 to float"
+              },
+              {
+                "line_no": 1014,
+                "text": "%997 = call float @dx.op.binary.f32(i32 35, float %996, float 0.000000e+00)"
+              },
+              {
+                "line_no": 1015,
+                "text": "%998 = bitcast float %997 to i32"
+              },
+              {
+                "line_no": 1016,
+                "text": "%999 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %986, i32 %985)"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -1915,11 +2723,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0012.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 2161, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0167.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0208.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -2381,11 +3315,138 @@
           "count": 12
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 45,
+        "kind_counts": {
+          "llvm_icmp": 42,
+          "dxil_binary_extremum": 3
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 42,
+          "direct_relu_or_lower_clamp_zero": 3
+        },
+        "opcode_counts": {
+          "llvm.icmp:eq": 21,
+          "llvm.icmp:ult": 15,
+          "binary.f32:35": 3,
+          "llvm.icmp:uge": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0054.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12",
+            "line_no": 3627,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%3118",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 3625,
+                "text": "%3116 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %3052, i32 0)"
+              },
+              {
+                "line_no": 3626,
+                "text": "%3117 = bitcast i32 %3116 to float"
+              },
+              {
+                "line_no": 3627,
+                "text": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)"
+              },
+              {
+                "line_no": 3628,
+                "text": "%3119 = load i32, ptr %3060, align 4"
+              },
+              {
+                "line_no": 3629,
+                "text": "%3120 = load i32, ptr %3066, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0088.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12",
+            "line_no": 3627,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%3118",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 3625,
+                "text": "%3116 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %3052, i32 0)"
+              },
+              {
+                "line_no": 3626,
+                "text": "%3117 = bitcast i32 %3116 to float"
+              },
+              {
+                "line_no": 3627,
+                "text": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)"
+              },
+              {
+                "line_no": 3628,
+                "text": "%3119 = load i32, ptr %3060, align 4"
+              },
+              {
+                "line_no": 3629,
+                "text": "%3120 = load i32, ptr %3066, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0129.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12",
+            "line_no": 3627,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%3118",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 3625,
+                "text": "%3116 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %3052, i32 0)"
+              },
+              {
+                "line_no": 3626,
+                "text": "%3117 = bitcast i32 %3116 to float"
+              },
+              {
+                "line_no": 3627,
+                "text": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)"
+              },
+              {
+                "line_no": 3628,
+                "text": "%3119 = load i32, ptr %3060, align 4"
+              },
+              {
+                "line_no": 3629,
+                "text": "%3120 = load i32, ptr %3066, align 4"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -2555,11 +3616,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0159.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 2161, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0185.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0207.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -2729,11 +3916,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0109.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0147.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 2161, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0170.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -3195,11 +4508,138 @@
           "count": 12
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 45,
+        "kind_counts": {
+          "llvm_icmp": 42,
+          "dxil_binary_extremum": 3
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 42,
+          "direct_relu_or_lower_clamp_zero": 3
+        },
+        "opcode_counts": {
+          "llvm.icmp:eq": 21,
+          "llvm.icmp:ult": 15,
+          "binary.f32:35": 3,
+          "llvm.icmp:uge": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0058.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2",
+            "line_no": 3627,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%3118",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 3625,
+                "text": "%3116 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %3052, i32 0)"
+              },
+              {
+                "line_no": 3626,
+                "text": "%3117 = bitcast i32 %3116 to float"
+              },
+              {
+                "line_no": 3627,
+                "text": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)"
+              },
+              {
+                "line_no": 3628,
+                "text": "%3119 = load i32, ptr %3060, align 4"
+              },
+              {
+                "line_no": 3629,
+                "text": "%3120 = load i32, ptr %3066, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0102.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2",
+            "line_no": 3627,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%3118",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 3625,
+                "text": "%3116 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %3052, i32 0)"
+              },
+              {
+                "line_no": 3626,
+                "text": "%3117 = bitcast i32 %3116 to float"
+              },
+              {
+                "line_no": 3627,
+                "text": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)"
+              },
+              {
+                "line_no": 3628,
+                "text": "%3119 = load i32, ptr %3060, align 4"
+              },
+              {
+                "line_no": 3629,
+                "text": "%3120 = load i32, ptr %3066, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0194.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2",
+            "line_no": 3627,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%3118",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 3625,
+                "text": "%3116 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %3052, i32 0)"
+              },
+              {
+                "line_no": 3626,
+                "text": "%3117 = bitcast i32 %3116 to float"
+              },
+              {
+                "line_no": 3627,
+                "text": "%3118 = call float @dx.op.binary.f32(i32 35, float %3117, float 0.000000e+00)"
+              },
+              {
+                "line_no": 3628,
+                "text": "%3119 = load i32, ptr %3060, align 4"
+              },
+              {
+                "line_no": 3629,
+                "text": "%3120 = load i32, ptr %3066, align 4"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -3369,11 +4809,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0055.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0131.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 2161, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0177.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -3834,11 +5400,29 @@
           "count": 2
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 15,
+        "kind_counts": {
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 15
+        },
+        "opcode_counts": {
+          "llvm.icmp:uge": 6,
+          "llvm.icmp:ult": 3,
+          "llvm.icmp:eq": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": []
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -4008,11 +5592,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0041.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass3_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 271, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0169.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass3_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0195.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass3_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -4474,11 +6184,138 @@
           "count": 87
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 57,
+        "kind_counts": {
+          "llvm_icmp": 54,
+          "dxil_binary_extremum": 3
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 54,
+          "direct_relu_or_lower_clamp_zero": 3
+        },
+        "opcode_counts": {
+          "llvm.icmp:eq": 27,
+          "llvm.icmp:ult": 21,
+          "binary.f32:35": 3,
+          "llvm.icmp:uge": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0112.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4",
+            "line_no": 5313,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%4528",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 5311,
+                "text": "%4526 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %4462, i32 0)"
+              },
+              {
+                "line_no": 5312,
+                "text": "%4527 = bitcast i32 %4526 to float"
+              },
+              {
+                "line_no": 5313,
+                "text": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)"
+              },
+              {
+                "line_no": 5314,
+                "text": "%4529 = load i32, ptr %4470, align 4"
+              },
+              {
+                "line_no": 5315,
+                "text": "%4530 = load i32, ptr %4476, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0119.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4",
+            "line_no": 5313,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%4528",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 5311,
+                "text": "%4526 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %4462, i32 0)"
+              },
+              {
+                "line_no": 5312,
+                "text": "%4527 = bitcast i32 %4526 to float"
+              },
+              {
+                "line_no": 5313,
+                "text": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)"
+              },
+              {
+                "line_no": 5314,
+                "text": "%4529 = load i32, ptr %4470, align 4"
+              },
+              {
+                "line_no": 5315,
+                "text": "%4530 = load i32, ptr %4476, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0139.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4",
+            "line_no": 5313,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%4528",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 5311,
+                "text": "%4526 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %4462, i32 0)"
+              },
+              {
+                "line_no": 5312,
+                "text": "%4527 = bitcast i32 %4526 to float"
+              },
+              {
+                "line_no": 5313,
+                "text": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)"
+              },
+              {
+                "line_no": 5314,
+                "text": "%4529 = load i32, ptr %4470, align 4"
+              },
+              {
+                "line_no": 5315,
+                "text": "%4530 = load i32, ptr %4476, align 4"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -4648,11 +6485,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0023.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 271, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0024.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0048.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -5114,11 +7077,138 @@
           "count": 87
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 57,
+        "kind_counts": {
+          "llvm_icmp": 54,
+          "dxil_binary_extremum": 3
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 54,
+          "direct_relu_or_lower_clamp_zero": 3
+        },
+        "opcode_counts": {
+          "llvm.icmp:eq": 27,
+          "llvm.icmp:ult": 21,
+          "binary.f32:35": 3,
+          "llvm.icmp:uge": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0013.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5",
+            "line_no": 5313,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%4528",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 5311,
+                "text": "%4526 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %4462, i32 0)"
+              },
+              {
+                "line_no": 5312,
+                "text": "%4527 = bitcast i32 %4526 to float"
+              },
+              {
+                "line_no": 5313,
+                "text": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)"
+              },
+              {
+                "line_no": 5314,
+                "text": "%4529 = load i32, ptr %4470, align 4"
+              },
+              {
+                "line_no": 5315,
+                "text": "%4530 = load i32, ptr %4476, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0186.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5",
+            "line_no": 5313,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%4528",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 5311,
+                "text": "%4526 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %4462, i32 0)"
+              },
+              {
+                "line_no": 5312,
+                "text": "%4527 = bitcast i32 %4526 to float"
+              },
+              {
+                "line_no": 5313,
+                "text": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)"
+              },
+              {
+                "line_no": 5314,
+                "text": "%4529 = load i32, ptr %4470, align 4"
+              },
+              {
+                "line_no": 5315,
+                "text": "%4530 = load i32, ptr %4476, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0196.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5",
+            "line_no": 5313,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%4528",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 5311,
+                "text": "%4526 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %4462, i32 0)"
+              },
+              {
+                "line_no": 5312,
+                "text": "%4527 = bitcast i32 %4526 to float"
+              },
+              {
+                "line_no": 5313,
+                "text": "%4528 = call float @dx.op.binary.f32(i32 35, float %4527, float 0.000000e+00)"
+              },
+              {
+                "line_no": 5314,
+                "text": "%4529 = load i32, ptr %4470, align 4"
+              },
+              {
+                "line_no": 5315,
+                "text": "%4530 = load i32, ptr %4476, align 4"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -5288,11 +7378,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0087.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0099.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0134.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 271, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -5753,11 +7969,29 @@
           "count": 4
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 15,
+        "kind_counts": {
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 15
+        },
+        "opcode_counts": {
+          "llvm.icmp:uge": 6,
+          "llvm.icmp:ult": 3,
+          "llvm.icmp:eq": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": []
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -5927,11 +8161,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0164.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass6_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0204.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass6_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 271, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0205.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass6_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 136, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -6393,11 +8753,138 @@
           "count": 171
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 91,
+        "kind_counts": {
+          "llvm_icmp": 88,
+          "dxil_binary_extremum": 3
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 88,
+          "direct_relu_or_lower_clamp_zero": 3
+        },
+        "opcode_counts": {
+          "llvm.icmp:ult": 32,
+          "llvm.icmp:eq": 48,
+          "binary.f32:35": 3,
+          "llvm.icmp:uge": 8
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0079.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7",
+            "line_no": 13016,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%11003",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 13014,
+                "text": "%11001 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %10937, i32 0)"
+              },
+              {
+                "line_no": 13015,
+                "text": "%11002 = bitcast i32 %11001 to float"
+              },
+              {
+                "line_no": 13016,
+                "text": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)"
+              },
+              {
+                "line_no": 13017,
+                "text": "%11004 = load i32, ptr %10945, align 4"
+              },
+              {
+                "line_no": 13018,
+                "text": "%11005 = load i32, ptr %10951, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0082.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7",
+            "line_no": 13016,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%11003",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 13014,
+                "text": "%11001 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %10937, i32 0)"
+              },
+              {
+                "line_no": 13015,
+                "text": "%11002 = bitcast i32 %11001 to float"
+              },
+              {
+                "line_no": 13016,
+                "text": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)"
+              },
+              {
+                "line_no": 13017,
+                "text": "%11004 = load i32, ptr %10945, align 4"
+              },
+              {
+                "line_no": 13018,
+                "text": "%11005 = load i32, ptr %10951, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0150.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7",
+            "line_no": 13016,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%11003",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 13014,
+                "text": "%11001 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %10937, i32 0)"
+              },
+              {
+                "line_no": 13015,
+                "text": "%11002 = bitcast i32 %11001 to float"
+              },
+              {
+                "line_no": 13016,
+                "text": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)"
+              },
+              {
+                "line_no": 13017,
+                "text": "%11004 = load i32, ptr %10945, align 4"
+              },
+              {
+                "line_no": 13018,
+                "text": "%11005 = load i32, ptr %10951, align 4"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -6567,11 +9054,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0052.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 271, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0092.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 136, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0183.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -7033,11 +9646,138 @@
           "count": 171
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 69,
+        "kind_counts": {
+          "llvm_icmp": 66,
+          "dxil_binary_extremum": 3
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 66,
+          "direct_relu_or_lower_clamp_zero": 3
+        },
+        "opcode_counts": {
+          "llvm.icmp:ult": 24,
+          "llvm.icmp:eq": 36,
+          "binary.f32:35": 3,
+          "llvm.icmp:uge": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0108.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8",
+            "line_no": 13016,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%11003",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 13014,
+                "text": "%11001 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %10937, i32 0)"
+              },
+              {
+                "line_no": 13015,
+                "text": "%11002 = bitcast i32 %11001 to float"
+              },
+              {
+                "line_no": 13016,
+                "text": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)"
+              },
+              {
+                "line_no": 13017,
+                "text": "%11004 = load i32, ptr %10945, align 4"
+              },
+              {
+                "line_no": 13018,
+                "text": "%11005 = load i32, ptr %10951, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0120.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8",
+            "line_no": 13016,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%11003",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 13014,
+                "text": "%11001 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %10937, i32 0)"
+              },
+              {
+                "line_no": 13015,
+                "text": "%11002 = bitcast i32 %11001 to float"
+              },
+              {
+                "line_no": 13016,
+                "text": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)"
+              },
+              {
+                "line_no": 13017,
+                "text": "%11004 = load i32, ptr %10945, align 4"
+              },
+              {
+                "line_no": 13018,
+                "text": "%11005 = load i32, ptr %10951, align 4"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0148.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8",
+            "line_no": 13016,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%11003",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 13014,
+                "text": "%11001 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %10937, i32 0)"
+              },
+              {
+                "line_no": 13015,
+                "text": "%11002 = bitcast i32 %11001 to float"
+              },
+              {
+                "line_no": 13016,
+                "text": "%11003 = call float @dx.op.binary.f32(i32 35, float %11002, float 0.000000e+00)"
+              },
+              {
+                "line_no": 13017,
+                "text": "%11004 = load i32, ptr %10945, align 4"
+              },
+              {
+                "line_no": 13018,
+                "text": "%11005 = load i32, ptr %10951, align 4"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -7207,11 +9947,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0038.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0063.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 136, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0127.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 271, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -7673,11 +10539,314 @@
           "count": 210
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 90,
+        "kind_counts": {
+          "llvm_icmp": 66,
+          "dxil_binary_extremum": 24
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 66,
+          "direct_relu_or_lower_clamp_zero": 24
+        },
+        "opcode_counts": {
+          "llvm.icmp:eq": 15,
+          "llvm.icmp:ult": 39,
+          "binary.f32:35": 24,
+          "llvm.icmp:slt": 6,
+          "llvm.icmp:uge": 6
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0104.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+            "line_no": 2604,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2571",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2571 = call float @dx.op.binary.f32(i32 35, float %2570, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2602,
+                "text": "%2569 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %2561, i32 0)"
+              },
+              {
+                "line_no": 2603,
+                "text": "%2570 = bitcast i32 %2569 to float"
+              },
+              {
+                "line_no": 2604,
+                "text": "%2571 = call float @dx.op.binary.f32(i32 35, float %2570, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2605,
+                "text": "%2572 = bitcast float %2571 to i32"
+              },
+              {
+                "line_no": 2606,
+                "text": "%2573 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %2560, i32 %2559)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0104.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+            "line_no": 2643,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2606",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2606 = call float @dx.op.binary.f32(i32 35, float %2605, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2641,
+                "text": "%2604 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %2596, i32 0)"
+              },
+              {
+                "line_no": 2642,
+                "text": "%2605 = bitcast i32 %2604 to float"
+              },
+              {
+                "line_no": 2643,
+                "text": "%2606 = call float @dx.op.binary.f32(i32 35, float %2605, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2644,
+                "text": "%2607 = bitcast float %2606 to i32"
+              },
+              {
+                "line_no": 2645,
+                "text": "%2608 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %2595, i32 %2594)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0104.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+            "line_no": 2682,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2641",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2641 = call float @dx.op.binary.f32(i32 35, float %2640, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2680,
+                "text": "%2639 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %2631, i32 0)"
+              },
+              {
+                "line_no": 2681,
+                "text": "%2640 = bitcast i32 %2639 to float"
+              },
+              {
+                "line_no": 2682,
+                "text": "%2641 = call float @dx.op.binary.f32(i32 35, float %2640, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2683,
+                "text": "%2642 = bitcast float %2641 to i32"
+              },
+              {
+                "line_no": 2684,
+                "text": "%2643 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %2630, i32 %2629)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0104.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+            "line_no": 2721,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2676",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2676 = call float @dx.op.binary.f32(i32 35, float %2675, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2719,
+                "text": "%2674 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %2666, i32 0)"
+              },
+              {
+                "line_no": 2720,
+                "text": "%2675 = bitcast i32 %2674 to float"
+              },
+              {
+                "line_no": 2721,
+                "text": "%2676 = call float @dx.op.binary.f32(i32 35, float %2675, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2722,
+                "text": "%2677 = bitcast float %2676 to i32"
+              },
+              {
+                "line_no": 2723,
+                "text": "%2678 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %2665, i32 %2664)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0104.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+            "line_no": 2760,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2711",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2711 = call float @dx.op.binary.f32(i32 35, float %2710, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2758,
+                "text": "%2709 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %2701, i32 0)"
+              },
+              {
+                "line_no": 2759,
+                "text": "%2710 = bitcast i32 %2709 to float"
+              },
+              {
+                "line_no": 2760,
+                "text": "%2711 = call float @dx.op.binary.f32(i32 35, float %2710, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2761,
+                "text": "%2712 = bitcast float %2711 to i32"
+              },
+              {
+                "line_no": 2762,
+                "text": "%2713 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %2700, i32 %2699)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0104.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+            "line_no": 2799,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2746",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2746 = call float @dx.op.binary.f32(i32 35, float %2745, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2797,
+                "text": "%2744 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %2736, i32 0)"
+              },
+              {
+                "line_no": 2798,
+                "text": "%2745 = bitcast i32 %2744 to float"
+              },
+              {
+                "line_no": 2799,
+                "text": "%2746 = call float @dx.op.binary.f32(i32 35, float %2745, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2800,
+                "text": "%2747 = bitcast float %2746 to i32"
+              },
+              {
+                "line_no": 2801,
+                "text": "%2748 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %2735, i32 %2734)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0104.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+            "line_no": 2838,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2781",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2781 = call float @dx.op.binary.f32(i32 35, float %2780, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2836,
+                "text": "%2779 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %2771, i32 0)"
+              },
+              {
+                "line_no": 2837,
+                "text": "%2780 = bitcast i32 %2779 to float"
+              },
+              {
+                "line_no": 2838,
+                "text": "%2781 = call float @dx.op.binary.f32(i32 35, float %2780, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2839,
+                "text": "%2782 = bitcast float %2781 to i32"
+              },
+              {
+                "line_no": 2840,
+                "text": "%2783 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %2770, i32 %2769)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0104.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+            "line_no": 2877,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2816",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2816 = call float @dx.op.binary.f32(i32 35, float %2815, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2875,
+                "text": "%2814 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1358964272, i32 undef, i32 undef, i32 %2806, i32 0)"
+              },
+              {
+                "line_no": 2876,
+                "text": "%2815 = bitcast i32 %2814 to float"
+              },
+              {
+                "line_no": 2877,
+                "text": "%2816 = call float @dx.op.binary.f32(i32 35, float %2815, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2878,
+                "text": "%2817 = bitcast float %2816 to i32"
+              },
+              {
+                "line_no": 2879,
+                "text": "%2818 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %1, i32 1342177327, i32 undef, i32 undef, i32 %2805, i32 %2804)"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -7847,11 +11016,137 @@
       "top_decoded_key_slots": [],
       "raw_load_formula_count": 0,
       "top_raw_load_formula_families": [],
+      "activation_nonlinearity": {
+        "event_count": 21,
+        "kind_counts": {
+          "dxil_binary_extremum": 6,
+          "llvm_icmp": 15
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 18,
+          "integer_upper_clamp_one": 3
+        },
+        "opcode_counts": {
+          "binary.i32:40": 6,
+          "llvm.icmp:ult": 12,
+          "llvm.icmp:slt": 3
+        },
+        "has_direct_relu_or_lower_clamp_zero": false,
+        "has_direct_upper_clamp_one": false,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0021.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 1081, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0039.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 541, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0138.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9_post",
+            "line_no": 11,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 40,
+            "op_name": "UMin",
+            "result": "%10",
+            "type": "i32",
+            "pattern": "integer_upper_clamp_one",
+            "line": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)",
+            "context": [
+              {
+                "line_no": 9,
+                "text": "%8 = sub i32 271, %6"
+              },
+              {
+                "line_no": 10,
+                "text": "%9 = call i32 @dx.op.binary.i32(i32 40, i32 %7, i32 33)"
+              },
+              {
+                "line_no": 11,
+                "text": "%10 = call i32 @dx.op.binary.i32(i32 40, i32 %8, i32 1)"
+              },
+              {
+                "line_no": 12,
+                "text": "%11 = add i32 %5, 1"
+              },
+              {
+                "line_no": 13,
+                "text": "%12 = add i32 %11, %9"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": false
+        "raw_load_formulas_extracted": false,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -8323,11 +11618,325 @@
           "count": 960
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 8916,
+        "kind_counts": {
+          "llvm_icmp": 492,
+          "llvm_fcmp": 390,
+          "llvm_select": 390,
+          "dxil_binary_extremum": 3540,
+          "dxil_unary_nonlinear": 4104
+        },
+        "pattern_counts": {
+          "nonlinear_or_control": 5880,
+          "direct_relu_or_lower_clamp_zero": 2424,
+          "integer_lower_clamp_zero": 288,
+          "direct_upper_clamp_one": 324
+        },
+        "opcode_counts": {
+          "llvm.icmp:eq": 156,
+          "llvm.fcmp:oeq": 30,
+          "llvm.select:select": 390,
+          "llvm.icmp:ult": 336,
+          "binary.f32:35": 2460,
+          "unary.f32:21": 2052,
+          "binary.i32:37": 288,
+          "binary.i32:38": 324,
+          "unary.f32:23": 2052,
+          "binary.f32:36": 468,
+          "llvm.fcmp:olt": 360
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": true,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0007.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+            "line_no": 1184,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%1174",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%1174 = call float @dx.op.binary.f32(i32 35, float %1173, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 1182,
+                "text": "%1172 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %6, i32 1358964272, i32 undef, i32 undef, i32 %1164, i32 0)"
+              },
+              {
+                "line_no": 1183,
+                "text": "%1173 = bitcast i32 %1172 to float"
+              },
+              {
+                "line_no": 1184,
+                "text": "%1174 = call float @dx.op.binary.f32(i32 35, float %1173, float 0.000000e+00)"
+              },
+              {
+                "line_no": 1185,
+                "text": "%1175 = bitcast float %1174 to i32"
+              },
+              {
+                "line_no": 1186,
+                "text": "%1176 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %6, i32 1342177327, i32 undef, i32 undef, i32 %1163, i32 %1162)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0007.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+            "line_no": 1223,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%1209",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%1209 = call float @dx.op.binary.f32(i32 35, float %1208, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 1221,
+                "text": "%1207 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %6, i32 1358964272, i32 undef, i32 undef, i32 %1199, i32 0)"
+              },
+              {
+                "line_no": 1222,
+                "text": "%1208 = bitcast i32 %1207 to float"
+              },
+              {
+                "line_no": 1223,
+                "text": "%1209 = call float @dx.op.binary.f32(i32 35, float %1208, float 0.000000e+00)"
+              },
+              {
+                "line_no": 1224,
+                "text": "%1210 = bitcast float %1209 to i32"
+              },
+              {
+                "line_no": 1225,
+                "text": "%1211 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %6, i32 1342177327, i32 undef, i32 undef, i32 %1198, i32 %1197)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0007.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+            "line_no": 1386,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%1364",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%1364 = call float @dx.op.binary.f32(i32 35, float %1363, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 1384,
+                "text": "%1362 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %6, i32 1358964272, i32 undef, i32 undef, i32 %1354, i32 0)"
+              },
+              {
+                "line_no": 1385,
+                "text": "%1363 = bitcast i32 %1362 to float"
+              },
+              {
+                "line_no": 1386,
+                "text": "%1364 = call float @dx.op.binary.f32(i32 35, float %1363, float 0.000000e+00)"
+              },
+              {
+                "line_no": 1387,
+                "text": "%1365 = bitcast float %1364 to i32"
+              },
+              {
+                "line_no": 1388,
+                "text": "%1366 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %6, i32 1342177327, i32 undef, i32 undef, i32 %1353, i32 %1352)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0007.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+            "line_no": 1425,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%1399",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%1399 = call float @dx.op.binary.f32(i32 35, float %1398, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 1423,
+                "text": "%1397 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %6, i32 1358964272, i32 undef, i32 undef, i32 %1389, i32 0)"
+              },
+              {
+                "line_no": 1424,
+                "text": "%1398 = bitcast i32 %1397 to float"
+              },
+              {
+                "line_no": 1425,
+                "text": "%1399 = call float @dx.op.binary.f32(i32 35, float %1398, float 0.000000e+00)"
+              },
+              {
+                "line_no": 1426,
+                "text": "%1400 = bitcast float %1399 to i32"
+              },
+              {
+                "line_no": 1427,
+                "text": "%1401 = call i32 @dx.op.atomicCompareExchange.i32(i32 79, %dx.types.Handle %6, i32 1342177327, i32 undef, i32 undef, i32 %1388, i32 %1387)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0007.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+            "line_no": 2189,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 37,
+            "op_name": "IMax",
+            "result": "%2112",
+            "type": "i32",
+            "pattern": "integer_lower_clamp_zero",
+            "line": "%2112 = call i32 @dx.op.binary.i32(i32 37, i32 %2089, i32 0)",
+            "context": [
+              {
+                "line_no": 2187,
+                "text": "%2110 = extractvalue %dx.types.CBufRet.i32 %2109, 0"
+              },
+              {
+                "line_no": 2188,
+                "text": "%2111 = add i32 %2110, -1"
+              },
+              {
+                "line_no": 2189,
+                "text": "%2112 = call i32 @dx.op.binary.i32(i32 37, i32 %2089, i32 0)"
+              },
+              {
+                "line_no": 2190,
+                "text": "%2113 = call i32 @dx.op.binary.i32(i32 37, i32 %2083, i32 0)"
+              },
+              {
+                "line_no": 2191,
+                "text": "%2114 = call i32 @dx.op.binary.i32(i32 38, i32 %2112, i32 %2108)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0007.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+            "line_no": 2190,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 37,
+            "op_name": "IMax",
+            "result": "%2113",
+            "type": "i32",
+            "pattern": "integer_lower_clamp_zero",
+            "line": "%2113 = call i32 @dx.op.binary.i32(i32 37, i32 %2083, i32 0)",
+            "context": [
+              {
+                "line_no": 2188,
+                "text": "%2111 = add i32 %2110, -1"
+              },
+              {
+                "line_no": 2189,
+                "text": "%2112 = call i32 @dx.op.binary.i32(i32 37, i32 %2089, i32 0)"
+              },
+              {
+                "line_no": 2190,
+                "text": "%2113 = call i32 @dx.op.binary.i32(i32 37, i32 %2083, i32 0)"
+              },
+              {
+                "line_no": 2191,
+                "text": "%2114 = call i32 @dx.op.binary.i32(i32 38, i32 %2112, i32 %2108)"
+              },
+              {
+                "line_no": 2192,
+                "text": "%2115 = call i32 @dx.op.binary.i32(i32 38, i32 %2113, i32 %2111)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0007.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+            "line_no": 2210,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2133",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2133 = call float @dx.op.binary.f32(i32 35, float %2130, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2208,
+                "text": "%2131 = fmul fast float %2128, 0x3FB4D50600000000"
+              },
+              {
+                "line_no": 2209,
+                "text": "%2132 = fmul fast float %2129, 0x3FB4D50600000000"
+              },
+              {
+                "line_no": 2210,
+                "text": "%2133 = call float @dx.op.binary.f32(i32 35, float %2130, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2211,
+                "text": "%2134 = call float @dx.op.binary.f32(i32 35, float %2131, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2212,
+                "text": "%2135 = call float @dx.op.binary.f32(i32 35, float %2132, float 0.000000e+00)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0007.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+            "line_no": 2211,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%2134",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%2134 = call float @dx.op.binary.f32(i32 35, float %2131, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 2209,
+                "text": "%2132 = fmul fast float %2129, 0x3FB4D50600000000"
+              },
+              {
+                "line_no": 2210,
+                "text": "%2133 = call float @dx.op.binary.f32(i32 35, float %2130, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2211,
+                "text": "%2134 = call float @dx.op.binary.f32(i32 35, float %2131, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2212,
+                "text": "%2135 = call float @dx.op.binary.f32(i32 35, float %2132, float 0.000000e+00)"
+              },
+              {
+                "line_no": 2213,
+                "text": "%2136 = fmul fast float %2133, %2105"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     },
     {
@@ -8799,11 +12408,330 @@
           "count": 360
         }
       ],
+      "activation_nonlinearity": {
+        "event_count": 22470,
+        "kind_counts": {
+          "dxil_binary_extremum": 7488,
+          "dxil_unary_nonlinear": 7380,
+          "llvm_fcmp": 3066,
+          "llvm_select": 4086,
+          "llvm_icmp": 450
+        },
+        "pattern_counts": {
+          "integer_lower_clamp_zero": 720,
+          "nonlinear_or_control": 16350,
+          "direct_relu_or_lower_clamp_zero": 4860,
+          "direct_upper_clamp_one": 540
+        },
+        "opcode_counts": {
+          "binary.i32:37": 720,
+          "binary.i32:38": 720,
+          "binary.f32:35": 5508,
+          "binary.f32:36": 540,
+          "unary.f32:23": 4104,
+          "unary.f32:21": 3096,
+          "llvm.fcmp:ogt": 840,
+          "llvm.select:select": 4086,
+          "llvm.icmp:ne": 180,
+          "llvm.icmp:eq": 270,
+          "llvm.fcmp:ole": 720,
+          "llvm.fcmp:ult": 180,
+          "llvm.fcmp:oge": 180,
+          "unary.f32:24": 180,
+          "llvm.fcmp:olt": 1128,
+          "llvm.fcmp:oeq": 18
+        },
+        "has_direct_relu_or_lower_clamp_zero": true,
+        "has_direct_upper_clamp_one": true,
+        "sample_events": [
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0001.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+            "line_no": 56,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 37,
+            "op_name": "IMax",
+            "result": "%53",
+            "type": "i32",
+            "pattern": "integer_lower_clamp_zero",
+            "line": "%53 = call i32 @dx.op.binary.i32(i32 37, i32 %43, i32 0)",
+            "context": [
+              {
+                "line_no": 54,
+                "text": "%51 = extractvalue %dx.types.CBufRet.i32 %50, 0"
+              },
+              {
+                "line_no": 55,
+                "text": "%52 = add i32 %51, -1"
+              },
+              {
+                "line_no": 56,
+                "text": "%53 = call i32 @dx.op.binary.i32(i32 37, i32 %43, i32 0)"
+              },
+              {
+                "line_no": 57,
+                "text": "%54 = call i32 @dx.op.binary.i32(i32 37, i32 %44, i32 0)"
+              },
+              {
+                "line_no": 58,
+                "text": "%55 = call i32 @dx.op.binary.i32(i32 38, i32 %53, i32 %49)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0001.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+            "line_no": 57,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.i32",
+            "dxil_op_id": 37,
+            "op_name": "IMax",
+            "result": "%54",
+            "type": "i32",
+            "pattern": "integer_lower_clamp_zero",
+            "line": "%54 = call i32 @dx.op.binary.i32(i32 37, i32 %44, i32 0)",
+            "context": [
+              {
+                "line_no": 55,
+                "text": "%52 = add i32 %51, -1"
+              },
+              {
+                "line_no": 56,
+                "text": "%53 = call i32 @dx.op.binary.i32(i32 37, i32 %43, i32 0)"
+              },
+              {
+                "line_no": 57,
+                "text": "%54 = call i32 @dx.op.binary.i32(i32 37, i32 %44, i32 0)"
+              },
+              {
+                "line_no": 58,
+                "text": "%55 = call i32 @dx.op.binary.i32(i32 38, i32 %53, i32 %49)"
+              },
+              {
+                "line_no": 59,
+                "text": "%56 = call i32 @dx.op.binary.i32(i32 38, i32 %54, i32 %52)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0001.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+            "line_no": 64,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%61",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%61 = call float @dx.op.binary.f32(i32 35, float %58, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 62,
+                "text": "%59 = extractvalue %dx.types.ResRet.f32 %57, 1"
+              },
+              {
+                "line_no": 63,
+                "text": "%60 = extractvalue %dx.types.ResRet.f32 %57, 2"
+              },
+              {
+                "line_no": 64,
+                "text": "%61 = call float @dx.op.binary.f32(i32 35, float %58, float 0.000000e+00)"
+              },
+              {
+                "line_no": 65,
+                "text": "%62 = call float @dx.op.binary.f32(i32 35, float %59, float 0.000000e+00)"
+              },
+              {
+                "line_no": 66,
+                "text": "%63 = call float @dx.op.binary.f32(i32 35, float %60, float 0.000000e+00)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0001.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+            "line_no": 65,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%62",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%62 = call float @dx.op.binary.f32(i32 35, float %59, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 63,
+                "text": "%60 = extractvalue %dx.types.ResRet.f32 %57, 2"
+              },
+              {
+                "line_no": 64,
+                "text": "%61 = call float @dx.op.binary.f32(i32 35, float %58, float 0.000000e+00)"
+              },
+              {
+                "line_no": 65,
+                "text": "%62 = call float @dx.op.binary.f32(i32 35, float %59, float 0.000000e+00)"
+              },
+              {
+                "line_no": 66,
+                "text": "%63 = call float @dx.op.binary.f32(i32 35, float %60, float 0.000000e+00)"
+              },
+              {
+                "line_no": 67,
+                "text": "%64 = call float @dx.op.binary.f32(i32 36, float %61, float 1.000000e+00)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0001.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+            "line_no": 66,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 35,
+            "op_name": "FMax",
+            "result": "%63",
+            "type": "float",
+            "pattern": "direct_relu_or_lower_clamp_zero",
+            "line": "%63 = call float @dx.op.binary.f32(i32 35, float %60, float 0.000000e+00)",
+            "context": [
+              {
+                "line_no": 64,
+                "text": "%61 = call float @dx.op.binary.f32(i32 35, float %58, float 0.000000e+00)"
+              },
+              {
+                "line_no": 65,
+                "text": "%62 = call float @dx.op.binary.f32(i32 35, float %59, float 0.000000e+00)"
+              },
+              {
+                "line_no": 66,
+                "text": "%63 = call float @dx.op.binary.f32(i32 35, float %60, float 0.000000e+00)"
+              },
+              {
+                "line_no": 67,
+                "text": "%64 = call float @dx.op.binary.f32(i32 36, float %61, float 1.000000e+00)"
+              },
+              {
+                "line_no": 68,
+                "text": "%65 = call float @dx.op.binary.f32(i32 36, float %62, float 1.000000e+00)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0001.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+            "line_no": 67,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 36,
+            "op_name": "FMin",
+            "result": "%64",
+            "type": "float",
+            "pattern": "direct_upper_clamp_one",
+            "line": "%64 = call float @dx.op.binary.f32(i32 36, float %61, float 1.000000e+00)",
+            "context": [
+              {
+                "line_no": 65,
+                "text": "%62 = call float @dx.op.binary.f32(i32 35, float %59, float 0.000000e+00)"
+              },
+              {
+                "line_no": 66,
+                "text": "%63 = call float @dx.op.binary.f32(i32 35, float %60, float 0.000000e+00)"
+              },
+              {
+                "line_no": 67,
+                "text": "%64 = call float @dx.op.binary.f32(i32 36, float %61, float 1.000000e+00)"
+              },
+              {
+                "line_no": 68,
+                "text": "%65 = call float @dx.op.binary.f32(i32 36, float %62, float 1.000000e+00)"
+              },
+              {
+                "line_no": 69,
+                "text": "%66 = call float @dx.op.binary.f32(i32 36, float %63, float 1.000000e+00)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0001.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+            "line_no": 68,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 36,
+            "op_name": "FMin",
+            "result": "%65",
+            "type": "float",
+            "pattern": "direct_upper_clamp_one",
+            "line": "%65 = call float @dx.op.binary.f32(i32 36, float %62, float 1.000000e+00)",
+            "context": [
+              {
+                "line_no": 66,
+                "text": "%63 = call float @dx.op.binary.f32(i32 35, float %60, float 0.000000e+00)"
+              },
+              {
+                "line_no": 67,
+                "text": "%64 = call float @dx.op.binary.f32(i32 36, float %61, float 1.000000e+00)"
+              },
+              {
+                "line_no": 68,
+                "text": "%65 = call float @dx.op.binary.f32(i32 36, float %62, float 1.000000e+00)"
+              },
+              {
+                "line_no": 69,
+                "text": "%66 = call float @dx.op.binary.f32(i32 36, float %63, float 1.000000e+00)"
+              },
+              {
+                "line_no": 70,
+                "text": "%67 = call float @dx.op.unary.f32(i32 23, float %64)"
+              }
+            ]
+          },
+          {
+            "file": "build/llvm_ir/4_1_0/blob_0001.ll",
+            "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+            "line_no": 69,
+            "kind": "dxil_binary_extremum",
+            "family": "binary.f32",
+            "dxil_op_id": 36,
+            "op_name": "FMin",
+            "result": "%66",
+            "type": "float",
+            "pattern": "direct_upper_clamp_one",
+            "line": "%66 = call float @dx.op.binary.f32(i32 36, float %63, float 1.000000e+00)",
+            "context": [
+              {
+                "line_no": 67,
+                "text": "%64 = call float @dx.op.binary.f32(i32 36, float %61, float 1.000000e+00)"
+              },
+              {
+                "line_no": 68,
+                "text": "%65 = call float @dx.op.binary.f32(i32 36, float %62, float 1.000000e+00)"
+              },
+              {
+                "line_no": 69,
+                "text": "%66 = call float @dx.op.binary.f32(i32 36, float %63, float 1.000000e+00)"
+              },
+              {
+                "line_no": 70,
+                "text": "%67 = call float @dx.op.unary.f32(i32 23, float %64)"
+              },
+              {
+                "line_no": 71,
+                "text": "%68 = call float @dx.op.unary.f32(i32 23, float %65)"
+              }
+            ]
+          }
+        ]
+      },
       "static_completion": {
         "resources_mapped": true,
         "dxil_ops_summarized": true,
         "atomic_patterns_extracted": true,
-        "raw_load_formulas_extracted": true
+        "raw_load_formulas_extracted": true,
+        "activation_nonlinearity_extracted": true
       }
     }
   ]

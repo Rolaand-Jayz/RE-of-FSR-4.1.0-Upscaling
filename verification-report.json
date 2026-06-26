@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "timestamp": "2026-06-26T03:11:57.060128+00:00",
-  "total": 65,
-  "passed": 65,
+  "timestamp": "2026-06-26T03:33:24.796217+00:00",
+  "total": 72,
+  "passed": 72,
   "failed": 0,
   "results": [
     {
@@ -326,9 +326,44 @@
       "evidence": "passes=27"
     },
     {
-      "name": "Every main pass has static resource/op/atomic/formula completion",
+      "name": "Every main pass has static resource/op/atomic/formula/activation completion",
       "status": "PASS",
       "evidence": "main_passes=12"
+    },
+    {
+      "name": "Activation/nonlinearity artifact exists",
+      "status": "PASS",
+      "evidence": "/mnt/workdrive/fsr-re/reports/activation-nonlinearity-evidence.json"
+    },
+    {
+      "name": "Activation/nonlinearity artifact covers 27 entrypoints",
+      "status": "PASS",
+      "evidence": "unique=27 summary=27"
+    },
+    {
+      "name": "Activation/nonlinearity artifact covers all 214 shader variants",
+      "status": "PASS",
+      "evidence": "variants=214"
+    },
+    {
+      "name": "Activation/nonlinearity artifact includes compare/select evidence",
+      "status": "PASS",
+      "evidence": "kinds={'dxil_binary_extremum': 11166, 'dxil_unary_nonlinear': 11484, 'llvm_fcmp': 3456, 'llvm_select': 4476, 'llvm_icmp': 1714}"
+    },
+    {
+      "name": "Activation/nonlinearity artifact includes direct lower-clamp/ReLU candidates",
+      "status": "PASS",
+      "evidence": "patterns={'integer_lower_clamp_zero': 1008, 'nonlinear_or_control': 23041, 'direct_relu_or_lower_clamp_zero': 7344, 'direct_upper_clamp_one': 864, 'integer_upper_clamp_one': 39}"
+    },
+    {
+      "name": "Every main pass has activation/nonlinearity events",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Most main passes have direct lower-clamp/ReLU candidate evidence",
+      "status": "PASS",
+      "evidence": "direct_main=10/12; exceptions=['fsr4_model_v07_fp8_no_scale_pass3', 'fsr4_model_v07_fp8_no_scale_pass6']"
     }
   ]
 }

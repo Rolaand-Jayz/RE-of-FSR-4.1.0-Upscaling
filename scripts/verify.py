@@ -341,9 +341,28 @@ def main() -> int:
         record("Pass static summaries artifact exists", ps.get("schema_version") == 1, str(pass_summaries))
         record("Pass static summaries cover 27 entrypoints", len(passes) == 27, f"passes={len(passes)}")
         complete = all(all(p.get("static_completion", {}).values()) for p in main)
-        record("Every main pass has static resource/op/atomic/formula completion", complete, f"main_passes={len(main)}")
+        record("Every main pass has static resource/op/atomic/formula/activation completion", complete, f"main_passes={len(main)}")
     else:
         record("Pass static summaries artifact exists", False, str(pass_summaries))
+    print()
+
+    activation_report = repo_root / "reports/activation-nonlinearity-evidence.json"
+    if activation_report.exists():
+        act = json.loads(activation_report.read_text())
+        summary = act.get("summary", [])
+        main = [r for r in summary if r.get("class") == "main_pass"]
+        patterns = act.get("global_pattern_counts", {})
+        kinds = act.get("global_kind_counts", {})
+        record("Activation/nonlinearity artifact exists", act.get("schema_version") == 1, str(activation_report))
+        record("Activation/nonlinearity artifact covers 27 entrypoints", act.get("unique_entrypoints") == 27 and len(summary) == 27, f"unique={act.get('unique_entrypoints')} summary={len(summary)}")
+        record("Activation/nonlinearity artifact covers all 214 shader variants", act.get("shader_variants") == 214, f"variants={act.get('shader_variants')}")
+        record("Activation/nonlinearity artifact includes compare/select evidence", kinds.get("llvm_fcmp", 0) > 0 and kinds.get("llvm_select", 0) > 0, f"kinds={kinds}")
+        record("Activation/nonlinearity artifact includes direct lower-clamp/ReLU candidates", patterns.get("direct_relu_or_lower_clamp_zero", 0) > 0, f"patterns={patterns}")
+        record("Every main pass has activation/nonlinearity events", all(r.get("event_count", 0) > 0 for r in main), f"main_passes={len(main)}")
+        direct_main = sum(1 for r in main if r.get("has_direct_relu_or_lower_clamp_zero"))
+        record("Most main passes have direct lower-clamp/ReLU candidate evidence", direct_main >= 10, f"direct_main={direct_main}/{len(main)}; exceptions={[r.get('entrypoint') for r in main if not r.get('has_direct_relu_or_lower_clamp_zero')]}")
+    else:
+        record("Activation/nonlinearity artifact exists", False, str(activation_report))
     print()
 
 
