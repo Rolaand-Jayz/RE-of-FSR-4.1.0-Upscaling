@@ -365,6 +365,18 @@ def main() -> int:
         record("Activation/nonlinearity artifact exists", False, str(activation_report))
     print()
 
+    topology_report = repo_root / "spec/static-layer-topology.json"
+    if topology_report.exists():
+        topo = json.loads(topology_report.read_text())
+        obs = topo.get("observations", {})
+        record("Static layer topology artifact exists", topo.get("schema_version") == 1, str(topology_report))
+        record("Static layer topology covers 27 entrypoints", topo.get("entrypoint_count") == 27, f"entrypoints={topo.get('entrypoint_count')}")
+        record("Static layer topology identifies 12 main passes and 13 post stages", obs.get("main_passes") == 12 and obs.get("post_stages") == 13, f"observations={obs}")
+        record("Static layer topology pairs every main pass with a post stage", obs.get("main_passes_with_post_stage") == 12, f"paired={obs.get('main_passes_with_post_stage')}")
+    else:
+        record("Static layer topology artifact exists", False, str(topology_report))
+    print()
+
     arithmetic_report = repo_root / "reports/arithmetic-dataflow-slices.json"
     if arithmetic_report.exists():
         ar = json.loads(arithmetic_report.read_text())

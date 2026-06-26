@@ -1,0 +1,724 @@
+{
+  "schema_version": 1,
+  "basis": "static ordering/classification from entrypoint names plus generated static summaries; not runtime dispatch order proof",
+  "entrypoint_count": 27,
+  "classes": {
+    "prepass": [
+      "fsr4_model_v07_fp8_no_scale_prepass"
+    ],
+    "main": [
+      "fsr4_model_v07_fp8_no_scale_pass1",
+      "fsr4_model_v07_fp8_no_scale_pass10",
+      "fsr4_model_v07_fp8_no_scale_pass11",
+      "fsr4_model_v07_fp8_no_scale_pass12",
+      "fsr4_model_v07_fp8_no_scale_pass2",
+      "fsr4_model_v07_fp8_no_scale_pass3",
+      "fsr4_model_v07_fp8_no_scale_pass4",
+      "fsr4_model_v07_fp8_no_scale_pass5",
+      "fsr4_model_v07_fp8_no_scale_pass6",
+      "fsr4_model_v07_fp8_no_scale_pass7",
+      "fsr4_model_v07_fp8_no_scale_pass8",
+      "fsr4_model_v07_fp8_no_scale_pass9"
+    ],
+    "post": [
+      "fsr4_model_v07_fp8_no_scale_pass0_post",
+      "fsr4_model_v07_fp8_no_scale_pass10_post",
+      "fsr4_model_v07_fp8_no_scale_pass11_post",
+      "fsr4_model_v07_fp8_no_scale_pass12_post",
+      "fsr4_model_v07_fp8_no_scale_pass1_post",
+      "fsr4_model_v07_fp8_no_scale_pass2_post",
+      "fsr4_model_v07_fp8_no_scale_pass3_post",
+      "fsr4_model_v07_fp8_no_scale_pass4_post",
+      "fsr4_model_v07_fp8_no_scale_pass5_post",
+      "fsr4_model_v07_fp8_no_scale_pass6_post",
+      "fsr4_model_v07_fp8_no_scale_pass7_post",
+      "fsr4_model_v07_fp8_no_scale_pass8_post",
+      "fsr4_model_v07_fp8_no_scale_pass9_post"
+    ],
+    "final_postpass": [
+      "fsr4_model_v07_fp8_no_scale_postpass"
+    ]
+  },
+  "topology": [
+    {
+      "order": 0,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+      "class": "prepass",
+      "pass_index": null,
+      "stage_kind": "input_analysis_or_prepass",
+      "variants": 90,
+      "resource_roles": {
+        "write_target": 90,
+        "atomic_indirection_or_scratch_uav": 90,
+        "raw_intermediate_or_operand_uav": 90,
+        "unknown_static_role": 564,
+        "raw_model_or_weight_buffer_srv": 90,
+        "constant_buffer_or_root_constants": 90
+      },
+      "static_signals": {
+        "raw_load_formula_count": 29970,
+        "atomic_addr_total": 18450,
+        "activation_events": 22470,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 18450
+        }
+      }
+    },
+    {
+      "order": 1,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1",
+      "class": "main_pass",
+      "pass_index": 1,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 8652,
+        "atomic_addr_total": 5964,
+        "activation_events": 45,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 5964
+        }
+      }
+    },
+    {
+      "order": 2,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1_post",
+      "class": "post_stage",
+      "pass_index": 1,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 3
+        }
+      }
+    },
+    {
+      "order": 3,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2",
+      "class": "main_pass",
+      "pass_index": 2,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 8652,
+        "atomic_addr_total": 5964,
+        "activation_events": 45,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 5964
+        }
+      }
+    },
+    {
+      "order": 4,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2_post",
+      "class": "post_stage",
+      "pass_index": 2,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 3
+        }
+      }
+    },
+    {
+      "order": 5,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass3",
+      "class": "main_pass",
+      "pass_index": 3,
+      "stage_kind": "weighted_transform_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 4137,
+        "atomic_addr_total": 2343,
+        "activation_events": 15,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 2343
+        }
+      }
+    },
+    {
+      "order": 6,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass3_post",
+      "class": "post_stage",
+      "pass_index": 3,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 6
+        }
+      }
+    },
+    {
+      "order": 7,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4",
+      "class": "main_pass",
+      "pass_index": 4,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 13785,
+        "atomic_addr_total": 9885,
+        "activation_events": 57,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 9885
+        }
+      }
+    },
+    {
+      "order": 8,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4_post",
+      "class": "post_stage",
+      "pass_index": 4,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 6
+        }
+      }
+    },
+    {
+      "order": 9,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5",
+      "class": "main_pass",
+      "pass_index": 5,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 13785,
+        "atomic_addr_total": 9885,
+        "activation_events": 57,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 9885
+        }
+      }
+    },
+    {
+      "order": 10,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5_post",
+      "class": "post_stage",
+      "pass_index": 5,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 6
+        }
+      }
+    },
+    {
+      "order": 11,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass6",
+      "class": "main_pass",
+      "pass_index": 6,
+      "stage_kind": "weighted_transform_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 15075,
+        "atomic_addr_total": 8523,
+        "activation_events": 15,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 8523
+        }
+      }
+    },
+    {
+      "order": 12,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass6_post",
+      "class": "post_stage",
+      "pass_index": 6,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 12
+        }
+      }
+    },
+    {
+      "order": 13,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7",
+      "class": "main_pass",
+      "pass_index": 7,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 4,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 36741,
+        "atomic_addr_total": 27261,
+        "activation_events": 91,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 27261
+        }
+      }
+    },
+    {
+      "order": 14,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7_post",
+      "class": "post_stage",
+      "pass_index": 7,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 12
+        }
+      }
+    },
+    {
+      "order": 15,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8",
+      "class": "main_pass",
+      "pass_index": 8,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 36741,
+        "atomic_addr_total": 27261,
+        "activation_events": 69,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 27261
+        }
+      }
+    },
+    {
+      "order": 16,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8_post",
+      "class": "post_stage",
+      "pass_index": 8,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 12
+        }
+      }
+    },
+    {
+      "order": 17,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+      "class": "main_pass",
+      "pass_index": 9,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 24582,
+        "atomic_addr_total": 14514,
+        "activation_events": 90,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 14514
+        }
+      }
+    },
+    {
+      "order": 18,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9_post",
+      "class": "post_stage",
+      "pass_index": 9,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 6
+        }
+      }
+    },
+    {
+      "order": 19,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10",
+      "class": "main_pass",
+      "pass_index": 10,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 13785,
+        "atomic_addr_total": 9885,
+        "activation_events": 57,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 9885
+        }
+      }
+    },
+    {
+      "order": 20,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10_post",
+      "class": "post_stage",
+      "pass_index": 10,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 6
+        }
+      }
+    },
+    {
+      "order": 21,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+      "class": "main_pass",
+      "pass_index": 11,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 9138,
+        "atomic_addr_total": 5169,
+        "activation_events": 51,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 5169
+        }
+      }
+    },
+    {
+      "order": 22,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11_post",
+      "class": "post_stage",
+      "pass_index": 11,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 3
+        }
+      }
+    },
+    {
+      "order": 23,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12",
+      "class": "main_pass",
+      "pass_index": 12,
+      "stage_kind": "accumulation_heavy_main_pass",
+      "variants": 3,
+      "resource_roles": {
+        "atomic_indirection_or_scratch_uav": 3,
+        "raw_intermediate_or_operand_uav": 3,
+        "raw_model_or_weight_buffer_srv": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 8652,
+        "atomic_addr_total": 5964,
+        "activation_events": 45,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 5964
+        }
+      }
+    },
+    {
+      "order": 24,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12_post",
+      "class": "post_stage",
+      "pass_index": 12,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 3
+        }
+      }
+    },
+    {
+      "order": 25,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass0_post",
+      "class": "post_stage",
+      "pass_index": 0,
+      "stage_kind": "per_pass_post_stage",
+      "variants": 3,
+      "resource_roles": {
+        "write_target": 3,
+        "constant_buffer_or_root_constants": 3
+      },
+      "static_signals": {
+        "raw_load_formula_count": 0,
+        "atomic_addr_total": 0,
+        "activation_events": 21,
+        "direct_relu_or_lower_clamp_zero": false,
+        "arithmetic_sinks": {
+          "rawBufferStore.values": 3
+        }
+      }
+    },
+    {
+      "order": 26,
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+      "class": "final_postpass",
+      "pass_index": null,
+      "stage_kind": "final_output_postprocess",
+      "variants": 48,
+      "resource_roles": {
+        "write_target": 192,
+        "atomic_indirection_or_scratch_uav": 48,
+        "raw_intermediate_or_operand_uav": 48,
+        "unknown_static_role": 126,
+        "raw_model_or_weight_buffer_srv": 48,
+        "constant_buffer_or_root_constants": 48
+      },
+      "static_signals": {
+        "raw_load_formula_count": 139152,
+        "atomic_addr_total": 75792,
+        "activation_events": 8916,
+        "direct_relu_or_lower_clamp_zero": true,
+        "arithmetic_sinks": {
+          "atomicCompareExchange.operands": 75792
+        }
+      }
+    }
+  ],
+  "main_post_pairs": [
+    {
+      "pass_index": 1,
+      "main": "fsr4_model_v07_fp8_no_scale_pass1",
+      "post": "fsr4_model_v07_fp8_no_scale_pass1_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 2,
+      "main": "fsr4_model_v07_fp8_no_scale_pass2",
+      "post": "fsr4_model_v07_fp8_no_scale_pass2_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 3,
+      "main": "fsr4_model_v07_fp8_no_scale_pass3",
+      "post": "fsr4_model_v07_fp8_no_scale_pass3_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 4,
+      "main": "fsr4_model_v07_fp8_no_scale_pass4",
+      "post": "fsr4_model_v07_fp8_no_scale_pass4_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 5,
+      "main": "fsr4_model_v07_fp8_no_scale_pass5",
+      "post": "fsr4_model_v07_fp8_no_scale_pass5_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 6,
+      "main": "fsr4_model_v07_fp8_no_scale_pass6",
+      "post": "fsr4_model_v07_fp8_no_scale_pass6_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 7,
+      "main": "fsr4_model_v07_fp8_no_scale_pass7",
+      "post": "fsr4_model_v07_fp8_no_scale_pass7_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 8,
+      "main": "fsr4_model_v07_fp8_no_scale_pass8",
+      "post": "fsr4_model_v07_fp8_no_scale_pass8_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 9,
+      "main": "fsr4_model_v07_fp8_no_scale_pass9",
+      "post": "fsr4_model_v07_fp8_no_scale_pass9_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 10,
+      "main": "fsr4_model_v07_fp8_no_scale_pass10",
+      "post": "fsr4_model_v07_fp8_no_scale_pass10_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 11,
+      "main": "fsr4_model_v07_fp8_no_scale_pass11",
+      "post": "fsr4_model_v07_fp8_no_scale_pass11_post",
+      "has_post": true
+    },
+    {
+      "pass_index": 12,
+      "main": "fsr4_model_v07_fp8_no_scale_pass12",
+      "post": "fsr4_model_v07_fp8_no_scale_pass12_post",
+      "has_post": true
+    }
+  ],
+  "observations": {
+    "main_passes": 12,
+    "post_stages": 13,
+    "main_passes_with_post_stage": 12,
+    "prepass_count": 1,
+    "final_postpass_count": 1
+  }
+}

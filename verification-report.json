@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "timestamp": "2026-06-26T03:35:25.547303+00:00",
-  "total": 78,
-  "passed": 78,
+  "timestamp": "2026-06-26T03:36:11.064540+00:00",
+  "total": 82,
+  "passed": 82,
   "failed": 0,
   "results": [
     {
@@ -364,6 +364,26 @@
       "name": "Most main passes have direct lower-clamp/ReLU candidate evidence",
       "status": "PASS",
       "evidence": "direct_main=10/12; exceptions=['fsr4_model_v07_fp8_no_scale_pass3', 'fsr4_model_v07_fp8_no_scale_pass6']"
+    },
+    {
+      "name": "Static layer topology artifact exists",
+      "status": "PASS",
+      "evidence": "/mnt/workdrive/fsr-re/spec/static-layer-topology.json"
+    },
+    {
+      "name": "Static layer topology covers 27 entrypoints",
+      "status": "PASS",
+      "evidence": "entrypoints=27"
+    },
+    {
+      "name": "Static layer topology identifies 12 main passes and 13 post stages",
+      "status": "PASS",
+      "evidence": "observations={'main_passes': 12, 'post_stages': 13, 'main_passes_with_post_stage': 12, 'prepass_count': 1, 'final_postpass_count': 1}"
+    },
+    {
+      "name": "Static layer topology pairs every main pass with a post stage",
+      "status": "PASS",
+      "evidence": "paired=12"
     },
     {
       "name": "Arithmetic dataflow slice artifact exists",
