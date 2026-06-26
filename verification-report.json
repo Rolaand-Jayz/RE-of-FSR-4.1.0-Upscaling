@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "timestamp": "2026-06-26T03:33:24.796217+00:00",
-  "total": 72,
-  "passed": 72,
+  "timestamp": "2026-06-26T03:35:25.547303+00:00",
+  "total": 78,
+  "passed": 78,
   "failed": 0,
   "results": [
     {
@@ -364,6 +364,36 @@
       "name": "Most main passes have direct lower-clamp/ReLU candidate evidence",
       "status": "PASS",
       "evidence": "direct_main=10/12; exceptions=['fsr4_model_v07_fp8_no_scale_pass3', 'fsr4_model_v07_fp8_no_scale_pass6']"
+    },
+    {
+      "name": "Arithmetic dataflow slice artifact exists",
+      "status": "PASS",
+      "evidence": "/mnt/workdrive/fsr-re/reports/arithmetic-dataflow-slices.json"
+    },
+    {
+      "name": "Arithmetic dataflow slice artifact covers 27 entrypoints",
+      "status": "PASS",
+      "evidence": "unique=27 summary=27"
+    },
+    {
+      "name": "Arithmetic dataflow slice artifact covers all 214 shader variants",
+      "status": "PASS",
+      "evidence": "variants=214"
+    },
+    {
+      "name": "Arithmetic dataflow slices include raw stores and atomic sinks",
+      "status": "PASS",
+      "evidence": "sinks={'rawBufferStore.values': 81, 'atomicCompareExchange.operands': 226860}"
+    },
+    {
+      "name": "Arithmetic dataflow slices reach rawBufferLoad and arithmetic producers",
+      "status": "PASS",
+      "evidence": "nodes={'rawBufferLoad': 6024, 'add': 22926, 'mul': 4464, 'fadd': 186}"
+    },
+    {
+      "name": "Every main pass has arithmetic dataflow sink slices",
+      "status": "PASS",
+      "evidence": "main_passes=12"
     }
   ]
 }
