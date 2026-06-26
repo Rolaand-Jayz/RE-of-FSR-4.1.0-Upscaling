@@ -1,6 +1,6 @@
 #!/bin/bash
 # Build fsr_data.dll from reconstructed source + extracted weight blobs
-# Produces fsr_data_prepatch.dll (needs PE patching for bit-identical match)
+# Produces fsr_data_prepatch.dll for independent section comparison
 # Requires: x86_64-w64-mingw32-gcc (MinGW cross-compiler)
 set -e
 
@@ -26,7 +26,7 @@ ls -la fsr_data_prepatch.dll
 echo ""
 echo "Expected pre-patch MD5: cddca9acec4e79776cb180d2ee337dc6"
 echo ""
-echo "To achieve bit-identical match, run:"
-echo "  ORIGINAL_DLL=/path/to/original/fsr_data.dll python3 pe_patcher.py"
+echo "To compare against the original without copying original bytes, run:"
+echo "  ORIGINAL_DLL=/path/to/original/fsr_data.dll python3 pe_patcher.py --rebuilt fsr_data_prepatch.dll"
 echo ""
-echo "Expected final MD5:    cb1aa61c71c33b25549ed59c1551d661"
+echo "Historical patched-final MD5 (not independent proof): cb1aa61c71c33b25549ed59c1551d661"

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from pathlib import Path
 """
 Extract the InitializerBuffer offset map from 4.0.2 FP8 HLSL source.
 
@@ -17,7 +18,7 @@ import re, os, json, argparse, sys
 def main():
     parser = argparse.ArgumentParser(description="Extract FSR4 tensor offsets from HLSL source")
     parser.add_argument("--hlsl-dir",
-        default="/mnt/workdrive/fsr-re/build/llvm_ir/4_0_2",
+        default=str(Path(__file__).resolve().parents[1] / "build/llvm_ir/4_0_2"),
         help="Directory containing HLSL shader source files")
     parser.add_argument("-o", "--output",
         default=None,

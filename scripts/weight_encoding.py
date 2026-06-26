@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from pathlib import Path
 """
 Analyze FP8 encoding patterns across FSR shader passes.
 Examines how weights are encoded in the DXIL LLVM IR.

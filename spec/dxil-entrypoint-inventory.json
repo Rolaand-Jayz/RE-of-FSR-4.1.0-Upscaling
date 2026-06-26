@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "source": "build/llvm_ir/4_1_0/*.ll",
+  "unique_entrypoints": [
+    "fsr4_model_v07_fp8_no_scale_pass0_post",
+    "fsr4_model_v07_fp8_no_scale_pass1",
+    "fsr4_model_v07_fp8_no_scale_pass10",
+    "fsr4_model_v07_fp8_no_scale_pass10_post",
+    "fsr4_model_v07_fp8_no_scale_pass11",
+    "fsr4_model_v07_fp8_no_scale_pass11_post",
+    "fsr4_model_v07_fp8_no_scale_pass12",
+    "fsr4_model_v07_fp8_no_scale_pass12_post",
+    "fsr4_model_v07_fp8_no_scale_pass1_post",
+    "fsr4_model_v07_fp8_no_scale_pass2",
+    "fsr4_model_v07_fp8_no_scale_pass2_post",
+    "fsr4_model_v07_fp8_no_scale_pass3",
+    "fsr4_model_v07_fp8_no_scale_pass3_post",
+    "fsr4_model_v07_fp8_no_scale_pass4",
+    "fsr4_model_v07_fp8_no_scale_pass4_post",
+    "fsr4_model_v07_fp8_no_scale_pass5",
+    "fsr4_model_v07_fp8_no_scale_pass5_post",
+    "fsr4_model_v07_fp8_no_scale_pass6",
+    "fsr4_model_v07_fp8_no_scale_pass6_post",
+    "fsr4_model_v07_fp8_no_scale_pass7",
+    "fsr4_model_v07_fp8_no_scale_pass7_post",
+    "fsr4_model_v07_fp8_no_scale_pass8",
+    "fsr4_model_v07_fp8_no_scale_pass8_post",
+    "fsr4_model_v07_fp8_no_scale_pass9",
+    "fsr4_model_v07_fp8_no_scale_pass9_post",
+    "fsr4_model_v07_fp8_no_scale_postpass",
+    "fsr4_model_v07_fp8_no_scale_prepass"
+  ],
+  "classes": {
+    "prepass": [
+      "fsr4_model_v07_fp8_no_scale_prepass"
+    ],
+    "main": [
+      "fsr4_model_v07_fp8_no_scale_pass1",
+      "fsr4_model_v07_fp8_no_scale_pass10",
+      "fsr4_model_v07_fp8_no_scale_pass11",
+      "fsr4_model_v07_fp8_no_scale_pass12",
+      "fsr4_model_v07_fp8_no_scale_pass2",
+      "fsr4_model_v07_fp8_no_scale_pass3",
+      "fsr4_model_v07_fp8_no_scale_pass4",
+      "fsr4_model_v07_fp8_no_scale_pass5",
+      "fsr4_model_v07_fp8_no_scale_pass6",
+      "fsr4_model_v07_fp8_no_scale_pass7",
+      "fsr4_model_v07_fp8_no_scale_pass8",
+      "fsr4_model_v07_fp8_no_scale_pass9"
+    ],
+    "post": [
+      "fsr4_model_v07_fp8_no_scale_pass0_post",
+      "fsr4_model_v07_fp8_no_scale_pass10_post",
+      "fsr4_model_v07_fp8_no_scale_pass11_post",
+      "fsr4_model_v07_fp8_no_scale_pass12_post",
+      "fsr4_model_v07_fp8_no_scale_pass1_post",
+      "fsr4_model_v07_fp8_no_scale_pass2_post",
+      "fsr4_model_v07_fp8_no_scale_pass3_post",
+      "fsr4_model_v07_fp8_no_scale_pass4_post",
+      "fsr4_model_v07_fp8_no_scale_pass5_post",
+      "fsr4_model_v07_fp8_no_scale_pass6_post",
+      "fsr4_model_v07_fp8_no_scale_pass7_post",
+      "fsr4_model_v07_fp8_no_scale_pass8_post",
+      "fsr4_model_v07_fp8_no_scale_pass9_post"
+    ],
+    "final_postpass": [
+      "fsr4_model_v07_fp8_no_scale_postpass"
+    ]
+  },
+  "observations": [
+    "No fsr4_model_v07_fp8_no_scale_pass13 entry point is present in the extracted 4.1.0 DXIL corpus.",
+    "The active corpus contains main compute passes pass1 through pass12; pass0 appears as pass0_post, not as a main pass0 entry point.",
+    "prepass and postpass entrypoints appear in multiple blob variants/presets."
+  ]
+}

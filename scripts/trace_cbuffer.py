@@ -15,7 +15,7 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(description="Trace cbuffer offset loads in FSR 4.1.0 DXIL")
-    parser.add_argument("--dxil-dir", default="/mnt/workdrive/fsr-re/build/llvm_ir/4_1_0",
+    parser.add_argument("--dxil-dir", default=str(Path(__file__).resolve().parents[1] / "build/llvm_ir/4_1_0"),
         help="Directory containing DXIL LLVM IR files")
     parser.add_argument("-o", "--output", default=None,
         help="Output JSON file path (default: stdout)")
@@ -24,7 +24,7 @@ def main():
 
 import re, glob, struct
 
-LLVM_DIR = "/mnt/workdrive/fsr-re/build/llvm_ir/4_1_0"
+LLVM_DIR = str(Path(__file__).resolve().parents[1] / "build/llvm_ir/4_1_0")
 
 # Find all NN pass blobs (those with "pass" in their entry name)
 pass_files = {}
@@ -72,7 +72,7 @@ key_passes = {
     'pass6': 'encoder3 downscale',
     'pass7': 'bottleneck RB0',
     'pass9': 'bottleneck RB2 (last bottleneck)',
-    'pass13': 'decoder2 RB2 (final upscale)',
+    # No pass13 entry point is present in the extracted 4.1.0 DXIL corpus.
 }
 
 for filepath, entry in sorted(pass_files.items(), key=lambda x: x[1]):

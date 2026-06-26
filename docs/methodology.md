@@ -59,7 +59,7 @@ This is the same pattern used by GPU RE projects like Asahi Linux and Panfrost: 
 **Method**:
 1. Wrote `parse_offsets.py` to extract `threadGroupStorageByteOffset` attributes from 4.0.2 HLSL source
 2. This produced a complete 78-tensor table with offset, shape, format, and pass assignment
-3. Confirmed 4.1.0 DXIL entry points use the same names (`pass0` through `pass13`)
+3. Confirmed 4.1.0 DXIL entry points use the observed `fsr4_model_v07_fp8_no_scale_*` naming family; the authoritative inventory is `spec/dxil-entrypoint-inventory.json`
 4. Searched the 4.1.0 DLL binary for the known offset constants → **zero hits**
 5. Confirmed offsets are loaded from cbuffer at runtime (not hardcoded)
 

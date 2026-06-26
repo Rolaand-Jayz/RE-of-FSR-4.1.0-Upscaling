@@ -17,9 +17,9 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(description="Extract weight blobs from FSR DLL")
-    parser.add_argument("--dll", default="/mnt/workdrive/fsr-re/build/dll_v410.dll",
+    parser.add_argument("--dll", default=str(Path(__file__).resolve().parents[1] / "build/dll_v410.dll"),
         help="Path to the FSR DLL")
-    parser.add_argument("--output-dir", default="/mnt/workdrive/fsr-re/extracted/v410_initializers",
+    parser.add_argument("--output-dir", default=str(Path(__file__).resolve().parents[1] / "extracted/v410_initializers"),
         help="Output directory for extracted blobs")
     args = parser.parse_args()
 
@@ -29,8 +29,8 @@ import os
 import json
 import hashlib
 
-DLL_V410 = os.path.expanduser("~/Desktop/temporal forge/vendor/fidelityfx-sdk-v220/Kits/FidelityFX/signedbin/amd_fidelityfx_upscaler_dx12.dll")
-DLL_V402 = os.path.expanduser("~/Desktop/temporal forge/vendor/fidelityfx-sdk-mit-original/Kits/FidelityFX/signedbin/amd_fidelityfx_upscaler_dx12.dll")
+DLL_V410 = os.path.expanduser("${FSR410_DLL:-/path/to/amd_fidelityfx_upscaler_dx12.dll}")
+DLL_V402 = os.path.expanduser("${FSR402_DLL:-/path/to/amd_fidelityfx_upscaler_dx12.dll}")
 BUILD_DIR = "/mnt/workdrive/fsr-re/build"
 
 DXBC_MAGIC = b'DXBC'

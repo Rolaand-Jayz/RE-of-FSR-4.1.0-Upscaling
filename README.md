@@ -1,24 +1,20 @@
-# FSR 4.1.0 — Reverse Engineered
+# FSR 4.1.0 — Static Reverse-Engineering Notes
 
 > *"Knowledge is power. Freedom of knowledge is empowerment. Hoarding of knowledge is tyranny."*
 >
 > — Rolaand Jayz, The Shadow Librarian
 
-We bit-reconstructed a DLL from first principles — and matched the original, byte for byte. Then we decoded the main provider DLL's dispatch pipeline from raw x86-64 disassembly.
+This repository documents a static structural analysis of the FSR 4.1.0 temporal upscaler: extracted weight blobs, shader/pass catalogs, data-layout reconstruction, and provider-DLL dispatch analysis from Ghidra, DXIL, and raw x86-64 disassembly.
 
-AMD's FidelityFX Super Resolution 4.1.0 ships as a compiled Windows DLL containing a neural network upscaler. The network's weights are opaque binary blobs. The pipeline architecture is undocumented. The shader dispatch sequence is hidden behind layers of API abstraction. Nobody outside AMD has ever published a full structural analysis of what this thing actually *does* — let alone proven they understand it by rebuilding it from scratch.
+AMD's FidelityFX Super Resolution 4.1.0 ships as compiled Windows DLLs containing a neural network upscaler. The network's weights are opaque binary blobs. The pipeline architecture is undocumented. The shader dispatch sequence is hidden behind layers of API abstraction.
 
-We did. And then we proved it:
+What is included:
 
-1. **Data DLL** — Recompiled from reconstructed C source, re-embedded the extracted weight data, post-link patched the PE headers, producing a binary whose MD5 matches the original:
-```
-cb1aa61c71c33b25549ed59c1551d661  fsr_data_final.dll  (our rebuild)
-cb1aa61c71c33b25549ed59c1551d661  original            (AMD's binary)
-```
+1. **Data DLL research** — Reconstructed C source and embedded extracted weight data. The historical post-link patcher that copied original PE regions has been removed from the proof path; MD5 equality after copying original bytes is not claimed as independent reconstruction evidence. Use `rebuild/pe_patcher.py` now as a section-comparison tool that reports hashes and differences without modifying rebuilt output.
 
-2. **Provider DLL** — Disassembled the PSO creation function (`FUN_180025990`) that Ghidra couldn't decompile. Decoded the jump table, flag index table, and pass descriptor table. Mapped all 30 unique shader blobs (verified by MD5 hash) to their pass indices. Extracted complete resource binding layouts from LLVM IR.
+2. **Provider DLL** — Disassembled the PSO creation function (`FUN_180025990`) that Ghidra could not decompile. Decoded the jump table, flag index table, and pass descriptor table. Mapped 30 unique shader blobs (verified by MD5 hash) to pass indices. Extracted resource binding layouts from LLVM IR.
 
-This repository is the complete record of that work: the analysis, the dead ends, the methodology, the extracted neural network weights, the full pipeline spec, and the tooling to verify everything independently.
+This repository is a research record: analysis, dead ends, methodology, extracted neural-network weights, pipeline specs, and tooling. Runtime execution remains unverified; exact per-pass arithmetic, buffer-address derivation, and weight-index mapping remain research gaps unless explicitly marked otherwise in a specific document.
 
 > **Scope:** This reverse engineering covers the FSR 4 **temporal upscaler** (the ML-based image reconstruction pipeline) only. FSR 4.1.0 as shipped also includes **frame generation** — that is a separate component and was **not** part of this analysis. If you're looking for frame generation RE, this is not it.
 
@@ -31,14 +27,14 @@ This repository is the complete record of that work: the analysis, the dead ends
 | **602 DXBC shader blobs** cataloged and classified | Full enumeration of every embedded compute shader | ✅ Verified — automated extraction + manual audit |
 | **30 unique shader blobs** mapped to 30 passes | MD5-verified — zero duplicates across all passes | ✅ Verified — binary hash comparison |
 | **6 weight blobs** extracted, each 131,072 bytes | 5 identical (quality/balanced/performance/ultraperf/native), 1 unique (DRS) | ✅ Verified — MD5 hash comparison |
-| **Weight format fully decoded** | 7,208B FP16 biases → 122,880B FP8 (uint8) weights → 888B extra FP16 → 96B pad | ✅ Verified — format parsed, values validated, offsets match across all blobs |
+| **Weight container format decoded** | 7,208B FP16 biases → 122,880B FP8/uint8-like weights → 888B extra FP16 → 96B pad | ✅ Verified — container parsed, values validated, offsets match across all blobs |
 | **Pipeline: 27 main + 3 conditional passes** | 27-pass main loop + RCAS + SPD AutoExposure + Debug View | ✅ Verified — hardcoded loop count in dispatch function + Ghidra decompilation |
 | **All passes use (32,1,1) thread groups** | Wavefront-width 1D dispatch | ✅ Verified — LLVM IR `!dx.numthreads` metadata |
-| **Complete resource binding map** | 9 register spaces identified with semantic meaning | ✅ Verified — createHandle analysis across all 30 LLVM IR blobs |
+| **Static resource binding map** | 9 register spaces identified with proposed semantic meaning | ⚠️ Static only — createHandle analysis across LLVM IR blobs; runtime descriptor bindings not captured |
 | **Constant buffer layout decoded** | 5-6 registers × 4 floats (80-96 bytes) per pass; even/odd pair pattern | ✅ Verified — cbufferLoadLegacy register indices from LLVM IR |
 | **Architecture restructured** | 4.0.2's Pre/Body/Post replaced with Encoder/Orchestration/Body/Decoder pipeline | ⚠️ Static only — inferred from shader classification + offset mapping |
 | **Weight loading changed** | 4.0.2 embeds weights in shaders; 4.1.0 uses InitializerBuffer with dynamic loading | ✅ Verified — structural comparison with MIT-licensed 4.0.2 source |
-| **Bit-identical DLL reconstruction** | Reconstructed C source → MinGW cross-compile → PE post-link patch → MD5 match | ✅ Verified — `cb1aa61c71c33b25549ed59c1551d661` |
+| **Data-section reconstruction tooling** | Reconstructed C source → MinGW cross-compile → section comparison | ⚠️ Bounded — section hashes must be reported separately; copied-byte MD5 equality is not used as proof |
 | **PSO creation function decoded** | FUN_180025990 decoded via raw x86-64 disassembly: jump table + flag index table + 30-entry descriptor table | ✅ Verified — objdump disassembly + PE section parsing |
 
 ### Evidence Tags
@@ -222,16 +218,16 @@ This isn't a failure section. It's a record of real engineering work that produc
 
 **Built with:** `gcc -shared -fPIC -O2 -o fsr4_capture.so fsr4_capture.c -ldl` on CachyOS
 
-**Deployed to:** `/mnt/workdrive/fsr-re/runtime-capture/fsr4_capture.so`
+**Example local path:** `<repo>/runtime-capture/fsr4_capture.so`
 
 **Launch options:**
 ```
-LD_PRELOAD=/mnt/workdrive/fsr-re/runtime-capture/fsr4_capture.so PROTON_FSR4_UPGRADE=1 DXIL_SPIRV_CONFIG=wmma_rdna3_workaround WINEDLLOVERRIDES=version=n,b %command%
+LD_PRELOAD=<repo>/runtime-capture/fsr4_capture.so PROTON_FSR4_UPGRADE=1 DXIL_SPIRV_CONFIG=wmma_rdna3_workaround WINEDLLOVERRIDES=version=n,b %command%
 ```
 
 **Result:** ❌ The shim loaded (confirmed by `[INIT] FSR4 capture shim loaded` in `dispatch_log.txt`) but produced no dispatch data. The `LD_PRELOAD` hook propagated into Proton's wine process but the `vkCmdDispatch` intercept never fired. Likely cause: VKD3D-Proton's Vulkan dispatch goes through a code path that doesn't route through the standard `vkCmdDispatch` symbol, or the hook's `dlsym` resolution fails inside the Proton loader.
 
-**What we learned:** `LD_PRELOAD` does survive into Proton's wine process (the init message proved it), but hooking Vulkan calls through VKD3D translation is unreliable. The hook fires in the host process but not necessarily inside the wine Vulkan wrapper.
+**What we learned:** `LD_PRELOAD` does survive into Proton's wine process (the init message documented evidence for it), but hooking Vulkan calls through VKD3D translation is unreliable. The hook fires in the host process but not necessarily inside the wine Vulkan wrapper.
 
 ### Attempt 3: RenderDoc Full Capture
 
@@ -239,7 +235,7 @@ LD_PRELOAD=/mnt/workdrive/fsr-re/runtime-capture/fsr4_capture.so PROTON_FSR4_UPG
 
 **Launch options:**
 ```
-ENABLE_VULKAN_RENDERDOC_CAPTURE=1 RENDERDOC_CAPTUREFILE=/mnt/workdrive/fsr-re/runtime-capture/fsr4_ff7r VKD3D_DEBUG=trace VKD3D_SHADER_DUMP_PATH=/mnt/workdrive/fsr-re/runtime-capture/vkd3d-shaders %command%
+ENABLE_VULKAN_RENDERDOC_CAPTURE=1 RENDERDOC_CAPTUREFILE=<repo>/runtime-capture/fsr4_ff7r VKD3D_DEBUG=trace VKD3D_SHADER_DUMP_PATH=<repo>/runtime-capture/vkd3d-shaders %command%
 ```
 
 **Result:** ❌ RenderDoc hooks every Vulkan call through VKD3D. FSR4 dispatches 27+ compute passes per frame. The capture grows enormous, the game freezes, and eventually crashes with a 120-second timeout. Full RenderDoc capture is incompatible with FSR4's dispatch density.
@@ -264,7 +260,7 @@ The runtime capture gap is real. Our pipeline analysis now comes from:
 - ✅ Constant buffer register maps extracted from cbufferLoadLegacy patterns
 - ⚠️ Runtime dispatch sequence not confirmed (Proton blocks all capture methods)
 
-The bit-identical DLL rebuild proves our **data extraction** is correct. The binary analysis proves our **pipeline structure** is correct. The only unconfirmed piece is whether the actual runtime execution matches the static analysis — and Proton makes that impossible to verify.
+The data-DLL rebuild and per-section comparison support our **data extraction/layout** claims, but do not prove complete binary reconstruction. The binary analysis supports the published **pipeline structure** claims. The unconfirmed piece is whether actual runtime execution matches the static analysis — and Proton blocked the capture attempts made so far.
 
 ---
 
@@ -276,7 +272,7 @@ Honest documentation means showing the gaps:
 
 1. **No runtime verification.** The game requires Proton. Proton's VKD3D translation layer absorbs all hooks, shims, and capture tools. We cannot confirm the static analysis by watching the code execute. This is the single largest credibility gap. Three independent capture methods were built and deployed — all blocked by Proton's Vulkan translation layer. **Runtime validation by someone with native Windows + D3D12 access is needed to close this gap.** See [Validation Status](#validation-status--call-for-collaborators) below.
 
-2. **No bit-identical rebuild of the provider DLL.** The 15.6MB provider DLL contains compiled C++ code, linked libraries, and DXBC shader containers. Reproducing it bit-for-bit would require AMD's exact build environment, compiler version, and shader compiler. We proved our understanding through structural analysis instead.
+2. **No bit-identical rebuild of the provider DLL.** The 15.6MB provider DLL contains compiled C++ code, linked libraries, and DXBC shader containers. Reproducing it bit-for-bit would require AMD's exact build environment, compiler version, and shader compiler. The evidence here is structural analysis, not a provider-binary rebuild.
 
 3. **CBV field semantics partially unknown.** We know which registers are accessed and which components (x/y/z/w) are extracted. We don't know the exact semantic meaning of every float value.
 
@@ -296,7 +292,7 @@ fsr-re/
 ├── .gitignore
 │
 ├── docs/                         Technical documentation.
-│   ├── IMPLEMENTATION_GUIDE.md   Complete implementation guide for the neural upscaler.
+│   ├── IMPLEMENTATION_GUIDE.md   Implementation research notes for the neural upscaler.
 │   ├── activation-lut-analysis.md FP8 decode and activation function analysis.
 │   ├── adversarial-review-2.md   Adversarial review — challenges assumptions.
 │   ├── architecture.md           Network topology, layer details, channel flow.
@@ -324,15 +320,15 @@ fsr-re/
 │   ├── pass-catalog.json         Full pass catalog (machine-readable).
 │   └── v410_independent_offsets.json  Independent offset map.
 │
-├── rebuild/                   Bit-identical DLL reconstruction.
-│   ├── README.md                  Build instructions, verification proof.
+├── rebuild/                   Data DLL rebuild and section comparison.
+│   ├── README.md                  Build instructions and bounded verification notes.
 │   ├── fsr_data.c                 Reconstructed C source from disassembly.
 │   ├── fsr_data.def               PE export definitions.
-│   ├── pe_patcher.py              Post-link PE patcher.
-│   ├── pe_patcher_v2.py           Section-size-aware PE patcher.
+│   ├── pe_patcher.py              Section comparison tool; does not copy original bytes.
+│   ├── pe_patcher_v2.py           Historical patcher; superseded by pe_patcher.py.
 │   ├── build.sh                   Full build + verify script.
-│   ├── fsr_data_prepatch.dll      Before PE patching (893,019 bytes).
-│   └── fsr_data_final.dll         After patching — bit-identical (893,388 bytes).
+│   ├── fsr_data_prepatch.dll      Independently rebuilt DLL (893,019 bytes).
+│   └── fsr_data_final.dll         Historical patched artifact (893,388 bytes); not proof.
 │
 ├── extracted/                 Weight blobs — the neural network data.
 │   ├── v410_initializers/         6 blobs × 131,072 bytes (4.1.0 weights).
@@ -383,7 +379,7 @@ fsr-re/
 
 ## Validation Status & Call for Collaborators
 
-This project is **statically complete** — every claim about architecture, weights, pass structure, and resource bindings is backed by binary analysis evidence in this repository. The bit-identical DLL reconstruction proves the data extraction is correct.
+This project is a substantial static analysis, but not complete runtime validation. Claims about weights, pass structure, and static resource bindings are backed by binary-analysis evidence in this repository; runtime dispatch order, CBV values, and actual descriptor bindings still need native D3D12 confirmation.
 
 But **static analysis is not runtime proof**. The 27-pass dispatch sequence, the constant buffer values, and the actual GPU resource bindings during execution have never been observed live. Three capture methods were attempted (FFX proxy DLL, Vulkan LD_PRELOAD shim, RenderDoc full capture) — all blocked by Proton's VKD3D translation layer on Linux.
 

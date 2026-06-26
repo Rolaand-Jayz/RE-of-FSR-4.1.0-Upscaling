@@ -1,19 +1,21 @@
-# Bit-Identical DLL Reconstruction Proof
+# Data DLL Rebuild and Section Comparison
 
-This directory contains the complete pipeline for reconstructing `fsr_data.dll` (FSR 4.1.0) from reverse-engineered source and extracted weight blobs, producing a DLL that is **bit-identical** to the original.
+This directory contains the pipeline for rebuilding `fsr_data.dll` (FSR 4.1.0) from reverse-engineered source and extracted weight blobs, then comparing the rebuilt file against the original by section.
 
-## The Three-Step Proof
+**Important correction:** a previous version described a bit-identical proof. That was overstated. The old post-link patcher copied original section bodies, headers, and overlay bytes into the output before comparing hashes, which made MD5 equality circular. The current tooling does not patch original bytes into the rebuilt file; it emits a comparison report instead.
+
+## The Two-Step Check
 
 | Step | Tool | Description |
 |------|------|-------------|
 | **1. Disassemble** | IDA / Ghidra | Reverse the original DLL to recover API logic, data layout, and section structure |
 | **2. Rebuild** | MinGW GCC | Compile reconstructed C source + extracted weight blobs into a new DLL |
-| **3. Patch & Verify** | `pe_patcher.py` | Align non-functional PE metadata (headers, overlay, checksum) and verify MD5 match |
+| **3. Compare** | `pe_patcher.py` | Report per-region hashes and byte differences without modifying rebuilt output |
 
 ## Build Prerequisites
 
 - **MinGW GCC** (`x86_64-w64-mingw32-gcc`) — cross-compiler targeting 64-bit Windows
-- **Python 3** — for the PE post-link patcher
+- **Python 3** — for the PE comparison tool
 - **Extracted weight blobs** in `../extracted/v410_initializers/`
 
 ## Step-by-Step Build Instructions
@@ -25,32 +27,31 @@ chmod +x build.sh
 ./build.sh
 ```
 
-This produces `fsr_data_prepatch.dll` — a functional DLL whose sections contain identical code and data to the original, but whose PE metadata differs slightly.
+This produces `fsr_data_prepatch.dll` — the independently rebuilt DLL.
 
-### 2. Patch to bit-identical
-
-```bash
-ORIGINAL_DLL=/path/to/original/fsr_data.dll python3 pe_patcher.py
-```
-
-This produces `fsr_data_final.dll` — a **bit-identical** match to the original.
-
-### 3. Verify
+### 2. Compare against the original without patching
 
 ```bash
-md5sum fsr_data_final.dll
-# cb1aa61c71c33b25549ed59c1551d661  fsr_data_final.dll
+ORIGINAL_DLL=/path/to/original/fsr_data.dll python3 pe_patcher.py --rebuilt fsr_data_prepatch.dll
 ```
 
-## Verification: MD5 Hashes
+This produces `section-comparison.json`. It does **not** produce or claim a patched bit-identical DLL.
+
+### 3. Interpret the report
+
+```bash
+jq '.all_regions_match_without_patching, .regions[] | {region, matches, differing_bytes, first_difference}' section-comparison.json
+```
+
+## Historical MD5 Hashes
 
 | File | MD5 | Size | Description |
 |------|-----|------|-------------|
 | `fsr_data_prepatch.dll` | `cddca9acec4e79776cb180d2ee337dc6` | 893,019 bytes | GCC output from RE'd source + extracted blobs |
-| `fsr_data_final.dll` | `cb1aa61c71c33b25549ed59c1551d661` | 893,388 bytes | After PE post-link patching |
-| **Original** | `cb1aa61c71c33b25549ed59c1551d661` | 893,388 bytes | **MATCH ✓** |
+| `fsr_data_final.dll` | `cb1aa61c71c33b25549ed59c1551d661` | 893,388 bytes | Historical patched artifact; not independent proof |
+| **Original** | `cb1aa61c71c33b25549ed59c1551d661` | 893,388 bytes | AMD binary hash |
 
-The 369-byte size difference between pre-patch and final is entirely due to the CRT overlay (metadata appended by the original MSVC linker after the last section). This data has no functional effect on the DLL.
+The 369-byte size difference between the historical pre-patch and final files came from the original overlay copied into the patched file. Treat that as a diagnostic artifact, not evidence of independent reconstruction.
 
 ## Weight Blobs
 
@@ -88,22 +89,17 @@ struct blob_entry {
 };
 ```
 
-## What the Patcher Does (and Why It's Honest)
+## What the Comparison Tool Does
 
-The PE post-link patcher addresses three categories of non-functional differences between the GCC-built DLL and the original MSVC-built DLL:
+`pe_patcher.py` is retained for filename compatibility, but it is now a comparison tool. It reports:
 
-1. **PE Headers** — DOS stub, COFF timestamp, optional header fields, and section header metadata (virtual sizes, characteristics) differ between compilers. These are copied verbatim from the original. They have **zero effect** on runtime behavior.
+1. **PE Headers** — separate SHA-256 hashes and byte differences.
 
-2. **CRT Overlay** — The original MSVC linker appends 369 bytes of CRT metadata after the last section. This data is never mapped into memory and serves no purpose for a DLL with no CRT dependencies. It is appended to achieve byte-for-byte parity.
+2. **Each section** — separate SHA-256 hashes and byte differences for `.text`, `.rdata`, `.data`, `.pdata`, `.reloc`, exports, and any other section present.
 
-3. **PE Checksum** — Recomputed using the standard carry-propagation algorithm to match the original's checksum field.
+3. **Overlay** — separate SHA-256 hash and byte differences.
 
-**No data fabrication occurs.** The patcher never modifies code, weight data, or relocation tables. It only aligns metadata that:
-- Differs solely due to compiler/linker choice (GCC vs MSVC)
-- Has no functional impact on the DLL's behavior
-- Is necessary only because we chose GCC as the rebuild compiler
-
-The code sections, data sections, export tables, and relocation entries are **compiled from source** and are functionally identical to the original without any patching.
+No bytes are copied from the original into the rebuilt file. If a region differs, the report says so and the user must decide whether the difference is acceptable for their research purpose.
 
 ## File Manifest
 
@@ -112,5 +108,5 @@ The code sections, data sections, export tables, and relocation entries are **co
 | `README.md` | This documentation |
 | `fsr_data.c` | Reconstructed C source with inline assembly for data layout |
 | `fsr_data.def` | Module definition file controlling exported symbols |
-| `pe_patcher.py` | PE post-link patcher for bit-identical reconstruction |
+| `pe_patcher.py` | PE section comparison tool; does not patch original bytes into rebuilt output |
 | `build.sh` | Build script producing the pre-patch DLL |

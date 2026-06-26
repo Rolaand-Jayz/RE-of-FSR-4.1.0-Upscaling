@@ -14,9 +14,9 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(description="Compare weight distributions between FSR versions")
-    parser.add_argument("--v402-dir", default="/mnt/workdrive/fsr-re/extracted/v402_initializers",
+    parser.add_argument("--v402-dir", default=str(Path(__file__).resolve().parents[1] / "extracted/v402_initializers"),
         help="Directory with 4.0.2 weight blobs")
-    parser.add_argument("--v410-dir", default="/mnt/workdrive/fsr-re/extracted/v410_initializers",
+    parser.add_argument("--v410-dir", default=str(Path(__file__).resolve().parents[1] / "extracted/v410_initializers"),
         help="Directory with 4.1.0 weight blobs")
     parser.add_argument("--offsets", default=None,
         help="Tensor offset JSON (from parse_offsets.py)")
@@ -29,9 +29,9 @@ import re, struct, os, json
 
 HLSL = "/path/to/sdk/source"
 SRC = "/path/to/sdk/source"
-DLL_410 = "/mnt/workdrive/fsr-re/build/dll_v410.dll"
-REPORT = "/mnt/workdrive/fsr-re/reports"
-EXTRACT = "/mnt/workdrive/fsr-re/extracted/fp8_weights"
+DLL_410 = str(Path(__file__).resolve().parents[1] / "build/dll_v410.dll")
+REPORT = str(Path(__file__).resolve().parents[1] / "reports")
+EXTRACT = str(Path(__file__).resolve().parents[1] / "extracted/fp8_weights")
 
 with open(HLSL) as f:
     content = f.read()
