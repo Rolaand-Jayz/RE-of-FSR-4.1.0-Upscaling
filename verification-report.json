@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "timestamp": "2026-06-26T02:57:45.484719+00:00",
-  "total": 53,
-  "passed": 53,
+  "timestamp": "2026-06-26T03:11:57.060128+00:00",
+  "total": 65,
+  "passed": 65,
   "failed": 0,
   "results": [
     {
@@ -269,6 +269,66 @@
       "name": "Atomic SSA trace includes provenance trees",
       "status": "PASS",
       "evidence": "checked provenance fields"
+    },
+    {
+      "name": "Resource binding artifact exists",
+      "status": "PASS",
+      "evidence": "/mnt/workdrive/fsr-re/spec/resource-bindings.json"
+    },
+    {
+      "name": "Resource binding artifact covers all model shader variants",
+      "status": "PASS",
+      "evidence": "entries=214"
+    },
+    {
+      "name": "No DXIL handle uses are unmapped",
+      "status": "PASS",
+      "evidence": "unmapped=0"
+    },
+    {
+      "name": "Every main pass has the four expected static resource roles",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Affine SSA formula artifact exists",
+      "status": "PASS",
+      "evidence": "/mnt/workdrive/fsr-re/reports/affine-ssa-formulas-summary.json"
+    },
+    {
+      "name": "Affine SSA formula artifact covers more than 100 shader variants",
+      "status": "PASS",
+      "evidence": "entries=174"
+    },
+    {
+      "name": "Affine SSA formula artifact has many formula families",
+      "status": "PASS",
+      "evidence": "families=200"
+    },
+    {
+      "name": "Key slot semantics artifact exists",
+      "status": "PASS",
+      "evidence": "/mnt/workdrive/fsr-re/spec/key-slot-semantics.json"
+    },
+    {
+      "name": "Key slot semantics include critical static roles",
+      "status": "PASS",
+      "evidence": "roles=['control_tile_selector', 'control_unknown_slot', 'control_weight_or_loop_bound', 'dimension_or_loop_metadata', 'expanded_control_slot', 'expanded_operand_slot', 'expanded_output_slot', 'lane_metadata_slot', 'lane_vector_slot', 'metadata_or_stride_slot', 'operand_unknown_slot', 'output_or_channel_slot', 'packed_control_pair', 'packed_pair_or_channel_slot', 'post_or_stride_slot', 'shape_or_stride_metadata', 'tile_operand_or_accumulator_slot', 'vector_unknown_slot', 'weight_index_indirection_slot']"
+    },
+    {
+      "name": "Pass static summaries artifact exists",
+      "status": "PASS",
+      "evidence": "/mnt/workdrive/fsr-re/spec/pass-static-summaries.json"
+    },
+    {
+      "name": "Pass static summaries cover 27 entrypoints",
+      "status": "PASS",
+      "evidence": "passes=27"
+    },
+    {
+      "name": "Every main pass has static resource/op/atomic/formula completion",
+      "status": "PASS",
+      "evidence": "main_passes=12"
     }
   ]
 }

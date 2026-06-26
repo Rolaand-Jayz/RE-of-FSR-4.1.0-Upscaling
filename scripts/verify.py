@@ -301,6 +301,50 @@ def main() -> int:
     else:
         record("Atomic SSA trace report exists", False, str(ssa_trace))
     print()
+    resource_bindings = repo_root / "spec/resource-bindings.json"
+    if resource_bindings.exists():
+        rb = json.loads(resource_bindings.read_text())
+        entries = rb.get("entries", [])
+        record("Resource binding artifact exists", rb.get("schema_version") == 1, str(resource_bindings))
+        record("Resource binding artifact covers all model shader variants", len(entries) == 214, f"entries={len(entries)}")
+        record("No DXIL handle uses are unmapped", len(rb.get("unmapped_handle_uses", [])) == 0, f"unmapped={len(rb.get('unmapped_handle_uses', []))}")
+        main = [x for x in rb.get("summary", []) if x.get("class") == "main_pass"]
+        required = {"atomic_indirection_or_scratch_uav", "raw_intermediate_or_operand_uav", "raw_model_or_weight_buffer_srv", "constant_buffer_or_root_constants"}
+        roles_ok = all(required.issubset(set(x.get("role_counts", {}).keys())) for x in main)
+        record("Every main pass has the four expected static resource roles", roles_ok, f"main_passes={len(main)}")
+    else:
+        record("Resource binding artifact exists", False, str(resource_bindings))
+    print()
+    affine_formulas = repo_root / "reports/affine-ssa-formulas-summary.json"
+    key_slots = repo_root / "spec/key-slot-semantics.json"
+    pass_summaries = repo_root / "spec/pass-static-summaries.json"
+    if affine_formulas.exists():
+        af = json.loads(affine_formulas.read_text())
+        record("Affine SSA formula artifact exists", af.get("schema_version") == 1, str(affine_formulas))
+        record("Affine SSA formula artifact covers more than 100 shader variants", af.get("entries_count", len(af.get("entries", []))) > 100, f"entries={af.get('entries_count', len(af.get('entries', [])))}")
+        record("Affine SSA formula artifact has many formula families", len(af.get("global_formula_families", [])) >= 100, f"families={len(af.get('global_formula_families', []))}")
+    else:
+        record("Affine SSA formula artifact exists", False, str(affine_formulas))
+    if key_slots.exists():
+        ks = json.loads(key_slots.read_text())
+        slots = ks.get("slots", [])
+        record("Key slot semantics artifact exists", ks.get("schema_version") == 1, str(key_slots))
+        observed_roles = {s.get("inferred_static_role") for s in slots}
+        needed_roles = {"weight_index_indirection_slot", "lane_vector_slot", "control_weight_or_loop_bound"}
+        record("Key slot semantics include critical static roles", needed_roles.issubset(observed_roles), f"roles={sorted(observed_roles)[:20]}")
+    else:
+        record("Key slot semantics artifact exists", False, str(key_slots))
+    if pass_summaries.exists():
+        ps = json.loads(pass_summaries.read_text())
+        passes = ps.get("passes", [])
+        main = [p for p in passes if p.get("class") == "main_pass"]
+        record("Pass static summaries artifact exists", ps.get("schema_version") == 1, str(pass_summaries))
+        record("Pass static summaries cover 27 entrypoints", len(passes) == 27, f"passes={len(passes)}")
+        complete = all(all(p.get("static_completion", {}).values()) for p in main)
+        record("Every main pass has static resource/op/atomic/formula completion", complete, f"main_passes={len(main)}")
+    else:
+        record("Pass static summaries artifact exists", False, str(pass_summaries))
+    print()
 
 
     return finish(args.report)

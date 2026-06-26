@@ -63,3 +63,4 @@ Thumbs.db
 *~
 .vscode/
 .idea/
+reports/*.full.local.json
