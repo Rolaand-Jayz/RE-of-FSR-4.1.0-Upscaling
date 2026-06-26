@@ -281,6 +281,26 @@ def main() -> int:
     else:
         record("DXIL entrypoint inventory exists", False, str(entry_inventory))
     print()
+    decoded_addr = repo_root / "reports/decoded-buffer-addressing.json"
+    ssa_trace = repo_root / "reports/atomic-ssa-trace.json"
+    if decoded_addr.exists():
+        dec = json.loads(decoded_addr.read_text())
+        record("Decoded buffer addressing report exists", dec.get("schema_version") == 1, str(decoded_addr))
+        spaces = {row.get("space") for row in dec.get("global_top_keys", [])}
+        record("Decoded key spaces include operand/control/vector classes", {"operand_or_accumulator", "control_or_dimension_metadata", "lane_vector_or_output_slots"}.issubset(spaces), f"spaces={sorted(spaces)}")
+        record("Decoded addressing report covers many packed keys", len(dec.get("global_top_keys", [])) >= 80, f"top_keys={len(dec.get('global_top_keys', []))}")
+    else:
+        record("Decoded buffer addressing report exists", False, str(decoded_addr))
+    if ssa_trace.exists():
+        tr = json.loads(ssa_trace.read_text())
+        entries = tr.get("entries", [])
+        record("Atomic SSA trace report exists", tr.get("schema_version") == 1, str(ssa_trace))
+        record("Atomic SSA trace covers more than 100 shader variants", len(entries) > 100, f"entries={len(entries)}")
+        has_prov = any(any("index_provenance" in ev or "new_provenance" in ev or "compare_provenance" in ev for ev in e.get("events", [])) for e in entries)
+        record("Atomic SSA trace includes provenance trees", has_prov, "checked provenance fields")
+    else:
+        record("Atomic SSA trace report exists", False, str(ssa_trace))
+    print()
 
 
     return finish(args.report)
