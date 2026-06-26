@@ -16,10 +16,10 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-LLVM_IR_DIR = "/mnt/workdrive/fsr-re/build/llvm_ir/4_1_0"
-TENSOR_MAP_PATH = "/mnt/workdrive/fsr-re/spec/tensor-map.json"
-OUTPUT_MAP_PATH = "/mnt/workdrive/fsr-re/reports/v410_independent_offsets.json"
-REPORT_PATH = "/mnt/workdrive/fsr-re/reports/tensor-verification-report.md"
+LLVM_IR_DIR = str(Path(__file__).resolve().parents[1] / "build/llvm_ir/4_1_0")
+TENSOR_MAP_PATH = str(Path(__file__).resolve().parents[1] / "spec/tensor-map.json")
+OUTPUT_MAP_PATH = str(Path(__file__).resolve().parents[1] / "reports/v410_independent_offsets.json")
+REPORT_PATH = str(Path(__file__).resolve().parents[1] / "reports/tensor-verification-report.md")
 
 BLOB_SIZE = 131072  # 0x20000
 

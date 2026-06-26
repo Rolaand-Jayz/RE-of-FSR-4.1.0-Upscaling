@@ -12,7 +12,7 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(description="Parse 4.1.0 DXIL for InitializerBuffer structure")
-    parser.add_argument("--dxil-dir", default="/mnt/workdrive/fsr-re/build/llvm_ir/4_1_0",
+    parser.add_argument("--dxil-dir", default=str(Path(__file__).resolve().parents[1] / "build/llvm_ir/4_1_0"),
         help="Directory containing DXIL LLVM IR files")
     parser.add_argument("-o", "--output", default=None,
         help="Output JSON file path (default: stdout)")
@@ -22,7 +22,7 @@ def main():
 
 import re, os, json, glob
 
-V410_LLVM_DIR = "/mnt/workdrive/fsr-re/build/llvm_ir/4_1_0"
+V410_LLVM_DIR = str(Path(__file__).resolve().parents[1] / "build/llvm_ir/4_1_0")
 V402_SCHEMA = "/mnt/workdrive/fsr-re/reports/v402_initializer_offsets.json"
 
 # Load 4.0.2 schema for comparison

@@ -28,12 +28,12 @@ import os
 import sys
 import json
 
-DLL_402 = '/mnt/workdrive/fsr-re/build/dll_v402.dll'
-DLL_410 = '/mnt/workdrive/fsr-re/build/dll_v410.dll'
+DLL_402 = str(Path(__file__).resolve().parents[1] / "build/dll_v402.dll")
+DLL_410 = str(Path(__file__).resolve().parents[1] / "build/dll_v410.dll")
 SRC_BASE = '/path/to/sdk/source'
-REPORT_DIR = '/mnt/workdrive/fsr-re/reports'
-EXTRACT_DIR = '/mnt/workdrive/fsr-re/extracted/fp8_initializers'
-LOG = '/mnt/workdrive/fsr-re/reports/progress.log'
+REPORT_DIR = str(Path(__file__).resolve().parents[1] / "reports")
+EXTRACT_DIR = str(Path(__file__).resolve().parents[1] / "extracted/fp8_initializers")
+LOG = str(Path(__file__).resolve().parents[1] / "reports/progress.log")
 
 os.makedirs(EXTRACT_DIR, exist_ok=True)
 os.makedirs(REPORT_DIR, exist_ok=True)

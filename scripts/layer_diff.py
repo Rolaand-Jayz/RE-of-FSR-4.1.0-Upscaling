@@ -14,9 +14,9 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(description="Layer-by-layer weight comparison between FSR 4.0.2 and 4.1.0")
-    parser.add_argument("--v402-dir", default="/mnt/workdrive/fsr-re/extracted/v402_initializers",
+    parser.add_argument("--v402-dir", default=str(Path(__file__).resolve().parents[1] / "extracted/v402_initializers"),
         help="Directory with 4.0.2 weight blobs")
-    parser.add_argument("--v410-dir", default="/mnt/workdrive/fsr-re/extracted/v410_initializers",
+    parser.add_argument("--v410-dir", default=str(Path(__file__).resolve().parents[1] / "extracted/v410_initializers"),
         help="Directory with 4.1.0 weight blobs")
     parser.add_argument("--offsets", default=None,
         help="Tensor offset JSON (from parse_offsets.py)")
@@ -31,7 +31,7 @@ import json, struct, numpy as np, os, re
 V402_OFFSETS = "/mnt/workdrive/fsr-re/reports/v402_initializer_offsets.json"
 V410_BLOB = "/mnt/workdrive/fsr-re/extracted/v410_initializers/quality.bin"
 V402_BLOB = "/mnt/workdrive/fsr-re/extracted/v402_initializers/quality.bin"
-LLVM_DIR = "/mnt/workdrive/fsr-re/build/llvm_ir"
+LLVM_DIR = str(Path(__file__).resolve().parents[1] / "build/llvm_ir")
 
 # Load 4.0.2 schema
 with open(V402_OFFSETS) as f:

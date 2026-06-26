@@ -22,13 +22,13 @@ groupshared float s2[32]                 : register(s2);   // offset 1088
 // ...
 ```
 
-We parsed all 14 pass files (pass0–pass13, plus pre/post) and extracted **78 tensor definitions** with their byte offsets. ✅ *This is public, MIT-licensed data — anyone can verify it.*
+We parsed the MIT-licensed 4.0.2 model pass source and extracted **78 tensor definitions** with their byte offsets. ✅ *This is public, MIT-licensed data — anyone can verify it.*
 
 ## Applying to 4.1.0
 
 *Source: DXIL entry point name matching + structural analysis.*
 
-We confirmed the 4.1.0 DXIL entry points use the same model name (`fsr4_model_v07_fp8_no_scale`, passes `pass0` through `pass13`). This is strong evidence the architecture is identical.
+We confirmed the 4.1.0 DXIL entry points use the same model family name (`fsr4_model_v07_fp8_no_scale`). The extracted 4.1.0 corpus contains 27 unique model entrypoints: prepass, postpass, main passes 1–12, and post stages 0–12. This supports structural continuity without inventing a nonexistent pass13.
 
 **However**: In 4.1.0, the tensor byte offsets are loaded from cbuffer at runtime (via `cbufferLoadLegacy`), not hardcoded in the shader. We did not capture the actual cbuffer values during execution. The assumption that the 4.0.2 offsets apply verbatim to 4.1.0 is based on:
 

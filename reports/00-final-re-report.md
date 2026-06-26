@@ -238,6 +238,6 @@ The work was reproduced with:
 
 The RE is **strongly complete at the provider + weight-layout + pass-identity level** and **intentionally honest about what remains unproven**. That is the difference between a flashy report and a gold-standard one.
 
-**What "strongly complete" means:** every structural claim is backed by binary evidence. The bit-identical DLL rebuild proves data extraction. The DXIL IR analysis proves architecture and activation functions. What it does **not** mean: the analysis has been confirmed at runtime. Runtime validation on native Windows D3D12 is the next step for full credibility, and a small number of contributors with the right hardware could close this gap.
+**What "strongly supported" means:** structural claims are backed by binary evidence where cited. The data-DLL rebuild and comparison support extraction/layout claims; they do not prove independent bit-identical reconstruction. The DXIL IR analysis supports architecture and activation-function claims. What it does **not** mean: the analysis has been confirmed at runtime. Runtime validation on native Windows D3D12 is the next step for full credibility, and a small number of contributors with the right hardware could close this gap.
 
 If this repo is going to be the new benchmark, this report is the contract: **verified facts first, static inference labeled, unresolved items never hidden**.

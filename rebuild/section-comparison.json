@@ -1,0 +1,230 @@
+{
+  "original": "rebuild/fsr_data_final.dll",
+  "rebuilt": "rebuild/fsr_data_prepatch.dll",
+  "original_sha256": "9190608e7f5edcdec060e8b00f3eb6bc4c675feee94d687162da6968f26c0491",
+  "rebuilt_sha256": "a30b12b6f7d68d9f82e5a1de729d0a5a9f20fce73db76b45125f18e71596da5e",
+  "all_regions_match_without_patching": false,
+  "regions": [
+    {
+      "region": "headers",
+      "original_sha256": "a67b655acdd11d7fccf23e24c5be1957a13dc6e3458905ad122fd6b645a384bb",
+      "rebuilt_sha256": "a5d7d351bddb65f9f88d49bc26e7baa70c2a6c0b9d6ff005fca6cffbba1a9398",
+      "original_size": 1192,
+      "rebuilt_size": 1192,
+      "matches": false,
+      "differing_bytes": 13,
+      "first_difference": 136
+    },
+    {
+      "region": ".text",
+      "original_sha256": "7cfbe4d33610f83b768e8b697a2502b24a14c17c2aee4ccca10be139bd1a1528",
+      "rebuilt_sha256": "1a39af596304cb19ebe5aa8e85582b033b09d6086759ddbfc488c3d8ebe43ddc",
+      "original_size": 5632,
+      "rebuilt_size": 5632,
+      "matches": false,
+      "differing_bytes": 94,
+      "first_difference": 1200
+    },
+    {
+      "region": ".data",
+      "original_sha256": "fe0dd1fe52ba62a4f94d00dea5c4221ec3da5757202b1eabb5cae34f11cab058",
+      "rebuilt_sha256": "4efecc0df8a388701b44a1b21d8a30bcc80b4d7ff2e33322cae87d0eea1c3304",
+      "original_size": 786944,
+      "rebuilt_size": 786944,
+      "matches": false,
+      "differing_bytes": 638140,
+      "first_difference": 32
+    },
+    {
+      "region": ".rdata",
+      "original_sha256": "24d3e2299d3b9be6baad5846e75a24c2d66885a57ae543c541667e3311d62589",
+      "rebuilt_sha256": "284c21b5b2aad0fd51929a06d7eb6eee5a160086ad69d0156d9ab9d4e6297dad",
+      "original_size": 2048,
+      "rebuilt_size": 2048,
+      "matches": false,
+      "differing_bytes": 69,
+      "first_difference": 161
+    },
+    {
+      "region": "/4",
+      "original_sha256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+      "rebuilt_sha256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+      "original_size": 512,
+      "rebuilt_size": 512,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": ".pdata",
+      "original_sha256": "a93157213f306c53a145f6340fe26f4ea34bdc0bc0b0c82331a2de8d754fc7fa",
+      "rebuilt_sha256": "3a0a0088111a2be3c2190365bab8ca98f04e3b3a916bbd8ca1aaa21b7d3c7a05",
+      "original_size": 512,
+      "rebuilt_size": 512,
+      "matches": false,
+      "differing_bytes": 31,
+      "first_difference": 136
+    },
+    {
+      "region": ".xdata",
+      "original_sha256": "2897f0fd736cdf305fb3453cfc249a211346b8fe5a8a91979833de66ba8d4804",
+      "rebuilt_sha256": "5c05863d691146e746171a22dab7f1e81fdd5d718cf7197d5cfdb0b190a7f36a",
+      "original_size": 512,
+      "rebuilt_size": 512,
+      "matches": false,
+      "differing_bytes": 166,
+      "first_difference": 81
+    },
+    {
+      "region": ".bss",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rebuilt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_size": 0,
+      "rebuilt_size": 0,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": ".edata",
+      "original_sha256": "918a36f8f9943fe306386b0dda2fb1280ae2ab2a811b3d13a841e88974e36637",
+      "rebuilt_sha256": "1c3054e611c2fe8d297cc37faf1c78a52076e3fee5e56047452d354f43d209aa",
+      "original_size": 512,
+      "rebuilt_size": 512,
+      "matches": false,
+      "differing_bytes": 108,
+      "first_difference": 4
+    },
+    {
+      "region": ".idata",
+      "original_sha256": "290d6ef3d9421ce7f12c47645369441835d4a17c7b124996dd2788cdb4d08ce5",
+      "rebuilt_sha256": "290d6ef3d9421ce7f12c47645369441835d4a17c7b124996dd2788cdb4d08ce5",
+      "original_size": 1536,
+      "rebuilt_size": 1536,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": ".tls",
+      "original_sha256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+      "rebuilt_sha256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+      "original_size": 512,
+      "rebuilt_size": 512,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": ".reloc",
+      "original_sha256": "4b34258371935e026f38e178201fe1afeb2490be2293f7345da1cbce602526e0",
+      "rebuilt_sha256": "071fae23ca99a48687e1ac96b3b77c6c92cc1198f8a0508619333059c2762098",
+      "original_size": 512,
+      "rebuilt_size": 512,
+      "matches": false,
+      "differing_bytes": 61,
+      "first_difference": 8
+    },
+    {
+      "region": "/14",
+      "original_sha256": "ae2b817fe236c304bcfb39e7f974cb33773720d2808337a0fbe8bab779655335",
+      "rebuilt_sha256": "ae2b817fe236c304bcfb39e7f974cb33773720d2808337a0fbe8bab779655335",
+      "original_size": 1024,
+      "rebuilt_size": 1024,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": "/29",
+      "original_sha256": "2d5ade7a9b7f9955b2c5ae1c56c8690604569a139398a855a7e9351d3e1b74dc",
+      "rebuilt_sha256": "b6006ed0456e2ce04c1f0adbefc8ace1eb0300cc04e54cc2eaa4fcfef5acc33e",
+      "original_size": 36352,
+      "rebuilt_size": 36352,
+      "matches": false,
+      "differing_bytes": 9,
+      "first_difference": 8065
+    },
+    {
+      "region": "/41",
+      "original_sha256": "b48d6cc2bc8913c09c1b7a6ce55da243993ced18f21803c24f5fef92f7810acc",
+      "rebuilt_sha256": "b48d6cc2bc8913c09c1b7a6ce55da243993ced18f21803c24f5fef92f7810acc",
+      "original_size": 6656,
+      "rebuilt_size": 6656,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": "/55",
+      "original_sha256": "e94f3eebb089555f208d1a7978a8f9757f4c4ac50b1011d6ae4eee4e4df0f1ae",
+      "rebuilt_sha256": "e94f3eebb089555f208d1a7978a8f9757f4c4ac50b1011d6ae4eee4e4df0f1ae",
+      "original_size": 6656,
+      "rebuilt_size": 6656,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": "/67",
+      "original_sha256": "3ee296d6d84373069ab658f76e655f0892e5ddb28ce9c107d1567c74a1f48a1c",
+      "rebuilt_sha256": "3ee296d6d84373069ab658f76e655f0892e5ddb28ce9c107d1567c74a1f48a1c",
+      "original_size": 2048,
+      "rebuilt_size": 2048,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": "/80",
+      "original_sha256": "bd3d3ddf517b3c1554bb9af3df884ce13a83af37f38e8f99be69385f43f1b3c4",
+      "rebuilt_sha256": "bd3d3ddf517b3c1554bb9af3df884ce13a83af37f38e8f99be69385f43f1b3c4",
+      "original_size": 512,
+      "rebuilt_size": 512,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": "/91",
+      "original_sha256": "03dc2bf9520844a3fba9b57daf335ec77e996b163344976e9336140eb428811e",
+      "rebuilt_sha256": "03dc2bf9520844a3fba9b57daf335ec77e996b163344976e9336140eb428811e",
+      "original_size": 6656,
+      "rebuilt_size": 6656,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": "/107",
+      "original_sha256": "6ffb5a4c19416d7dfca36d4b69fa2bc5819db9e8875b92858c0edf8ac89f7fc3",
+      "rebuilt_sha256": "6ffb5a4c19416d7dfca36d4b69fa2bc5819db9e8875b92858c0edf8ac89f7fc3",
+      "original_size": 4608,
+      "rebuilt_size": 4608,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": "/123",
+      "original_sha256": "02e13b4fa0166d8eb0244119c96da7f1e4b52357f50a6a2e376485211fd7f2b3",
+      "rebuilt_sha256": "02e13b4fa0166d8eb0244119c96da7f1e4b52357f50a6a2e376485211fd7f2b3",
+      "original_size": 512,
+      "rebuilt_size": 512,
+      "matches": true,
+      "differing_bytes": 0,
+      "first_difference": null
+    },
+    {
+      "region": "overlay",
+      "original_sha256": "d511bddfa063a84db1032b632da8b8163d17a73fe12cc82e8588cbe867dec92b",
+      "rebuilt_sha256": "7d82597ecc0c9f2e57f64979e2290aeaab6cc861975e5c0a9dc9d3ae8271e407",
+      "original_size": 27596,
+      "rebuilt_size": 27069,
+      "matches": false,
+      "differing_bytes": 14675,
+      "first_difference": 1484
+    }
+  ],
+  "note": "No bytes were copied from the original into the rebuilt file. This is a comparison report, not a patch proof."
+}

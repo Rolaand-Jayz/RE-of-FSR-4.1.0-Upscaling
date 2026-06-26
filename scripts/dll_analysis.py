@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from pathlib import Path
 """
 Phase 3: PE Analysis of FSR 4.1.0 DLL.
 Walk sections, exports, resources. Search for DXIL/DXBC blobs.
@@ -11,7 +12,7 @@ import os, json, argparse, sys
 
 def main():
     parser = argparse.ArgumentParser(description="Analyze FSR DLL PE structure")
-    parser.add_argument("--dll", default="/mnt/workdrive/fsr-re/build/dll_v410.dll",
+    parser.add_argument("--dll", default=str(Path(__file__).resolve().parents[1] / "build/dll_v410.dll"),
         help="Path to the FSR DLL")
     parser.add_argument("-o", "--output", default=None,
         help="Output JSON file path (default: stdout)")
@@ -24,8 +25,8 @@ import os
 import json
 import sys
 
-DLL_V410 = os.path.expanduser("~/Desktop/temporal forge/vendor/fidelityfx-sdk-v220/Kits/FidelityFX/signedbin/amd_fidelityfx_upscaler_dx12.dll")
-DLL_V402 = os.path.expanduser("~/Desktop/temporal forge/vendor/fidelityfx-sdk-mit-original/Kits/FidelityFX/signedbin/amd_fidelityfx_upscaler_dx12.dll")
+DLL_V410 = os.path.expanduser("${FSR410_DLL:-/path/to/amd_fidelityfx_upscaler_dx12.dll}")
+DLL_V402 = os.path.expanduser("${FSR402_DLL:-/path/to/amd_fidelityfx_upscaler_dx12.dll}")
 OUTPUT = "/mnt/workdrive/fsr-re/reports/dll_analysis.json"
 
 # DXBC magic bytes (DirectX Bytecode header)

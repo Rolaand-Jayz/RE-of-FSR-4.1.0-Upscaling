@@ -79,7 +79,7 @@ AMD has published thousands of lines of FSR source code under a license that exp
 
 ### The FSR 4 Accidental Release (August 2025)
 
-In **August 2025**, AMD accidentally published the **FSR 4 source code** on GPUOpen under the **MIT license**. AMD subsequently confirmed this was a mistake and removed the files. However, under copyright law, the MIT license is generally considered irrevocable once granted — those who obtained the source during the window it was publicly available may retain their license rights. We do not rely on this argument as a primary justification for this repository, but it is a factual data point: AMD's own open-source infrastructure published FSR 4 source under MIT, even if briefly.
+In **August 2025**, AMD accidentally published the **FSR 4 source code** on GPUOpen under the **MIT license**. AMD subsequently confirmed this was a mistake and removed the files. However, under copyright law, the MIT license is often argued to be irrevocable once granted, subject to jurisdiction and facts — those who obtained the source during the window it was publicly available may retain their license rights. We do not rely on this argument as a primary justification for this repository, but it is a factual data point: AMD's own open-source infrastructure published FSR 4 source under MIT, even if briefly.
 
 ### Zero DMCA Takedowns
 
@@ -100,7 +100,7 @@ We are explicit about what is and is not included, and the licensing status of e
 | Architecture specs (JSON) | Original work derived from MIT-licensed 4.0.2 source | ✅ Yes |
 | FSR 4.0.2 HLSL reference data | Already MIT licensed by AMD (GPUOpen) | ✅ Yes |
 | **Extracted weight blobs** (6 × ~131KB `.bin` files) | AMD proprietary data, extracted for interoperability research | ✅ Yes |
-| **Rebuilt DLLs** (pre-patch and bit-identical final) | Reconstructed from RE work + extracted data | ✅ Yes |
+| **Rebuilt DLLs / comparison artifacts** | Reconstructed from RE work + extracted data; not licensed as AMD data | ✅ Yes |
 | Original FSR 4.1.0 DLL (AMD binary) | AMD proprietary | ❌ **Not included** |
 | Ghidra project / decompiled C++ | Contains proprietary decompilation of AMD code | ❌ **Not included** |
 | DXIL disassembly (`.ll` files) | Derived from proprietary shaders | ❌ **Not included** |
@@ -123,7 +123,7 @@ This section describes our methodology with specificity. We believe transparency
 
 4. **Weight blob extraction.** We identified and extracted 6 weight blobs (~131KB each) from the binary. These are the neural network parameters — the learned data that defines FSR 4.1.0's upscaling behavior. They are embedded in the DLL's data sections and are necessary for any functional reconstruction.
 
-5. **DLL reconstruction.** Using the architectural understanding from steps 1–4, we wrote original C code that implements the PE structure and embeds the extracted weight data in the correct layout. The patcher script applies targeted modifications to produce a bit-identical reconstruction of the original binary. The rebuilt DLLs serve as **proof of correctness** — they demonstrate that our understanding of the binary format is complete and accurate.
+5. **DLL reconstruction research.** Using the architectural understanding from steps 1–4, we wrote C code that implements the observed API/data structure and embeds the extracted weight data in the expected layout. Earlier documentation overstated the historical post-link patcher's result: copying original sections/headers/overlay before comparing hashes is not independent proof of complete binary reconstruction. The current rebuild tooling emits per-region comparison reports without copying original bytes.
 
 ---
 
@@ -160,7 +160,7 @@ The weights are small (6 × ~131KB ≈ 786KB total) and constitute a factual rec
 
 ### The rebuilt DLLs are the verification
 
-The rebuilt DLLs — both the pre-patch version and the bit-identical final version — demonstrate that our RE analysis is complete and correct. A bit-identical reconstruction is the strongest possible evidence that we understand the binary format fully. Without publishing them, the claim of bit-identical reconstruction is, again, an unverifiable assertion.
+The rebuilt DLLs and comparison reports demonstrate a narrower claim: the extracted data layout and exported data-access API can be studied and checked. They do not, by themselves, prove complete binary reconstruction or functional equivalence of the full FSR runtime. Per-section hashes, differential API tests, and runtime traces are required for stronger claims.
 
 ### Interoperability requires the data
 

@@ -190,7 +190,7 @@ See docs/activation-lut-analysis.md for full analysis.
 
 **Static analysis gaps: closed.** All five original analysis gaps have been resolved through DXIL IR analysis, SPIR-V cross-validation, and 4.0.2 source comparison.
 
-**However:** Runtime validation remains an open credibility gap. The static analysis has not been confirmed by observing the upscaler execute in real time. This does not affect the correctness of the structural analysis (the bit-identical DLL rebuild is independent proof of data extraction accuracy), but it means the dispatch sequence and runtime resource bindings are inferred, not observed. See the README for details on what runtime validation would require.
+**However:** Runtime validation remains an open credibility gap. The static analysis has not been confirmed by observing the upscaler execute in real time. The historical bit-identical DLL claim is no longer used as proof because it depended on copying original PE regions before comparing hashes. The current rebuild evidence is bounded to extracted data layout, exported API structure, and per-section comparison. Dispatch sequence and runtime resource bindings are inferred, not observed. See the README for details on what runtime validation would require.
 ---
 
 ## Previously Listed as Unresolved — Now Resolved
@@ -224,7 +224,7 @@ These items were listed as gaps in earlier documentation but are actually docume
 | Architecture unchanged 4.0.2→4.1.0 | 95% | Same entry points, same tensor count, same blob layout |
 | Weight retrain confirmation | 99% | 98.7% byte diff, uniform across layers |
 
-**Bottom line:** The static analysis is **thorough** — all architecture and shader internals have been determined from binary analysis, all 5 original analysis gaps are resolved, and the bit-identical DLL rebuild independently proves the data extraction. However, **runtime validation has not been performed** and is the primary remaining credibility gap. The analysis is correct as far as static methods can prove; confirming it at runtime would require native Windows D3D12 capture (not possible through Proton). This is an acknowledged limitation, not a claim of completion.
+**Bottom line:** The static analysis is substantial but bounded. It supports the published structural claims with binary evidence, but it does not prove complete runtime behavior or independent bit-identical binary reconstruction. Runtime validation has not been performed and is the primary remaining credibility gap; confirming it would require native Windows D3D12 capture with dispatch order, PSO hashes, descriptor tables, CBV dumps, and resource transitions. This is an acknowledged limitation, not a claim of completion.
 
 **Scope note:** This analysis covers the FSR 4 temporal **upscaler** only. FSR 4.1.0 also includes **frame generation**, which was not analyzed and is outside the scope of this project.
 
