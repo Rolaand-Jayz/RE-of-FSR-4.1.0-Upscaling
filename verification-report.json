@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "timestamp": "2026-06-26T02:39:46.543926+00:00",
-  "total": 47,
-  "passed": 47,
+  "timestamp": "2026-06-26T02:57:45.484719+00:00",
+  "total": 53,
+  "passed": 53,
   "failed": 0,
   "results": [
     {
@@ -239,6 +239,36 @@
       "name": "DXIL entrypoint inventory agrees with 27 unique names",
       "status": "PASS",
       "evidence": "unique=27"
+    },
+    {
+      "name": "Decoded buffer addressing report exists",
+      "status": "PASS",
+      "evidence": "/mnt/workdrive/fsr-re/reports/decoded-buffer-addressing.json"
+    },
+    {
+      "name": "Decoded key spaces include operand/control/vector classes",
+      "status": "PASS",
+      "evidence": "spaces=['control_or_dimension_metadata', 'lane_vector_or_output_slots', 'operand_or_accumulator']"
+    },
+    {
+      "name": "Decoded addressing report covers many packed keys",
+      "status": "PASS",
+      "evidence": "top_keys=120"
+    },
+    {
+      "name": "Atomic SSA trace report exists",
+      "status": "PASS",
+      "evidence": "/mnt/workdrive/fsr-re/reports/atomic-ssa-trace.json"
+    },
+    {
+      "name": "Atomic SSA trace covers more than 100 shader variants",
+      "status": "PASS",
+      "evidence": "entries=174"
+    },
+    {
+      "name": "Atomic SSA trace includes provenance trees",
+      "status": "PASS",
+      "evidence": "checked provenance fields"
     }
   ]
 }
