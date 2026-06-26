@@ -365,6 +365,23 @@ def main() -> int:
         record("Activation/nonlinearity artifact exists", False, str(activation_report))
     print()
 
+    arithmetic_report = repo_root / "reports/arithmetic-dataflow-slices.json"
+    if arithmetic_report.exists():
+        ar = json.loads(arithmetic_report.read_text())
+        summary = ar.get("summary", [])
+        main = [r for r in summary if r.get("class") == "main_pass"]
+        nodes = ar.get("global_node_kind_counts", {})
+        sinks = ar.get("global_sink_counts", {})
+        record("Arithmetic dataflow slice artifact exists", ar.get("schema_version") == 1, str(arithmetic_report))
+        record("Arithmetic dataflow slice artifact covers 27 entrypoints", ar.get("unique_entrypoints") == 27 and len(summary) == 27, f"unique={ar.get('unique_entrypoints')} summary={len(summary)}")
+        record("Arithmetic dataflow slice artifact covers all 214 shader variants", ar.get("shader_variants") == 214, f"variants={ar.get('shader_variants')}")
+        record("Arithmetic dataflow slices include raw stores and atomic sinks", sinks.get("rawBufferStore.values", 0) > 0 and sinks.get("atomicCompareExchange.operands", 0) > 0, f"sinks={sinks}")
+        record("Arithmetic dataflow slices reach rawBufferLoad and arithmetic producers", nodes.get("dxil_rawBufferLoad", 0) > 0 and (nodes.get("llvm_add", 0) + nodes.get("llvm_mul", 0) + nodes.get("llvm_fadd", 0)) > 0, f"nodes={{'rawBufferLoad': {nodes.get('dxil_rawBufferLoad', 0)}, 'add': {nodes.get('llvm_add', 0)}, 'mul': {nodes.get('llvm_mul', 0)}, 'fadd': {nodes.get('llvm_fadd', 0)}}}")
+        record("Every main pass has arithmetic dataflow sink slices", all(r.get("sink_counts") for r in main), f"main_passes={len(main)}")
+    else:
+        record("Arithmetic dataflow slice artifact exists", False, str(arithmetic_report))
+    print()
+
 
     return finish(args.report)
 

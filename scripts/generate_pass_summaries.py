@@ -21,6 +21,8 @@ def main():
     slots=json.load(open('spec/key-slot-semantics.json'))
     activation_path=Path('reports/activation-nonlinearity-evidence.json')
     activation=json.load(open(activation_path)) if activation_path.exists() else {'summary': []}
+    arithmetic_path=Path('reports/arithmetic-dataflow-slices.json')
+    arithmetic=json.load(open(arithmetic_path)) if arithmetic_path.exists() else {'summary': []}
     slot_lookup={(s['space'],s['slot_low8']):s for s in slots['slots']}
     out_rows=[]
     eps=sorted({x['entrypoint'] for x in dx['summary']})
@@ -29,6 +31,7 @@ def main():
     at_by={x['entrypoint']:x for x in atomic['summary']}
     aff_by=defaultdict(list); [aff_by[x['entrypoint']].append(x) for x in aff.get('entries', aff.get('entry_summaries', []))]
     act_by={x['entrypoint']:x for x in activation.get('summary', [])}
+    arith_by={x['entrypoint']:x for x in arithmetic.get('summary', [])}
     for ep in eps:
         resources=Counter()
         handles=[]
@@ -54,7 +57,8 @@ def main():
             for item in source_iter:
                 formulas[item['signature']] += item.get('count', 1); formula_count += item.get('count', 1)
         act=act_by.get(ep,{})
-        row={'entrypoint':ep,'class':cls(ep),'variants':dx_by.get(ep,{}).get('variants',0),'line_count':dx_by.get(ep,{}).get('line_count',{}),'resource_role_counts':dict(resources),'representative_handles':handles,'dxop_hist':dx_by.get(ep,{}).get('dxop_hist',{}),'resource_ops':dx_by.get(ep,{}).get('resource_ops',{}),'atomic_addr_total':at.get('atomic_addr_total',0),'atomic_addr_unique':at.get('atomic_addr_unique',0),'top_decoded_key_slots':top_slots,'raw_load_formula_count':formula_count,'top_raw_load_formula_families':[{'signature':k,'count':v} for k,v in formulas.most_common(20)],'activation_nonlinearity':{'event_count':act.get('event_count',0),'kind_counts':act.get('kind_counts',{}),'pattern_counts':act.get('pattern_counts',{}),'opcode_counts':act.get('opcode_counts',{}),'has_direct_relu_or_lower_clamp_zero':act.get('has_direct_relu_or_lower_clamp_zero',False),'has_direct_upper_clamp_one':act.get('has_direct_upper_clamp_one',False),'sample_events':act.get('sample_events',[])[:8]},'static_completion':{'resources_mapped':bool(resources),'dxil_ops_summarized':ep in dx_by,'atomic_patterns_extracted':bool(at),'raw_load_formulas_extracted':formula_count>0,'activation_nonlinearity_extracted':ep in act_by and act.get('event_count',0)>0}}
+        arith=arith_by.get(ep,{})
+        row={'entrypoint':ep,'class':cls(ep),'variants':dx_by.get(ep,{}).get('variants',0),'line_count':dx_by.get(ep,{}).get('line_count',{}),'resource_role_counts':dict(resources),'representative_handles':handles,'dxop_hist':dx_by.get(ep,{}).get('dxop_hist',{}),'resource_ops':dx_by.get(ep,{}).get('resource_ops',{}),'atomic_addr_total':at.get('atomic_addr_total',0),'atomic_addr_unique':at.get('atomic_addr_unique',0),'top_decoded_key_slots':top_slots,'raw_load_formula_count':formula_count,'top_raw_load_formula_families':[{'signature':k,'count':v} for k,v in formulas.most_common(20)],'activation_nonlinearity':{'event_count':act.get('event_count',0),'kind_counts':act.get('kind_counts',{}),'pattern_counts':act.get('pattern_counts',{}),'opcode_counts':act.get('opcode_counts',{}),'has_direct_relu_or_lower_clamp_zero':act.get('has_direct_relu_or_lower_clamp_zero',False),'has_direct_upper_clamp_one':act.get('has_direct_upper_clamp_one',False),'sample_events':act.get('sample_events',[])[:8]},'arithmetic_dataflow':{'sink_counts':arith.get('sink_counts',{}),'node_kind_counts':arith.get('node_kind_counts',{}),'root_counts':arith.get('root_counts',{}),'has_store_slice':arith.get('has_store_slice',False),'has_atomic_slice':arith.get('has_atomic_slice',False),'sample_slices':arith.get('sample_slices',[])[:4]},'static_completion':{'resources_mapped':bool(resources),'dxil_ops_summarized':ep in dx_by,'atomic_patterns_extracted':bool(at),'raw_load_formulas_extracted':formula_count>0,'activation_nonlinearity_extracted':ep in act_by and act.get('event_count',0)>0,'arithmetic_dataflow_extracted':ep in arith_by and bool(arith.get('sink_counts',{}))}}
         out_rows.append(row)
     out={'schema_version':1,'basis':'static DXIL/resource/key/formula artifacts; not runtime validated','passes':out_rows}
     args.out.parent.mkdir(parents=True, exist_ok=True); args.out.write_text(json.dumps(out,indent=2)); print(f'wrote {args.out}: passes={len(out_rows)}')
