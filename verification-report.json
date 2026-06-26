@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "timestamp": "2026-06-26T02:34:58.403059+00:00",
-  "total": 40,
-  "passed": 40,
+  "timestamp": "2026-06-26T02:39:46.543926+00:00",
+  "total": 47,
+  "passed": 47,
   "failed": 0,
   "results": [
     {
@@ -204,6 +204,41 @@
       "name": "Zone 'padding' at 0x1FFA0 has expected size",
       "status": "PASS",
       "evidence": "bytes_available=96 expected=96"
+    },
+    {
+      "name": "DXIL IR evidence artifact exists and covers 27 entrypoints",
+      "status": "PASS",
+      "evidence": "unique_entrypoints=27"
+    },
+    {
+      "name": "DXIL IR evidence covers 12 main passes",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Every main pass has rawBufferLoad evidence",
+      "status": "PASS",
+      "evidence": "checked resource_ops.rawBufferLoad.max > 0"
+    },
+    {
+      "name": "Atomic/buffer pattern artifact covers 12 main passes",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Every main pass has atomicCompareExchange address evidence",
+      "status": "PASS",
+      "evidence": "checked atomic_addr_total and atomic_addr_unique"
+    },
+    {
+      "name": "Every main pass has tertiary scale evidence",
+      "status": "PASS",
+      "evidence": "checked dx.op.tertiary scale constants"
+    },
+    {
+      "name": "DXIL entrypoint inventory agrees with 27 unique names",
+      "status": "PASS",
+      "evidence": "unique=27"
     }
   ]
 }

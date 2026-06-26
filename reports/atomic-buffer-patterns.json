@@ -1,0 +1,8632 @@
+{
+  "schema_version": 1,
+  "source": "build/llvm_ir/4_1_0",
+  "summary": [
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass0_post",
+      "class": "post_stage",
+      "pass_index": 0,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0098.ll",
+        "build/llvm_ir/4_1_0/blob_0107.ll",
+        "build/llvm_ir/4_1_0/blob_0182.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 30752,
+          "count": 1
+        },
+        {
+          "scale": 15392,
+          "count": 1
+        },
+        {
+          "scale": 61472,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1",
+      "class": "main_pass",
+      "pass_index": 1,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0036.ll",
+        "build/llvm_ir/4_1_0/blob_0066.ll",
+        "build/llvm_ir/4_1_0/blob_0068.ll"
+      ],
+      "atomic_addr_unique": 72,
+      "atomic_addr_total": 5964,
+      "atomic_addr_top80": [
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 168
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 168
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 168
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 168
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 168
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 168
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 168
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 168
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 168
+        },
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 156
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 156
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 156
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 156
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 156
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 156
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 156
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 156
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 156
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 156
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 156
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 156
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 156
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 156
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 156
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 156
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 156
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 156
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 156
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 156
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 156
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 111
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 63
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 63
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 63
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 63
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 63
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 63
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 63
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 63
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 63
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 63
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 63
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 63
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 57
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 48
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 9
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 9
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 9
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 9
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 9
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 9
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 9
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 9
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 9
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 9
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 9
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 9
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 9
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 9
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 9
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 9
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 9
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 9
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 9
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 9
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 6
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 3333
+        },
+        {
+          "value": "38",
+          "count": 51
+        },
+        {
+          "value": "%238",
+          "count": 12
+        },
+        {
+          "value": "26",
+          "count": 12
+        },
+        {
+          "value": "%2355",
+          "count": 12
+        },
+        {
+          "value": "%2389",
+          "count": 12
+        },
+        {
+          "value": "%3280",
+          "count": 12
+        },
+        {
+          "value": "%700",
+          "count": 9
+        },
+        {
+          "value": "%750",
+          "count": 9
+        },
+        {
+          "value": "%800",
+          "count": 9
+        },
+        {
+          "value": "%851",
+          "count": 9
+        },
+        {
+          "value": "%901",
+          "count": 9
+        },
+        {
+          "value": "%951",
+          "count": 9
+        },
+        {
+          "value": "%3893",
+          "count": 9
+        },
+        {
+          "value": "%549",
+          "count": 6
+        },
+        {
+          "value": "%599",
+          "count": 6
+        },
+        {
+          "value": "%649",
+          "count": 6
+        },
+        {
+          "value": "%1467",
+          "count": 6
+        },
+        {
+          "value": "%1517",
+          "count": 6
+        },
+        {
+          "value": "%1567",
+          "count": 6
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 3618
+        },
+        {
+          "value": "16",
+          "count": 123
+        },
+        {
+          "value": "1",
+          "count": 9
+        },
+        {
+          "value": "%244",
+          "count": 3
+        },
+        {
+          "value": "%246",
+          "count": 3
+        },
+        {
+          "value": "%248",
+          "count": 3
+        },
+        {
+          "value": "%250",
+          "count": 3
+        },
+        {
+          "value": "%277",
+          "count": 3
+        },
+        {
+          "value": "%279",
+          "count": 3
+        },
+        {
+          "value": "%281",
+          "count": 3
+        },
+        {
+          "value": "%283",
+          "count": 3
+        },
+        {
+          "value": "%310",
+          "count": 3
+        },
+        {
+          "value": "%312",
+          "count": 3
+        },
+        {
+          "value": "%314",
+          "count": 3
+        },
+        {
+          "value": "%316",
+          "count": 3
+        },
+        {
+          "value": "%343",
+          "count": 3
+        },
+        {
+          "value": "%345",
+          "count": 3
+        },
+        {
+          "value": "%347",
+          "count": 3
+        },
+        {
+          "value": "%349",
+          "count": 3
+        },
+        {
+          "value": "%388",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 171
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 15392,
+          "count": 20
+        },
+        {
+          "scale": 61472,
+          "count": 20
+        },
+        {
+          "scale": 30752,
+          "count": 20
+        },
+        {
+          "scale": 256,
+          "count": 6
+        },
+        {
+          "scale": 768,
+          "count": 3
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10",
+      "class": "main_pass",
+      "pass_index": 10,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0053.ll",
+        "build/llvm_ir/4_1_0/blob_0156.ll",
+        "build/llvm_ir/4_1_0/blob_0174.ll"
+      ],
+      "atomic_addr_unique": 72,
+      "atomic_addr_total": 9885,
+      "atomic_addr_top80": [
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 300
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 300
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 300
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 300
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 300
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 300
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 300
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 300
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 300
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 300
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 300
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 300
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 300
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 300
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 300
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 300
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 300
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 300
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 300
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 300
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 300
+        },
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 207
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 207
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 207
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 207
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 207
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 207
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 207
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 207
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 207
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 114
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 102
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 102
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 102
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 102
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 102
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 102
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 102
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 102
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 102
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 102
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 102
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 102
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 93
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 84
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 9
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 9
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 9
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 9
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 9
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 9
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 9
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 9
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 9
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 9
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 9
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 9
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 9
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 9
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 9
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 9
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 9
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 9
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 9
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 9
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 9
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 5253
+        },
+        {
+          "value": "38",
+          "count": 87
+        },
+        {
+          "value": "26",
+          "count": 15
+        },
+        {
+          "value": "%268",
+          "count": 12
+        },
+        {
+          "value": "%2484",
+          "count": 12
+        },
+        {
+          "value": "%2519",
+          "count": 12
+        },
+        {
+          "value": "%2553",
+          "count": 12
+        },
+        {
+          "value": "%2587",
+          "count": 12
+        },
+        {
+          "value": "%4709",
+          "count": 12
+        },
+        {
+          "value": "%4743",
+          "count": 12
+        },
+        {
+          "value": "%737",
+          "count": 9
+        },
+        {
+          "value": "%788",
+          "count": 9
+        },
+        {
+          "value": "%839",
+          "count": 9
+        },
+        {
+          "value": "%891",
+          "count": 9
+        },
+        {
+          "value": "%942",
+          "count": 9
+        },
+        {
+          "value": "%993",
+          "count": 9
+        },
+        {
+          "value": "%6489",
+          "count": 9
+        },
+        {
+          "value": "%583",
+          "count": 6
+        },
+        {
+          "value": "%634",
+          "count": 6
+        },
+        {
+          "value": "%685",
+          "count": 6
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 5652
+        },
+        {
+          "value": "16",
+          "count": 126
+        },
+        {
+          "value": "1",
+          "count": 9
+        },
+        {
+          "value": "%274",
+          "count": 3
+        },
+        {
+          "value": "%276",
+          "count": 3
+        },
+        {
+          "value": "%278",
+          "count": 3
+        },
+        {
+          "value": "%280",
+          "count": 3
+        },
+        {
+          "value": "%307",
+          "count": 3
+        },
+        {
+          "value": "%309",
+          "count": 3
+        },
+        {
+          "value": "%311",
+          "count": 3
+        },
+        {
+          "value": "%313",
+          "count": 3
+        },
+        {
+          "value": "%340",
+          "count": 3
+        },
+        {
+          "value": "%342",
+          "count": 3
+        },
+        {
+          "value": "%344",
+          "count": 3
+        },
+        {
+          "value": "%346",
+          "count": 3
+        },
+        {
+          "value": "%373",
+          "count": 3
+        },
+        {
+          "value": "%375",
+          "count": 3
+        },
+        {
+          "value": "%377",
+          "count": 3
+        },
+        {
+          "value": "%379",
+          "count": 3
+        },
+        {
+          "value": "%419",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 210
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 7712,
+          "count": 21
+        },
+        {
+          "scale": 15392,
+          "count": 21
+        },
+        {
+          "scale": 30752,
+          "count": 21
+        },
+        {
+          "scale": 256,
+          "count": 6
+        },
+        {
+          "scale": 768,
+          "count": 3
+        },
+        {
+          "scale": 512,
+          "count": 3
+        },
+        {
+          "scale": 1024,
+          "count": 3
+        },
+        {
+          "scale": 2097664,
+          "count": 1
+        },
+        {
+          "scale": 8342464,
+          "count": 1
+        },
+        {
+          "scale": 33273664,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass10_post",
+      "class": "post_stage",
+      "pass_index": 10,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0059.ll",
+        "build/llvm_ir/4_1_0/blob_0084.ll",
+        "build/llvm_ir/4_1_0/blob_0105.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 15392,
+          "count": 1
+        },
+        {
+          "scale": 30752,
+          "count": 1
+        },
+        {
+          "scale": 7712,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11",
+      "class": "main_pass",
+      "pass_index": 11,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0030.ll",
+        "build/llvm_ir/4_1_0/blob_0117.ll",
+        "build/llvm_ir/4_1_0/blob_0155.ll"
+      ],
+      "atomic_addr_unique": 93,
+      "atomic_addr_total": 5169,
+      "atomic_addr_top80": [
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 171
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 171
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 171
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 171
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 171
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 171
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 171
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 171
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 171
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 99
+        },
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 99
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 99
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 99
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 99
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 99
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 99
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 99
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 99
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 99
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 99
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 99
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 99
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 99
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 99
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 99
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 99
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 99
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 99
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 99
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 99
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 99
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 69
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 69
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 69
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 69
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 69
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 69
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 69
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 69
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 69
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 69
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 69
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 69
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 57
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 36
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 33
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 24
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 24
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 24
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 24
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 24
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 21
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 21
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 21
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 21
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 21
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 21
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 21
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 21
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 21
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 21
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 21
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 21
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 18
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 18
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 9
+        },
+        {
+          "value": 1358998057,
+          "hex": "0x5100aa29",
+          "count": 3
+        },
+        {
+          "value": 1358965298,
+          "hex": "0x51002a32",
+          "count": 3
+        },
+        {
+          "value": 1342242869,
+          "hex": "0x50010035",
+          "count": 3
+        },
+        {
+          "value": 1342243125,
+          "hex": "0x50010135",
+          "count": 3
+        },
+        {
+          "value": 1342246965,
+          "hex": "0x50011035",
+          "count": 3
+        },
+        {
+          "value": 1342247221,
+          "hex": "0x50011135",
+          "count": 3
+        },
+        {
+          "value": 1342308405,
+          "hex": "0x50020035",
+          "count": 3
+        },
+        {
+          "value": 1342308661,
+          "hex": "0x50020135",
+          "count": 3
+        },
+        {
+          "value": 1342312501,
+          "hex": "0x50021035",
+          "count": 3
+        },
+        {
+          "value": 1342312757,
+          "hex": "0x50021135",
+          "count": 3
+        },
+        {
+          "value": 1358964277,
+          "hex": "0x51002635",
+          "count": 3
+        },
+        {
+          "value": 1375731765,
+          "hex": "0x52000035",
+          "count": 3
+        },
+        {
+          "value": 1375732021,
+          "hex": "0x52000135",
+          "count": 3
+        },
+        {
+          "value": 1375732277,
+          "hex": "0x52000235",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 3024
+        },
+        {
+          "value": "38",
+          "count": 42
+        },
+        {
+          "value": "26",
+          "count": 24
+        },
+        {
+          "value": "%470",
+          "count": 12
+        },
+        {
+          "value": "%472",
+          "count": 12
+        },
+        {
+          "value": "%474",
+          "count": 12
+        },
+        {
+          "value": "%476",
+          "count": 12
+        },
+        {
+          "value": "%496",
+          "count": 12
+        },
+        {
+          "value": "%498",
+          "count": 12
+        },
+        {
+          "value": "%500",
+          "count": 12
+        },
+        {
+          "value": "%502",
+          "count": 12
+        },
+        {
+          "value": "122880",
+          "count": 12
+        },
+        {
+          "value": "%1499",
+          "count": 12
+        },
+        {
+          "value": "%1501",
+          "count": 12
+        },
+        {
+          "value": "%1503",
+          "count": 12
+        },
+        {
+          "value": "%1505",
+          "count": 12
+        },
+        {
+          "value": "%1538",
+          "count": 12
+        },
+        {
+          "value": "%1540",
+          "count": 12
+        },
+        {
+          "value": "%1542",
+          "count": 12
+        },
+        {
+          "value": "%1544",
+          "count": 12
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 3306
+        },
+        {
+          "value": "16",
+          "count": 111
+        },
+        {
+          "value": "32",
+          "count": 30
+        },
+        {
+          "value": "1",
+          "count": 24
+        },
+        {
+          "value": "%471",
+          "count": 12
+        },
+        {
+          "value": "%473",
+          "count": 12
+        },
+        {
+          "value": "%475",
+          "count": 12
+        },
+        {
+          "value": "%477",
+          "count": 12
+        },
+        {
+          "value": "%497",
+          "count": 12
+        },
+        {
+          "value": "%499",
+          "count": 12
+        },
+        {
+          "value": "%501",
+          "count": 12
+        },
+        {
+          "value": "%503",
+          "count": 12
+        },
+        {
+          "value": "%1500",
+          "count": 12
+        },
+        {
+          "value": "%1502",
+          "count": 12
+        },
+        {
+          "value": "%1504",
+          "count": 12
+        },
+        {
+          "value": "%1506",
+          "count": 12
+        },
+        {
+          "value": "%1539",
+          "count": 12
+        },
+        {
+          "value": "%1541",
+          "count": 12
+        },
+        {
+          "value": "%1543",
+          "count": 12
+        },
+        {
+          "value": "%1545",
+          "count": 12
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 174
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 30752,
+          "count": 11
+        },
+        {
+          "scale": 15392,
+          "count": 11
+        },
+        {
+          "scale": 7712,
+          "count": 9
+        },
+        {
+          "scale": 61472,
+          "count": 2
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass11_post",
+      "class": "post_stage",
+      "pass_index": 11,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0012.ll",
+        "build/llvm_ir/4_1_0/blob_0167.ll",
+        "build/llvm_ir/4_1_0/blob_0208.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 61472,
+          "count": 1
+        },
+        {
+          "scale": 30752,
+          "count": 1
+        },
+        {
+          "scale": 15392,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12",
+      "class": "main_pass",
+      "pass_index": 12,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0054.ll",
+        "build/llvm_ir/4_1_0/blob_0088.ll",
+        "build/llvm_ir/4_1_0/blob_0129.ll"
+      ],
+      "atomic_addr_unique": 72,
+      "atomic_addr_total": 5964,
+      "atomic_addr_top80": [
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 168
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 168
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 168
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 168
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 168
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 168
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 168
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 168
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 168
+        },
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 156
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 156
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 156
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 156
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 156
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 156
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 156
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 156
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 156
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 156
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 156
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 156
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 156
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 156
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 156
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 156
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 156
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 156
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 156
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 156
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 156
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 111
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 63
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 63
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 63
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 63
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 63
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 63
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 63
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 63
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 63
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 63
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 63
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 63
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 57
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 48
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 9
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 9
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 9
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 9
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 9
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 9
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 9
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 9
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 9
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 9
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 9
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 9
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 9
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 9
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 9
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 9
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 9
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 9
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 9
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 9
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 6
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 3333
+        },
+        {
+          "value": "38",
+          "count": 51
+        },
+        {
+          "value": "%238",
+          "count": 12
+        },
+        {
+          "value": "26",
+          "count": 12
+        },
+        {
+          "value": "%2373",
+          "count": 12
+        },
+        {
+          "value": "%2407",
+          "count": 12
+        },
+        {
+          "value": "%3299",
+          "count": 12
+        },
+        {
+          "value": "%707",
+          "count": 9
+        },
+        {
+          "value": "%758",
+          "count": 9
+        },
+        {
+          "value": "%809",
+          "count": 9
+        },
+        {
+          "value": "%861",
+          "count": 9
+        },
+        {
+          "value": "%912",
+          "count": 9
+        },
+        {
+          "value": "%963",
+          "count": 9
+        },
+        {
+          "value": "%3912",
+          "count": 9
+        },
+        {
+          "value": "%553",
+          "count": 6
+        },
+        {
+          "value": "%604",
+          "count": 6
+        },
+        {
+          "value": "%655",
+          "count": 6
+        },
+        {
+          "value": "%1480",
+          "count": 6
+        },
+        {
+          "value": "%1531",
+          "count": 6
+        },
+        {
+          "value": "%1582",
+          "count": 6
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 3618
+        },
+        {
+          "value": "16",
+          "count": 123
+        },
+        {
+          "value": "1",
+          "count": 9
+        },
+        {
+          "value": "%244",
+          "count": 3
+        },
+        {
+          "value": "%246",
+          "count": 3
+        },
+        {
+          "value": "%248",
+          "count": 3
+        },
+        {
+          "value": "%250",
+          "count": 3
+        },
+        {
+          "value": "%277",
+          "count": 3
+        },
+        {
+          "value": "%279",
+          "count": 3
+        },
+        {
+          "value": "%281",
+          "count": 3
+        },
+        {
+          "value": "%283",
+          "count": 3
+        },
+        {
+          "value": "%310",
+          "count": 3
+        },
+        {
+          "value": "%312",
+          "count": 3
+        },
+        {
+          "value": "%314",
+          "count": 3
+        },
+        {
+          "value": "%316",
+          "count": 3
+        },
+        {
+          "value": "%343",
+          "count": 3
+        },
+        {
+          "value": "%345",
+          "count": 3
+        },
+        {
+          "value": "%347",
+          "count": 3
+        },
+        {
+          "value": "%349",
+          "count": 3
+        },
+        {
+          "value": "%389",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 171
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 15392,
+          "count": 20
+        },
+        {
+          "scale": 61472,
+          "count": 20
+        },
+        {
+          "scale": 30752,
+          "count": 20
+        },
+        {
+          "scale": 256,
+          "count": 6
+        },
+        {
+          "scale": 768,
+          "count": 3
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass12_post",
+      "class": "post_stage",
+      "pass_index": 12,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0159.ll",
+        "build/llvm_ir/4_1_0/blob_0185.ll",
+        "build/llvm_ir/4_1_0/blob_0207.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 61472,
+          "count": 1
+        },
+        {
+          "scale": 15392,
+          "count": 1
+        },
+        {
+          "scale": 30752,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass1_post",
+      "class": "post_stage",
+      "pass_index": 1,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0109.ll",
+        "build/llvm_ir/4_1_0/blob_0147.ll",
+        "build/llvm_ir/4_1_0/blob_0170.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 30752,
+          "count": 1
+        },
+        {
+          "scale": 61472,
+          "count": 1
+        },
+        {
+          "scale": 15392,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2",
+      "class": "main_pass",
+      "pass_index": 2,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0058.ll",
+        "build/llvm_ir/4_1_0/blob_0102.ll",
+        "build/llvm_ir/4_1_0/blob_0194.ll"
+      ],
+      "atomic_addr_unique": 72,
+      "atomic_addr_total": 5964,
+      "atomic_addr_top80": [
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 168
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 168
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 168
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 168
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 168
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 168
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 168
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 168
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 168
+        },
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 156
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 156
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 156
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 156
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 156
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 156
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 156
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 156
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 156
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 156
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 156
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 156
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 156
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 156
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 156
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 156
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 156
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 156
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 156
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 156
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 156
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 111
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 63
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 63
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 63
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 63
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 63
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 63
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 63
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 63
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 63
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 63
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 63
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 63
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 57
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 48
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 9
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 9
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 9
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 9
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 9
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 9
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 9
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 9
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 9
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 9
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 9
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 9
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 9
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 9
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 9
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 9
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 9
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 9
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 9
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 9
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 6
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 3333
+        },
+        {
+          "value": "38",
+          "count": 51
+        },
+        {
+          "value": "%238",
+          "count": 12
+        },
+        {
+          "value": "26",
+          "count": 12
+        },
+        {
+          "value": "%2373",
+          "count": 12
+        },
+        {
+          "value": "%2407",
+          "count": 12
+        },
+        {
+          "value": "%3299",
+          "count": 12
+        },
+        {
+          "value": "%707",
+          "count": 9
+        },
+        {
+          "value": "%758",
+          "count": 9
+        },
+        {
+          "value": "%809",
+          "count": 9
+        },
+        {
+          "value": "%861",
+          "count": 9
+        },
+        {
+          "value": "%912",
+          "count": 9
+        },
+        {
+          "value": "%963",
+          "count": 9
+        },
+        {
+          "value": "%3912",
+          "count": 9
+        },
+        {
+          "value": "%553",
+          "count": 6
+        },
+        {
+          "value": "%604",
+          "count": 6
+        },
+        {
+          "value": "%655",
+          "count": 6
+        },
+        {
+          "value": "%1480",
+          "count": 6
+        },
+        {
+          "value": "%1531",
+          "count": 6
+        },
+        {
+          "value": "%1582",
+          "count": 6
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 3618
+        },
+        {
+          "value": "16",
+          "count": 123
+        },
+        {
+          "value": "1",
+          "count": 9
+        },
+        {
+          "value": "%244",
+          "count": 3
+        },
+        {
+          "value": "%246",
+          "count": 3
+        },
+        {
+          "value": "%248",
+          "count": 3
+        },
+        {
+          "value": "%250",
+          "count": 3
+        },
+        {
+          "value": "%277",
+          "count": 3
+        },
+        {
+          "value": "%279",
+          "count": 3
+        },
+        {
+          "value": "%281",
+          "count": 3
+        },
+        {
+          "value": "%283",
+          "count": 3
+        },
+        {
+          "value": "%310",
+          "count": 3
+        },
+        {
+          "value": "%312",
+          "count": 3
+        },
+        {
+          "value": "%314",
+          "count": 3
+        },
+        {
+          "value": "%316",
+          "count": 3
+        },
+        {
+          "value": "%343",
+          "count": 3
+        },
+        {
+          "value": "%345",
+          "count": 3
+        },
+        {
+          "value": "%347",
+          "count": 3
+        },
+        {
+          "value": "%349",
+          "count": 3
+        },
+        {
+          "value": "%389",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 171
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 30752,
+          "count": 20
+        },
+        {
+          "scale": 61472,
+          "count": 20
+        },
+        {
+          "scale": 15392,
+          "count": 20
+        },
+        {
+          "scale": 256,
+          "count": 6
+        },
+        {
+          "scale": 768,
+          "count": 3
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass2_post",
+      "class": "post_stage",
+      "pass_index": 2,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0055.ll",
+        "build/llvm_ir/4_1_0/blob_0131.ll",
+        "build/llvm_ir/4_1_0/blob_0177.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 30752,
+          "count": 1
+        },
+        {
+          "scale": 61472,
+          "count": 1
+        },
+        {
+          "scale": 15392,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass3",
+      "class": "main_pass",
+      "pass_index": 3,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0116.ll",
+        "build/llvm_ir/4_1_0/blob_0123.ll",
+        "build/llvm_ir/4_1_0/blob_0145.ll"
+      ],
+      "atomic_addr_unique": 66,
+      "atomic_addr_total": 2343,
+      "atomic_addr_top80": [
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 108
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 108
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 108
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 108
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 108
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 108
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 108
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 108
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 108
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 48
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 48
+        },
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 48
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 48
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 48
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 48
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 48
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 48
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 48
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 48
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 48
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 48
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 48
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 48
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 48
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 48
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 48
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 48
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 48
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 48
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 48
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 48
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 48
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 15
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 15
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 15
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 15
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 15
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 15
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 15
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 15
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 15
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 15
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 15
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 15
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 15
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 12
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 3
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 3
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 3
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 3
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 3
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 3
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 3
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 3
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 3
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 3
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 3
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 3
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 3
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 3
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 1443
+        },
+        {
+          "value": "38",
+          "count": 12
+        },
+        {
+          "value": "%14",
+          "count": 6
+        },
+        {
+          "value": "%49",
+          "count": 6
+        },
+        {
+          "value": "%152",
+          "count": 6
+        },
+        {
+          "value": "%168",
+          "count": 6
+        },
+        {
+          "value": "%211",
+          "count": 6
+        },
+        {
+          "value": "%279",
+          "count": 6
+        },
+        {
+          "value": "%375",
+          "count": 6
+        },
+        {
+          "value": "%389",
+          "count": 6
+        },
+        {
+          "value": "%432",
+          "count": 6
+        },
+        {
+          "value": "%499",
+          "count": 6
+        },
+        {
+          "value": "%595",
+          "count": 6
+        },
+        {
+          "value": "%609",
+          "count": 6
+        },
+        {
+          "value": "%651",
+          "count": 6
+        },
+        {
+          "value": "%718",
+          "count": 6
+        },
+        {
+          "value": "%813",
+          "count": 6
+        },
+        {
+          "value": "%827",
+          "count": 6
+        },
+        {
+          "value": "%869",
+          "count": 6
+        },
+        {
+          "value": "%936",
+          "count": 6
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 1581
+        },
+        {
+          "value": "16",
+          "count": 51
+        },
+        {
+          "value": "32",
+          "count": 48
+        },
+        {
+          "value": "%20",
+          "count": 3
+        },
+        {
+          "value": "%22",
+          "count": 3
+        },
+        {
+          "value": "%24",
+          "count": 3
+        },
+        {
+          "value": "%26",
+          "count": 3
+        },
+        {
+          "value": "%55",
+          "count": 3
+        },
+        {
+          "value": "%57",
+          "count": 3
+        },
+        {
+          "value": "%59",
+          "count": 3
+        },
+        {
+          "value": "%61",
+          "count": 3
+        },
+        {
+          "value": "%88",
+          "count": 3
+        },
+        {
+          "value": "%90",
+          "count": 3
+        },
+        {
+          "value": "%92",
+          "count": 3
+        },
+        {
+          "value": "%94",
+          "count": 3
+        },
+        {
+          "value": "%121",
+          "count": 3
+        },
+        {
+          "value": "%123",
+          "count": 3
+        },
+        {
+          "value": "%125",
+          "count": 3
+        },
+        {
+          "value": "%127",
+          "count": 3
+        },
+        {
+          "value": "%174",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 111
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 1024,
+          "count": 24
+        },
+        {
+          "scale": 15392,
+          "count": 9
+        },
+        {
+          "scale": 30752,
+          "count": 9
+        },
+        {
+          "scale": 61472,
+          "count": 8
+        },
+        {
+          "scale": 7712,
+          "count": 1
+        },
+        {
+          "scale": 2097664,
+          "count": 1
+        },
+        {
+          "scale": 33273664,
+          "count": 1
+        },
+        {
+          "scale": 8342464,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass3_post",
+      "class": "post_stage",
+      "pass_index": 3,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0041.ll",
+        "build/llvm_ir/4_1_0/blob_0169.ll",
+        "build/llvm_ir/4_1_0/blob_0195.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 7712,
+          "count": 1
+        },
+        {
+          "scale": 30752,
+          "count": 1
+        },
+        {
+          "scale": 15392,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4",
+      "class": "main_pass",
+      "pass_index": 4,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0112.ll",
+        "build/llvm_ir/4_1_0/blob_0119.ll",
+        "build/llvm_ir/4_1_0/blob_0139.ll"
+      ],
+      "atomic_addr_unique": 72,
+      "atomic_addr_total": 9885,
+      "atomic_addr_top80": [
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 300
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 300
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 300
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 300
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 300
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 300
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 300
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 300
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 300
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 300
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 300
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 300
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 300
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 300
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 300
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 300
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 300
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 300
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 300
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 300
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 300
+        },
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 207
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 207
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 207
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 207
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 207
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 207
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 207
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 207
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 207
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 114
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 102
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 102
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 102
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 102
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 102
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 102
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 102
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 102
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 102
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 102
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 102
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 102
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 93
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 84
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 9
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 9
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 9
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 9
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 9
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 9
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 9
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 9
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 9
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 9
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 9
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 9
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 9
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 9
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 9
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 9
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 9
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 9
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 9
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 9
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 9
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 5253
+        },
+        {
+          "value": "38",
+          "count": 87
+        },
+        {
+          "value": "26",
+          "count": 15
+        },
+        {
+          "value": "%268",
+          "count": 12
+        },
+        {
+          "value": "%2484",
+          "count": 12
+        },
+        {
+          "value": "%2519",
+          "count": 12
+        },
+        {
+          "value": "%2553",
+          "count": 12
+        },
+        {
+          "value": "%2587",
+          "count": 12
+        },
+        {
+          "value": "%4709",
+          "count": 12
+        },
+        {
+          "value": "%4743",
+          "count": 12
+        },
+        {
+          "value": "%737",
+          "count": 9
+        },
+        {
+          "value": "%788",
+          "count": 9
+        },
+        {
+          "value": "%839",
+          "count": 9
+        },
+        {
+          "value": "%891",
+          "count": 9
+        },
+        {
+          "value": "%942",
+          "count": 9
+        },
+        {
+          "value": "%993",
+          "count": 9
+        },
+        {
+          "value": "%6489",
+          "count": 9
+        },
+        {
+          "value": "%583",
+          "count": 6
+        },
+        {
+          "value": "%634",
+          "count": 6
+        },
+        {
+          "value": "%685",
+          "count": 6
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 5652
+        },
+        {
+          "value": "16",
+          "count": 126
+        },
+        {
+          "value": "1",
+          "count": 9
+        },
+        {
+          "value": "%274",
+          "count": 3
+        },
+        {
+          "value": "%276",
+          "count": 3
+        },
+        {
+          "value": "%278",
+          "count": 3
+        },
+        {
+          "value": "%280",
+          "count": 3
+        },
+        {
+          "value": "%307",
+          "count": 3
+        },
+        {
+          "value": "%309",
+          "count": 3
+        },
+        {
+          "value": "%311",
+          "count": 3
+        },
+        {
+          "value": "%313",
+          "count": 3
+        },
+        {
+          "value": "%340",
+          "count": 3
+        },
+        {
+          "value": "%342",
+          "count": 3
+        },
+        {
+          "value": "%344",
+          "count": 3
+        },
+        {
+          "value": "%346",
+          "count": 3
+        },
+        {
+          "value": "%373",
+          "count": 3
+        },
+        {
+          "value": "%375",
+          "count": 3
+        },
+        {
+          "value": "%377",
+          "count": 3
+        },
+        {
+          "value": "%379",
+          "count": 3
+        },
+        {
+          "value": "%419",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 210
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 7712,
+          "count": 21
+        },
+        {
+          "scale": 30752,
+          "count": 21
+        },
+        {
+          "scale": 15392,
+          "count": 21
+        },
+        {
+          "scale": 256,
+          "count": 6
+        },
+        {
+          "scale": 768,
+          "count": 3
+        },
+        {
+          "scale": 512,
+          "count": 3
+        },
+        {
+          "scale": 1024,
+          "count": 3
+        },
+        {
+          "scale": 2097664,
+          "count": 1
+        },
+        {
+          "scale": 33273664,
+          "count": 1
+        },
+        {
+          "scale": 8342464,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass4_post",
+      "class": "post_stage",
+      "pass_index": 4,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0023.ll",
+        "build/llvm_ir/4_1_0/blob_0024.ll",
+        "build/llvm_ir/4_1_0/blob_0048.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 7712,
+          "count": 1
+        },
+        {
+          "scale": 15392,
+          "count": 1
+        },
+        {
+          "scale": 30752,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5",
+      "class": "main_pass",
+      "pass_index": 5,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0013.ll",
+        "build/llvm_ir/4_1_0/blob_0186.ll",
+        "build/llvm_ir/4_1_0/blob_0196.ll"
+      ],
+      "atomic_addr_unique": 72,
+      "atomic_addr_total": 9885,
+      "atomic_addr_top80": [
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 300
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 300
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 300
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 300
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 300
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 300
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 300
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 300
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 300
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 300
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 300
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 300
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 300
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 300
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 300
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 300
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 300
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 300
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 300
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 300
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 300
+        },
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 207
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 207
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 207
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 207
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 207
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 207
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 207
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 207
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 207
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 114
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 102
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 102
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 102
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 102
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 102
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 102
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 102
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 102
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 102
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 102
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 102
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 102
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 93
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 84
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 9
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 9
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 9
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 9
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 9
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 9
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 9
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 9
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 9
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 9
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 9
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 9
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 9
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 9
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 9
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 9
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 9
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 9
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 9
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 9
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 9
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 5253
+        },
+        {
+          "value": "38",
+          "count": 87
+        },
+        {
+          "value": "26",
+          "count": 15
+        },
+        {
+          "value": "%268",
+          "count": 12
+        },
+        {
+          "value": "%2484",
+          "count": 12
+        },
+        {
+          "value": "%2519",
+          "count": 12
+        },
+        {
+          "value": "%2553",
+          "count": 12
+        },
+        {
+          "value": "%2587",
+          "count": 12
+        },
+        {
+          "value": "%4709",
+          "count": 12
+        },
+        {
+          "value": "%4743",
+          "count": 12
+        },
+        {
+          "value": "%737",
+          "count": 9
+        },
+        {
+          "value": "%788",
+          "count": 9
+        },
+        {
+          "value": "%839",
+          "count": 9
+        },
+        {
+          "value": "%891",
+          "count": 9
+        },
+        {
+          "value": "%942",
+          "count": 9
+        },
+        {
+          "value": "%993",
+          "count": 9
+        },
+        {
+          "value": "%6489",
+          "count": 9
+        },
+        {
+          "value": "%583",
+          "count": 6
+        },
+        {
+          "value": "%634",
+          "count": 6
+        },
+        {
+          "value": "%685",
+          "count": 6
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 5652
+        },
+        {
+          "value": "16",
+          "count": 126
+        },
+        {
+          "value": "1",
+          "count": 9
+        },
+        {
+          "value": "%274",
+          "count": 3
+        },
+        {
+          "value": "%276",
+          "count": 3
+        },
+        {
+          "value": "%278",
+          "count": 3
+        },
+        {
+          "value": "%280",
+          "count": 3
+        },
+        {
+          "value": "%307",
+          "count": 3
+        },
+        {
+          "value": "%309",
+          "count": 3
+        },
+        {
+          "value": "%311",
+          "count": 3
+        },
+        {
+          "value": "%313",
+          "count": 3
+        },
+        {
+          "value": "%340",
+          "count": 3
+        },
+        {
+          "value": "%342",
+          "count": 3
+        },
+        {
+          "value": "%344",
+          "count": 3
+        },
+        {
+          "value": "%346",
+          "count": 3
+        },
+        {
+          "value": "%373",
+          "count": 3
+        },
+        {
+          "value": "%375",
+          "count": 3
+        },
+        {
+          "value": "%377",
+          "count": 3
+        },
+        {
+          "value": "%379",
+          "count": 3
+        },
+        {
+          "value": "%419",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 210
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 30752,
+          "count": 21
+        },
+        {
+          "scale": 7712,
+          "count": 21
+        },
+        {
+          "scale": 15392,
+          "count": 21
+        },
+        {
+          "scale": 256,
+          "count": 6
+        },
+        {
+          "scale": 768,
+          "count": 3
+        },
+        {
+          "scale": 512,
+          "count": 3
+        },
+        {
+          "scale": 1024,
+          "count": 3
+        },
+        {
+          "scale": 33273664,
+          "count": 1
+        },
+        {
+          "scale": 2097664,
+          "count": 1
+        },
+        {
+          "scale": 8342464,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass5_post",
+      "class": "post_stage",
+      "pass_index": 5,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0087.ll",
+        "build/llvm_ir/4_1_0/blob_0099.ll",
+        "build/llvm_ir/4_1_0/blob_0134.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 15392,
+          "count": 1
+        },
+        {
+          "scale": 30752,
+          "count": 1
+        },
+        {
+          "scale": 7712,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass6",
+      "class": "main_pass",
+      "pass_index": 6,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0017.ll",
+        "build/llvm_ir/4_1_0/blob_0019.ll",
+        "build/llvm_ir/4_1_0/blob_0085.ll"
+      ],
+      "atomic_addr_unique": 66,
+      "atomic_addr_total": 8523,
+      "atomic_addr_top80": [
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 408
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 408
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 408
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 408
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 408
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 408
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 408
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 408
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 408
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 192
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 192
+        },
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 192
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 192
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 192
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 192
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 192
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 192
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 192
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 192
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 192
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 192
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 192
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 192
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 192
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 192
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 192
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 192
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 192
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 192
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 192
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 192
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 192
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 27
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 27
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 27
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 27
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 27
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 27
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 27
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 27
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 27
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 27
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 27
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 27
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 27
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 24
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 3
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 3
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 3
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 3
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 3
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 3
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 3
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 3
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 3
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 3
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 3
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 3
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 3
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 3
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 5235
+        },
+        {
+          "value": "38",
+          "count": 24
+        },
+        {
+          "value": "%289",
+          "count": 12
+        },
+        {
+          "value": "%349",
+          "count": 12
+        },
+        {
+          "value": "%403",
+          "count": 12
+        },
+        {
+          "value": "%459",
+          "count": 12
+        },
+        {
+          "value": "%1166",
+          "count": 12
+        },
+        {
+          "value": "%1224",
+          "count": 12
+        },
+        {
+          "value": "%1278",
+          "count": 12
+        },
+        {
+          "value": "%1334",
+          "count": 12
+        },
+        {
+          "value": "%2038",
+          "count": 12
+        },
+        {
+          "value": "%2095",
+          "count": 12
+        },
+        {
+          "value": "%2149",
+          "count": 12
+        },
+        {
+          "value": "%2205",
+          "count": 12
+        },
+        {
+          "value": "%2908",
+          "count": 12
+        },
+        {
+          "value": "%2965",
+          "count": 12
+        },
+        {
+          "value": "%3019",
+          "count": 12
+        },
+        {
+          "value": "%3075",
+          "count": 12
+        },
+        {
+          "value": "%14",
+          "count": 6
+        },
+        {
+          "value": "%49",
+          "count": 6
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 5697
+        },
+        {
+          "value": "16",
+          "count": 195
+        },
+        {
+          "value": "32",
+          "count": 192
+        },
+        {
+          "value": "%20",
+          "count": 3
+        },
+        {
+          "value": "%22",
+          "count": 3
+        },
+        {
+          "value": "%24",
+          "count": 3
+        },
+        {
+          "value": "%26",
+          "count": 3
+        },
+        {
+          "value": "%55",
+          "count": 3
+        },
+        {
+          "value": "%57",
+          "count": 3
+        },
+        {
+          "value": "%59",
+          "count": 3
+        },
+        {
+          "value": "%61",
+          "count": 3
+        },
+        {
+          "value": "%90",
+          "count": 3
+        },
+        {
+          "value": "%92",
+          "count": 3
+        },
+        {
+          "value": "%94",
+          "count": 3
+        },
+        {
+          "value": "%96",
+          "count": 3
+        },
+        {
+          "value": "%125",
+          "count": 3
+        },
+        {
+          "value": "%127",
+          "count": 3
+        },
+        {
+          "value": "%129",
+          "count": 3
+        },
+        {
+          "value": "%131",
+          "count": 3
+        },
+        {
+          "value": "%158",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 411
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 2048,
+          "count": 96
+        },
+        {
+          "scale": 15392,
+          "count": 9
+        },
+        {
+          "scale": 7712,
+          "count": 9
+        },
+        {
+          "scale": 30752,
+          "count": 8
+        },
+        {
+          "scale": 8342464,
+          "count": 1
+        },
+        {
+          "scale": 4128,
+          "count": 1
+        },
+        {
+          "scale": 565536,
+          "count": 1
+        },
+        {
+          "scale": 2097664,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass6_post",
+      "class": "post_stage",
+      "pass_index": 6,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0164.ll",
+        "build/llvm_ir/4_1_0/blob_0204.ll",
+        "build/llvm_ir/4_1_0/blob_0205.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 15392,
+          "count": 1
+        },
+        {
+          "scale": 7712,
+          "count": 1
+        },
+        {
+          "scale": 4128,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7",
+      "class": "main_pass",
+      "pass_index": 7,
+      "variants": 4,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0079.ll",
+        "build/llvm_ir/4_1_0/blob_0079.spirv.ll",
+        "build/llvm_ir/4_1_0/blob_0082.ll",
+        "build/llvm_ir/4_1_0/blob_0150.ll"
+      ],
+      "atomic_addr_unique": 72,
+      "atomic_addr_total": 27261,
+      "atomic_addr_top80": [
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 984
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 984
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 984
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 984
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 984
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 984
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 984
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 984
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 984
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 984
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 984
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 984
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 984
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 984
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 984
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 984
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 984
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 984
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 984
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 984
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 984
+        },
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 399
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 399
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 399
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 399
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 399
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 399
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 399
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 399
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 399
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 222
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 186
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 186
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 186
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 186
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 186
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 186
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 186
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 186
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 186
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 186
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 186
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 186
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 177
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 168
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 9
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 9
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 9
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 9
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 9
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 9
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 9
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 9
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 9
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 9
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 9
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 9
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 9
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 9
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 9
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 9
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 9
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 9
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 9
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 9
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 9
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 13617
+        },
+        {
+          "value": "38",
+          "count": 171
+        },
+        {
+          "value": "26",
+          "count": 15
+        },
+        {
+          "value": "%275",
+          "count": 12
+        },
+        {
+          "value": "%310",
+          "count": 12
+        },
+        {
+          "value": "%4490",
+          "count": 12
+        },
+        {
+          "value": "%4524",
+          "count": 12
+        },
+        {
+          "value": "%4559",
+          "count": 12
+        },
+        {
+          "value": "%4594",
+          "count": 12
+        },
+        {
+          "value": "%4628",
+          "count": 12
+        },
+        {
+          "value": "%4662",
+          "count": 12
+        },
+        {
+          "value": "%4696",
+          "count": 12
+        },
+        {
+          "value": "%4730",
+          "count": 12
+        },
+        {
+          "value": "%11190",
+          "count": 12
+        },
+        {
+          "value": "%11224",
+          "count": 12
+        },
+        {
+          "value": "%11258",
+          "count": 12
+        },
+        {
+          "value": "%11292",
+          "count": 12
+        },
+        {
+          "value": "%878",
+          "count": 9
+        },
+        {
+          "value": "%929",
+          "count": 9
+        },
+        {
+          "value": "%980",
+          "count": 9
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 14376
+        },
+        {
+          "value": "16",
+          "count": 234
+        },
+        {
+          "value": "1",
+          "count": 9
+        },
+        {
+          "value": "%281",
+          "count": 3
+        },
+        {
+          "value": "%283",
+          "count": 3
+        },
+        {
+          "value": "%285",
+          "count": 3
+        },
+        {
+          "value": "%287",
+          "count": 3
+        },
+        {
+          "value": "%316",
+          "count": 3
+        },
+        {
+          "value": "%318",
+          "count": 3
+        },
+        {
+          "value": "%320",
+          "count": 3
+        },
+        {
+          "value": "%322",
+          "count": 3
+        },
+        {
+          "value": "%349",
+          "count": 3
+        },
+        {
+          "value": "%351",
+          "count": 3
+        },
+        {
+          "value": "%353",
+          "count": 3
+        },
+        {
+          "value": "%355",
+          "count": 3
+        },
+        {
+          "value": "%382",
+          "count": 3
+        },
+        {
+          "value": "%384",
+          "count": 3
+        },
+        {
+          "value": "%386",
+          "count": 3
+        },
+        {
+          "value": "%388",
+          "count": 3
+        },
+        {
+          "value": "%415",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 402
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 15392,
+          "count": 21
+        },
+        {
+          "scale": 4128,
+          "count": 21
+        },
+        {
+          "scale": 7712,
+          "count": 21
+        },
+        {
+          "scale": 256,
+          "count": 6
+        },
+        {
+          "scale": 768,
+          "count": 3
+        },
+        {
+          "scale": 2304,
+          "count": 3
+        },
+        {
+          "scale": 1024,
+          "count": 3
+        },
+        {
+          "scale": 2048,
+          "count": 3
+        },
+        {
+          "scale": 8342464,
+          "count": 3
+        },
+        {
+          "scale": 565536,
+          "count": 3
+        },
+        {
+          "scale": 2097664,
+          "count": 3
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass7_post",
+      "class": "post_stage",
+      "pass_index": 7,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0052.ll",
+        "build/llvm_ir/4_1_0/blob_0092.ll",
+        "build/llvm_ir/4_1_0/blob_0183.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 7712,
+          "count": 1
+        },
+        {
+          "scale": 4128,
+          "count": 1
+        },
+        {
+          "scale": 15392,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8",
+      "class": "main_pass",
+      "pass_index": 8,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0108.ll",
+        "build/llvm_ir/4_1_0/blob_0120.ll",
+        "build/llvm_ir/4_1_0/blob_0148.ll"
+      ],
+      "atomic_addr_unique": 72,
+      "atomic_addr_total": 27261,
+      "atomic_addr_top80": [
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 984
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 984
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 984
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 984
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 984
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 984
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 984
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 984
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 984
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 984
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 984
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 984
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 984
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 984
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 984
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 984
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 984
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 984
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 984
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 984
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 984
+        },
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 399
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 399
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 399
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 399
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 399
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 399
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 399
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 399
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 399
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 222
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 186
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 186
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 186
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 186
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 186
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 186
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 186
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 186
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 186
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 186
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 186
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 186
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 177
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 168
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 9
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 9
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 9
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 9
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 9
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 9
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 9
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 9
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 9
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 9
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 9
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 9
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 9
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 9
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 9
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 9
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 9
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 9
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 9
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 9
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 9
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 3
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 3
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 3
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 3
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 3
+        },
+        {
+          "value": 1375771178,
+          "hex": "0x52009a2a",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 13617
+        },
+        {
+          "value": "38",
+          "count": 171
+        },
+        {
+          "value": "26",
+          "count": 15
+        },
+        {
+          "value": "%275",
+          "count": 12
+        },
+        {
+          "value": "%310",
+          "count": 12
+        },
+        {
+          "value": "%4490",
+          "count": 12
+        },
+        {
+          "value": "%4524",
+          "count": 12
+        },
+        {
+          "value": "%4559",
+          "count": 12
+        },
+        {
+          "value": "%4594",
+          "count": 12
+        },
+        {
+          "value": "%4628",
+          "count": 12
+        },
+        {
+          "value": "%4662",
+          "count": 12
+        },
+        {
+          "value": "%4696",
+          "count": 12
+        },
+        {
+          "value": "%4730",
+          "count": 12
+        },
+        {
+          "value": "%11190",
+          "count": 12
+        },
+        {
+          "value": "%11224",
+          "count": 12
+        },
+        {
+          "value": "%11258",
+          "count": 12
+        },
+        {
+          "value": "%11292",
+          "count": 12
+        },
+        {
+          "value": "%878",
+          "count": 9
+        },
+        {
+          "value": "%929",
+          "count": 9
+        },
+        {
+          "value": "%980",
+          "count": 9
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 14376
+        },
+        {
+          "value": "16",
+          "count": 234
+        },
+        {
+          "value": "1",
+          "count": 9
+        },
+        {
+          "value": "%281",
+          "count": 3
+        },
+        {
+          "value": "%283",
+          "count": 3
+        },
+        {
+          "value": "%285",
+          "count": 3
+        },
+        {
+          "value": "%287",
+          "count": 3
+        },
+        {
+          "value": "%316",
+          "count": 3
+        },
+        {
+          "value": "%318",
+          "count": 3
+        },
+        {
+          "value": "%320",
+          "count": 3
+        },
+        {
+          "value": "%322",
+          "count": 3
+        },
+        {
+          "value": "%349",
+          "count": 3
+        },
+        {
+          "value": "%351",
+          "count": 3
+        },
+        {
+          "value": "%353",
+          "count": 3
+        },
+        {
+          "value": "%355",
+          "count": 3
+        },
+        {
+          "value": "%382",
+          "count": 3
+        },
+        {
+          "value": "%384",
+          "count": 3
+        },
+        {
+          "value": "%386",
+          "count": 3
+        },
+        {
+          "value": "%388",
+          "count": 3
+        },
+        {
+          "value": "%415",
+          "count": 3
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 402
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 4128,
+          "count": 21
+        },
+        {
+          "scale": 7712,
+          "count": 21
+        },
+        {
+          "scale": 15392,
+          "count": 21
+        },
+        {
+          "scale": 256,
+          "count": 6
+        },
+        {
+          "scale": 768,
+          "count": 3
+        },
+        {
+          "scale": 2304,
+          "count": 3
+        },
+        {
+          "scale": 1024,
+          "count": 3
+        },
+        {
+          "scale": 2048,
+          "count": 3
+        },
+        {
+          "scale": 565536,
+          "count": 3
+        },
+        {
+          "scale": 2097664,
+          "count": 3
+        },
+        {
+          "scale": 8342464,
+          "count": 3
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass8_post",
+      "class": "post_stage",
+      "pass_index": 8,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0038.ll",
+        "build/llvm_ir/4_1_0/blob_0063.ll",
+        "build/llvm_ir/4_1_0/blob_0127.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 15392,
+          "count": 1
+        },
+        {
+          "scale": 4128,
+          "count": 1
+        },
+        {
+          "scale": 7712,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9",
+      "class": "main_pass",
+      "pass_index": 9,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0104.ll",
+        "build/llvm_ir/4_1_0/blob_0160.ll",
+        "build/llvm_ir/4_1_0/blob_0199.ll"
+      ],
+      "atomic_addr_unique": 93,
+      "atomic_addr_total": 14514,
+      "atomic_addr_top80": [
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 480
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 480
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 480
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 480
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 480
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 480
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 480
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 480
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 480
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 342
+        },
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 342
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 342
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 342
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 342
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 342
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 342
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 342
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 342
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 342
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 342
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 342
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 342
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 342
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 342
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 342
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 342
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 342
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 342
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 342
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 342
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 342
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 129
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 129
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 129
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 129
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 129
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 129
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 129
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 129
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 129
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 129
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 129
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 129
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 111
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 69
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 66
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 48
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 48
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 48
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 48
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 48
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 39
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 39
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 39
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 39
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 39
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 39
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 39
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 39
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 39
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 39
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 39
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 39
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 36
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 36
+        },
+        {
+          "value": 1358961202,
+          "hex": "0x51001a32",
+          "count": 15
+        },
+        {
+          "value": 1358998057,
+          "hex": "0x5100aa29",
+          "count": 3
+        },
+        {
+          "value": 1358965298,
+          "hex": "0x51002a32",
+          "count": 3
+        },
+        {
+          "value": 1342242869,
+          "hex": "0x50010035",
+          "count": 3
+        },
+        {
+          "value": 1342243125,
+          "hex": "0x50010135",
+          "count": 3
+        },
+        {
+          "value": 1342246965,
+          "hex": "0x50011035",
+          "count": 3
+        },
+        {
+          "value": 1342247221,
+          "hex": "0x50011135",
+          "count": 3
+        },
+        {
+          "value": 1342308405,
+          "hex": "0x50020035",
+          "count": 3
+        },
+        {
+          "value": 1342308661,
+          "hex": "0x50020135",
+          "count": 3
+        },
+        {
+          "value": 1342312501,
+          "hex": "0x50021035",
+          "count": 3
+        },
+        {
+          "value": 1342312757,
+          "hex": "0x50021135",
+          "count": 3
+        },
+        {
+          "value": 1358964277,
+          "hex": "0x51002635",
+          "count": 3
+        },
+        {
+          "value": 1375731765,
+          "hex": "0x52000035",
+          "count": 3
+        },
+        {
+          "value": 1375732021,
+          "hex": "0x52000135",
+          "count": 3
+        },
+        {
+          "value": 1375732277,
+          "hex": "0x52000235",
+          "count": 3
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 8325
+        },
+        {
+          "value": "38",
+          "count": 81
+        },
+        {
+          "value": "26",
+          "count": 45
+        },
+        {
+          "value": "%4299",
+          "count": 24
+        },
+        {
+          "value": "%4301",
+          "count": 24
+        },
+        {
+          "value": "%4303",
+          "count": 24
+        },
+        {
+          "value": "%4305",
+          "count": 24
+        },
+        {
+          "value": "%4338",
+          "count": 24
+        },
+        {
+          "value": "%4340",
+          "count": 24
+        },
+        {
+          "value": "%4342",
+          "count": 24
+        },
+        {
+          "value": "%4344",
+          "count": 24
+        },
+        {
+          "value": "%4379",
+          "count": 24
+        },
+        {
+          "value": "%4381",
+          "count": 24
+        },
+        {
+          "value": "%4383",
+          "count": 24
+        },
+        {
+          "value": "%4385",
+          "count": 24
+        },
+        {
+          "value": "%4420",
+          "count": 24
+        },
+        {
+          "value": "%4422",
+          "count": 24
+        },
+        {
+          "value": "%4424",
+          "count": 24
+        },
+        {
+          "value": "%4426",
+          "count": 24
+        },
+        {
+          "value": "%2838",
+          "count": 12
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 9012
+        },
+        {
+          "value": "16",
+          "count": 315
+        },
+        {
+          "value": "64",
+          "count": 96
+        },
+        {
+          "value": "1",
+          "count": 45
+        },
+        {
+          "value": "%4300",
+          "count": 24
+        },
+        {
+          "value": "%4302",
+          "count": 24
+        },
+        {
+          "value": "%4304",
+          "count": 24
+        },
+        {
+          "value": "%4306",
+          "count": 24
+        },
+        {
+          "value": "%4339",
+          "count": 24
+        },
+        {
+          "value": "%4341",
+          "count": 24
+        },
+        {
+          "value": "%4343",
+          "count": 24
+        },
+        {
+          "value": "%4345",
+          "count": 24
+        },
+        {
+          "value": "%4380",
+          "count": 24
+        },
+        {
+          "value": "%4382",
+          "count": 24
+        },
+        {
+          "value": "%4384",
+          "count": 24
+        },
+        {
+          "value": "%4386",
+          "count": 24
+        },
+        {
+          "value": "%4421",
+          "count": 24
+        },
+        {
+          "value": "%4423",
+          "count": 24
+        },
+        {
+          "value": "%4425",
+          "count": 24
+        },
+        {
+          "value": "%4427",
+          "count": 24
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 483
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 15392,
+          "count": 11
+        },
+        {
+          "scale": 7712,
+          "count": 11
+        },
+        {
+          "scale": 4128,
+          "count": 9
+        },
+        {
+          "scale": 8342464,
+          "count": 5
+        },
+        {
+          "scale": 2097664,
+          "count": 5
+        },
+        {
+          "scale": 565536,
+          "count": 3
+        },
+        {
+          "scale": 30752,
+          "count": 2
+        },
+        {
+          "scale": 33273664,
+          "count": 2
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_pass9_post",
+      "class": "post_stage",
+      "pass_index": 9,
+      "variants": 3,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0021.ll",
+        "build/llvm_ir/4_1_0/blob_0039.ll",
+        "build/llvm_ir/4_1_0/blob_0138.ll"
+      ],
+      "atomic_addr_unique": 0,
+      "atomic_addr_total": 0,
+      "atomic_addr_top80": [],
+      "atomic_compare_top20": [],
+      "atomic_new_top20": [],
+      "raw_mask_align": [],
+      "tertiary_scale": [
+        {
+          "scale": 30752,
+          "count": 1
+        },
+        {
+          "scale": 15392,
+          "count": 1
+        },
+        {
+          "scale": 7712,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_postpass",
+      "class": "final_postpass",
+      "pass_index": null,
+      "variants": 48,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0007.ll",
+        "build/llvm_ir/4_1_0/blob_0009.ll",
+        "build/llvm_ir/4_1_0/blob_0014.ll",
+        "build/llvm_ir/4_1_0/blob_0016.ll",
+        "build/llvm_ir/4_1_0/blob_0025.ll",
+        "build/llvm_ir/4_1_0/blob_0032.ll",
+        "build/llvm_ir/4_1_0/blob_0034.ll",
+        "build/llvm_ir/4_1_0/blob_0037.ll",
+        "build/llvm_ir/4_1_0/blob_0042.ll",
+        "build/llvm_ir/4_1_0/blob_0044.ll",
+        "build/llvm_ir/4_1_0/blob_0050.ll",
+        "build/llvm_ir/4_1_0/blob_0064.ll",
+        "build/llvm_ir/4_1_0/blob_0067.ll",
+        "build/llvm_ir/4_1_0/blob_0069.ll",
+        "build/llvm_ir/4_1_0/blob_0072.ll",
+        "build/llvm_ir/4_1_0/blob_0078.ll",
+        "build/llvm_ir/4_1_0/blob_0080.ll",
+        "build/llvm_ir/4_1_0/blob_0081.ll",
+        "build/llvm_ir/4_1_0/blob_0083.ll",
+        "build/llvm_ir/4_1_0/blob_0090.ll",
+        "build/llvm_ir/4_1_0/blob_0096.ll",
+        "build/llvm_ir/4_1_0/blob_0103.ll",
+        "build/llvm_ir/4_1_0/blob_0110.ll",
+        "build/llvm_ir/4_1_0/blob_0111.ll",
+        "build/llvm_ir/4_1_0/blob_0114.ll",
+        "build/llvm_ir/4_1_0/blob_0121.ll",
+        "build/llvm_ir/4_1_0/blob_0125.ll",
+        "build/llvm_ir/4_1_0/blob_0128.ll",
+        "build/llvm_ir/4_1_0/blob_0130.ll",
+        "build/llvm_ir/4_1_0/blob_0133.ll",
+        "build/llvm_ir/4_1_0/blob_0135.ll",
+        "build/llvm_ir/4_1_0/blob_0137.ll",
+        "build/llvm_ir/4_1_0/blob_0143.ll",
+        "build/llvm_ir/4_1_0/blob_0144.ll",
+        "build/llvm_ir/4_1_0/blob_0149.ll",
+        "build/llvm_ir/4_1_0/blob_0151.ll",
+        "build/llvm_ir/4_1_0/blob_0152.ll",
+        "build/llvm_ir/4_1_0/blob_0157.ll",
+        "build/llvm_ir/4_1_0/blob_0162.ll",
+        "build/llvm_ir/4_1_0/blob_0166.ll",
+        "build/llvm_ir/4_1_0/blob_0171.ll",
+        "build/llvm_ir/4_1_0/blob_0180.ll",
+        "build/llvm_ir/4_1_0/blob_0181.ll",
+        "build/llvm_ir/4_1_0/blob_0188.ll",
+        "build/llvm_ir/4_1_0/blob_0191.ll",
+        "build/llvm_ir/4_1_0/blob_0193.ll",
+        "build/llvm_ir/4_1_0/blob_0201.ll",
+        "build/llvm_ir/4_1_0/blob_0202.ll"
+      ],
+      "atomic_addr_unique": 83,
+      "atomic_addr_total": 75792,
+      "atomic_addr_top80": [
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 2448
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 2448
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 2448
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 2448
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 2448
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 2448
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 2448
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 2448
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 2448
+        },
+        {
+          "value": 1358957097,
+          "hex": "0x51000a29",
+          "count": 1296
+        },
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 1296
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 1296
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 1296
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 1296
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 1296
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 1296
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 1296
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 1296
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 1296
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 1296
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 1296
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 1296
+        },
+        {
+          "value": 1358956328,
+          "hex": "0x51000728",
+          "count": 1296
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 1296
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 1296
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 1296
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 1296
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 1296
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 1296
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 1296
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 1296
+        },
+        {
+          "value": 1358954547,
+          "hex": "0x51000033",
+          "count": 912
+        },
+        {
+          "value": 1358954803,
+          "hex": "0x51000133",
+          "count": 912
+        },
+        {
+          "value": 1358955059,
+          "hex": "0x51000233",
+          "count": 912
+        },
+        {
+          "value": 1358955315,
+          "hex": "0x51000333",
+          "count": 912
+        },
+        {
+          "value": 1358958643,
+          "hex": "0x51001033",
+          "count": 912
+        },
+        {
+          "value": 1358958899,
+          "hex": "0x51001133",
+          "count": 912
+        },
+        {
+          "value": 1358959155,
+          "hex": "0x51001233",
+          "count": 912
+        },
+        {
+          "value": 1358959411,
+          "hex": "0x51001333",
+          "count": 912
+        },
+        {
+          "value": 1342183987,
+          "hex": "0x50001a33",
+          "count": 864
+        },
+        {
+          "value": 1358993961,
+          "hex": "0x51009a29",
+          "count": 864
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 672
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 672
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 672
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 672
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 672
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 672
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 672
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 672
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 672
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 672
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 672
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 672
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 576
+        },
+        {
+          "value": 1342177328,
+          "hex": "0x50000030",
+          "count": 432
+        },
+        {
+          "value": 1342177584,
+          "hex": "0x50000130",
+          "count": 432
+        },
+        {
+          "value": 1342181424,
+          "hex": "0x50001030",
+          "count": 432
+        },
+        {
+          "value": 1342181680,
+          "hex": "0x50001130",
+          "count": 432
+        },
+        {
+          "value": 1358964272,
+          "hex": "0x51002630",
+          "count": 432
+        },
+        {
+          "value": 1342187057,
+          "hex": "0x50002631",
+          "count": 336
+        },
+        {
+          "value": 1342177327,
+          "hex": "0x5000002f",
+          "count": 336
+        },
+        {
+          "value": 1342177583,
+          "hex": "0x5000012f",
+          "count": 336
+        },
+        {
+          "value": 1342181423,
+          "hex": "0x5000102f",
+          "count": 336
+        },
+        {
+          "value": 1342181679,
+          "hex": "0x5000112f",
+          "count": 336
+        },
+        {
+          "value": 1358964271,
+          "hex": "0x5100262f",
+          "count": 336
+        },
+        {
+          "value": 1375731759,
+          "hex": "0x5200002f",
+          "count": 336
+        },
+        {
+          "value": 1375732015,
+          "hex": "0x5200012f",
+          "count": 336
+        },
+        {
+          "value": 1375732271,
+          "hex": "0x5200022f",
+          "count": 336
+        },
+        {
+          "value": 1375732527,
+          "hex": "0x5200032f",
+          "count": 336
+        },
+        {
+          "value": 1375735855,
+          "hex": "0x5200102f",
+          "count": 336
+        },
+        {
+          "value": 1375736111,
+          "hex": "0x5200112f",
+          "count": 336
+        },
+        {
+          "value": 1375736367,
+          "hex": "0x5200122f",
+          "count": 336
+        },
+        {
+          "value": 1375736623,
+          "hex": "0x5200132f",
+          "count": 336
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 192
+        },
+        {
+          "value": 1358998057,
+          "hex": "0x5100aa29",
+          "count": 96
+        },
+        {
+          "value": 1358965298,
+          "hex": "0x51002a32",
+          "count": 96
+        },
+        {
+          "value": 1342187059,
+          "hex": "0x50002633",
+          "count": 48
+        },
+        {
+          "value": 1342177326,
+          "hex": "0x5000002e",
+          "count": 48
+        },
+        {
+          "value": 1358954542,
+          "hex": "0x5100002e",
+          "count": 48
+        },
+        {
+          "value": 1358954798,
+          "hex": "0x5100012e",
+          "count": 48
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 47904
+        },
+        {
+          "value": "26",
+          "count": 384
+        },
+        {
+          "value": "38",
+          "count": 288
+        },
+        {
+          "value": "126720",
+          "count": 96
+        },
+        {
+          "value": "126976",
+          "count": 96
+        },
+        {
+          "value": "127232",
+          "count": 96
+        },
+        {
+          "value": "127488",
+          "count": 96
+        },
+        {
+          "value": "127744",
+          "count": 96
+        },
+        {
+          "value": "128000",
+          "count": 96
+        },
+        {
+          "value": "128256",
+          "count": 96
+        },
+        {
+          "value": "128512",
+          "count": 96
+        },
+        {
+          "value": "128768",
+          "count": 96
+        },
+        {
+          "value": "129152",
+          "count": 96
+        },
+        {
+          "value": "129408",
+          "count": 96
+        },
+        {
+          "value": "129792",
+          "count": 96
+        },
+        {
+          "value": "129808",
+          "count": 96
+        },
+        {
+          "value": "%1666",
+          "count": 75
+        },
+        {
+          "value": "%1678",
+          "count": 72
+        },
+        {
+          "value": "%1719",
+          "count": 72
+        },
+        {
+          "value": "%1707",
+          "count": 63
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 51264
+        },
+        {
+          "value": "16",
+          "count": 2112
+        },
+        {
+          "value": "1",
+          "count": 384
+        },
+        {
+          "value": "32",
+          "count": 192
+        },
+        {
+          "value": "%1079",
+          "count": 48
+        },
+        {
+          "value": "%1081",
+          "count": 48
+        },
+        {
+          "value": "%1083",
+          "count": 48
+        },
+        {
+          "value": "%1090",
+          "count": 48
+        },
+        {
+          "value": "%1092",
+          "count": 48
+        },
+        {
+          "value": "%1094",
+          "count": 48
+        },
+        {
+          "value": "%1096",
+          "count": 48
+        },
+        {
+          "value": "%1663",
+          "count": 48
+        },
+        {
+          "value": "%1665",
+          "count": 48
+        },
+        {
+          "value": "%1078",
+          "count": 48
+        },
+        {
+          "value": "%1080",
+          "count": 48
+        },
+        {
+          "value": "%1082",
+          "count": 48
+        },
+        {
+          "value": "%1091",
+          "count": 48
+        },
+        {
+          "value": "%1093",
+          "count": 48
+        },
+        {
+          "value": "%1095",
+          "count": 48
+        },
+        {
+          "value": "%1662",
+          "count": 48
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 2448
+        },
+        {
+          "mask": 15,
+          "align": 4,
+          "count": 96
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 61472,
+          "count": 288
+        },
+        {
+          "scale": 15392,
+          "count": 288
+        },
+        {
+          "scale": 30752,
+          "count": 288
+        },
+        {
+          "scale": 256,
+          "count": 48
+        }
+      ]
+    },
+    {
+      "entrypoint": "fsr4_model_v07_fp8_no_scale_prepass",
+      "class": "prepass",
+      "pass_index": null,
+      "variants": 90,
+      "files": [
+        "build/llvm_ir/4_1_0/blob_0001.ll",
+        "build/llvm_ir/4_1_0/blob_0002.ll",
+        "build/llvm_ir/4_1_0/blob_0003.ll",
+        "build/llvm_ir/4_1_0/blob_0004.ll",
+        "build/llvm_ir/4_1_0/blob_0005.ll",
+        "build/llvm_ir/4_1_0/blob_0006.ll",
+        "build/llvm_ir/4_1_0/blob_0008.ll",
+        "build/llvm_ir/4_1_0/blob_0010.ll",
+        "build/llvm_ir/4_1_0/blob_0011.ll",
+        "build/llvm_ir/4_1_0/blob_0015.ll",
+        "build/llvm_ir/4_1_0/blob_0018.ll",
+        "build/llvm_ir/4_1_0/blob_0020.ll",
+        "build/llvm_ir/4_1_0/blob_0022.ll",
+        "build/llvm_ir/4_1_0/blob_0026.ll",
+        "build/llvm_ir/4_1_0/blob_0027.ll",
+        "build/llvm_ir/4_1_0/blob_0028.ll",
+        "build/llvm_ir/4_1_0/blob_0029.ll",
+        "build/llvm_ir/4_1_0/blob_0031.ll",
+        "build/llvm_ir/4_1_0/blob_0033.ll",
+        "build/llvm_ir/4_1_0/blob_0035.ll",
+        "build/llvm_ir/4_1_0/blob_0040.ll",
+        "build/llvm_ir/4_1_0/blob_0043.ll",
+        "build/llvm_ir/4_1_0/blob_0045.ll",
+        "build/llvm_ir/4_1_0/blob_0046.ll",
+        "build/llvm_ir/4_1_0/blob_0047.ll",
+        "build/llvm_ir/4_1_0/blob_0049.ll",
+        "build/llvm_ir/4_1_0/blob_0051.ll",
+        "build/llvm_ir/4_1_0/blob_0056.ll",
+        "build/llvm_ir/4_1_0/blob_0057.ll",
+        "build/llvm_ir/4_1_0/blob_0060.ll",
+        "build/llvm_ir/4_1_0/blob_0061.ll",
+        "build/llvm_ir/4_1_0/blob_0062.ll",
+        "build/llvm_ir/4_1_0/blob_0065.ll",
+        "build/llvm_ir/4_1_0/blob_0070.ll",
+        "build/llvm_ir/4_1_0/blob_0071.ll",
+        "build/llvm_ir/4_1_0/blob_0073.ll",
+        "build/llvm_ir/4_1_0/blob_0074.ll",
+        "build/llvm_ir/4_1_0/blob_0075.ll",
+        "build/llvm_ir/4_1_0/blob_0076.ll",
+        "build/llvm_ir/4_1_0/blob_0077.ll",
+        "build/llvm_ir/4_1_0/blob_0086.ll",
+        "build/llvm_ir/4_1_0/blob_0089.ll",
+        "build/llvm_ir/4_1_0/blob_0091.ll",
+        "build/llvm_ir/4_1_0/blob_0093.ll",
+        "build/llvm_ir/4_1_0/blob_0094.ll",
+        "build/llvm_ir/4_1_0/blob_0095.ll",
+        "build/llvm_ir/4_1_0/blob_0097.ll",
+        "build/llvm_ir/4_1_0/blob_0100.ll",
+        "build/llvm_ir/4_1_0/blob_0101.ll",
+        "build/llvm_ir/4_1_0/blob_0106.ll",
+        "build/llvm_ir/4_1_0/blob_0113.ll",
+        "build/llvm_ir/4_1_0/blob_0115.ll",
+        "build/llvm_ir/4_1_0/blob_0118.ll",
+        "build/llvm_ir/4_1_0/blob_0122.ll",
+        "build/llvm_ir/4_1_0/blob_0124.ll",
+        "build/llvm_ir/4_1_0/blob_0126.ll",
+        "build/llvm_ir/4_1_0/blob_0132.ll",
+        "build/llvm_ir/4_1_0/blob_0136.ll",
+        "build/llvm_ir/4_1_0/blob_0140.ll",
+        "build/llvm_ir/4_1_0/blob_0141.ll",
+        "build/llvm_ir/4_1_0/blob_0142.ll",
+        "build/llvm_ir/4_1_0/blob_0146.ll",
+        "build/llvm_ir/4_1_0/blob_0153.ll",
+        "build/llvm_ir/4_1_0/blob_0154.ll",
+        "build/llvm_ir/4_1_0/blob_0158.ll",
+        "build/llvm_ir/4_1_0/blob_0161.ll",
+        "build/llvm_ir/4_1_0/blob_0163.ll",
+        "build/llvm_ir/4_1_0/blob_0165.ll",
+        "build/llvm_ir/4_1_0/blob_0168.ll",
+        "build/llvm_ir/4_1_0/blob_0172.ll",
+        "build/llvm_ir/4_1_0/blob_0173.ll",
+        "build/llvm_ir/4_1_0/blob_0175.ll",
+        "build/llvm_ir/4_1_0/blob_0176.ll",
+        "build/llvm_ir/4_1_0/blob_0178.ll",
+        "build/llvm_ir/4_1_0/blob_0179.ll",
+        "build/llvm_ir/4_1_0/blob_0184.ll",
+        "build/llvm_ir/4_1_0/blob_0187.ll",
+        "build/llvm_ir/4_1_0/blob_0189.ll",
+        "build/llvm_ir/4_1_0/blob_0190.ll",
+        "build/llvm_ir/4_1_0/blob_0192.ll",
+        "build/llvm_ir/4_1_0/blob_0197.ll",
+        "build/llvm_ir/4_1_0/blob_0198.ll",
+        "build/llvm_ir/4_1_0/blob_0200.ll",
+        "build/llvm_ir/4_1_0/blob_0203.ll",
+        "build/llvm_ir/4_1_0/blob_0206.ll",
+        "build/llvm_ir/4_1_0/blob_0209.ll",
+        "build/llvm_ir/4_1_0/blob_0210.ll",
+        "build/llvm_ir/4_1_0/blob_0211.ll",
+        "build/llvm_ir/4_1_0/blob_0212.ll",
+        "build/llvm_ir/4_1_0/blob_0213.ll"
+      ],
+      "atomic_addr_unique": 61,
+      "atomic_addr_total": 18450,
+      "atomic_addr_top80": [
+        {
+          "value": 1342177325,
+          "hex": "0x5000002d",
+          "count": 360
+        },
+        {
+          "value": 1358992429,
+          "hex": "0x5100942d",
+          "count": 360
+        },
+        {
+          "value": 1375731757,
+          "hex": "0x5200002d",
+          "count": 360
+        },
+        {
+          "value": 1375732013,
+          "hex": "0x5200012d",
+          "count": 360
+        },
+        {
+          "value": 1375732269,
+          "hex": "0x5200022d",
+          "count": 360
+        },
+        {
+          "value": 1375732525,
+          "hex": "0x5200032d",
+          "count": 360
+        },
+        {
+          "value": 1375735853,
+          "hex": "0x5200102d",
+          "count": 360
+        },
+        {
+          "value": 1375736109,
+          "hex": "0x5200112d",
+          "count": 360
+        },
+        {
+          "value": 1375736365,
+          "hex": "0x5200122d",
+          "count": 360
+        },
+        {
+          "value": 1375736621,
+          "hex": "0x5200132d",
+          "count": 360
+        },
+        {
+          "value": 1342242856,
+          "hex": "0x50010028",
+          "count": 360
+        },
+        {
+          "value": 1342243112,
+          "hex": "0x50010128",
+          "count": 360
+        },
+        {
+          "value": 1342246952,
+          "hex": "0x50011028",
+          "count": 360
+        },
+        {
+          "value": 1342247208,
+          "hex": "0x50011128",
+          "count": 360
+        },
+        {
+          "value": 1342308392,
+          "hex": "0x50020028",
+          "count": 360
+        },
+        {
+          "value": 1342308648,
+          "hex": "0x50020128",
+          "count": 360
+        },
+        {
+          "value": 1342312488,
+          "hex": "0x50021028",
+          "count": 360
+        },
+        {
+          "value": 1342312744,
+          "hex": "0x50021128",
+          "count": 360
+        },
+        {
+          "value": 1342373928,
+          "hex": "0x50030028",
+          "count": 360
+        },
+        {
+          "value": 1342374184,
+          "hex": "0x50030128",
+          "count": 360
+        },
+        {
+          "value": 1342378024,
+          "hex": "0x50031028",
+          "count": 360
+        },
+        {
+          "value": 1342378280,
+          "hex": "0x50031128",
+          "count": 360
+        },
+        {
+          "value": 1358955816,
+          "hex": "0x51000528",
+          "count": 360
+        },
+        {
+          "value": 1375731752,
+          "hex": "0x52000028",
+          "count": 360
+        },
+        {
+          "value": 1375732008,
+          "hex": "0x52000128",
+          "count": 360
+        },
+        {
+          "value": 1375732264,
+          "hex": "0x52000228",
+          "count": 360
+        },
+        {
+          "value": 1375732520,
+          "hex": "0x52000328",
+          "count": 360
+        },
+        {
+          "value": 1375735848,
+          "hex": "0x52001028",
+          "count": 360
+        },
+        {
+          "value": 1375736104,
+          "hex": "0x52001128",
+          "count": 360
+        },
+        {
+          "value": 1375736360,
+          "hex": "0x52001228",
+          "count": 360
+        },
+        {
+          "value": 1375736616,
+          "hex": "0x52001328",
+          "count": 360
+        },
+        {
+          "value": 1342177321,
+          "hex": "0x50000029",
+          "count": 270
+        },
+        {
+          "value": 1375731753,
+          "hex": "0x52000029",
+          "count": 270
+        },
+        {
+          "value": 1375732009,
+          "hex": "0x52000129",
+          "count": 270
+        },
+        {
+          "value": 1375732265,
+          "hex": "0x52000229",
+          "count": 270
+        },
+        {
+          "value": 1375732521,
+          "hex": "0x52000329",
+          "count": 270
+        },
+        {
+          "value": 1375735849,
+          "hex": "0x52001029",
+          "count": 270
+        },
+        {
+          "value": 1375736105,
+          "hex": "0x52001129",
+          "count": 270
+        },
+        {
+          "value": 1375736361,
+          "hex": "0x52001229",
+          "count": 270
+        },
+        {
+          "value": 1375736617,
+          "hex": "0x52001329",
+          "count": 270
+        },
+        {
+          "value": 1342177330,
+          "hex": "0x50000032",
+          "count": 270
+        },
+        {
+          "value": 1342177586,
+          "hex": "0x50000132",
+          "count": 270
+        },
+        {
+          "value": 1342181426,
+          "hex": "0x50001032",
+          "count": 270
+        },
+        {
+          "value": 1342181682,
+          "hex": "0x50001132",
+          "count": 270
+        },
+        {
+          "value": 1358964274,
+          "hex": "0x51002632",
+          "count": 270
+        },
+        {
+          "value": 1375731762,
+          "hex": "0x52000032",
+          "count": 270
+        },
+        {
+          "value": 1375732018,
+          "hex": "0x52000132",
+          "count": 270
+        },
+        {
+          "value": 1375732274,
+          "hex": "0x52000232",
+          "count": 270
+        },
+        {
+          "value": 1375732530,
+          "hex": "0x52000332",
+          "count": 270
+        },
+        {
+          "value": 1375735858,
+          "hex": "0x52001032",
+          "count": 270
+        },
+        {
+          "value": 1375736114,
+          "hex": "0x52001132",
+          "count": 270
+        },
+        {
+          "value": 1375736370,
+          "hex": "0x52001232",
+          "count": 270
+        },
+        {
+          "value": 1375736626,
+          "hex": "0x52001332",
+          "count": 270
+        },
+        {
+          "value": 1358955561,
+          "hex": "0x51000429",
+          "count": 180
+        },
+        {
+          "value": 1342177322,
+          "hex": "0x5000002a",
+          "count": 180
+        },
+        {
+          "value": 1358954538,
+          "hex": "0x5100002a",
+          "count": 180
+        },
+        {
+          "value": 1358954794,
+          "hex": "0x5100012a",
+          "count": 180
+        },
+        {
+          "value": 1358958634,
+          "hex": "0x5100102a",
+          "count": 180
+        },
+        {
+          "value": 1358958890,
+          "hex": "0x5100112a",
+          "count": 180
+        },
+        {
+          "value": 1375775274,
+          "hex": "0x5200aa2a",
+          "count": 180
+        },
+        {
+          "value": 1358997033,
+          "hex": "0x5100a629",
+          "count": 90
+        }
+      ],
+      "atomic_compare_top20": [
+        {
+          "value": "0",
+          "count": 10620
+        },
+        {
+          "value": "42",
+          "count": 180
+        },
+        {
+          "value": "512",
+          "count": 90
+        },
+        {
+          "value": "1024",
+          "count": 90
+        },
+        {
+          "value": "38",
+          "count": 90
+        },
+        {
+          "value": "128",
+          "count": 90
+        },
+        {
+          "value": "256",
+          "count": 90
+        },
+        {
+          "value": "384",
+          "count": 90
+        },
+        {
+          "value": "%1387",
+          "count": 39
+        },
+        {
+          "value": "%1397",
+          "count": 36
+        },
+        {
+          "value": "%1385",
+          "count": 33
+        },
+        {
+          "value": "%1398",
+          "count": 30
+        },
+        {
+          "value": "%1395",
+          "count": 30
+        },
+        {
+          "value": "%1399",
+          "count": 30
+        },
+        {
+          "value": "%1384",
+          "count": 27
+        },
+        {
+          "value": "%1400",
+          "count": 27
+        },
+        {
+          "value": "%1402",
+          "count": 27
+        },
+        {
+          "value": "%1386",
+          "count": 27
+        },
+        {
+          "value": "%1388",
+          "count": 27
+        },
+        {
+          "value": "%1906",
+          "count": 24
+        }
+      ],
+      "atomic_new_top20": [
+        {
+          "value": "0",
+          "count": 11070
+        },
+        {
+          "value": "8",
+          "count": 360
+        },
+        {
+          "value": "32",
+          "count": 180
+        },
+        {
+          "value": "1",
+          "count": 180
+        },
+        {
+          "value": "16",
+          "count": 180
+        },
+        {
+          "value": "undef",
+          "count": 90
+        },
+        {
+          "value": "%1386",
+          "count": 33
+        },
+        {
+          "value": "%1388",
+          "count": 33
+        },
+        {
+          "value": "%1399",
+          "count": 30
+        },
+        {
+          "value": "%1398",
+          "count": 30
+        },
+        {
+          "value": "%1400",
+          "count": 30
+        },
+        {
+          "value": "%1401",
+          "count": 27
+        },
+        {
+          "value": "%1387",
+          "count": 27
+        },
+        {
+          "value": "%1389",
+          "count": 27
+        },
+        {
+          "value": "%1396",
+          "count": 27
+        },
+        {
+          "value": "%1907",
+          "count": 24
+        },
+        {
+          "value": "%1909",
+          "count": 24
+        },
+        {
+          "value": "%1911",
+          "count": 24
+        },
+        {
+          "value": "%1895",
+          "count": 24
+        },
+        {
+          "value": "%1897",
+          "count": 24
+        }
+      ],
+      "raw_mask_align": [
+        {
+          "mask": 1,
+          "align": 4,
+          "count": 450
+        }
+      ],
+      "tertiary_scale": [
+        {
+          "scale": 61472,
+          "count": 60
+        },
+        {
+          "scale": 30752,
+          "count": 60
+        },
+        {
+          "scale": 15392,
+          "count": 60
+        }
+      ]
+    }
+  ]
+}

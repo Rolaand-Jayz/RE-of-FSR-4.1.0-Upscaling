@@ -251,6 +251,38 @@ def main() -> int:
             record(f"Zone '{zone.get('name', '?')}' at 0x{offset:X} has expected size", len(actual) == size, f"bytes_available={len(actual)} expected={size}")
     else:
         record("Blob format spec exists", False, str(args.spec))
+
+    print("[V8] Generated DXIL RE evidence artifacts")
+    dxil_ir_evidence = repo_root / "reports/dxil-ir-evidence.json"
+    atomic_evidence = repo_root / "reports/atomic-buffer-patterns.json"
+    entry_inventory = repo_root / "spec/dxil-entrypoint-inventory.json"
+    if dxil_ir_evidence.exists():
+        dxil_data = json.loads(dxil_ir_evidence.read_text())
+        record("DXIL IR evidence artifact exists and covers 27 entrypoints", dxil_data.get("unique_entrypoints") == 27, f"unique_entrypoints={dxil_data.get('unique_entrypoints')}")
+        main = [r for r in dxil_data.get("summary", []) if r.get("class") == "main_pass"]
+        record("DXIL IR evidence covers 12 main passes", len(main) == 12, f"main_passes={len(main)}")
+        raw_ok = all(r.get("resource_ops", {}).get("rawBufferLoad", {}).get("max", 0) > 0 for r in main)
+        record("Every main pass has rawBufferLoad evidence", raw_ok, "checked resource_ops.rawBufferLoad.max > 0")
+    else:
+        record("DXIL IR evidence artifact exists", False, str(dxil_ir_evidence))
+    if atomic_evidence.exists():
+        atomic_data = json.loads(atomic_evidence.read_text())
+        main = [r for r in atomic_data.get("summary", []) if r.get("class") == "main_pass"]
+        record("Atomic/buffer pattern artifact covers 12 main passes", len(main) == 12, f"main_passes={len(main)}")
+        atomic_ok = all(r.get("atomic_addr_total", 0) > 0 and r.get("atomic_addr_unique", 0) > 0 for r in main)
+        record("Every main pass has atomicCompareExchange address evidence", atomic_ok, "checked atomic_addr_total and atomic_addr_unique")
+        scale_ok = all(len(r.get("tertiary_scale", [])) > 0 for r in main)
+        record("Every main pass has tertiary scale evidence", scale_ok, "checked dx.op.tertiary scale constants")
+    else:
+        record("Atomic/buffer pattern artifact exists", False, str(atomic_evidence))
+    if entry_inventory.exists():
+        inv = json.loads(entry_inventory.read_text())
+        record("DXIL entrypoint inventory agrees with 27 unique names", len(inv.get("unique_entrypoints", [])) == 27, f"unique={len(inv.get('unique_entrypoints', []))}")
+    else:
+        record("DXIL entrypoint inventory exists", False, str(entry_inventory))
+    print()
+
+
     return finish(args.report)
 
 
