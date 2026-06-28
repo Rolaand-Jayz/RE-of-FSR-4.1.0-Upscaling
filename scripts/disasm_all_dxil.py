@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+import os
 Extract LLVM bitcode from DXIL chunk files and disassemble using opt.
 Works around LLVM 22's strict data layout validation by using opt --data-layout.
 
@@ -58,7 +59,7 @@ def main():
     parser.add_argument('--version', choices=['4_1_0', '4_0_2', 'both'], default='both')
     args = parser.parse_args()
     
-    base = '/mnt/workdrive/fsr-re/build'
+    base = 'os.path.dirname(os.path.dirname(os.path.abspath(__file__)))/build'
     versions = ['4_1_0', '4_0_2'] if args.version == 'both' else [args.version]
     
     for version in versions:

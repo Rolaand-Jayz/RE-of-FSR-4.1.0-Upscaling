@@ -23,7 +23,7 @@ def main():
 import re, os, json, glob
 
 V410_LLVM_DIR = str(Path(__file__).resolve().parents[1] / "build/llvm_ir/4_1_0")
-V402_SCHEMA = "/mnt/workdrive/fsr-re/reports/v402_initializer_offsets.json"
+V402_SCHEMA = "os.path.dirname(os.path.dirname(os.path.abspath(__file__)))/reports/v402_initializer_offsets.json"
 
 # Load 4.0.2 schema for comparison
 with open(V402_SCHEMA) as f:

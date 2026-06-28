@@ -1,7 +1,7 @@
 # FSR 4.1.0 Architecture Map
 
 **Date:** 2026-06-01
-**Method:** LLVM IR analysis of 602 DXBC blobs from FSR 4.1.0 DLL (15,273,344 bytes)
+**Method:** LLVM IR analysis of 602 DXBC blobs from FSR 4.1.0 DLL (15,605,520 bytes)
 **Build:** git commit abd3160, March 20 2026
 
 ---
@@ -66,7 +66,7 @@ Input (color texture + depth + motion vectors)
 |   +-- FasterNet/ConvNext blocks
 |   +-- FP8 dequantization (bitcast + scale)
 |   +-- Residual connections
-|   +-- Activation functions (Relu, Sigmoid)
+|   +-- Activation: ReLU (FMax(x, 0.0))
 |
 +-- Decoder passes (~2-4 dispatches)
 |   +-- NHWC buffer -> texture conversion
@@ -95,12 +95,12 @@ The 13 extra passes compared to 4.0.2 are primarily data orchestration passes --
 - AtomicCompareExchange used for dynamic scratch buffer allocation
 
 ### Implication for Tensor Offset Map
-The previous 78-tensor offset map derived from 4.0.2's HLSL schema CANNOT be applied to 4.1.0 because:
-1. 4.1.0 has 27 passes vs 4.0.2's 14 -- the tensor layout is fundamentally different
+The previous 78-tensor offset map derived from 4.0.2's HLSL schema is STRUCTURALLY CONSISTENT with 4.1.0 but NOT runtime-verified because:
+1. 4.1.0 has 27 main-loop dispatches vs 4.0.2's 14 main passes -- the tensor layout is fundamentally different
 2. Offsets are computed dynamically from cbuffer values, not hardcoded
 3. The scratch buffer uses atomic-based allocation, meaning tensor positions vary per dispatch
 
-The tensor structure can only be definitively mapped via runtime capture.
+The tensor structure can only be definitively confirmed via runtime capture. Static evidence (matching model name, matching pass count, matching blob sizes) supports but does not prove offset equivalence.
 
 ## 5. Body Pass Architecture Detail
 
@@ -164,5 +164,5 @@ The decoder passes share the same signature but read from buffers and write to U
 - Capturing rawBufferLoad offsets at runtime would map the weight access pattern
 
 ### Partially done (needs verification):
-- The 444 extra FP16 parameters at blob offset 130088 -- likely accessed only by SRV buf 17 passes (group B3)
+- The 222 FP32 output composition biases at blob offset 130088 -- consumed by postpass via rawBufferLoad (resolved, see docs/extra-params-analysis.md)
 - The exact spatial pyramid structure (which passes operate at which resolution)

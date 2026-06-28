@@ -31,7 +31,7 @@ import hashlib
 
 DLL_V410 = os.path.expanduser("${FSR410_DLL:-/path/to/amd_fidelityfx_upscaler_dx12.dll}")
 DLL_V402 = os.path.expanduser("${FSR402_DLL:-/path/to/amd_fidelityfx_upscaler_dx12.dll}")
-BUILD_DIR = "/mnt/workdrive/fsr-re/build"
+BUILD_DIR = "os.path.dirname(os.path.dirname(os.path.abspath(__file__)))/build"
 
 DXBC_MAGIC = b'DXBC'
 

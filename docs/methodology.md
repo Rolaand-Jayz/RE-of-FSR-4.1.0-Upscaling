@@ -29,7 +29,7 @@ This is the same pattern used by GPU RE projects like Asahi Linux and Panfrost: 
 **Goal**: Locate the weight data in the DLL.
 
 **Method**:
-1. Ran Ghidra 12.1 headless on `dll_v410.dll` (15,273,344 bytes)
+1. Ran Ghidra 12.1 headless on `dll_v410.dll` (15,605,520 bytes)
 2. Decompiled all 340 functions to C pseudocode
 3. Traced the call chain from `ffxDispatch` (the main entry point) down to the CreateContext factory function
 
@@ -39,7 +39,7 @@ This is the same pattern used by GPU RE projects like Asahi Linux and Panfrost: 
 - 27 dispatches per frame (confirmed by loop counter `0x1b`)
 - Resource name tables (12 SRV, 12 UAV names)
 - Sequential-only pipeline structure (no skip connections detected)
-- U-Net spatial pyramid: 1.0× → 0.5× → 0.25× → 0.125× → 0.25× → 0.5× → 1.0×
+- Bottleneck autoencoder spatial pyramid: 1.0× → 0.5× → 0.25× → 0.125× → 0.25× → 0.5× → 1.0×
 
 ## Stage 2: Weight Extraction
 
@@ -77,7 +77,7 @@ This is the same pattern used by GPU RE projects like Asahi Linux and Panfrost: 
 **Key discoveries**:
 - **98.7% of bytes changed** — consistent with complete weight retrain, uniform across all layers
 - **122 → 255 unique weight values** — 4.0.2 used a limited FP8 codebook; 4.1.0 uses full uint8 range
-- **444 new FP16 parameters** (888 bytes) appended after existing weights — purpose unconfirmed; possibly quantization scale factors
+- **222 FP32 output composition biases** (888 bytes) appended after existing weights — purpose unconfirmed; possibly quantization scale factors
 - **Preset collapse** — quality is now controlled by spatial tiling/dispatch, not separate models
 
 ## Tools Used
@@ -128,6 +128,6 @@ Not everything worked on the first try:
 | 78-tensor offset map (4.0.2) | **99%** | Parsed from MIT-licensed source | — |
 | 78-tensor offset map (4.1.0) | **85%** | Assumed from name match + structural equivalence | Runtime cbuffer capture |
 | No skip connections | **90%** | Consistent indirect evidence from 3 independent sources | D3D12 hook deployment |
-| Complete weight retrain | **99%** | Byte-by-byte diff, 98.7% changed uniformly | — |
+| Weight retrain (inferred) | **99%** | Byte-by-byte diff, 98.7% changed uniformly | — |
 | Architecture unchanged | **95%** | Same entry points, same tensor count, same blob layout | Runtime verification |
 | Extra params = quant scales | **70%** | Correlation with improved FP8 range, plausible mechanism | Shader tracing |

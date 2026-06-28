@@ -4,7 +4,7 @@
 
 ## The Challenge
 
-FSR 4.1.0 ships as a single Windows DLL (`dll_v410.dll`, 15,273,344 bytes). Unlike 4.0.2, there's no source code. The weights are somewhere inside — but a 15 MB DLL has a lot of data sections.
+FSR 4.1.0 ships as a single Windows DLL (`dll_v410.dll`, 15,605,520 bytes). Unlike 4.0.2, there's no source code. The weights are somewhere inside — but a 15 MB DLL has a lot of data sections.
 
 ## Finding the Weights
 
@@ -79,7 +79,7 @@ Each 131,072-byte blob is divided into zones:
 │  ✅ Confirmed: offset, size, count match HLSL    │
 ├─────────────────────────────────────────────────┤ 0x1FC28
 │  Extra FP16 Parameters                          │
-│  888 bytes — 444 FP16 values                    │
+│  888 bytes — 222 FP32 values (output composition biases)                    │
 │  ⚠️ Observed in 4.1.0 only. Purpose unconfirmed.│
 │  Hypothesis: quantization scale factors (based   │
 │  on correlation with improved FP8 range).        │
@@ -101,7 +101,7 @@ The 4.0.2 SDK ships with the same model architecture but different weight blobs:
 | Blob size | 130,088 bytes | 131,072 bytes (padded) | ✅ pefile measurement |
 | Bias zone | 7,208 bytes | 7,208 bytes | ✅ Identical layout from HLSL |
 | Weight zone | 122,880 bytes | 122,880 bytes | ✅ Identical layout from HLSL |
-| Extra params | None | 888 bytes (444 FP16) | ⚠️ Observed, purpose unknown |
+| Extra params | None | 888 bytes (222 FP32) | ⚠️ Observed, purpose unknown |
 | Unique presets | 6 (all different) | 2 (5 identical + DRS) | ✅ MD5 comparison |
 | FP8 unique values | 122 | 255 | ✅ Statistical count |
 | Bytes changed | — | **98.7%** | ✅ Byte-by-byte diff |
@@ -121,7 +121,7 @@ The near-total byte change rate is remarkably uniform across all blocks:
 
 Bias zone: 159,711 / 161,216 bytes changed = **99.1%**.
 
-This is consistent with a **complete weight retrain** — every layer's weights were regenerated, not fine-tuned. We cannot distinguish "retrain" from "re-quantize with different scheme" from the byte-level data alone.
+This is consistent with a **weight retrain (inferred from byte-diff; cannot distinguish retrain from re-quantization)** — every layer's weights were regenerated, not fine-tuned. We cannot distinguish "retrain" from "re-quantize with different scheme" from the byte-level data alone.
 
 ### FP8 Quantization Change
 

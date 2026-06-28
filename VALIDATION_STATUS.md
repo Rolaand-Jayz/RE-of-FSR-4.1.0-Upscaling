@@ -64,14 +64,15 @@
 - All 6 blobs extracted from DLL via pefile RVA resolution
 - Weight blobs byte-identical between workdrive copy and desktop repo
 
-### ✅ Data DLL Bit-Identical Rebuild
-- `fsr_data.dll` reconstructed from C source + weight blobs
-- MD5 verified: `cb1aa61c71c33b25549ed59c1551d661` (original == rebuilt)
-- Note: exact byte match requires PE patcher step; GCC version affects pre-patch output
+### ⚠️ Data DLL Section Comparison (NOT bit-identical proof)
+- `fsr_data.dll` reconstructed from C source + extracted weight blobs
+- Section hashes compared independently; data section matches by construction
+- The historical "bit-identical" MD5 match depended on copying original PE regions before comparing -- this is circular and is no longer claimed as proof
+- See rebuild/README.md for honest per-section comparison
 
 ### ✅ Blob Format
 - v4.0.2: 130,088 bytes (7,208 bytes FP16 biases + 122,880 bytes FP8 weights)
-- v4.1.0: 131,072 bytes (same zones + 984 bytes extra, including 444 FP16 scale factors)
+- v4.1.0: 131,072 bytes (same zones + 888 bytes extra = 222 FP32 output biases + 96B pad)
 
 ### ✅ Weight Retrain Confirmation
 - 98.7% of bytes changed between 4.0.2 and 4.1.0

@@ -25,9 +25,9 @@ This repository is a research record: analysis, dead ends, methodology, extracte
 | Finding | Detail | Evidence |
 |:---|:---|:---|
 | **602 DXBC shader blobs** cataloged and classified | Full enumeration of every embedded compute shader | ✅ Verified — automated extraction + manual audit |
-| **30 unique shader blobs** mapped to 30 passes | MD5-verified — zero duplicates across all passes | ✅ Verified — binary hash comparison |
+| **27 unique model shaders + 3 conditional** | 27 main-loop passes (prepass + 12 model × 2 + postpass + SPD) + 3 conditional (RCAS, autoexposure, debug) | ✅ Verified — binary hash comparison |
 | **6 weight blobs** extracted, each 131,072 bytes | 5 identical (quality/balanced/performance/ultraperf/native), 1 unique (DRS) | ✅ Verified — MD5 hash comparison |
-| **Weight container format decoded** | 7,208B FP16 biases → 122,880B FP8/uint8-like weights → 888B extra FP16 → 96B pad | ✅ Verified — container parsed, values validated, offsets match across all blobs |
+| **Weight container format decoded** | 7,208B FP16 biases → 122,880B FP8/uint8-like weights → 888B extra (222 FP32 output biases) → 96B pad | ✅ Verified — container parsed, values validated, offsets match across all blobs |
 | **Pipeline: 27 main + 3 conditional passes** | 27-pass main loop + RCAS + SPD AutoExposure + Debug View | ✅ Verified — hardcoded loop count in dispatch function + Ghidra decompilation |
 | **All passes use (32,1,1) thread groups** | Wavefront-width 1D dispatch | ✅ Verified — LLVM IR `!dx.numthreads` metadata |
 | **Static resource binding map** | 9 register spaces identified with proposed semantic meaning | ⚠️ Static only — createHandle analysis across LLVM IR blobs; runtime descriptor bindings not captured |
@@ -46,7 +46,7 @@ This repository is a research record: analysis, dead ends, methodology, extracte
 
 ## Main DLL: Pipeline Dispatch Analysis
 
-The main provider DLL (`amd_fidelityfx_upscaler_dx12.dll`, 15.6MB) is the other half of the system. Where `fsr_data.dll` stores weights, the provider DLL runs the neural network. We traced the complete dispatch pipeline from Ghidra decompilation and raw x86-64 disassembly.
+The main provider DLL (`amd_fidelityfx_upscaler_dx12.dll`, 15.6MB) is the other half of the system. Where `fsr_data.dll` stores weights, the provider DLL runs the neural network. We traced the static dispatch pipeline from Ghidra decompilation and raw x86-64 disassembly.
 
 ### Dispatch Architecture
 
@@ -434,6 +434,8 @@ For the full legal analysis, AMD history, and honest risk assessment, see [`LEGA
 
 This project is released under the **MIT License** — the same license AMD chose for FSR 4.0.2. We believe knowledge should be free. AMD apparently agreed, once.
 
+> **Licensing boundary:** The MIT license covers **authored code only** (scripts, documentation, specifications). The `extracted/*.bin` weight files, `dist/*.dll` reconstructed binaries, and `build/*.dll` provider DLLs contain **proprietary AMD-derived data** and are NOT MIT-licensed. See `LEGAL.md` for full analysis and per-directory `NOTICE.md` files.
+
 ---
 
 ## Shader Internals: Neural Network Architecture
@@ -457,9 +459,9 @@ The DRS (Dynamic Resolution Scaling) blob is a **completely retrained network**:
 - Same architecture (128KB, same FP8 value distribution)
 - Same quantization scheme applied to different trained parameters
 
-### FP8 Decode: LUT via Atomics
+### FP8 Weight Decode via Atomics
 
-The shaders decode FP8 weights through a **256-entry lookup table** in the ScratchBuffer, accessed via `atomicCompareExchange` as side-effect-free table reads:
+The shaders decode FP8 weights through a **256-entry atomicCompareExchange table** in the ScratchBuffer, accessed via `atomicCompareExchange` as side-effect-free table reads:
 
 1. Read FP8 byte from weight SRV (space 0, register 18)
 2. Use fixed-offset LUT lookup in UAV (space 1, register 0)
@@ -479,7 +481,7 @@ This avoids branching and uses GPU atomics idiomatically as LUT reads.
 | Large | pass7, pass8 | 5x4 convolution (deepest) | ~20,750 | 9,088 | 5x4 |
 | Special | pass3, pass6, pass9, pass11 | Unique roles | varies | varies | varies |
 | Output | postpass | ML + conventional composite | 2,675 | 1,580 | mixed |
-| Scatter | pass*_post (x13) | Data rearrangement only | ~125 | 0 | N/A |
+| Scatter | pass*_post (x12) | Data rearrangement only | ~125 | 0 | N/A |
 
 **Post passes are trivial** — 2-5 `rawBufferStore` calls, no ML computation. They scatter accumulated results from scratch buffer to output planes.
 
@@ -518,10 +520,17 @@ The architecture has a **bottleneck structure with symmetric pass layout**: feat
 
 ### What Remains Unknown
 
-- **Exact activation functions** — integer-only accumulation obscures whether LUT encodes activations
-- **Temporal state flow** — how frame N-1 feeds into frame N
-- **Skip connections** — pass symmetry suggests them, but unconfirmed
+- **Exact per-pass MAC arithmetic** — integer multiply-add patterns identified but exact weight-index vs. input-feature mapping not fully traced
+- **Runtime cbuffer values** — offset computations inferred from static IR, not captured at runtime
+- **Temporal state flow** — how frame N-1 feeds into frame N (not captured at runtime)
+- **Skip connections** — not confirmed; pass symmetry is consistent with a bottleneck autoencoder (decoder mirroring encoder), which does not require skips
 - **Attention mechanisms** — no softmax/QKV patterns found; likely pure convolutional
+
+### What Has Been Resolved
+
+- **Activation function** — ReLU via `FMax(x, 0.0)`, cross-validated in DXIL + SPIR-V (see docs/activation-lut-analysis.md)
+- **Extra parameters** — 222 FP32 output composition biases consumed by postpass (see docs/extra-params-analysis.md)
+- **"LUT mechanism"** — coherent atomic buffer I/O for cross-thread-group communication, not an activation LUT
 
 Full details: [docs/shader-internals.md](docs/shader-internals.md). Machine-readable analysis: [spec/shader_analysis.json](spec/shader_analysis.json).
 

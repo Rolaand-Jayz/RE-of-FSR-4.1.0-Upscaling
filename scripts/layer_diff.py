@@ -28,9 +28,9 @@ def main():
 
 import json, struct, numpy as np, os, re
 
-V402_OFFSETS = "/mnt/workdrive/fsr-re/reports/v402_initializer_offsets.json"
-V410_BLOB = "/mnt/workdrive/fsr-re/extracted/v410_initializers/quality.bin"
-V402_BLOB = "/mnt/workdrive/fsr-re/extracted/v402_initializers/quality.bin"
+V402_OFFSETS = "os.path.dirname(os.path.dirname(os.path.abspath(__file__)))/reports/v402_initializer_offsets.json"
+V410_BLOB = "os.path.dirname(os.path.dirname(os.path.abspath(__file__)))/extracted/v410_initializers/quality.bin"
+V402_BLOB = "os.path.dirname(os.path.dirname(os.path.abspath(__file__)))/extracted/v402_initializers/quality.bin"
 LLVM_DIR = str(Path(__file__).resolve().parents[1] / "build/llvm_ir")
 
 # Load 4.0.2 schema

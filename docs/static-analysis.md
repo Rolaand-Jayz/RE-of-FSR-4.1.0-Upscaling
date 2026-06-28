@@ -6,7 +6,7 @@
 
 ## Overview
 
-We decompiled all 340 exported functions from `dll_v410.dll` (15,273,344 bytes) using Ghidra 12.1 headless. This produced C pseudocode for the entire runtime pipeline, from the top-level dispatch entry point down to the per-pass binding resolver.
+We decompiled all 340 exported functions from `dll_v410.dll` (15,605,520 bytes) using Ghidra 12.1 headless. This produced C pseudocode for the entire runtime pipeline, from the top-level dispatch entry point down to the per-pass binding resolver.
 
 **Limitation**: Static analysis reveals program structure and data references, but cannot confirm actual runtime behavior. Findings below reflect what the code *appears to do*, not what was observed executing.
 
@@ -99,7 +99,7 @@ There are **no encoder-to-decoder cross-references** in the resource name table.
 
 **However**: This does not rule out skip connections implemented through other mechanisms (e.g., aliased resource bindings, descriptor heap manipulation, or compute shader implicit state). Runtime capture would be needed to fully exclude this possibility.
 
-## U-Net Spatial Dimensions
+## bottleneck autoencoder (encoder-decoder without confirmed skip connections) Spatial Dimensions
 
 *Source: Ghidra decompilation of tile config tables at RVAs 0x5c510, 0x5c8d0, 0x5cc90.*
 
@@ -127,7 +127,7 @@ Three tile config tables (3 base resolutions × 17 passes) encode the spatial st
 | 15 | 1.0× | 1080×1920 | Postpass |
 | 16 | 1.0× | 1080×1920 | Postpass |
 
-Classic U-Net spatial pyramid: 1.0 → 0.5 → 0.25 → 0.125 → 0.25 → 0.5 → 1.0. ✅ *Verified: decoded directly from static data tables.*
+Bottleneck autoencoder with spatial pyramid: 1.0 → 0.5 → 0.25 → 0.125 → 0.25 → 0.5 → 1.0. ✅ *Verified: decoded directly from static data tables.*
 
 ## Identical PSV0 Bindings
 
@@ -164,6 +164,6 @@ Git branch: {}  commit: abd3160
 | 27 dispatches per frame | ✅ **High** — literal constant in decompiled code | Runtime capture |
 | Weight blob locations in .rdata | ✅ **High** — LEA tracing + pefile cross-verification | Runtime capture |
 | Sequential pipeline (no skips) | ⚠️ **Moderate** — consistent indirect evidence, no direct observation | D3D12 hook deployment |
-| U-Net spatial pyramid | ✅ **High** — decoded from static data tables | Runtime capture |
+| bottleneck autoencoder (encoder-decoder without confirmed skip connections) spatial pyramid | ✅ **High** — decoded from static data tables | Runtime capture |
 | Per-pass binding swap | ⚠️ **Moderate** — inferred from identical PSV0 + name resolver | GPU binding capture |
-| Model = 12-layer sequential U-Net | ⚠️ **Moderate** — combines multiple moderate-evidence findings | End-to-end verification |
+| Model = 12-layer sequential bottleneck autoencoder | ⚠️ **Moderate** — combines multiple moderate-evidence findings | End-to-end verification |

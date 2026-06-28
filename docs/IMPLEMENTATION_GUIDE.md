@@ -1,6 +1,6 @@
-# Neural Upscaler Implementation Guide
+# Neural Upscaler Implementation Research Notes
 
-> Complete instructions for reimplementing the quantized neural upscaler from
+> Research notes for reimplementing the quantized neural upscaler from
 > static shader analysis. All information is derived from DXIL/SPIR-V IR.
 > No proprietary source code is included.
 
@@ -443,7 +443,7 @@ independent verification of DXIL opcode mappings via native LLVM intrinsics.
 
 ## 9. Implementation Checklist
 
-To write complete HLSL compute shaders from this guide:
+To write HLSL compute shaders from these notes (currently incomplete — see Remaining Tracing Work):
 
 ### Phase 1: Scaffolding
 - [ ] Define root signature with all resource bindings (§3.1)

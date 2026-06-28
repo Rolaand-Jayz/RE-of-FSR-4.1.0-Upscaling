@@ -37,7 +37,7 @@ This reverse engineering covers the FSR 4.1.0 **temporal upscaler** — the ML-b
 
 FSR 4.1.0 is a **27-dispatch compute pipeline** centered on the internal model name `fsr4_model_v07_fp8_no_scale`. The binary contains **6 initializer blobs** in `.rdata`, with **2 unique weight sets** after MD5 comparison. The provider layer, resource IDs, and constant-buffer layout are largely stable relative to 4.0.2, but the **weight-loading strategy changed fundamentally**: 4.1.0 uses a dynamic `InitializerBuffer` and runtime `rawBufferLoad`-based access rather than 4.0.2’s static embedded shader arrays.
 
-The architecture is **not cleanly proven end-to-end at runtime**. Static analysis strongly supports a sequential 27-pass pipeline with 12 model passes, but the exact 4.1.0 tensor-offset map is **not independently verified** from runtime data, and the role of the extra 444 FP16 values remains unresolved. The report therefore separates:
+The architecture is **not cleanly proven end-to-end at runtime**. Static analysis strongly supports a sequential 27-pass pipeline with 12 model passes, but the exact 4.1.0 tensor-offset map is **not independently verified** from runtime data, and the role of the extra 222 FP32 (resolved: output composition biases) values remains unresolved. The report therefore separates:
 
 - **Verified facts**: binary size, model strings, pass strings, blob locations, blob sizes, resource IDs, constant-buffer stability, 2 unique presets, unchanged operator set.
 - **Static-only findings**: no skip connections detected, layer shape interpretation, pass classification, tensor schema resemblance.
@@ -236,8 +236,8 @@ The work was reproduced with:
 
 ## 10. Bottom Line
 
-The RE is **strongly complete at the provider + weight-layout + pass-identity level** and **intentionally honest about what remains unproven**. That is the difference between a flashy report and a gold-standard one.
+The RE is **substantially complete at the structural level (runtime validation pending) at the provider + weight-layout + pass-identity level** and **intentionally honest about what remains unproven**. That is the difference between a flashy report and a gold-standard one.
 
-**What "strongly supported" means:** structural claims are backed by binary evidence where cited. The data-DLL rebuild and comparison support extraction/layout claims; they do not prove independent bit-identical reconstruction. The DXIL IR analysis supports architecture and activation-function claims. What it does **not** mean: the analysis has been confirmed at runtime. Runtime validation on native Windows D3D12 is the next step for full credibility, and a small number of contributors with the right hardware could close this gap.
+**What "strongly supported" means:** structural claims are backed by binary evidence where cited. The data-DLL rebuild and comparison support extraction/layout claims; they do not prove independent data-section reconstruct (not bit-identical)ion. The DXIL IR analysis supports architecture and activation-function claims. What it does **not** mean: the analysis has been confirmed at runtime. Runtime validation on native Windows D3D12 is the next step for full credibility, and a small number of contributors with the right hardware could close this gap.
 
 If this repo is going to be the new benchmark, this report is the contract: **verified facts first, static inference labeled, unresolved items never hidden**.
