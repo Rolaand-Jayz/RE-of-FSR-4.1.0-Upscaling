@@ -314,7 +314,7 @@ temporal recurrence within the network.
 
 | Item | Status | Notes |
 |------|--------|-------|
-| Activation function | Narrowed to ReLU-family | LUT-folded, exact variant needs runtime capture |
+| Activation function | Narrowed to ReLU-family | ReLU (FMax(x, 0.0)), cross-validated in DXIL + SPIR-V |
 | Temporal state flow | RESOLVED | History buffer feedback (not recurrence) |
 | Channel dimensions | RESOLVED | Fully mapped in tensor-map.json |
 | Skip connections | 90% none | 4 independent static evidence sources |

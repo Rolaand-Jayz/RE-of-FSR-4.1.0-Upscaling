@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-We traced the complete dispatch pipeline of `amd_fidelityfx_upscaler_dx12.dll` (15.6MB) from binary analysis:
+We traced the static dispatch pipeline of `amd_fidelityfx_upscaler_dx12.dll` (15.6MB) from binary analysis:
 - **30 unique shader blobs** confirmed by MD5 hash
 - **27-pass main loop** + 3 conditional passes (RCAS, SPD AutoExposure, Debug View)
 - **Thread groups**: All passes use (32, 1, 1) — wavefront-width dispatch
@@ -126,7 +126,7 @@ Each cbuffer register is 4 × float32 = 16 bytes:
 
 ## Pass Pair Structure
 
-The 27 main passes form 13 pairs + 1 standalone:
+The 27 main passes form 12 pairs + 1 standalone:
 - Passes 0,1 = pair 0 (pre/post)
 - Passes 2,3 = pair 1 (pre/post)
 - ...

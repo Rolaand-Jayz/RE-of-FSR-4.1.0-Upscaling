@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 from pathlib import Path
 """
 Extract the InitializerBuffer offset map from 4.0.2 FP8 HLSL source.
@@ -167,7 +168,7 @@ for r in all_results:
 print(f"\n  Total data range: 0 - {prev_end}")
 
 # Save as JSON
-out_path = "/mnt/workdrive/fsr-re/reports/v402_initializer_offsets.json"
+out_path = "os.path.dirname(os.path.dirname(os.path.abspath(__file__)))/reports/v402_initializer_offsets.json"
 with open(out_path, 'w') as f:
     json.dump(all_results, f, indent=2)
 print(f"\nSaved to {out_path}")

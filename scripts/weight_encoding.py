@@ -11,7 +11,7 @@ Usage:
 import os, re
 
 def find_blob(ver, func):
-    irl = f"/mnt/workdrive/fsr-re/build/llvm_ir/{ver}"
+    irl = f"os.path.dirname(os.path.dirname(os.path.abspath(__file__)))/build/llvm_ir/{ver}"
     for f in sorted(os.listdir(irl)):
         if not f.endswith(".ll"): continue
         path = os.path.join(irl, f)

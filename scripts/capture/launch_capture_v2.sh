@@ -7,7 +7,7 @@
 #
 set -e
 
-CAPTURE_DIR="/mnt/workdrive/fsr-re/runtime-capture"
+CAPTURE_DIR="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}/runtime-capture"
 RENDERDOC_SO="/usr/lib/librenderdoc.so"
 
 mkdir -p "$CAPTURE_DIR"
@@ -30,6 +30,6 @@ echo "  Captures save to $CAPTURE_DIR/*.rdc"
 echo ""
 echo "=== After capture, analyze: ==="
 echo "  PYTHONPATH=/usr/share/renderdoc/python:\$PYTHONPATH \\"
-echo "  python3 /mnt/workdrive/fsr-re/scripts/capture/capture.py $CAPTURE_DIR/fsr4_ff7r.rdc"
+echo "  python3 ${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}/scripts/capture/capture.py $CAPTURE_DIR/fsr4_ff7r.rdc"
 echo ""
 echo "================================================"

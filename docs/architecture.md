@@ -74,7 +74,7 @@ Input (7 channels, H×W)
 
 *Source: Ghidra decompilation of tile config tables in `dll_v410.dll`.*
 
-The network operates at four spatial scales in a U-shaped progression:
+The network operates at four spatial scales in a encoder-decoder progression with spatial bottleneck:
 
 ```
 Scale    Dimensions (1080p)    Stage
@@ -151,12 +151,12 @@ The weight blob (`InitializerBuffer`) is allocated once at 131,072 bytes and bou
 
 | Property | 4.0.2 | 4.1.0 | Evidence |
 |----------|-------|-------|----------|
-| Architecture | v07 sequential U-Net | Identical | DXIL entry point names match |
+| Architecture | v07 sequential bottleneck autoencoder | Identical | DXIL entry point names match |
 | Tensor count | 78 | 78 (assumed identical) | ⚠️ Not runtime-verified |
 | Blob size | 130,088 bytes | 131,072 bytes (+976) | pefile measurement |
 | Unique presets | 6 (all different) | 2 (5 identical + DRS) | MD5 comparison |
 | FP8 unique values | 122 (clustered codebook) | 255 (full uint8 range) | Statistical analysis |
 | Weight change | — | 98.7% bytes changed | Byte-by-byte diff |
-| Extra params | — | +444 FP16 values | Observed; purpose ⚠️ unconfirmed |
+| Extra params | — | +222 FP32 (output composition biases) values | Observed; purpose ⚠️ unconfirmed |
 
 **Note on offset equivalence**: The 4.0.2 HLSL source provides exact byte offsets for all 78 tensors. The 4.1.0 DXIL confirms identical entry point names, suggesting the same architecture. However, the 4.1.0 offsets are loaded from cbuffer at runtime — we did not capture the actual runtime values. The assumption that offsets match is based on structural equivalence, not direct observation.

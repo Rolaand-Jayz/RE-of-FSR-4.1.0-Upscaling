@@ -210,8 +210,7 @@ Both previously-open gaps are now fully resolved through static analysis:
 | Activation variant | ❌ Runtime-only | ✅ ReLU — FMax(x, 0.0), verified DXIL+SPIR-V | 99% |
 | LUT mechanism | ❌ Runtime-only | ✅ Coherent atomic buffer I/O, no LUT | 98% |
 
-The FSR 4.1.0 reverse engineering now has **zero open gaps**. All architectural properties
-are determined from static DXIL/SPIR-V analysis alone.
+The static analysis has resolved the five original analysis gaps (activation, LUT mechanism, cbuffer offsets, extra parameters, skip connections). However, runtime validation remains an open credibility gap: the static findings have not been confirmed by observing the upscaler execute in real time. Exact per-pass MAC arithmetic and weight-index mapping also remain research gaps.
 
 ### Lesson Learned
 

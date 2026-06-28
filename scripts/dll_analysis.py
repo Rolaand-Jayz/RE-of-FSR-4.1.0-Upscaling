@@ -27,7 +27,7 @@ import sys
 
 DLL_V410 = os.path.expanduser("${FSR410_DLL:-/path/to/amd_fidelityfx_upscaler_dx12.dll}")
 DLL_V402 = os.path.expanduser("${FSR402_DLL:-/path/to/amd_fidelityfx_upscaler_dx12.dll}")
-OUTPUT = "/mnt/workdrive/fsr-re/reports/dll_analysis.json"
+OUTPUT = "os.path.dirname(os.path.dirname(os.path.abspath(__file__)))/reports/dll_analysis.json"
 
 # DXBC magic bytes (DirectX Bytecode header)
 DXBC_MAGIC = b'DXBC'
