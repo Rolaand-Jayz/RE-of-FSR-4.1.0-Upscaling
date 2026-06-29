@@ -1,0 +1,177 @@
+{
+  "$schema": "host-cbuffer-dispatch/v1",
+  "source": "Ghidra decompilation of amd_fidelityfx_upscaler_dx12.dll (FSR 4.1.0, build abd3160, Mar 20 2026)",
+  "analysis_date": "2026-06-28",
+  "summary": "The host DLL writes constant-buffer VALUES in exactly one place: FUN_18000d5b0 (ffxProvider_FSR4::Dispatch). It fills 4 separate cbuffers per frame, uploads each via the backend Upload fn (ctx+0x78), then iterates the 27 model passes (ctx+0x238 + passIdx*0x8e68), packing SRV/UAV/CBV handles per pass via FUN_18000d380 and recording barriers+Dispatch via FUN_180004eb0. Per-pass WEIGHT OFFSETS are NOT written as discrete host constants; the host binds the 131072-byte InitializerBuffer (weight blob) as a raw SRV and the shader derives tensor offsets from the shared FSR4Constants + baked-in shader constants. The host's weight contribution is purely the blob upload at CreateContext (0x20000 bytes).",
+
+  "function_map": {
+    "ffxDispatch": "text_ffxDispatch.c @ 0x37ee0 — thin export; vtable[7] (offset 0x38) indirect call into provider",
+    "FUN_18000d5b0": "text_00d5b0.c @ 0xd5b0 — PROVIDER DISPATCH (ffxProvider_FSR4::Dispatch). Validates params, selects quality preset, writes all 4 cbuffers, dispatches SPD/AutoExposure/RCAS/27-model-passes. THIS is where cbuffer values come from.",
+    "FUN_1800083c0": "text_0083c0.c @ 0x83c0 — dispatch-dimension calculator. Fills per-tier render dims + per-pass thread-group grid (X,Y,Z) for 14 grid slots from preset tile tables. Output is a 0x110-byte cbuffer.",
+    "FUN_18000d380": "text_00d380.c @ 0xd380 — per-pass render-job packer. Copies SRV/UAV/CBV descriptor handles from context tables into a per-pass job using the pass's binding-index arrays; submits via ctx+0x90.",
+    "FUN_180004eb0": "text_004eb0.c @ 0x4eb0 — command-list render recorder. Resource barriers (incl. UAV-counter/AtomicCompareExchange scratch barriers via FUN_180001710), SetComputeRootCBV (plVar4+0xc0), SetRootDescriptorTable (plVar4+0x90/0x98), Dispatch (param_3+0x70). Operates on a per-frame cbuffer ring (frameIdx*0x19000).",
+    "FUN_18000b3c0": "text_00b3c0.c @ 0xb3c0 — CreateContext PSO builder. switch(preset 0..5), iterates 27 FFX_FSR4 passes (0x1b) + SPD_AUTOEXPOSURE(0x1b) + RCAS(0x1d) + extra(0x1c). Uploads 0x20000 (131072) byte InitializerBuffer per preset. Per-pass PSO struct stride = 0x8e68.",
+    "FUN_1800041f0": "text_0041f0.c @ 0x41f0 — root-signature + binding-table builder (D3D12SerializeRootSignature). Builds per-resource-category binding arrays at ctx offsets 0x44(CBV)/0x2344(SRV)/0x4644(UAV)/0x6944(sampler)/0x8c44(CSO), entry stride 0x8c.",
+    "FUN_180033180": "text_033180.c @ 0x33180 — per-pass resource-binding SCHEMA lookup. switch(passIndex 0..7+) returns static descriptor tables (33 qwords) copied to caller. Defines which SRV/UAV/CBV slots each pass consumes.",
+    "FUN_180001df0": "text_001df0.c @ 0x1df0 — DX12 backend allocator. Allocates scratch/upload rings sized by frameCount: cbuffer ring = frameCount*0x19000, scratch0 = frameCount*0xbe000, scratch1 = frameCount*0x8000, scratch2 = frameCount*0xc8000.",
+    "FUN_180001710": "(called from 004eb0) — resource barrier builder for UAV-counter resources that back the AtomicCompareExchange scratch allocation."
+  },
+
+  "loop_structure": "Per-frame in FUN_18000d5b0: (1) compute outputSize, renderSize, scale ratio -> select preset uVar19 in {0..5} (DRS=4 when ctx flag set, else by ratio thresholds DAT_180ec57c8/57d0/57e0/57e8). (2) if preset changed, call FUN_18000b3c0 to (re)build PSOs. (3) fill FSR4Constants cbuffer (ctx+0x10c600, 0x100B) and upload to CBV slot ctx+0xf8. (4) if AutoExposure: fill SPD cbuffer (ctx+0x10c700, 0x100B)->slot ctx+0x118, dispatch SPD (FUN_18000d380 on ctx+0xf9598, grid=(ceil(renderW/64), ceil(renderH/64))). (5) FUN_1800083c0(outW,outH,dimsBuf,preset) -> upload 0x110B dispatch-dims cbuffer to slot ctx+0x138. (6) for passIdx in 0..0x1a (27): FUN_18000d380(ctx, ctx+0x238+passIdx*0x8e68, gridX, gridY). (7) optional RCAS dispatch on ctx+0xf0730 (grid=ceil(outW/16),ceil(outH/16)) and debug-view dispatch on ctx+0x102400. (8) frame counter ctx+0x10c900++.",
+
+  "dispatch_grid_calculator": {
+    "function": "FUN_1800083c0 (text_0083c0.c)",
+    "inputs": "(renderWidthAligned, renderHeightAligned, outBuf[0x44 ints], preset)",
+    "preset_tile_tables": {
+      "0": {"strideTable": "DAT_18005c510", "widthTable": "DAT_18005cd28", "heightTable": "DAT_18005cd2c"},
+      "1": {"strideTable": "DAT_18005c110", "widthTable": "DAT_18005cd38", "heightTable": "DAT_18005cd3c"},
+      "2": {"strideTable": "DAT_18005c910", "widthTable": "DAT_18005cd18", "heightTable": "DAT_18005cd1c"},
+      "note": "preset 3+ falls back to stride {w:0x8, h:0xc} (i.e. 8x12) — DRS/native path"
+    },
+    "tier_loop": "steps puVar8 by 0x3c while < 0x3fc (17 tiers); per tier writes [roundUp(renderW,tileW)*scaleX, roundUp(renderH,tileH)*scaleY, 0, 0] (4 ints) into outBuf starting at index 2",
+    "grid_passes": "After the tier loop, computes thread-group grid (X,Y,Z,1) for 14 dispatch slots, each stored at outBuf[0x44 + pass*4]. Grid formulas per slot use round-up divisors: 0x20(>>5)=32, 0x10(>>4)=16, 4(>>2)=4, 0x40(>>6)=64, plus /2 for a couple of slots. Helper FUN_180008250(g1,g2,g3,buf,preset) records each. Output cbuffer = 0x110 (272) bytes -> CBV slot ctx+0x138."
+  },
+
+  "cbuffers_uploaded_per_frame": {
+    "FSR4Constants": {
+      "ctx_src_offset": "0x10c600",
+      "size_bytes": 256,
+      "cbv_slot_descriptor_offset": "0xf8",
+      "upload_call": "(ctx+0x78)(ctx+8, ctx+0x10c600, 0x100, ctx+0xf8)",
+      "shared_by_all_passes": true,
+      "layout": [
+        {"offset": "0x00", "name": "invDisplaySizeX", "type": "float", "formula": "1.0 / outputWidth"},
+        {"offset": "0x04", "name": "invDisplaySizeY", "type": "float", "formula": "1.0 / outputHeight"},
+        {"offset": "0x08", "name": "viewScaleX", "type": "float", "formula": "outputWidth / renderWidth"},
+        {"offset": "0x0c", "name": "viewScaleY", "type": "float", "formula": "outputHeight / renderHeight"},
+        {"offset": "0x10", "name": "invViewScaleX", "type": "float", "formula": "1.0 / viewScaleX = renderWidth/outputWidth"},
+        {"offset": "0x14", "name": "invViewScaleY", "type": "float", "formula": "1.0 / viewScaleY = renderHeight/outputHeight"},
+        {"offset": "0x18", "name": "jitterOffsetX", "type": "float", "formula": "dispatchDesc.jitterOffset.x (offset 0x168)"},
+        {"offset": "0x1c", "name": "jitterOffsetY", "type": "float", "formula": "dispatchDesc.jitterOffset.y (offset 0x16c)"},
+        {"offset": "0x20", "name": "motionVectorScaleX_over_renderW", "type": "float", "formula": "dispatchDesc.motionVectorScale.x (0x170) / renderWidth"},
+        {"offset": "0x24", "name": "motionVectorScaleY_over_renderH", "type": "float", "formula": "dispatchDesc.motionVectorScale.y (0x174) / renderHeight"},
+        {"offset": "0x28", "name": "maxUpscaleSizeX", "type": "float", "formula": "(float) ctx+0x230"},
+        {"offset": "0x2c", "name": "maxUpscaleSizeY", "type": "float", "formula": "(float) ctx+0x234"},
+        {"offset": "0x30", "name": "maxRenderSizeX", "type": "float", "formula": "(float) ctx+0x228"},
+        {"offset": "0x34", "name": "maxRenderSizeY", "type": "float", "formula": "(float) ctx+0x22c"},
+        {"offset": "0x38", "name": "deltaJitterX", "type": "float", "formula": "(prevJitterX - jitterX)/renderWidth  [only if ctx+0x225 flag set]"},
+        {"offset": "0x3c", "name": "deltaJitterY", "type": "float", "formula": "(prevJitterY - jitterY)/renderHeight [only if ctx+0x225 flag set]"},
+        {"offset": "0x40", "name": "displaySizeX", "type": "int32", "formula": "outputWidth"},
+        {"offset": "0x44", "name": "displaySizeY", "type": "int32", "formula": "outputHeight"},
+        {"offset": "0x48", "name": "reset / deviceLost", "type": "uint32", "formula": "1 if (dispatchDesc.reset | presetChanged | firstFrame) else 0"},
+        {"offset": "0x4c", "name": "renderSizeX", "type": "int32", "formula": "renderWidth (dispatchDesc.renderSize.x)"},
+        {"offset": "0x50", "name": "renderSizeY", "type": "int32", "formula": "renderHeight (dispatchDesc.renderSize.y)"},
+        {"offset": "0x54", "name": "preExposure", "type": "float", "formula": "dispatchDesc.preExposure (0x194)"},
+        {"offset": "0x58", "name": "preExposurePrevious", "type": "float", "formula": "previous-frame preExposure (latched)"},
+        {"offset": "0x5c", "name": "debugViewFlags", "type": "uint32", "formula": "(uint8) dispatchDesc+0x31"},
+        {"offset": "0x60", "name": "sharpness", "type": "float", "formula": "dispatchDesc.sharpness (0x18c)"}
+      ],
+      "note": "Structurally identical to FSR 4.0.2 FSR4Constants (report 00-final-re-report.md sec 3.3). Fields 0x38/0x3c (deltaJitter) gated by reactive-mask context bool ctx+0x225."
+    },
+    "DispatchDimensions": {
+      "ctx_src": "stack buffer local_f08 (filled by FUN_1800083c0)",
+      "size_bytes": 272,
+      "cbv_slot_descriptor_offset": "0x138",
+      "upload_call": "(ctx+0x78)(ctx+8, local_f08, 0x110, ctx+0x138)",
+      "contents": "header[0..0x43] = per-tier aligned render dimensions (W,H,0,0 per tier, 17 tiers); body[0x44..] = 14 (gridX,gridY,gridZ,pad) quads, one per dispatch slot. The pass-iteration grid for the 27 model passes themselves is NOT in here — those grids are read from the per-pass PSO struct and passed as args to FUN_18000d380."
+    },
+    "AutoExposure_SPD": {
+      "ctx_src_offset": "0x10c700",
+      "size_bytes": 256,
+      "cbv_slot_descriptor_offset": "0x118",
+      "upload_call": "(ctx+0x78)(ctx+8, ctx+0x10c700, 0x100, ctx+0x118)",
+      "only_when": "ctx+0x21e (autoExposure flag) set",
+      "layout": [
+        {"offset": "0x00", "name": "spdMipCount", "type": "int32", "formula": "min(floor(log2(max(renderW,renderH))), DAT_180ec57f8)"},
+        {"offset": "0x04", "name": "spdTileCount", "type": "uint32", "formula": "(ceil(renderH/64)) * (ceil(renderW/64))"},
+        {"offset": "0x08", "name": "pad", "type": "uint64", "formula": "0"},
+        {"offset": "0x10", "name": "exposureNormX", "type": "float", "formula": "1.0/renderWidth"},
+        {"offset": "0x14", "name": "exposureNormY", "type": "float", "formula": "1.0/renderHeight"},
+        {"offset": "0x18", "name": "preExposure", "type": "float", "formula": "dispatchDesc.preExposure"}
+      ]
+    },
+    "ExposureResource": {
+      "ctx_src_offset": "0x10c800",
+      "size_bytes": 256,
+      "cbv_slot_descriptor_offset": "0x128",
+      "upload_call": "(ctx+0x78)(ctx+8, ctx+0x10c800, 0x100, ctx+0x128)",
+      "contents": "[0]=computedExposureScale (exp2 of sharpness-driven exponent when non-autoexposure; see bitfield/log2 path at lines 447-455), [8]=0. Built from dispatchDesc.preExposure/sharpness. Also receives the resource descriptor pointers (color/depth/motion/exposure/output) copied at lines 337-367 but those are uploaded to descriptor-heap slots (ctx+0x14c/0x150/0x154/0x158/0x1dc), not into this cbuffer."
+    }
+  },
+
+  "per_pass_cbuffer": {
+    "_comment": "There is NO per-pass distinct cbuffer. ALL 27 model passes bind the SAME shared FSR4Constants (ctx+0xf8) and DispatchDimensions (ctx+0x138) cbuffers. What varies per pass is: (a) the SRV/UAV/CBV descriptor-handle selection (done in FUN_18000d380 by indexing the per-pass binding tables), and (b) the dispatch grid (X,Y) passed as args. The pass index (0..26) selects a per-pass PSO struct at ctx+0x238+passIdx*0x8e68 holding the binding-index arrays + shader bytecode handle. Sample grids from FUN_18000d5b0:",
+    "SPD_AutoExposure_pass": {"struct": "ctx+0xf9598", "gridX": "ceil(renderWidth/64)", "gridY": "ceil(renderHeight/64)", "gridZ": 1},
+    "RCAS_pass": {"struct": "ctx+0xf0730", "gridX": "ceil((renderWidth+15)/16)", "gridY": "ceil((outputHeight+15)/16)", "gridZ": 1, "only_when": "dispatchDesc+0x31 (enableSharpening) set"},
+    "DebugView_pass": {"struct": "ctx+0x102400", "gridX": "ceil((renderWidth+7)/8)", "gridY": "ceil((outputHeight+7)/8)", "gridZ": 1, "only_when": "FFX_UPSCALE_FLAG_DRAW_DEBUG_VIEW set"},
+    "model_pass_0..26": {"struct": "ctx+0x238 + i*0x8e68", "gridX": "puVar20[-1] (from per-pass PSO table local_df8)", "gridY": "*puVar20", "gridZ": "1", "dispatch_helper": "FUN_18000d380(ctx, struct, gridX, gridY)"}
+  },
+
+  "weight_offset_source": {
+    "answer": "NOT a host cbuffer. Weight/tensor offsets are computed ON THE GPU inside each shader blob.",
+    "host_contribution": [
+      "Binds the 131072-byte InitializerBuffer (weight blob) as a raw/structured SRV (resource id 17/18 per architecture-map). Uploaded once at CreateContext: 0x20000 bytes per preset (text_00b3c0).",
+      "Provides FSR4Constants (dimensions, scale, jitter) via cbuffer; shaders combine these with per-pass constants baked into shader bytecode (pass index, layer channel counts, HWNC strides) to derive each tensor's base offset into the weight blob + the scratch buffer.",
+      "The host NEVER writes a per-pass 'weight base offset' i32/float into any cbuffer."
+    ],
+    "weight_blob_layout": {
+      "total_size_bytes": 131072,
+      "v402_total": 130088,
+      "zones": [
+        {"name": "fp16_params", "offset": 0, "size": 7208, "dtype": "fp16", "elements": 3604, "tensors": 40, "note": "39 biases + encoder1 downscale conv weight"},
+        {"name": "fp8_weights", "offset": 7208, "size": 122880, "dtype": "uint8/FP8", "elements": 122880, "tensors": 38, "layout": "HWNC or HWCN"},
+        {"name": "extra_scale_factors", "offset": 130088, "size": 888, "dtype": "fp16", "elements": 444, "note": "4.1.0 ONLY — per-layer quantization scale factors; absent in 4.0.2"},
+        {"name": "padding", "offset": 130976, "size": 96, "dtype": "zeros", "note": "align total to 0x20000"}
+      ]
+    }
+  },
+
+  "scratch_buffer_allocation": {
+    "host_ring_sizes_FUN_180001df0": {
+      "cbuffer_upload_ring": "frameCount * 0x19000 (102400 B/frame)",
+      "scratch_ring_0": "frameCount * 0xbe000 (1245184 B/frame)",
+      "scratch_ring_1": "frameCount * 0x8000 (32768 B/frame)",
+      "scratch_ring_2": "frameCount * 0xc8000 (819200 B/frame)",
+      "descriptor_ring": "frameCount * 0x60 (96 B/frame)"
+    },
+    "per_frame_wraparound": "FUN_180004eb0 resets the per-frame cbuffer cursor (param_1+0x44) to 0 when (frameCount*0x19000) < cursor+1+dispatchesThisFrame (lines 99 & 303). This is the ring-buffer wrap for the GPU cbuffer VAs computed as base + cursor*elementSize.",
+    "gpu_atomic_scratch": {
+      "mechanism": "AtomicCompareExchange inside Group-A 'data orchestration' shaders (782-9088 ACE ops/blob per architecture-map).",
+      "host_setup": "FUN_180004eb0 emits UAV-counter resource barriers (FUN_180001710) that transition the counter buffer backing the atomic allocator. The barrier descriptor is written at ctx+0x68..0x84 per allocation slot: fields = {state=0, pad, uavGPUHandle.lo, uavGPUHandle.hi, 0xFFFFFFFF, counterLo, counterHi, pad2}. Counter resources flagged with bits 2/4/0x40 per category. Counter array grows at ctx+0x1068.",
+      "scratch_size_at_runtime": "resolution-dependent: ~21 MB @1080p, ~84 MB @4K, ~322 MB @8K (provider-diff-report)"
+    }
+  },
+
+  "key_constants": {
+    "0x19000": {"dec": 102400, "meaning": "per-frame cbuffer/upload ring slot size (bytes)"},
+    "0x8e68": {"dec": 36456, "meaning": "per-pass PSO struct stride (ctx+0x238 + i*0x8e68)"},
+    "0x8c": {"dec": 140, "meaning": "per-resource binding-table entry stride"},
+    "0x40": {"dec": 64, "meaning": "per-descriptor resource-entry stride (SRV/UAV/CBV descriptor records)"},
+    "0xbe000": {"dec": 1245184, "meaning": "scratch ring 0 size per frame"},
+    "0xc8000": {"dec": 819200, "meaning": "scratch ring 2 size per frame"},
+    "0x8000": {"dec": 32768, "meaning": "scratch ring 1 size per frame"},
+    "0x20000": {"dec": 131072, "meaning": "InitializerBuffer (weight blob) total size; uploaded per preset at CreateContext"},
+    "0x1688": {"dec": 5768, "meaning": "fixed constant seen in dispatch/barrier setup (text_004eb0:422, text_0025d0:351, text_0031b0:102, text_003940:55/108) — used as a dispatch element/tile count in the structured-resource UAV path; candidate for a fixed tensor-tile element count"},
+    "0x1b": {"dec": 27, "meaning": "number of FFX_FSR4 model passes dispatched per frame (also 0x1c=28 incl. extra, 0x1d=29 RCAS, pass-name indices)"},
+    "7208": {"meaning": "weight blob zone: fp16 params size (offset 0)"},
+    "122880": {"meaning": "weight blob zone: fp8/uint8 weights size (offset 7208)"},
+    "130088": {"meaning": "weight blob zone: extra fp16 scale factors start (= 7208+122880); also v4.0.2 total blob size"},
+    "131072": {"meaning": "v4.1.0 total weight blob size (0x20000)"},
+    "444": {"meaning": "count of extra fp16 scale factors (4.1.0 only)"},
+    "ctx_cbuffer_regions": {"0x10c600": "FSR4Constants(256B)->slot0xf8", "0x10c700": "AutoExposure/SPD(256B)->slot0x118", "0x10c800": "Exposure(256B)->slot0x128", "0x138": "DispatchDimensions(272B, stack)->slot0x138"},
+    "ctx_pass_structs": {"0x238": "model pass 0 base (stride 0x8e68)", "0xf9598": "SPD/AutoExposure pass", "0xf0730": "RCAS pass", "0x102400": "DebugView pass"},
+    "ctx_descriptor_tables": {"0x148": "SRV handle table", "0x1ac": "UAV handle table", "0xf8": "CBV handle table (entry=0x10)"}
+  },
+
+  "byte_offset_hex_search": {
+    "note": "The specific hex offsets 0x1C28 / 0x1FC28 etc. do NOT appear as immediates in the decompiled C. Those are GPU-side offsets into the weight blob/scratch computed by shader arithmetic from cbuffer values — confirming the architecture-map conclusion that 4.1.0 tensor offsets are runtime-derived, not host-baked. The only weight-region offsets present in host code are the blob-zone boundaries 7208/122880/130088/131072 (and they appear in spec/blob-format.json, derived from binary analysis, not as function immediates).",
+    "offset_like_hex_found_in_host": ["0x1688 (dispatch/tile constant)", "0x8e68 (pass stride)", "0x8c (binding stride)", "0x20000 (blob size)", "0x19000/0xbe000/0xc8000/0x8000 (ring sizes)"]
+  },
+
+  "confidence": {
+    "FSR4Constants_layout": "High — directly decoded from text_00d5b0.c lines 291-336; matches 4.0.2 schema per repo reports.",
+    "dispatch_flow": "High — cross-verified across text_00d5b0/0083c0/00d380/004eb0/00b3c0/0041f0/033180.",
+    "no_per_pass_weight_offset_cbuffer": "High — no host function writes a pass-indexed weight base offset; architecture-map + tensor-verification-report both flag 4.1.0 offsets as GPU-derived (Unresolved at runtime).",
+    "exact_runtime_tensor_offsets": "Unresolved — requires runtime cbuffer+rawBufferLoad capture (see reports/00-final-re-report.md §5)."
+  }
+}

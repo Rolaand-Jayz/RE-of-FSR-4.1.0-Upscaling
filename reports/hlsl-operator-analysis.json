@@ -1,0 +1,1774 @@
+{
+  "schema_version": "1.0",
+  "source": "4.0.2 MIT HLSL ml2code_runtime (115 operator files)",
+  "operators": {
+    "config.hlsli": {
+      "path": "config.hlsli",
+      "size": 2574,
+      "lines": 72,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": []
+    },
+    "globals.hlsli": {
+      "path": "globals.hlsli",
+      "size": 7339,
+      "lines": 186,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "OffsetOf",
+        "OffsetOf",
+        "Pack2h",
+        "Pack4u8",
+        "InsideSlice",
+        "InsideTensor",
+        "ValidPosition",
+        "ValidPosition",
+        "ValidPosition",
+        "NeedSliceBounds"
+      ]
+    },
+    "padding.hlsli": {
+      "path": "padding.hlsli",
+      "size": 14569,
+      "lines": 382,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                            {\n                                resetOp.Execute(tensor, pos + int3(-tensor.paddingBegin.x + padX, -tensor.paddingBegin.y + padY, c))"
+        ],
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                    {\n                        resetOp.Execute(tensor, pos + int3(0, -tensor.paddingBegin.y + pad, c))"
+        ],
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                            {\n                                resetOp.Execute(tensor, pos + int3(1 + padX, -tensor.paddingBegin.y + padY, c))"
+        ],
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                    {\n                        resetOp.Execute(tensor, pos + int3(-tensor.paddingBegin.x + pad, 0, c))"
+        ],
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                    {\n                        resetOp.Execute(tensor, pos + int3(1 + pad, 0, c))"
+        ],
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                            {\n                                resetOp.Execute(tensor, pos + int3(-tensor.paddingBegin.x + padX, 1 + padY, c))"
+        ],
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                    {\n                        resetOp.Execute(tensor, pos + int3(0, 1 + pad, c))"
+        ],
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                            {\n                                resetOp.Execute(tensor, pos + int3(1 + padX, 1 + padY, c))"
+        ],
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                    {\n                        resetOp.Execute(tensor, pos + int3(-tensor.paddingBegin.x, -tensor.paddingBegin.y, c))"
+        ],
+        [
+          "c",
+          "resetOp.GetBatchSize())\n                {\n                    resetOp.Execute(tensor, pos + int3(0, -tensor.paddingBegin.y, c))"
+        ]
+      ],
+      "functions": [
+        "Execute",
+        "GetBatchSize",
+        "Execute",
+        "GetBatchSize",
+        "Execute",
+        "GetBatchSize",
+        "Execute",
+        "GetBatchSize",
+        "Execute",
+        "GetBatchSize"
+      ]
+    },
+    "scalar_functions.hlsli": {
+      "path": "scalar_functions.hlsli",
+      "size": 484,
+      "lines": 29,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": []
+    },
+    "storage.hlsli": {
+      "path": "storage.hlsli",
+      "size": 3769,
+      "lines": 101,
+      "load_patterns": [
+        ".Load(byteOffset)",
+        ".Load2(byteOffset)",
+        ".Load3(byteOffset)",
+        ".Load4(byteOffset)",
+        ".Load(byteOffset)"
+      ],
+      "acc_patterns": [],
+      "functions": [
+        "Load1",
+        "Load1",
+        "Store1",
+        "Store2",
+        "Store3",
+        "Store4",
+        "Load1",
+        "Load1",
+        "Store1",
+        "Store2"
+      ]
+    },
+    "tensor_float16.hlsli": {
+      "path": "tensor_float16.hlsli",
+      "size": 7704,
+      "lines": 211,
+      "load_patterns": [
+        ".Load1(AlignDownToDWord(byteAddress)",
+        ".Load1(byteAddress)",
+        ".Load2(AlignDownToDWord(byteAddress)",
+        ".Load4(input.OffsetOf(po)"
+      ],
+      "acc_patterns": [
+        [
+          "x",
+          "2)\n    {\n        const int po = output.threadGroupSliceStart + x"
+        ],
+        [
+          "x",
+          "2)\n        {\n            const int2 po = output.threadGroupSliceStart + uint2(x, y)"
+        ],
+        [
+          "x",
+          "2)\n            {\n                const int3 po = output.threadGroupSliceStart + int3(x, y, c)"
+        ],
+        [
+          "x",
+          "2)\n            {\n                const int3 po = workOffset + int3(x, y, z)"
+        ],
+        [
+          "c",
+          "8)\n                {\n                    const int4 po = poBase + int4(0, 0, c, 0)"
+        ]
+      ],
+      "functions": [
+        "CopyTensor1h",
+        "CopyTensor2h",
+        "CopyTensor3h",
+        "CopyTensor",
+        "CopyTensor4h"
+      ]
+    },
+    "tensor_float32.hlsli": {
+      "path": "tensor_float32.hlsli",
+      "size": 4938,
+      "lines": 138,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "CopyTensor1f",
+        "CopyTensor2f",
+        "CopyTensor3f"
+      ]
+    },
+    "tensor_float8.hlsli": {
+      "path": "tensor_float8.hlsli",
+      "size": 1479,
+      "lines": 42,
+      "load_patterns": [
+        ".Load1(byteAddress)"
+      ],
+      "acc_patterns": [],
+      "functions": [
+        "Store4f8A"
+      ]
+    },
+    "tensor_int32.hlsli": {
+      "path": "tensor_int32.hlsli",
+      "size": 846,
+      "lines": 26,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": []
+    },
+    "tensor_int8.hlsli": {
+      "path": "tensor_int8.hlsli",
+      "size": 1479,
+      "lines": 42,
+      "load_patterns": [
+        ".Load1(byteAddress)"
+      ],
+      "acc_patterns": [],
+      "functions": [
+        "Store4i8A"
+      ]
+    },
+    "tensor_uint8.hlsli": {
+      "path": "tensor_uint8.hlsli",
+      "size": 1040,
+      "lines": 32,
+      "load_patterns": [
+        ".Load1(byteAddress)"
+      ],
+      "acc_patterns": [],
+      "functions": [
+        "Store4u8A"
+      ]
+    },
+    "Add.hlsli": {
+      "path": "operators/uint8_NHWC/Add.hlsli",
+      "size": 2551,
+      "lines": 71,
+      "load_patterns": [
+        ".Load4(aOffset + c * 2)",
+        ".Load4(aOffset + c * 2)",
+        ".Load2(aOffset + c * 2)",
+        ".Load2(bOffset + c * 2)"
+      ],
+      "acc_patterns": [
+        [
+          "c",
+          "8"
+        ],
+        [
+          "c",
+          "4"
+        ]
+      ],
+      "functions": [
+        "PipelinedAdd",
+        "Add"
+      ]
+    },
+    "AveragePool2D_k2s2.hlsli": {
+      "path": "operators/float32/AveragePool2D_k2s2.hlsli",
+      "size": 1397,
+      "lines": 36,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "sum",
+          "Load2f(input, basePi + uint3(0, 1, 0))"
+        ]
+      ],
+      "functions": [
+        "AveragePool2D_k2s2"
+      ]
+    },
+    "Concat.hlsli": {
+      "path": "operators/int8_NHWC/Concat.hlsli",
+      "size": 4353,
+      "lines": 113,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "z",
+          "4)\n            {\n                const int3 po = workOffset + int3(x, y, z)"
+        ],
+        [
+          "z",
+          "4)\n            {\n                const int3 po = workOffset + int3(x, y, z)"
+        ],
+        [
+          "z",
+          "4)\n            {\n                const int3 po = workOffset + int3(x, y, z)"
+        ]
+      ],
+      "functions": [
+        "Concat",
+        "Concat",
+        "Concat"
+      ]
+    },
+    "Conv2D.hlsli": {
+      "path": "operators/uint8_NHWC/Conv2D.hlsli",
+      "size": 3438,
+      "lines": 99,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "Conv2D",
+        "ValidInput",
+        "ValidOutput",
+        "Dot",
+        "StoreOutput4",
+        "Conv2D",
+        "ValidInput",
+        "ValidOutput",
+        "StoreOutput4"
+      ]
+    },
+    "Conv2D_k1.hlsli": {
+      "path": "operators/float32/Conv2D_k1.hlsli",
+      "size": 5886,
+      "lines": 148,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ],
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ],
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ]
+      ],
+      "functions": [
+        "Conv2D_k1",
+        "Conv2D",
+        "Conv2D"
+      ]
+    },
+    "Conv2D_k1b.hlsli": {
+      "path": "operators/float32/Conv2D_k1b.hlsli",
+      "size": 5946,
+      "lines": 149,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ],
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ],
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ]
+      ],
+      "functions": [
+        "Conv2D_k1b",
+        "Conv2D",
+        "Conv2D"
+      ]
+    },
+    "Conv2D_k2s2.hlsli": {
+      "path": "operators/float32/Conv2D_k2s2.hlsli",
+      "size": 1886,
+      "lines": 47,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ]
+      ],
+      "functions": [
+        "Conv2D_k2s2"
+      ]
+    },
+    "Conv2D_k2s2b.hlsli": {
+      "path": "operators/int8_NHWC/Conv2D_k2s2b.hlsli",
+      "size": 16509,
+      "lines": 448,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(bias.OffsetOf(0)",
+        ".Load4(bias.OffsetOf(8)",
+        ".Load4(inputOffset)"
+      ],
+      "acc_patterns": [],
+      "functions": [
+        "Conv_8_16_k2s2b",
+        "Conv_8_16_k2s2b",
+        "Conv_10_16_k2s2b",
+        "Conv2D_k2s2b",
+        "ValidInput",
+        "ValidOutput",
+        "Dot",
+        "StoreOutput4",
+        "Conv2D_k2s2b",
+        "ValidInput"
+      ]
+    },
+    "Conv2D_k3b.hlsli": {
+      "path": "operators/float16_NHWC/Conv2D_k3b.hlsli",
+      "size": 1733,
+      "lines": 52,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "Conv2D_k3b",
+        "ValidInput",
+        "ValidOutput",
+        "StoreOutput4"
+      ]
+    },
+    "Conv2D_k3p1.hlsli": {
+      "path": "operators/float32/Conv2D_k3p1.hlsli",
+      "size": 5888,
+      "lines": 148,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ],
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ],
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ]
+      ],
+      "functions": [
+        "Conv2D_k3p1",
+        "Conv2D",
+        "Conv2D"
+      ]
+    },
+    "Conv2D_k3p1b.hlsli": {
+      "path": "operators/int8_NHWC/Conv2D_k3p1b.hlsli",
+      "size": 4062,
+      "lines": 116,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "Conv2D_k3p1b",
+        "ValidInput",
+        "ValidOutput",
+        "Dot",
+        "StoreOutput4",
+        "Conv2D_k3p1b",
+        "ValidInput",
+        "ValidOutput",
+        "Dot",
+        "StoreOutput4"
+      ]
+    },
+    "Conv2D_k3p1g.hlsli": {
+      "path": "operators/float16_NHWC/Conv2D_k3p1g.hlsli",
+      "size": 51806,
+      "lines": 1414,
+      "load_patterns": [
+        ".Load4(biasOffset)",
+        ".Load4(biasOffset)",
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(inputOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "c",
+          "4)\n            {\n                int3 ps = piBase + uint3(kx, ky, c)"
+        ],
+        [
+          "c",
+          "4)\n                {\n                    const uint4 pw = uint4(kx, ky, c, f)"
+        ],
+        [
+          "f",
+          "4)\n    {\n        int3 po = poBase"
+        ],
+        [
+          "z",
+          "f"
+        ],
+        [
+          "f",
+          "8)\n    {\n        const uint4 biasDwords = bias.storage.Load4(biasOffset)"
+        ],
+        [
+          "biasOffset",
+          "8*2"
+        ],
+        [
+          "c",
+          "4)\n            {\n                int3 ps = piBase + uint3(kx, ky, c)"
+        ],
+        [
+          "c",
+          "4)\n                {\n                    const uint4 pw = uint4(kx, ky, c, f)"
+        ],
+        [
+          "f",
+          "4)\n    {\n        int3 po = poBase"
+        ],
+        [
+          "z",
+          "f"
+        ]
+      ],
+      "functions": [
+        "InnerConv4_16_32",
+        "InnerConv4_16_32",
+        "InnerConv4_32_64",
+        "InnerConv4_8_16",
+        "InnerConv4_10_16",
+        "Conv2dDownsample_2x2",
+        "Conv2dDownsample_2x2_UnRolled2x",
+        "InnerConv4",
+        "InnerConv4Padded_16_32",
+        "InnerConv4Padded"
+      ]
+    },
+    "Conv2D_k3p1gb.hlsli": {
+      "path": "operators/int8_NHWC/Conv2D_k3p1gb.hlsli",
+      "size": 1964,
+      "lines": 56,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "Conv2D_k3p1b",
+        "ValidInput",
+        "ValidOutput",
+        "Dot",
+        "StoreOutput4"
+      ]
+    },
+    "ConvTranspose2D_k2s2b.hlsli": {
+      "path": "operators/int8_NHWC/ConvTranspose2D_k2s2b.hlsli",
+      "size": 6265,
+      "lines": 139,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "c16",
+          "1)\n            {\n                packedVss[c16] = input.storage.Load4(inputOffset)"
+        ],
+        [
+          "inputOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w0 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w1 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w2 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w3 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ]
+      ],
+      "functions": [
+        "ConvTranspose2D_Add_2x2_2x2_3413_NHWC_HWCN_44i8",
+        "ConvTranspose2D_k2s2b"
+      ]
+    },
+    "Cos.hlsli": {
+      "path": "operators/float16_NHWC/Cos.hlsli",
+      "size": 1150,
+      "lines": 30,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "2)\n            {\n                const int3 po = workOffset + int3(x, y, c)"
+        ]
+      ],
+      "functions": [
+        "Cos"
+      ]
+    },
+    "DequantizeLinear.hlsli": {
+      "path": "operators/float32_NHWC/DequantizeLinear.hlsli",
+      "size": 3184,
+      "lines": 78,
+      "load_patterns": [
+        ".Load1(readOffset + c)"
+      ],
+      "acc_patterns": [
+        [
+          "c",
+          "4)\n            {\n                const int3 po = poBase + int3(0, 0, c)"
+        ],
+        [
+          "c",
+          "4)\n            {\n                const int8_t4_packed packed = input.storage.Load1(readOffset + c)"
+        ]
+      ],
+      "functions": [
+        "DequantizeLinear",
+        "DequantizeLinear"
+      ]
+    },
+    "Div.hlsli": {
+      "path": "operators/float16_NHWC/Div.hlsli",
+      "size": 2668,
+      "lines": 64,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "2)\n            {\n                const int3 po = workOffset + int3(x, y, c)"
+        ],
+        [
+          "c",
+          "2)\n            {\n                const int3 po = workOffset + int3(x, y, c)"
+        ]
+      ],
+      "functions": [
+        "Div",
+        "Div"
+      ]
+    },
+    "Log.hlsli": {
+      "path": "operators/float32/Log.hlsli",
+      "size": 1278,
+      "lines": 30,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "Log"
+      ]
+    },
+    "Mul.hlsli": {
+      "path": "operators/float32/Mul.hlsli",
+      "size": 2602,
+      "lines": 61,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "Mul",
+        "Mul"
+      ]
+    },
+    "Pad.hlsli": {
+      "path": "operators/int8_NHWC/Pad.hlsli",
+      "size": 5863,
+      "lines": 150,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "4) //Assume we are memory padding to multiples of four for int8\n            {\n                int8_t4_packed values = Load4i8A(input, poBase + int3(0, 0, c))"
+        ],
+        [
+          "threadGroupStorageByteOffset",
+          "dot(output.paddingBegin, output.storageByteStrides)"
+        ]
+      ],
+      "functions": [
+        "SetPaddingConstant",
+        "SetPaddingReflect",
+        "SetPaddingEdge",
+        "SetPaddingWrap",
+        "Pad",
+        "Pad"
+      ]
+    },
+    "Relu.hlsli": {
+      "path": "operators/uint8_NHWC/Relu.hlsli",
+      "size": 2532,
+      "lines": 71,
+      "load_patterns": [
+        ".Load4(readOffset + c * 2)",
+        ".Load2(readOffset + c * 2)"
+      ],
+      "acc_patterns": [
+        [
+          "c",
+          "8"
+        ],
+        [
+          "c",
+          "4"
+        ]
+      ],
+      "functions": [
+        "PipelinedRelu",
+        "Relu"
+      ]
+    },
+    "Resize.hlsli": {
+      "path": "operators/float32/Resize.hlsli",
+      "size": 4647,
+      "lines": 128,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "Resize2x_nearest",
+        "Resize_nearest",
+        "Resize_nearest",
+        "Resize_nearest2x"
+      ]
+    },
+    "Sigmoid.hlsli": {
+      "path": "operators/float32/Sigmoid.hlsli",
+      "size": 1321,
+      "lines": 31,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "Sigmoid"
+      ]
+    },
+    "Sin.hlsli": {
+      "path": "operators/float16_NHWC/Sin.hlsli",
+      "size": 1150,
+      "lines": 30,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "2)\n            {\n                const int3 po = workOffset + int3(x, y, c)"
+        ]
+      ],
+      "functions": [
+        "Sin"
+      ]
+    },
+    "Split.hlsli": {
+      "path": "operators/float32/Split.hlsli",
+      "size": 1143,
+      "lines": 28,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "Split"
+      ]
+    },
+    "Sqrt.hlsli": {
+      "path": "operators/float16_NHWC/Sqrt.hlsli",
+      "size": 1127,
+      "lines": 28,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "2)\n            {\n                const int3 po = workOffset + int3(x, y, c)"
+        ]
+      ],
+      "functions": [
+        "Sqrt"
+      ]
+    },
+    "CNB_CT2D.hlsli": {
+      "path": "operators/float16_NHWC/Fused/CNB_CT2D.hlsli",
+      "size": 33053,
+      "lines": 777,
+      "load_patterns": [
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "c",
+          "16)\n    {\n        const uint4 w0 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n    {\n        const uint4 w1 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n    {\n        const uint4 w2 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n    {\n        const uint4 w3 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n    {\n        const uint4 w0 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16"
+        ]
+      ],
+      "functions": [
+        "CNB_CT2D",
+        "CNB_CT2D",
+        "CNB_CT2D"
+      ]
+    },
+    "FasterNet.hlsli": {
+      "path": "operators/float16_NHWC/Fused/FasterNet.hlsli",
+      "size": 36104,
+      "lines": 825,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(kernelOffset)",
+        ".Load4(inputOffset)",
+        ".Load4(kernelOffset)",
+        ".Load4(inputOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "z",
+          "4)\n            {\n                int3 po = int3(poBase.xy, z)"
+        ],
+        [
+          "c",
+          "8)\n                        {\n                            const uint4 inputDwords = input.storage.Load4(inputOffset)"
+        ],
+        [
+          "accumulator",
+          "dot(Unpack4h(inputDwords.xy), Unpack4h(kernelDwords.xy))"
+        ],
+        [
+          "accumulator",
+          "dot(Unpack4h(inputDwords.zw), Unpack4h(kernelDwords.zw))"
+        ],
+        [
+          "inputOffset",
+          "8*2"
+        ],
+        [
+          "kernelOffset",
+          "8*2"
+        ],
+        [
+          "j",
+          "4)\n                {\n                    half4 conv_output = half4(conv0_output[j], conv0_output[j+1], conv0_output[j+2], conv0_output[j+3])"
+        ],
+        [
+          "accumulator",
+          "dot(conv_output, Load4hA(weights1, uint4(0,0,j,i)))"
+        ],
+        [
+          "i",
+          "4) // num channels in the output\n            {\n                half4 accumulator = 0"
+        ],
+        [
+          "j",
+          "4)\n                {\n                    half4 relu_out = half4(relu_output[j], relu_output[j+1], relu_output[j+2], relu_output[j+3])"
+        ]
+      ],
+      "functions": [
+        "FasterNet48_NoGroup",
+        "FasterNet_Group2",
+        "FasterNet_NoGroup",
+        "FasterNet64_Waveops",
+        "FasterNet"
+      ]
+    },
+    "FusedConv2D_DW_Conv2D_PW_Relu_Conv2D_Add.hlsli": {
+      "path": "operators/float16_NHWC/Fused/FusedConv2D_DW_Conv2D_PW_Relu_Conv2D_Add.hlsli",
+      "size": 7803,
+      "lines": 168,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(kernelOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "f",
+          "4)\n                        {\n                            half4 bias = Load4hA(bias0, f)"
+        ],
+        [
+          "i",
+          "4)\n                        {\n                            half4 accumulator = Load4hA(bias1, i)"
+        ],
+        [
+          "c",
+          "8)\n                                {\n                                    const uint4 inputDwords = input.storage.Load4(inputOffset)"
+        ],
+        [
+          "inputOffset",
+          "8*2"
+        ],
+        [
+          "c",
+          "8)\n                                    {\n                                        const uint4 kernelDwords = weights0.storage.Load4(kernelOffset)"
+        ],
+        [
+          "kernelOffset",
+          "8*2"
+        ],
+        [
+          "j",
+          "4)\n                        {\n                            half4 conv_output = half4(conv0_output[j], conv0_output[j+1], conv0_output[j+2], conv0_output[j+3])"
+        ],
+        [
+          "accumulator",
+          "dot(conv_output, Load4hA(weights1, uint4(0,0,j,i)))"
+        ],
+        [
+          "i",
+          "4) // num channels in the output\n                    {\n                        float4 accumulator = Load4hA(bias2, i)"
+        ],
+        [
+          "j",
+          "4)\n                        {\n                            const half4 relu_out = half4(relu_output[j], relu_output[j+1], relu_output[j+2], relu_output[j+3])"
+        ]
+      ],
+      "functions": [
+        "FusedConv2D_DW_Conv2D_PW_Relu_Conv2D_Add"
+      ]
+    },
+    "FusedConv2D_k1b_Relu.hlsli": {
+      "path": "operators/int8_NHWC/Fused/FusedConv2D_k1b_Relu.hlsli",
+      "size": 2771,
+      "lines": 78,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "FusedConv2D_k1b_Relu",
+        "ValidInput",
+        "ValidOutput",
+        "Dot",
+        "StoreOutput4",
+        "FusedConv2D_k1b_Relu"
+      ]
+    },
+    "FusedConv2D_k1b_SqrSwish.hlsli": {
+      "path": "operators/float16_NHWC/Fused/FusedConv2D_k1b_SqrSwish.hlsli",
+      "size": 4548,
+      "lines": 146,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "4)\n                    {\n                        const uint4 pw = uint4(kx, ky, c, f)"
+        ],
+        [
+          "c",
+          "4)\n                {\n                    const uint4 pw = uint4(kx, ky, c, f)"
+        ]
+      ],
+      "functions": [
+        "InnerConvSqrSwish4Padded",
+        "InnerConvSqrSwish4",
+        "FusedConv2D_k1b_SqrSwish"
+      ]
+    },
+    "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b.hlsli": {
+      "path": "operators/float16_NHWC/Fused/FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b.hlsli",
+      "size": 3348,
+      "lines": 109,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b",
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b",
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b",
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b"
+      ]
+    },
+    "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add.hlsli": {
+      "path": "operators/float16_NHWC/Fused/FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add.hlsli",
+      "size": 1771,
+      "lines": 57,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add",
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add"
+      ]
+    },
+    "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Add.hlsli": {
+      "path": "operators/float16_NHWC/Fused/FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Add.hlsli",
+      "size": 1993,
+      "lines": 63,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Add",
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Add"
+      ]
+    },
+    "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Add_CT2D.hlsli": {
+      "path": "operators/float16_NHWC/Fused/FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Add_CT2D.hlsli",
+      "size": 2317,
+      "lines": 71,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Add_CT2D",
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Add_CT2D"
+      ]
+    },
+    "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Conv2D_k2s2b.hlsli": {
+      "path": "operators/float16_NHWC/Fused/FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Conv2D_k2s2b.hlsli",
+      "size": 2337,
+      "lines": 65,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Conv2D_k2s2b",
+        "FusedConv2D_k3p1b_Conv2D_k1b_SqrSwish_Conv2D_k1b_Add_Conv2D_k2s2b"
+      ]
+    },
+    "FusedConvTranspose2D_k2s2b_Add.hlsli": {
+      "path": "operators/int8_NHWC/Fused/FusedConvTranspose2D_k2s2b_Add.hlsli",
+      "size": 11950,
+      "lines": 262,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "c16",
+          "1)\n            {\n                packedVss[c16] = input.storage.Load4(inputOffset)"
+        ],
+        [
+          "inputOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w0 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w1 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w2 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w3 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ]
+      ],
+      "functions": [
+        "ConvTranspose2D_Add_2x2_2x2_3413_NHWC_HWCN_44i8",
+        "ConvTranspose2D_Add_2x2_2x2_3413_NHWC_HWCN_44i8",
+        "FusedConvTranspose2D_k2s2b_Add"
+      ]
+    },
+    "FusedSinCos.hlsli": {
+      "path": "operators/float16_NHWC/Fused/FusedSinCos.hlsli",
+      "size": 1264,
+      "lines": 32,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "2)\n            {\n                const int3 po = workOffset + int3(x, y, c)"
+        ]
+      ],
+      "functions": [
+        "FusedSinCos"
+      ]
+    },
+    "Split_Conv2D_Concat.hlsli": {
+      "path": "operators/float16_NHWC/Fused/Split_Conv2D_Concat.hlsli",
+      "size": 3335,
+      "lines": 102,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "4)\n//                     {\n//                         const uint4 pw = uint4(kx, ky, c, f)"
+        ],
+        [
+          "z",
+          "4)\n            {\n                int3 po = int3(poBase.xy, z)"
+        ]
+      ],
+      "functions": [
+        "InnerConv4Padded",
+        "Split_Conv2D_Concat"
+      ]
+    },
+    "ConvTranspose2D.hlsli": {
+      "path": "operators/templates/ConvTranspose2D.hlsli",
+      "size": 2699,
+      "lines": 65,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "z",
+          "4)\n            {\n                int3 po = poBase + int3(0,0,z)"
+        ],
+        [
+          "c",
+          "4)\n                        {\n                            const int3 ps = int3(stridedPs / strides, c)"
+        ],
+        [
+          "accumulator",
+          "w0 * vs.x +\n                                w1 * vs.y +\n                                w2 * vs.z +\n                                w3 * vs.w"
+        ]
+      ],
+      "functions": [
+        "TemplatedConvTranspose2D_2x2_2x2_3413_NHWC_44"
+      ]
+    },
+    "ConvTranspose2D_k2.hlsli": {
+      "path": "operators/float32/ConvTranspose2D_k2.hlsli",
+      "size": 1693,
+      "lines": 46,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "accumulator",
+          "w*Load1f(input, ps)"
+        ]
+      ],
+      "functions": [
+        "ConvTranspose2D_k2"
+      ]
+    },
+    "ConvTranspose2D_k2b.hlsli": {
+      "path": "operators/float32/ConvTranspose2D_k2b.hlsli",
+      "size": 1752,
+      "lines": 47,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "accumulator",
+          "w*Load1f(input, ps)"
+        ]
+      ],
+      "functions": [
+        "ConvTranspose2D_k2b"
+      ]
+    },
+    "ConvTranspose2D_k2s2.hlsli": {
+      "path": "operators/float32/ConvTranspose2D_k2s2.hlsli",
+      "size": 2137,
+      "lines": 53,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "accumulator",
+          "w * Load1f(input, ps)"
+        ]
+      ],
+      "functions": [
+        "ConvTranspose2D_k2s2"
+      ]
+    },
+    "LeakyRelu.hlsli": {
+      "path": "operators/float32/LeakyRelu.hlsli",
+      "size": 999,
+      "lines": 23,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "LeakyRelu"
+      ]
+    },
+    "MaxPool2D_k2s2.hlsli": {
+      "path": "operators/float32/MaxPool2D_k2s2.hlsli",
+      "size": 1805,
+      "lines": 45,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": [
+        "MaxPool2D_k2s2"
+      ]
+    },
+    "Shape.hlsli": {
+      "path": "operators/float32/Shape.hlsli",
+      "size": 76,
+      "lines": 1,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": []
+    },
+    "Conv2D_Relu.hlsli": {
+      "path": "operators/float32/Fused/Conv2D_Relu.hlsli",
+      "size": 2212,
+      "lines": 54,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "accumulator",
+          "w * v"
+        ]
+      ],
+      "functions": [
+        "FusedConv2D_Relu"
+      ]
+    },
+    "Conv2D_Relu_Conv2D_Relu_MaxPool2D.hlsli": {
+      "path": "operators/float32/Fused/Conv2D_Relu_Conv2D_Relu_MaxPool2D.hlsli",
+      "size": 76,
+      "lines": 1,
+      "load_patterns": [],
+      "acc_patterns": [],
+      "functions": []
+    },
+    "ConvNextBlock.hlsli": {
+      "path": "operators/int8_NHWC/Fused/ConvNextBlock.hlsli",
+      "size": 26040,
+      "lines": 562,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "f",
+          "4)\n            {\n                const int4 bias = Load4i32(bias0, f)"
+        ],
+        [
+          "i",
+          "4)\n            {\n                int4 accumulator = Load4i32(bias1, i)"
+        ],
+        [
+          "c",
+          "16)\n                    {\n                        const uint inputOffset = input.OffsetOf(piBase + int3(kx, ky, c))"
+        ],
+        [
+          "c",
+          "16)\n                        {\n                            const uint weightsOffset = weights0.OffsetOf(uint4(kx, ky, c, f))"
+        ],
+        [
+          "f",
+          "4)\n            {\n                const int4 conv_accumulator = int4(accumulator[f], accumulator[f+1], accumulator[f+2], accumulator[f+3])"
+        ],
+        [
+          "i",
+          "4)\n            {\n                const int4 vs = int4(relu_output[i], relu_output[i+1], relu_output[i+2], relu_output[i+3])"
+        ],
+        [
+          "i",
+          "4)\n            {\n                const int4 vs = int4(conv3_output[i], conv3_output[i+1], conv3_output[i+2], conv3_output[i+3])"
+        ],
+        [
+          "result",
+          "unpack_s8s32(inputDwords[i/4]) * input.quantizationScale"
+        ],
+        [
+          "f",
+          "4)\n            {\n                const int4 bias = 0"
+        ],
+        [
+          "i",
+          "4)\n            {\n                int4 accumulator = 0"
+        ]
+      ],
+      "functions": [
+        "ConvNextBlock",
+        "ConvNextBlock",
+        "ConvNextBlock"
+      ]
+    },
+    "FNB_CT2D_ADD.hlsli": {
+      "path": "operators/int8_NHWC/Fused/FNB_CT2D_ADD.hlsli",
+      "size": 55481,
+      "lines": 1264,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(inputOffset)",
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "z",
+          "16)\n    {\n        const int3 po = int3(poBase.xy, z)"
+        ],
+        [
+          "i",
+          "16)\n    {\n        const int3 po = int3(poBase.xy, i)"
+        ],
+        [
+          "i",
+          "4)\n    {\n        const int4 b = 0"
+        ],
+        [
+          "c",
+          "16)\n            {\n                const uint inputOffset = input.OffsetOf(piBase + int3(kx, ky, c))"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint weightsOffset = weights0.OffsetOf(uint4(kx, ky, c, f))"
+        ],
+        [
+          "f",
+          "4)\n    {\n        const int4 accumulator = int4(conv_accumulator[f], conv_accumulator[f+1], conv_accumulator[f+2], conv_accumulator[f+3])"
+        ],
+        [
+          "i",
+          "4)\n    {\n        const int4 b = 0"
+        ],
+        [
+          "j",
+          "16)\n        {\n            const uint weightsOffset = weights1.OffsetOf(uint4(0,0,j,i))"
+        ],
+        [
+          "i",
+          "4)\n    {\n        const int4 vs = int4(relu_output[i], relu_output[i+1], relu_output[i+2], relu_output[i+3])"
+        ],
+        [
+          "j",
+          "16)\n        {\n            const uint weightsOffset = weights2.OffsetOf(uint4(0,0,j,i))"
+        ]
+      ],
+      "functions": [
+        "FNB_CT2D_ADD",
+        "FNB_CT2D_ADD",
+        "FNB_CT2D_ADD",
+        "FNB_CT2D_ADD"
+      ]
+    },
+    "FasterNetBlock.hlsli": {
+      "path": "operators/int8_NHWC/Fused/FasterNetBlock.hlsli",
+      "size": 214263,
+      "lines": 4054,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "z",
+          "16)\n                {\n                    const int3 po = int3(poBase.xy, z)"
+        ],
+        [
+          "i",
+          "16)\n                {\n                    const int3 po = int3(poBase.xy, i)"
+        ],
+        [
+          "i",
+          "4)\n                {\n                    const int4 b = Load4i32(bias0, i)"
+        ],
+        [
+          "c",
+          "4)\n                        {\n                            const int3 ps = piBase + int3(kx, ky, c)"
+        ],
+        [
+          "c",
+          "4)\n                            {\n                                int8_t4_packed weights = Load4i8A(weights0, uint4(kx, ky, c, f))"
+        ],
+        [
+          "f",
+          "4)\n                {\n                    const int4 accumulator = int4(conv_accumulator[f], conv_accumulator[f+1], conv_accumulator[f+2], conv_accumulator[f+3])"
+        ],
+        [
+          "i",
+          "4)\n                {\n                    const int4 b = Load4i32(bias1, i)"
+        ],
+        [
+          "i",
+          "4)\n                {\n                    const int4 vs = int4(relu_output[i], relu_output[i+1], relu_output[i+2], relu_output[i+3])"
+        ],
+        [
+          "j",
+          "16)\n                    {\n                        const uint weightsOffset = weights2.OffsetOf(uint4(0,0,j,i))"
+        ],
+        [
+          "inputIndex",
+          "4"
+        ]
+      ],
+      "functions": [
+        "FasterNetBlock",
+        "FasterNetBlock",
+        "FasterNetBlock",
+        "FasterNetBlock",
+        "FasterNetBlock",
+        "FasterNetBlock"
+      ]
+    },
+    "FusedConv2D_k2s2b_QuantizedOutput.hlsli": {
+      "path": "operators/int8_NHWC/Fused/FusedConv2D_k2s2b_QuantizedOutput.hlsli",
+      "size": 40921,
+      "lines": 1037,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffeset)",
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffeset)",
+        ".Load4(inputOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "f",
+          "4)\n    {\n        const int4 b = Load4i32(bias, f)"
+        ],
+        [
+          "f",
+          "4)\n    {\n        int4 acc = int4(accumulator[f], accumulator[f+1], accumulator[f+2], accumulator[f+3])"
+        ],
+        [
+          "f",
+          "4)\n    {\n        int4 acc = int4(accumulator[f], accumulator[f+1], accumulator[f+2], accumulator[f+3])"
+        ],
+        [
+          "f",
+          "4)\n    {\n        const int4 b = 0"
+        ],
+        [
+          "f",
+          "4)\n    {\n        int4 acc = int4(accumulator[f], accumulator[f+1], accumulator[f+2], accumulator[f+3])"
+        ],
+        [
+          "f",
+          "4)\n    {\n        int4 acc = int4(accumulator[f], accumulator[f+1], accumulator[f+2], accumulator[f+3])"
+        ],
+        [
+          "f",
+          "4)\n    {\n        const int4 b = 0"
+        ],
+        [
+          "f",
+          "4)\n    {\n        int4 acc = int4(accumulator[f], accumulator[f+1], accumulator[f+2], accumulator[f+3])"
+        ],
+        [
+          "f",
+          "4)\n    {\n        int4 acc = int4(accumulator[f], accumulator[f+1], accumulator[f+2], accumulator[f+3])"
+        ],
+        [
+          "f",
+          "4)\n    {\n        int4 acc = int4(accumulator[f], accumulator[f+1], accumulator[f+2], accumulator[f+3])"
+        ]
+      ],
+      "functions": [
+        "Conv_16_32",
+        "Conv_16_32",
+        "Conv_16_48",
+        "Conv_8_16_k2s2b",
+        "Conv_32_64",
+        "Conv_32_64",
+        "Conv_48_64",
+        "FusedConv2D_k2s2b_QuantizedOutput",
+        "FusedConv2D_k2s2b_QuantizedOutput",
+        "Conv_16_32"
+      ]
+    },
+    "Fused_FusedConv2D_DW_Conv2D_PW_Relu_Conv2D_Add_FusedConv2D_k2s2b_QuantizedOutput.hlsli": {
+      "path": "operators/float8_NHWC/Fused/Fused_FusedConv2D_DW_Conv2D_PW_Relu_Conv2D_Add_FusedConv2D_k2s2b_QuantizedOutput.hlsli",
+      "size": 15630,
+      "lines": 322,
+      "load_patterns": [
+        ".Load(Conv2D_DW_Conv2D_PW_Relu_Conv2D_Add_bias0.storage.buffer, byteAddress, 0, true)",
+        ".Load(input.storage.buffer, inputOffset, input.storageByteStrides.x, true)",
+        ".Load(Conv2D_DW_Conv2D_PW_Relu_Conv2D_Add_weights0.storage.buffer, weightOffset, Conv2D_DW_Conv2D_PW_Relu_Conv2D_Add_weights0.storageByteStrides.w, false)",
+        ".Load4(weightOffset)",
+        ".Load(Conv2D_DW_Conv2D_PW_Relu_Conv2D_Add_bias1.storage.buffer, byteAddress, 0, true)"
+      ],
+      "acc_patterns": [
+        [
+          "f",
+          "16)\n    {\n        AmdWaveMatrixAccumulator<AmdExtD3DShaderIntrinsicsWaveMatrixDataFormat_F32, 16, 16> accumulatorMatrix[2][4]"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    AmdWaveMatrixB<AmdExtD3DShaderIntrinsicsWaveMatrixDataFormat_FP8, 16, 16> inputMatrix = conv1OutputsWmma[inputWaveOffset][c / 16][Y]"
+        ],
+        [
+          "accumulatorValue",
+          "residual"
+        ],
+        [
+          "storeOffset",
+          "Conv2D_DW_Conv2D_PW_Relu_Conv2D_Add_output.storageByteStrides.x * 16"
+        ],
+        [
+          "f",
+          "16)\n                    {\n                        AmdWaveMatrixA < AmdExtD3DShaderIntrinsicsWaveMatrixDataFormat_FP8, 16, 16 > weightMatrix"
+        ],
+        [
+          "f",
+          "16)\n            {\n                outputMats[f/16][Y].CopySat(accumulatorMatrix[f/16][Y])"
+        ]
+      ],
+      "functions": [
+        "Fused_FusedConv2D_DW_Conv2D_PW_Relu_Conv2D_Add_FusedConv2D_k2s2b_QuantizedOutput"
+      ]
+    },
+    "QuantizeLinear.hlsli": {
+      "path": "operators/uint8_NHWC/QuantizeLinear.hlsli",
+      "size": 3078,
+      "lines": 76,
+      "load_patterns": [],
+      "acc_patterns": [
+        [
+          "c",
+          "4)\n            {\n                const int3 po = poBase + int3(0, 0, c)"
+        ],
+        [
+          "c",
+          "4)\n            {\n                const int3 po = poBase + int3(0, 0, c)"
+        ]
+      ],
+      "functions": [
+        "QuantizeLinear",
+        "QuantizeLinear"
+      ]
+    },
+    "FNB_CT2D.hlsli": {
+      "path": "operators/int8_NHWC/Fused/FNB_CT2D.hlsli",
+      "size": 11373,
+      "lines": 293,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "z",
+          "16)\n    {\n        const int3 po = int3(poBase.xy, z)"
+        ],
+        [
+          "i",
+          "16)\n    {\n        const int3 po = int3(poBase.xy, i)"
+        ],
+        [
+          "i",
+          "4)\n    {\n        const int4 b = 0"
+        ],
+        [
+          "c",
+          "4)\n            {\n                const int3 ps = piBase + int3(kx, ky, c)"
+        ],
+        [
+          "c",
+          "4)\n                {\n                    int8_t4_packed weights = Load4i8A(weights0, uint4(kx, ky, c, f))"
+        ],
+        [
+          "f",
+          "4)\n    {\n        const int4 accumulator = int4(conv_accumulator[f], conv_accumulator[f+1], conv_accumulator[f+2], conv_accumulator[f+3])"
+        ],
+        [
+          "i",
+          "4)\n    {\n        const int4 b = 0"
+        ],
+        [
+          "j",
+          "16)\n        {\n            const uint weightsOffset = weights1.OffsetOf(uint4(0,0,j,i))"
+        ],
+        [
+          "i",
+          "4)\n    {\n        const int4 vs = int4(relu_output[i], relu_output[i+1], relu_output[i+2], relu_output[i+3])"
+        ],
+        [
+          "j",
+          "16)\n        {\n            const uint weightsOffset = weights2.OffsetOf(uint4(0,0,j,i))"
+        ]
+      ],
+      "functions": [
+        "FNB_CT2D"
+      ]
+    },
+    "FusedAdd_QuantizedOutput.hlsli": {
+      "path": "operators/int8_NHWC/Fused/FusedAdd_QuantizedOutput.hlsli",
+      "size": 6615,
+      "lines": 164,
+      "load_patterns": [
+        ".Load2(bOffset + c)",
+        ".Load4(aOffset + c * 2)",
+        ".Load2(bOffset + c)",
+        ".Load4(aOffset + c * 2)",
+        ".Load4(bOffset + c * 2)"
+      ],
+      "acc_patterns": [
+        [
+          "c",
+          "8"
+        ],
+        [
+          "c",
+          "8"
+        ],
+        [
+          "c",
+          "8"
+        ],
+        [
+          "c",
+          "8"
+        ]
+      ],
+      "functions": [
+        "FusedAdd_QuantizedOutput",
+        "FusedAdd_QuantizedOutput"
+      ]
+    },
+    "FusedConvTranspose2D_k2s2b_Add_QuantizedOutput.hlsli": {
+      "path": "operators/int8_NHWC/Fused/FusedConvTranspose2D_k2s2b_Add_QuantizedOutput.hlsli",
+      "size": 12319,
+      "lines": 275,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "c16",
+          "1)\n            {\n                packedVss[c16] = input.storage.Load4(inputOffset)"
+        ],
+        [
+          "inputOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w0 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w1 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w2 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w3 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ]
+      ],
+      "functions": [
+        "ConvTranspose2D_Add_2x2_2x2_3413_NHWC_HWCN_44i8",
+        "ConvTranspose2D_Add_2x2_2x2_3413_NHWC_HWCN_44i8",
+        "FusedConvTranspose2D_k2s2b_Add_QuantizedOutput"
+      ]
+    },
+    "FusedConvTranspose2D_k2s2b_QuantizedOutput.hlsli": {
+      "path": "operators/int8_NHWC/Fused/FusedConvTranspose2D_k2s2b_QuantizedOutput.hlsli",
+      "size": 6046,
+      "lines": 140,
+      "load_patterns": [
+        ".Load4(inputOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)",
+        ".Load4(weightsOffset)"
+      ],
+      "acc_patterns": [
+        [
+          "c16",
+          "1)\n            {\n                packedVss[c16] = input.storage.Load4(inputOffset)"
+        ],
+        [
+          "inputOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w0 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w1 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w2 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ],
+        [
+          "c",
+          "16)\n                {\n                    const uint4 w3 = weights.storage.Load4(weightsOffset)"
+        ],
+        [
+          "weightsOffset",
+          "16*weights.storageByteStrides.w"
+        ]
+      ],
+      "functions": [
+        "ConvTranspose2D_2x2_2x2_3413_NHWC_HWCN_44i8",
+        "FusedConvTranspose2D_k2s2b_QuantizedOutput"
+      ]
+    }
+  }
+}

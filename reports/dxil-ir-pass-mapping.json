@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "model_passes_in_ir": {
+    "pass0_post": "blob_0098.ll",
+    "pass1": "blob_0036.ll",
+    "pass10": "blob_0053.ll",
+    "pass10_post": "blob_0059.ll",
+    "pass11": "blob_0030.ll",
+    "pass11_post": "blob_0012.ll",
+    "pass12": "blob_0054.ll",
+    "pass12_post": "blob_0159.ll",
+    "pass1_post": "blob_0109.ll",
+    "pass2": "blob_0058.ll",
+    "pass2_post": "blob_0055.ll",
+    "pass3": "blob_0116.ll",
+    "pass3_post": "blob_0041.ll",
+    "pass4": "blob_0112.ll",
+    "pass4_post": "blob_0023.ll",
+    "pass5": "blob_0013.ll",
+    "pass5_post": "blob_0087.ll",
+    "pass6": "blob_0017.ll",
+    "pass6_post": "blob_0164.ll",
+    "pass7": "blob_0079.ll",
+    "pass7_post": "blob_0052.ll",
+    "pass8": "blob_0108.ll",
+    "pass8_post": "blob_0038.ll",
+    "pass9": "blob_0104.ll",
+    "pass9_post": "blob_0021.ll",
+    "postpass": "blob_0007.ll",
+    "prepass": "blob_0001.ll"
+  },
+  "total_model_passes": 27
+}
