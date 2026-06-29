@@ -191,7 +191,7 @@ See docs/activation-lut-analysis.md for full analysis.
 
 **Static analysis gaps: closed.** All five original analysis gaps have been resolved through DXIL IR analysis, SPIR-V cross-validation, and 4.0.2 source comparison.
 
-**However:** Runtime validation remains an open credibility gap. The static analysis has not been confirmed by observing the upscaler execute in real time. The historical bit-identical DLL claim is no longer used as proof because it depended on copying original PE regions before comparing hashes. The current rebuild evidence is bounded to extracted data layout, exported API structure, and per-section comparison. Dispatch sequence and runtime resource bindings are inferred, not observed. See the README for details on what runtime validation would require.
+**However:** Static analysis gaps are now closed: tensor offsets verified (78/78), MAC arithmetic extracted from MIT HLSL source, host dispatch decoded via Ghidra. Runtime validation (temporal flow, conditional passes, runtime cbuffer values) remains the only open gap. The historical bit-identical DLL claim is no longer used as proof because it depended on copying original PE regions before comparing hashes. The current rebuild evidence is bounded to extracted data layout, exported API structure, and per-section comparison. Dispatch sequence and runtime resource bindings are inferred, not observed. See the README for details on what runtime validation would require.
 ---
 
 ## Previously Listed as Unresolved — Now Resolved

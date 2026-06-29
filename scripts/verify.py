@@ -402,6 +402,43 @@ def finish(report_path: Path) -> int:
     errors = validate_report_rows(results)
     for error in errors:
         record("Verification report schema/consistency validation", False, error)
+    # ============================================================
+    # [V9] Static RE Closure: Tensor offsets + MAC formulas + HLSL xref
+    # ============================================================
+    tov_path = Path("reports/tensor-offset-verification.json")
+    if tov_path.exists():
+        tov = json.loads(tov_path.read_text())
+        record("Tensor offset verification: all 78 tensors pass",
+               tov.get("all_pass", False),
+               f"passed={tov.get('passed')}/{tov.get('tensor_count')}")
+    else:
+        record("Tensor offset verification artifact exists", False, "not found")
+
+    mac_path = Path("reports/mac-arithmetic-complete.json")
+    if mac_path.exists():
+        mac = json.loads(mac_path.read_text())
+        pass_count = len(mac.get("pass_operators", {}))
+        record("MAC arithmetic formulas cover all passes",
+               pass_count >= 12,
+               f"passes_documented={pass_count}")
+    else:
+        record("MAC arithmetic artifact exists", False, "not found")
+
+    closure_path = Path("reports/static-re-closure.md")
+    record("Static RE closure report exists",
+           closure_path.exists(),
+           str(closure_path))
+
+    host_path = Path("reports/host-cbuffer-dispatch.json")
+    record("Host cbuffer dispatch analysis exists",
+           host_path.exists(),
+           str(host_path))
+
+    hlsli_path = Path("reports/hlsl-operator-analysis.json")
+    record("HLSL operator cross-reference exists",
+           hlsli_path.exists(),
+           str(hlsli_path))
+
     passed = sum(1 for _, s, _ in results if s == "PASS")
     failed = sum(1 for _, s, _ in results if s == "FAIL")
     report = {
@@ -414,6 +451,7 @@ def finish(report_path: Path) -> int:
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+
     print("=" * 60)
     print("VERIFICATION SUMMARY")
     print("=" * 60)

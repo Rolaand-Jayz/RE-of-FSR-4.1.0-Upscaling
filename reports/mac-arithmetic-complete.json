@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "source": "4.0.2 MIT-licensed HLSL operator include files (ml2code_runtime)",
+  "method": "Direct read of operator source code cross-referenced with pass function #include directives",
+  "core_formula": "accumulator[output_channel] = bias[output_channel]; for (ky, kx, input_channel): accumulator += weight[ky,kx,input_channel,output_channel] * input[x+kx, y+ky, input_channel]; output = quantize(accumulator)",
+  "wmma_variant": "Uses AmdWaveMatrixMultiply on 16x16 tiles (hardware matrix multiply-accumulate). Weight offset = threadGroupStorageByteOffset + 512 * kernel_y.",
+  "dot4add_variant": "Uses dot4add_i8packed (4-way integer SIMD dot-product accumulation). Weight and input packed as int8_t4_packed.",
+  "relu_confirmation": "HLSL source literally declares 'int relu_output[32]' in ConvNextBlock.hlsli line 53, independently confirming DXIL FMax(x,0.0) = ReLU finding.",
+  "pass_operators": {
+    "pass0": {
+      "operator": "Conv2D_k2s2b",
+      "type": "strided_downscale",
+      "in_channels": 7,
+      "out_channels": 16,
+      "kernel": "2x2",
+      "stride": 2
+    },
+    "pass1": {
+      "operator": "ConvNextBlock_WMMA_FP8",
+      "type": "convnext",
+      "channels": 16,
+      "kernel": "3x3 depthwise + 1x1 pointwise expand/contract"
+    },
+    "pass2": {
+      "operator": "FusedConv2D_k2s2b_QuantizedOutput",
+      "type": "strided_downscale",
+      "in_channels": 16,
+      "out_channels": 32,
+      "kernel": "2x2",
+      "stride": 2
+    },
+    "pass3": {
+      "operator": "FasterNetBlock",
+      "type": "fasternet",
+      "channels": 32,
+      "kernel": "3x3 depthwise + 1x1 pointwise expand/contract"
+    },
+    "pass4": {
+      "operator": "FasterNetBlock",
+      "type": "fasternet",
+      "channels": 32
+    },
+    "pass5": {
+      "operator": "FusedConv2D_k2s2b_QuantizedOutput",
+      "type": "strided_downscale",
+      "in_channels": 32,
+      "out_channels": 64,
+      "kernel": "2x2",
+      "stride": 2
+    },
+    "pass6": {
+      "operator": "FasterNetBlock",
+      "type": "fasternet",
+      "channels": 64
+    },
+    "pass7": {
+      "operator": "FasterNetBlock",
+      "type": "fasternet",
+      "channels": 64,
+      "note": "bottleneck - widest layers"
+    },
+    "pass8": {
+      "operator": "FNB_CT2D_ADD",
+      "type": "fasternet_with_convtranspose",
+      "channels": 64,
+      "note": "includes ConvTranspose2D upscale"
+    },
+    "pass9": {
+      "operator": "FasterNetBlock",
+      "type": "fasternet",
+      "channels": 64
+    },
+    "pass10": {
+      "operator": "FNB_CT2D_ADD",
+      "type": "fasternet_with_convtranspose",
+      "channels": 32,
+      "note": "includes ConvTranspose2D upscale"
+    },
+    "pass11": {
+      "operator": "ConvNextBlock_WMMA_FP8",
+      "type": "convnext",
+      "channels": 32
+    },
+    "pass12": {
+      "operator": "CNB_CT2D",
+      "type": "convnext_with_convtranspose",
+      "channels": 10,
+      "note": "FP16 variant, final decoder"
+    },
+    "pass13": {
+      "operator": "ConvNextBlock",
+      "type": "convnext",
+      "channels": 10,
+      "note": "this is pass12_post in the 4.1.0 DXIL, but HLSL calls it pass13"
+    }
+  },
+  "architecture_type": "bottleneck autoencoder (progressive spatial downsample 1920x1080->480x270 with channel expansion 7->64, then symmetric upsample back)",
+  "skip_connections": "none found in HLSL source",
+  "activation_function": "ReLU (FMax(x, 0.0))"
+}

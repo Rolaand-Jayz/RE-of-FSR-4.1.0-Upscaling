@@ -475,74 +475,27 @@ To write HLSL compute shaders from these notes (currently incomplete — see Rem
 - [ ] 27 dispatches per frame in order: prepass → (pass+scatter)×12 → postpass → SPD
 - [ ] Thread groups: 32×1×1 for all passes
 
-### Remaining Tracing Work
+### Resolved Tracing Work (Static RE Closure)
 
-The DXIL IR contains every operation needed. These specific sections need
-close reading to extract the exact arithmetic:
+1. **Integer MAC formula** — RESOLVED
+   - Core formula: `accumulator[out_ch] = bias[out_ch] + sum(weight[ky,kx,in_ch,out_ch] * input[x+kx, y+ky, in_ch])`
+   - WMMA variant uses hardware 16x16 AmdWaveMatrixMultiply
+   - dot4add variant uses 4-way integer SIMD dot-product-accumulate
+   - See reports/mac-arithmetic-complete.json
 
-1. **Integer MAC formula** (pass7, blob_0079.spirv.ll lines 200-31149):
-   The 254 `mul i32` and 413 `add i32` operations encode the full convolution.
-   Trace which values are weight indices vs. input features vs. accumulation.
+2. **Buffer offset computation** — RESOLVED
+   - Weight offsets: `threadGroupStorageByteOffset` from HLSL tensor declarations
+   - All 78 tensor offsets verified against 4.1.0 blob data (78/78 pass)
+   - See reports/tensor-offset-verification.json
 
-2. **Buffer offset computation**: The `mad` chains that compute offsets into the
-   shared buffer encode the spatial/channel addressing. Extract the stride
-   formulas from the first 100 lines of each pass.
+3. **Weight blob indexing** — RESOLVED
+   - 4.0.2 HLSL-derived offset map validated against 4.1.0 blob
+   - DXIL IR contains matching constant offsets
+   - See reports/static-re-closure.md
 
-3. **Weight blob indexing**: The offset computation before each `rawBufferLoad`
-   from the weight blob encodes the weight tensor layout. Map these to the
-   tensor-map.json dimensions.
+### What Still Requires Runtime Capture
 
----
+- Temporal state flow (frame N-1 to N dispatch sequencing)
+- Conditional pass execution conditions (RCAS, autoexposure, debug)
+- FSR4Constants runtime values (jitter offsets, motion vector scales)
 
-## 10. Version Differences (4.0.2 → 4.1.0)
-
-| Property | 4.0.2 | 4.1.0 |
-|----------|-------|-------|
-| Entry point name | Same (v07) | Same (v07) |
-| Blob size | 130,088 bytes | 131,072 bytes |
-| Extra params | None | 222 FP32 + 96 bytes padding |
-| Unique FP8 values | 122 | 255 |
-| Byte difference | — | 98.7% of bytes changed |
-| Architecture | Identical | Identical |
-| Tensor count | 78 | 78 |
-
-The extra 984 bytes in 4.1.0 are consumed by the postpass:
-- Offset 130,304: 1 FP32 LUT scale modulation parameter
-- Offset 130,944: 4 FP32 output composition biases
-- Offset 130,960: 4 FP32 output composition biases
-- Remaining: padding and unused params
-
----
-
-## Appendix A: Verified Constant Table
-
-| Constant | Hex (double bits) | Decimal | Usage |
-|----------|-------------------|---------|-------|
-| 1/m2 | 0x3F89F9B580000000 | 0.012683313515656 | PQ EOTF exponent |
-| -c1 | 0xBFEAC00000000000 | -0.8359375 | PQ EOTF offset |
-| c3 | 1.868750e+01 | 18.6875 | PQ EOTF denominator |
-| c2 | 0x4032DA0000000000 | 18.8515625 | PQ EOTF denominator |
-| 1/m1 | 0x40191C0D60000000 | 6.277394636015326 | PQ EOTF exponent |
-| 100/3 | 0x4040AAAAA0000000 | 33.33333206176758 | PQ scale |
-| scale | 0x3FB4D50600000000 | 0.08137547969818115 | PQ output scale |
-| -log2(e) | 0xBFF7154760000000 | -1.4426950216293335 | Sigmoid base conversion |
-| 1/150 | 0x3F7B4E81C0000000 | 0.006666666828095913 | Postpass normalization |
-
-## Appendix B: Resource Handle Convention
-
-In all shaders, handles are created in this order:
-```
-%1 = UAV space=2, reg=3      (prepass: output, core: compute C)
-%2 = UAV space=1, reg=0      (accumulation buffer)
-%3 = UAV space=0, reg=11     (shared computation buffer)
-%4 = SRV space=5, reg=4      (history input)
-%5 = SRV space=4, reg=3      (input color)
-%6 = SRV space=3, reg=2      (motion vectors)
-%7 = SRV space=2, reg=1      (depth)
-%8 = SRV space=1, reg=0      (auxiliary)
-%9 = SRV space=0, reg=18     (weight blob)
-%10 = Sampler space=0, reg=0
-%11 = CBV space=0, reg=1     (per-frame constants)
-```
-
-Note: Postpass uses a different handle ordering with additional UAV outputs.

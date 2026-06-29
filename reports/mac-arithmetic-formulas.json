@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "source": "4.0.2 MIT-licensed HLSL (ml2code_runtime operators)",
+  "method": "Extracted multiply-accumulate patterns from HLSL operator include files. These operators are #included by each pass function in fsr4_model_v07_fp8_no_scale_passes_1080.hlsl.",
+  "pass_operator_mapping": {
+    "0": [
+      "ml2code_runtime/operators/float8_NHWC/Conv2D_k2s2b.hlsli",
+      "ml2code_runtime/operators/float8_NHWC/Fused/ConvNextBlock.hlsli"
+    ],
+    "1": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/ConvNextBlock.hlsli"
+    ],
+    "2": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/FusedConv2D_k2s2b_QuantizedOutput.hlsli"
+    ],
+    "3": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/FasterNetBlock.hlsli"
+    ],
+    "4": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/FasterNetBlock.hlsli"
+    ],
+    "5": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/FusedConv2D_k2s2b_QuantizedOutput.hlsli"
+    ],
+    "6": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/FasterNetBlock.hlsli"
+    ],
+    "7": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/FasterNetBlock.hlsli"
+    ],
+    "8": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/FNB_CT2D_ADD.hlsli"
+    ],
+    "9": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/FasterNetBlock.hlsli"
+    ],
+    "10": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/FNB_CT2D_ADD.hlsli"
+    ],
+    "11": [
+      "ml2code_runtime/operators/float8_NHWC/Fused/ConvNextBlock.hlsli"
+    ],
+    "12": [
+      "ml2code_runtime/operators/float16_NHWC/Fused/CNB_CT2D.hlsli"
+    ]
+  },
+  "operator_analysis": {}
+}
