@@ -12,7 +12,7 @@ This directory contains the pipeline for rebuilding `fsr_data.dll` (FSR 4.1.0) f
 |------|------|-------------|
 | **1. Disassemble** | IDA / Ghidra | Reverse the original DLL to recover API logic, data layout, and section structure |
 | **2. Rebuild** | MinGW GCC | Compile reconstructed C source + extracted weight blobs into a new DLL |
-|| **3. Compare** | `compare_sections.py` | Report per-region hashes and byte differences without modifying rebuilt output |
+| **3. Compare** | `compare_sections.py` | Report per-region hashes and byte differences without modifying rebuilt output |
 | **4. Verify** | `test_blob_lookup.py` | Confirm `fsr_data_find_blob` returns the correct blobs for quality/DRS by MD5 and SHA-256 |
 
 ## Build Prerequisites
@@ -100,7 +100,9 @@ struct blob_entry {
 
 ## What the Comparison Tool Does
 
-`pe_patcher.py` is retained for filename compatibility, but it is now a comparison tool. It reports:
+`pe_patcher.py` is deprecated and exits intentionally. Use `compare_sections.py` for current section comparison.
+
+`compare_sections.py` reports:
 
 1. **PE Headers** — separate SHA-256 hashes and byte differences.
 
@@ -117,6 +119,7 @@ No bytes are copied from the original into the rebuilt file. If a region differs
 | `README.md` | This documentation |
 | `fsr_data.c` | Reconstructed C source with inline assembly for data layout |
 | `fsr_data.def` | Module definition file controlling exported symbols |
-| `pe_patcher.py` | PE section comparison tool; does not patch original bytes into rebuilt output |
+| `compare_sections.py` | Section comparison tool; reports per-region hashes and byte differences. Does not modify rebuilt output |
+| `pe_patcher.py` | Deprecated; exits immediately. Use `compare_sections.py` instead |
 | `build.sh` | Build script producing the pre-patch DLL |
 | `test_blob_lookup.py` | Verifies that `fsr_data_find_blob("quality")` and `fsr_data_find_blob("drs")` return blobs with the expected MD5/SHA-256 hashes |

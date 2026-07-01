@@ -8,7 +8,12 @@
       "description": "Six weight blobs of 131072 bytes each are extractable from amd_fidelityfx_upscaler_dx12.dll at the documented RVAs and reproduce byte-for-byte across re-extraction.",
       "status": "verified_static",
       "confidence": 0.98,
-      "evidence_files": ["scripts/verify.py", "verification-report.json", "evidence-manifest.json", "extracted/v410_initializers/"],
+      "evidence_files": [
+        "scripts/verify.py",
+        "verification-report.json",
+        "evidence-manifest.json",
+        "extracted/v410_initializers/"
+      ],
       "needs": "Runtime confirmation that the same bytes are bound as an InitializerBuffer during dispatch.",
       "open_counterexamples": null
     },
@@ -17,7 +22,11 @@
       "description": "The five standard presets (quality, balanced, performance, ultraperf, native) are byte-identical; the DRS preset is a separately trained network (96.1% byte difference).",
       "status": "verified_static",
       "confidence": 0.97,
-      "evidence_files": ["scripts/verify.py", "scripts/weight_compare.py", "evidence-manifest.json"],
+      "evidence_files": [
+        "scripts/verify.py",
+        "scripts/weight_compare.py",
+        "evidence-manifest.json"
+      ],
       "needs": "Runtime confirmation that preset selection does not load a different network.",
       "open_counterexamples": null
     },
@@ -26,7 +35,11 @@
       "description": "The DXIL corpus contains exactly 27 model entry points (prepass, pass1..pass12, pass0_post..pass12_post, postpass) with no pass13.",
       "status": "verified_static",
       "confidence": 0.97,
-      "evidence_files": ["spec/dxil-entrypoint-inventory.json", "reports/dxil-ir-evidence.json", "verification-report.json"],
+      "evidence_files": [
+        "spec/dxil-entrypoint-inventory.json",
+        "reports/dxil-ir-evidence.json",
+        "verification-report.json"
+      ],
       "needs": "Runtime capture correlating PSO CS bytecode hashes to these entry points.",
       "open_counterexamples": null
     },
@@ -35,7 +48,11 @@
       "description": "Static dispatch runs a 27-iteration loop with optional SPD AutoExposure before and RCAS/Debug View after.",
       "status": "inferred",
       "confidence": 0.75,
-      "evidence_files": ["reports/main_dll_analysis.md", "reports/host-cbuffer-dispatch.json", "spec/pipeline_spec.json"],
+      "evidence_files": [
+        "reports/main_dll_analysis.md",
+        "reports/host-cbuffer-dispatch.json",
+        "spec/pipeline_spec.json"
+      ],
       "needs": "Native D3D12 capture showing the actual per-frame dispatch sequence and loop count.",
       "open_counterexamples": "Conditional flags may reorder or suppress passes at runtime; static order is the unconditional path."
     },
@@ -44,7 +61,11 @@
       "description": "The 4.0.2-derived 78-tensor offset map parses 4.1.0 blob regions into plausible typed values.",
       "status": "inferred",
       "confidence": 0.6,
-      "evidence_files": ["reports/tensor-offset-verification.json", "reports/v410_independent_offsets.json", "spec/tensor-map.json"],
+      "evidence_files": [
+        "reports/tensor-offset-verification.json",
+        "reports/v410_independent_offsets.json",
+        "spec/tensor-map.json"
+      ],
       "needs": "Runtime offset-use confirmation; current check is a plausibility parse, not a proof of runtime addressing.",
       "open_counterexamples": "Plausibility does not prove the runtime actually reads these exact offsets."
     },
@@ -53,7 +74,12 @@
       "description": "The network is a bottleneck architecture with symmetric pass structure; per-pass kernels are consistent with 3x3/4x4/5x4 from phi-node counts.",
       "status": "inferred",
       "confidence": 0.55,
-      "evidence_files": ["reports/architecture-map-v410.md", "docs/shader-internals.md", "docs/adversarial-review-2.md", "docs/adversarial-review-resolution.md"],
+      "evidence_files": [
+        "reports/architecture-map-v410.md",
+        "docs/shader-internals.md",
+        "docs/adversarial-review-2.md",
+        "docs/adversarial-review-resolution.md"
+      ],
       "needs": "Runtime tensor-shape capture; attention mechanisms cannot be ruled out under integer-only computation.",
       "open_counterexamples": "U-Net label unsupported (no skip-connection evidence); kernel sizes inferred not extracted; attention not excluded."
     },
@@ -71,7 +97,9 @@
       "description": "Per-pass constant-buffer values at runtime match the static 5/6-register (80/96-byte) layout.",
       "status": "unresolved",
       "confidence": 0.0,
-      "evidence_files": ["reports/hlsl-per-pass-layout.json"],
+      "evidence_files": [
+        "reports/hlsl-per-pass-layout.json"
+      ],
       "needs": "CBV hex dumps from a native capture; current evidence is register-index access only, not values.",
       "open_counterexamples": null
     },
@@ -80,7 +108,12 @@
       "description": "The data DLL can be rebuilt from RE'd source + extracted blobs and its data sections compared against the original per-region.",
       "status": "verified_static",
       "confidence": 0.6,
-      "evidence_files": ["rebuild/README.md", "rebuild/pe_patcher.py", "rebuild/section-comparison.json", "rebuild/test_blob_lookup.py"],
+      "evidence_files": [
+        "rebuild/README.md",
+        "rebuild/compare_sections.py",
+        "rebuild/section-comparison.json",
+        "rebuild/test_blob_lookup.py"
+      ],
       "needs": "Byte-equality is not claimed; runtime API-equivalence test against the real provider DLL.",
       "open_counterexamples": "Per-section hash comparison, not a byte-equal independent rebuild (the copy-bytes proof was removed as circular)."
     },
@@ -89,7 +122,11 @@
       "description": "Each 4.1.0 blob contains an 888-byte region of 222 finite FP32 values not present in 4.0.2, followed by 96 bytes of zero padding.",
       "status": "verified_static",
       "confidence": 0.9,
-      "evidence_files": ["verification-report.json", "docs/extra-params-analysis.md", "spec/blob-format.json"],
+      "evidence_files": [
+        "verification-report.json",
+        "docs/extra-params-analysis.md",
+        "spec/blob-format.json"
+      ],
       "needs": "Runtime confirmation these are output biases and consumed as FP32.",
       "open_counterexamples": null
     },
@@ -98,7 +135,11 @@
       "description": "Weights use an FP8 codebook decoded through a 256-entry atomicCompareExchange table with 0x100 stride; the mechanism appears to function as a side-effect-free table read.",
       "status": "inferred",
       "confidence": 0.7,
-      "evidence_files": ["docs/activation-lut-analysis.md", "docs/shader-internals.md", "reports/atomic-ssa-trace.json"],
+      "evidence_files": [
+        "docs/activation-lut-analysis.md",
+        "docs/shader-internals.md",
+        "reports/atomic-ssa-trace.json"
+      ],
       "needs": "Runtime confirmation the atomic calls are reads, not stateful writes; rule out compiler-artifact and mixed read-write explanations.",
       "open_counterexamples": "Alternative explanations not ruled out: persistent atomic workspace, compiler artifact, or mixed read/write."
     }
