@@ -1,0 +1,176 @@
+{
+  "manifest_version": 1,
+  "generated": "2026-07-01",
+  "purpose": "Cryptographic manifest for proprietary-derived weight evidence. These hashes allow independent verification without redistributing the original DLL.",
+  "note": "Source DLLs are not redistributed. Re-extract from a local copy and compare against the SHA-256 below. 'source_dll_hash' is the provider DLL the blob was extracted from; its SHA-256 is marked PLACEHOLDER because the original binary is not committed to this repository.",
+  "source_dll": {
+    "name": "amd_fidelityfx_upscaler_dx12.dll",
+    "size_bytes": 15605520,
+    "sha256": "PLACEHOLDER_NOT_REDISTRIBUTED",
+    "version": "FSR 4.1.0"
+  },
+  "blobs": [
+    {
+      "filename": "extracted/v410_initializers/quality.bin",
+      "size_bytes": 131072,
+      "sha256": "ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868",
+      "md5": "6ccdb68fc828e0bef93fa32fd144c4f6",
+      "rva": "0x91DB50",
+      "generation_command": "python scripts/extract_blobs.py --dll <amd_fidelityfx_upscaler_dx12.dll> --output-dir extracted/v410_initializers",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/v410_initializers/balanced.bin",
+      "size_bytes": 131072,
+      "sha256": "ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868",
+      "md5": "6ccdb68fc828e0bef93fa32fd144c4f6",
+      "rva": "0x943CC0",
+      "generation_command": "python scripts/extract_blobs.py --dll <amd_fidelityfx_upscaler_dx12.dll> --output-dir extracted/v410_initializers",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/v410_initializers/performance.bin",
+      "size_bytes": 131072,
+      "sha256": "ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868",
+      "md5": "6ccdb68fc828e0bef93fa32fd144c4f6",
+      "rva": "0x963D20",
+      "generation_command": "python scripts/extract_blobs.py --dll <amd_fidelityfx_upscaler_dx12.dll> --output-dir extracted/v410_initializers",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/v410_initializers/ultraperf.bin",
+      "size_bytes": 131072,
+      "sha256": "ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868",
+      "md5": "6ccdb68fc828e0bef93fa32fd144c4f6",
+      "rva": "0x8D7570",
+      "generation_command": "python scripts/extract_blobs.py --dll <amd_fidelityfx_upscaler_dx12.dll> --output-dir extracted/v410_initializers",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/v410_initializers/native.bin",
+      "size_bytes": 131072,
+      "sha256": "ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868",
+      "md5": "6ccdb68fc828e0bef93fa32fd144c4f6",
+      "rva": "0x8FB700",
+      "generation_command": "python scripts/extract_blobs.py --dll <amd_fidelityfx_upscaler_dx12.dll> --output-dir extracted/v410_initializers",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/v410_initializers/drs.bin",
+      "size_bytes": 131072,
+      "sha256": "101d91f69e3f6121c2a6eb477ee5cbf6e7bf25f26b65c0a4dcd1ac04e57fe2e8",
+      "md5": "8e5c042e0c14cca83d56ed13df5f02dd",
+      "rva": "0x8B5120",
+      "generation_command": "python scripts/extract_blobs.py --dll <amd_fidelityfx_upscaler_dx12.dll> --output-dir extracted/v410_initializers",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v402_fp8_no_scale_quality.bin",
+      "size_bytes": 130088,
+      "sha256": "64e51f995a527ee1e7039833a37f671eaafed2a9aaed38ddf5bf50e78f98f6ff",
+      "md5": "4b92adb2e4634b5020733e30d5a16c90",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob <4.0.2_quality_initializer> --preset quality",
+      "source_dll_hash": "PLACEHOLDER_FSR_4_0_2_SOURCE_DERIVED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v402_fp8_no_scale_balanced.bin",
+      "size_bytes": 130088,
+      "sha256": "c8fc964368fbb87eed0281cf762af8f1d64819025d2ad1481db8169dcc295302",
+      "md5": "1081dc28d95e77a9290edc014f9b9f18",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob <4.0.2_balanced_initializer> --preset balanced",
+      "source_dll_hash": "PLACEHOLDER_FSR_4_0_2_SOURCE_DERIVED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v402_fp8_no_scale_performance.bin",
+      "size_bytes": 130088,
+      "sha256": "d90c776ab6363f48b22eb4dd9c55bf1cdf8bee68f3f4a10bdeacbb396ff10c84",
+      "md5": "e4505cb68c82c1c0b76ad341ea155a3c",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob <4.0.2_performance_initializer> --preset performance",
+      "source_dll_hash": "PLACEHOLDER_FSR_4_0_2_SOURCE_DERIVED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v402_fp8_no_scale_ultraperf.bin",
+      "size_bytes": 130088,
+      "sha256": "151a3643e286f6de2a72b646381fe6a886a8918f095a5d29ef80105a954085a2",
+      "md5": "9ade0ed0125d245105eb773086189480",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob <4.0.2_ultraperf_initializer> --preset ultraperf",
+      "source_dll_hash": "PLACEHOLDER_FSR_4_0_2_SOURCE_DERIVED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v402_fp8_no_scale_native.bin",
+      "size_bytes": 130088,
+      "sha256": "6f045961109dd8ecaa666858d1e2a712da2e747db91bf0b2ba94a08ad1e00c67",
+      "md5": "d0b5dbcddfcd5a7b7ec2f28ffe0a3c8c",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob <4.0.2_native_initializer> --preset native",
+      "source_dll_hash": "PLACEHOLDER_FSR_4_0_2_SOURCE_DERIVED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v402_fp8_no_scale_drs.bin",
+      "size_bytes": 130088,
+      "sha256": "e6899631df42ad14e2d2eb9413a11fcdaef4c552bfd71d29bcbf26e1287219e1",
+      "md5": "8034ea6e6aaa1c5de57643d70093ddb2",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob <4.0.2_drs_initializer> --preset drs",
+      "source_dll_hash": "PLACEHOLDER_FSR_4_0_2_SOURCE_DERIVED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v410_candidate_0.bin",
+      "size_bytes": 131124,
+      "sha256": "0d97ca127c11be1f62a3e0e0b7a2357e308601b0c404b37aab78970c0a04b177",
+      "md5": "b724fa03cff3c846d57149d5e5b8c3bf",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob extracted/v410_initializers/quality.bin (candidate offset scan)",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v410_candidate_1.bin",
+      "size_bytes": 131116,
+      "sha256": "1d69bb524b2a6edaa2c141aed295a9506924b0f233dcb3dca5d9d2cd9d8f0982",
+      "md5": "481af1221a40046b5018b26eee4af31b",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob extracted/v410_initializers/quality.bin (candidate offset scan)",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v410_candidate_2.bin",
+      "size_bytes": 131160,
+      "sha256": "a68ec01367ab8947b1c90d46af93d9ef51f59223c2ef3691565c11d9ba72eb78",
+      "md5": "61c080f033abd69cc85cf4ceb2acbcc8",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob extracted/v410_initializers/quality.bin (candidate offset scan)",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v410_candidate_3.bin",
+      "size_bytes": 131104,
+      "sha256": "a2e1917ed423f5f69e3f6a35cb6bd7d84efb8449f2efedd7cfb9e0e7c7a3baca",
+      "md5": "f9ecf9829858ae36f35faddcbd44551a",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob extracted/v410_initializers/quality.bin (candidate offset scan)",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v410_candidate_4a.bin",
+      "size_bytes": 131116,
+      "sha256": "5929051309a89d19f7d8229ea2197b1b5365990c3c090b4a5e8870bca63f5c52",
+      "md5": "776a264a429c2b65f1e67ad7e9805ed3",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob extracted/v410_initializers/quality.bin (candidate offset scan)",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    },
+    {
+      "filename": "extracted/fp8_initializers/v410_candidate_4b.bin",
+      "size_bytes": 132636,
+      "sha256": "ffac732119e936fdb4b1b9fd4ced5912443f1d38b619ea01a96ff70e6039e4ac",
+      "md5": "c2142617bec3ebc535efe6f435cedc8b",
+      "rva": null,
+      "generation_command": "python scripts/fp8_extract.py --blob extracted/v410_initializers/quality.bin (candidate offset scan)",
+      "source_dll_hash": "PLACEHOLDER_NOT_REDISTRIBUTED"
+    }
+  ]
+}

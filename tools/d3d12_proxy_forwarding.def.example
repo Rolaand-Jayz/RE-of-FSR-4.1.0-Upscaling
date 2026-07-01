@@ -1,0 +1,41 @@
+; d3d12_proxy_forwarding.def.example
+;
+; A real drop-in d3d12.dll proxy needs to forward ALL exports to the
+; original DLL (renamed to d3d12_orig.dll). Otherwise, games and tools
+; that call any unforwarded D3D12 function will crash before useful
+; capture occurs.
+;
+; This .def file should be generated from the real d3d12.dll export table
+; using: dumpbin /exports d3d12.dll  (MSVC) or: objdump -p d3d12.dll (MinGW)
+;
+; Pattern: every export forwards to d3d12_orig.dll EXCEPT D3D12CreateDevice,
+; which is intercepted by the hook DLL.
+;
+; Generated from: Windows 10/11 d3d12.dll (export list varies by Windows version)
+; The list below is illustrative — generate your own from your target OS.
+
+LIBRARY d3d12_proxy
+
+EXPORTS
+
+; === Intercepted by our hook ===
+D3D12CreateDevice = D3D12CreateDevice
+
+; === Forwarded to the original d3d12.dll (rename to d3d12_orig.dll) ===
+D3D12GetDebugInterface = d3d12_orig.D3D12GetDebugInterface
+D3D12EnableExperimentalFeatures = d3d12_orig.D3D12EnableExperimentalFeatures
+D3D12GetInterface = d3d12_orig.D3D12GetInterface
+D3D12SerializeRootSignature = d3d12_orig.D3D12SerializeRootSignature
+D3D12SerializeVersionedRootSignature = d3d12_orig.D3D12SerializeVersionedRootSignature
+
+; NOTE: The actual d3d12.dll on Windows 10 1903+ exports only 5-7 functions.
+; The full COM interface is obtained via D3D12CreateDevice and does not
+; need separate exports. However, if your target application loads
+; d3d12.dll dynamically and calls GetProcAddress for any of these,
+; the forwarding must cover them.
+
+; === For maximum compatibility, generate from your specific d3d12.dll ===
+; Run this on a Windows machine with the target d3d12.dll:
+;   dumpbin /exports C:\Windows\System32\d3d12.dll > d3d12_exports.txt
+; Then convert each line to:  ExportName = d3d12_orig.ExportName
+; EXCEPT for D3D12CreateDevice which stays as our hook.

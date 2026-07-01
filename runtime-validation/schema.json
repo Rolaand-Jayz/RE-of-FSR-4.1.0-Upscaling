@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "description": "Minimum fields a native D3D12 runtime capture must contain to upgrade FSR 4.1.0 static claims to runtime-observed. A capture missing any required_field is insufficient.",
+  "required_fields": {
+    "dispatch_index": "int — sequential dispatch number within a frame",
+    "pso_hash": "string — SHA-256 of CS bytecode",
+    "root_signature_hash": "string — SHA-256 of serialized root signature",
+    "descriptor_table_handles": "array — GPU descriptor handles per root parameter",
+    "cbv_values": "object — GPU VA + hex dump per CBV root parameter",
+    "srv_resource_ids": "array — resource IDs resolved from descriptor heaps",
+    "uav_resource_ids": "array — resource IDs resolved from descriptor heaps",
+    "barriers": "array — resource transitions before/after dispatch",
+    "dispatch_dimensions": "array — [x, y, z] thread group counts",
+    "timestamp_ns": "int — capture timestamp"
+  },
+  "frame_metadata": {
+    "gpu": "string — e.g. Radeon RX 9070 XT",
+    "driver_version": "string",
+    "game": "string",
+    "dll_hashes": "object — SHA-256 of each FSR DLL",
+    "capture_tool": "string — tool name + version"
+  },
+  "optional_fields": {
+    "render_resolution": "array — [width, height] input",
+    "output_resolution": "array — [width, height] output",
+    "quality_preset": "string — quality | balanced | performance | ultraperf | native | drs",
+    "frame_index": "int — frame number in the capture session"
+  }
+}

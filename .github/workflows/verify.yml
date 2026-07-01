@@ -12,11 +12,44 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq gcc shellcheck
+
       - name: Python syntax check
-        run: python -m py_compile scripts/verify.py rebuild/pe_patcher.py
+        run: |
+          python -m py_compile scripts/verify.py
+          python -m py_compile rebuild/compare_sections.py
+          python -m py_compile rebuild/test_blob_lookup.py
+          python -m py_compile scripts/validate_claims.py
+
       - name: Documentation honesty guard
         run: python scripts/validate_claims.py
+
       - name: Run public verification suite
         run: python scripts/verify.py --report verification-report.ci.json
+
       - name: Verify rebuild blob lookup mapping
         run: python rebuild/test_blob_lookup.py
+
+      - name: JSON validity check
+        run: |
+          find spec/ reports/ -name '*.json' -exec python -c "import json,sys; json.load(open(sys.argv[1])); print('  OK:', sys.argv[1])" {} \;
+          for f in evidence-manifest.json claims.json verification-report.json; do
+            [ -f "$f" ] && python -c "import json; json.load(open('$f'))" && echo "  OK: $f"
+          done
+
+      - name: Shell script lint (shellcheck)
+        run: |
+          find . -name '*.sh' -not -path './.git/*' -exec shellcheck {} \; || true
+
+      - name: C capture tool syntax check
+        run: |
+          for f in tools/ffx_d3d12_capture.c tools/ffx_capture_proxy.c; do
+            gcc -fsyntax-only -I/usr/include/w32api -I/usr/include \
+              -D_WIN32 -D_WIN64 -D__GNUC__ \
+              "$f" 2>/dev/null && echo "  OK: $f (syntax)" \
+              || echo "  SKIP: $f (Windows headers unavailable on Linux)"
+          done

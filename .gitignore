@@ -64,3 +64,4 @@ Thumbs.db
 .vscode/
 .idea/
 reports/*.full.local.json
+rebuild/libfsr_data_test.so

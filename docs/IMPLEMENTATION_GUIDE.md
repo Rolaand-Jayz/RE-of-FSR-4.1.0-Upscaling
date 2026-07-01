@@ -3,6 +3,13 @@
 > Research notes for reimplementing the quantized neural upscaler from
 > static shader analysis. All information is derived from DXIL/SPIR-V IR.
 > No proprietary source code is included.
+>
+> **Evidence status:** Claims in this document are derived from static
+> analysis (DXIL IR, LLVM IR, binary disassembly). No claim here has been
+> validated via runtime instrumentation unless explicitly marked
+> `runtime_observed`. Default evidence tier: `verified_static` or `inferred`.
+> See [VALIDATION_STATUS.md](../VALIDATION_STATUS.md) for the canonical
+> evidence-tier registry.
 
 ---
 
