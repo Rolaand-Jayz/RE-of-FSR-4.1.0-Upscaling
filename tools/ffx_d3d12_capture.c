@@ -8,13 +8,20 @@
  *   - What GPU resources are bound to each root parameter
  *   - The dispatch dimensions per pass
  *
- * Build:
- *   x86_64-w64-mingw32-gcc -shared -o dx12_capture.dll ffx_d3d12_capture.c \
+ * Build (with compile hardening):
+ *   x86_64-w64-mingw32-gcc -Wall -Wextra -Wformat -Werror -shared \
+ *     -o dx12_capture.dll ffx_d3d12_capture.c \
  *     -ld3d12 -lkernel32 -ldxgi -lole32 -Wl,--out-implib,libdx12_capture.a
+ *
+ * Supported compilers: MinGW-w64 GCC 13+ or MSVC 19.37+
  *
  * Usage:
  *   Set environment variable DX12_CAPTURE_LOG=filepath before launching game
  *   Or just let it write to dx12_capture.log in the working directory
+ *
+ * RESEARCH-GRADE WARNING: This tool is not production-tested. The vtable
+ * patching approach is brittle across interface versions, debug layers,
+ * and proxy stacks. See tools/README.md for known limitations.
  */
 
 #define COBJMACROS
@@ -27,6 +34,13 @@
 
 /* ============================================================
  * Hook infrastructure — vtable patching for ID3D12GraphicsCommandList
+ *
+ * WARNING: This approach mutates shared/global vtables via VirtualProtect.
+ * It is brittle across interface versions, wrapper DLLs, debug layers,
+ * and proxy stacks. A more robust approach would use COM wrapper objects
+ * (wrap the returned ID3D12GraphicsCommandList and forward all methods
+ * while intercepting compute methods) or Detours/MinHook-style function
+ * interception. The current approach is research-grade only.
  * ============================================================ */
 
 static FILE* g_log = NULL;
@@ -46,14 +60,18 @@ static void* g_origClose = NULL;
 static void* g_origReset = NULL;
 
 /* Track current pass state */
+#define MAX_ROOT_PARAMS 16
+#define MAX_ROOT_CONSTANTS 64
+
 typedef struct {
     ID3D12PipelineState* pso;
     ID3D12RootSignature* rootSig;
-    D3D12_GPU_DESCRIPTOR_HANDLE descriptorTable[16];
-    D3D12_GPU_VIRTUAL_ADDRESS cbv[16];
-    uint32_t constants[64];
+    D3D12_GPU_DESCRIPTOR_HANDLE descriptorTable[MAX_ROOT_PARAMS];
+    D3D12_GPU_VIRTUAL_ADDRESS cbv[MAX_ROOT_PARAMS];
+    uint32_t constants[MAX_ROOT_CONSTANTS];
     uint32_t threadGroups[3];
     int hasDispatch;
+    char psoHash[65];  /* SHA-256 hex of CS bytecode, or empty */
 } PassState;
 
 static PassState g_currentPass = {0};
@@ -106,6 +124,98 @@ static const char* GetPSOName(ID3D12PipelineState* pso) {
     return addrBuf;
 }
 
+/* ---- Minimal SHA-256 (public domain) ---- */
+typedef struct { uint32_t s[8]; uint64_t len; uint8_t buf[64]; } sha256_ctx;
+static const uint32_t sha256_k[64] = {
+    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,
+    0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,
+    0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,
+    0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,
+    0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,
+    0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,
+    0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,
+    0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,
+    0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
+};
+#define SHA256_ROTR(x,n) (((x)>>(n))|((x)<<(32-(n))))
+#define SHA256_CH(x,y,z) (((x)&(y))^(~(x)&(z)))
+#define SHA256_MAJ(x,y,z) (((x)&(y))^((x)&(z))^((y)&(z)))
+#define SHA256_EP0(x) (SHA256_ROTR(x,2)^SHA256_ROTR(x,13)^SHA256_ROTR(x,22))
+#define SHA256_EP1(x) (SHA256_ROTR(x,6)^SHA256_ROTR(x,11)^SHA256_ROTR(x,25))
+#define SHA256_SIG0(x) (SHA256_ROTR(x,7)^SHA256_ROTR(x,18)^((x)>>3))
+#define SHA256_SIG1(x) (SHA256_ROTR(x,17)^SHA256_ROTR(x,19)^((x)>>10))
+static void sha256_init(sha256_ctx*c){c->len=0;c->s[0]=0x6a09e667;c->s[1]=0xbb67ae85;c->s[2]=0x3c6ef372;c->s[3]=0xa54ff53a;c->s[4]=0x510e527f;c->s[5]=0x9b05688c;c->s[6]=0x1f83d9ab;c->s[7]=0x5be0cd19;}
+static void sha256_block(sha256_ctx*c,const uint8_t*p){
+    uint32_t w[64],a,b,cc,d,e,f,g,h,t1,t2;int i;
+    for(i=0;i<16;i++)w[i]=((uint32_t)p[i*4]<<24)|((uint32_t)p[i*4+1]<<16)|((uint32_t)p[i*4+2]<<8)|p[i*4+3];
+    for(;i<64;i++)w[i]=SHA256_SIG1(w[i-2])+w[i-7]+SHA256_SIG0(w[i-15])+w[i-16];
+    a=c->s[0];b=c->s[1];cc=c->s[2];d=c->s[3];e=c->s[4];f=c->s[5];g=c->s[6];h=c->s[7];
+    for(i=0;i<64;i++){t1=h+SHA256_EP1(e)+SHA256_CH(e,f,g)+sha256_k[i]+w[i];t2=SHA256_EP0(a)+SHA256_MAJ(a,b,cc);h=g;g=f;f=e;e=d+t1;d=cc;cc=b;b=a;a=t1+t2;}
+    c->s[0]+=a;c->s[1]+=b;c->s[2]+=cc;c->s[3]+=d;c->s[4]+=e;c->s[5]+=f;c->s[6]+=g;c->s[7]+=h;
+}
+static void sha256_update(sha256_ctx*c,const uint8_t*d,size_t n){size_t i;for(i=0;i<n;i++){c->buf[c->len&63]=d[i];c->len++;if(!(c->len&63))sha256_block(c,c->buf);}}
+static void sha256_final(sha256_ctx*c,uint8_t*out){uint64_t bits=c->len*8;uint32_t i=c->len&63;c->buf[i++]=0x80;if(i>56){while(i<64)c->buf[i++]=0;sha256_block(c,c->buf);i=0;}while(i<56)c->buf[i++]=0;for(int j=7;j>=0;j--)c->buf[i++]=(uint8_t)(bits>>(j*8));sha256_block(c,c->buf);for(i=0;i<8;i++){out[i*4]=c->s[i]>>24;out[i*4+1]=c->s[i]>>16;out[i*4+2]=c->s[i]>>8;out[i*4+3]=c->s[i];}}
+static void sha256_hex(const uint8_t*hash,char*out){const char*h="0123456789abcdef";for(int i=0;i<32;i++){out[i*2]=h[hash[i]>>4];out[i*2+1]=h[hash[i]&0xf];}out[64]=0;}
+
+/*
+ * Extract CS bytecode from a pipeline state and compute SHA-256.
+ * This identifies PSOs even when debug names are absent (common in
+ * optimized retail builds). Falls back to PSO pointer if extraction fails.
+ */
+static void GetPSOHash(ID3D12PipelineState* pso, char* out, size_t outsz) {
+    out[0] = 0;
+    if (!pso) return;
+
+    /* Try to get the cached blob (contains the serialized PSO including bytecode) */
+    ID3DBlob* blob = NULL;
+    HRESULT hr = ID3D12PipelineState_GetCachedBlob(pso, &blob);
+    if (SUCCEEDED(hr) && blob) {
+        size_t sz = ID3DBlob_GetBufferSize(blob);
+        const uint8_t* data = (const uint8_t*)ID3DBlob_GetBufferPointer(blob);
+        if (sz > 0 && data) {
+            sha256_ctx ctx;
+            uint8_t hash[32];
+            sha256_init(&ctx);
+            sha256_update(&ctx, data, sz);
+            sha256_final(&ctx, hash);
+            sha256_hex(hash, out);
+        }
+        ID3DBlob_Release(blob);
+    }
+
+    /* If we couldn't get the blob, fall back to pointer-based identity */
+    if (out[0] == 0) {
+        snprintf(out, outsz, "ptr_%p", (void*)pso);
+    }
+}
+
+/* ============================================================
+ * Descriptor identity tracking — map GPU handles to resources
+ *
+ * To fully resolve SRV/UAV identity from descriptor handles, the
+ * following device methods must also be hooked (on the device vtable
+ * after D3D12CreateDevice returns):
+ *   - CreateShaderResourceView  (ID3D12Device vtable index ~32)
+ *   - CreateUnorderedAccessView (index ~33)
+ *   - CopyDescriptors           (index ~41)
+ *   - CopyDescriptorsSimple     (index ~42)
+ *
+ * The hooked versions should record: { CPU descriptor handle, resource
+ * pointer, view desc fields } so that later, when a command list binds
+ * a descriptor table, the GPU handle range can be resolved back to the
+ * underlying resource objects.
+ *
+ * Additionally, ID3D12GraphicsCommandList::SetDescriptorHeaps (vtable
+ * index ~24) must be hooked to track which descriptor heaps are active
+ * on the command list, so that CPU-handle→resource lookups can be done.
+ *
+ * These hooks are documented but not yet implemented below. The current
+ * capture logs GPU descriptor handle values but does NOT resolve them to
+ * resource IDs. This is a known limitation.
+ * ============================================================ */
+
 /* ============================================================
  * Hooked command list methods
  * ============================================================ */
@@ -147,7 +257,9 @@ static HRESULT STDMETHODCALLTYPE HookedSetPipelineState(
     if (isFSR) {
         g_currentPass.pso = pPSO;
         g_currentPass.hasDispatch = 0;
-        Log("  [PSO] %s\n", name);
+        g_currentPass.psoHash[0] = 0;
+        GetPSOHash(pPSO, g_currentPass.psoHash, sizeof(g_currentPass.psoHash));
+        Log("  [PSO] name=%s sha256=%s\n", name, g_currentPass.psoHash);
     }
     
     SetPipelineState_t orig = (SetPipelineState_t)g_origSetPipelineState;
@@ -159,9 +271,13 @@ static void STDMETHODCALLTYPE HookedSetComputeRootDescriptorTable(
     D3D12_GPU_DESCRIPTOR_HANDLE BaseDescriptor) {
     
     if (g_currentPass.pso) {
-        g_currentPass.descriptorTable[RootParameterIndex] = BaseDescriptor;
-        Log("    [BIND] RootParam=%u GPUHandle=0x%llx\n", 
-            RootParameterIndex, (unsigned long long)BaseDescriptor.ptr);
+        if (RootParameterIndex < MAX_ROOT_PARAMS) {
+            g_currentPass.descriptorTable[RootParameterIndex] = BaseDescriptor;
+            Log("    [BIND] RootParam=%u GPUHandle=0x%llx\n", 
+                RootParameterIndex, (unsigned long long)BaseDescriptor.ptr);
+        } else {
+            Log("[WARN] root param overflow: RootParamIndex=%u >= %d\n", RootParameterIndex, MAX_ROOT_PARAMS);
+        }
     }
     
     SetComputeRootDescriptorTable_t orig = 
@@ -174,9 +290,13 @@ static void STDMETHODCALLTYPE HookedSetComputeRootConstantBufferView(
     D3D12_GPU_VIRTUAL_ADDRESS BufferLocation) {
     
     if (g_currentPass.pso) {
-        g_currentPass.cbv[RootParameterIndex] = BufferLocation;
-        Log("    [CBV] RootParam=%u GPUAddr=0x%llx\n",
-            RootParameterIndex, (unsigned long long)BufferLocation);
+        if (RootParameterIndex < MAX_ROOT_PARAMS) {
+            g_currentPass.cbv[RootParameterIndex] = BufferLocation;
+            Log("    [CBV] RootParam=%u GPUAddr=0x%llx\n",
+                RootParameterIndex, (unsigned long long)BufferLocation);
+        } else {
+            Log("[WARN] root param overflow: RootParamIndex=%u >= %d (CBV)\n", RootParameterIndex, MAX_ROOT_PARAMS);
+        }
     }
     
     SetComputeRootConstantBufferView_t orig = 
@@ -190,6 +310,15 @@ static void STDMETHODCALLTYPE HookedSetComputeRoot32BitConstants(
     
     if (g_currentPass.pso) {
         const uint32_t* vals = (const uint32_t*)pSrcData;
+        UINT endIdx = DestOffsetIn32BitValues + Num32BitValuesToSet;
+        if (endIdx <= MAX_ROOT_CONSTANTS) {
+            for (UINT i = 0; i < Num32BitValuesToSet; i++) {
+                g_currentPass.constants[DestOffsetIn32BitValues + i] = vals[i];
+            }
+        } else {
+            Log("[WARN] root constants overflow: offset=%u count=%u end=%u >= %d\n",
+                DestOffsetIn32BitValues, Num32BitValuesToSet, endIdx, MAX_ROOT_CONSTANTS);
+        }
         Log("    [CONST] RootParam=%u count=%u offset=%u vals=[",
             RootParameterIndex, Num32BitValuesToSet, DestOffsetIn32BitValues);
         for (UINT i = 0; i < Num32BitValuesToSet && i < 8; i++) {
@@ -202,6 +331,25 @@ static void STDMETHODCALLTYPE HookedSetComputeRoot32BitConstants(
     SetComputeRoot32BitConstants_t orig = 
         (SetComputeRoot32BitConstants_t)g_origSetComputeRoot32BitConstants;
     orig(This, RootParameterIndex, Num32BitValuesToSet, pSrcData, DestOffsetIn32BitValues);
+}
+
+/*
+ * Attempt to read CBV upload buffer contents for logging.
+ * This maps each CBV GPU virtual address and dumps up to 128 bytes.
+ * Wrapped in SEH for safety — buffer may be write-only or inaccessible.
+ * NOTE: Full CBV content capture requires tracking resource creation to
+ * build a GPU-VA → ID3D12Resource map. This stub logs the intent; the
+ * full implementation is documented in runtime-validation/schema.json.
+ */
+static void LogCBVContents(void) {
+    for (UINT i = 0; i < MAX_ROOT_PARAMS; i++) {
+        if (g_currentPass.cbv[i] == 0) continue;
+        /* TODO: resolve GPU VA to ID3D12Resource, Map for reading, dump 128 bytes.
+         * Current limitation: we log the address but cannot read contents without
+         * the resource-creation hooks described in the descriptor identity section. */
+        Log("    [CBV_DATA] RootParam=%u GPUAddr=0x%llx (contents: UNRESOLVED — requires descriptor/resource hooks)\n",
+            i, (unsigned long long)g_currentPass.cbv[i]);
+    }
 }
 
 static void STDMETHODCALLTYPE HookedDispatch(
@@ -219,6 +367,9 @@ static void STDMETHODCALLTYPE HookedDispatch(
             ThreadGroupCountX, ThreadGroupCountY, ThreadGroupCountZ,
             ThreadGroupCountX * 32, ThreadGroupCountY, ThreadGroupCountZ,
             ThreadGroupCountX * ThreadGroupCountY * ThreadGroupCountZ * 32);
+        
+        /* Log CBV contents for this dispatch (currently UNRESOLVED — see LogCBVContents) */
+        LogCBVContents();
     }
     
     Dispatch_t orig = (Dispatch_t)g_origDispatch;

@@ -1,10 +1,11 @@
 # FSR 4.1.0 — Static Reverse-Engineering Notes
 
-> *"Knowledge is power. Freedom of knowledge is empowerment. Hoarding of knowledge is tyranny."*
->
-> — Rolaand Jayz, The Shadow Librarian
+> **Current status:** See [CURRENT_STATUS.md](CURRENT_STATUS.md) for a one-glance truth table.
+> **Canonical validation source:** [VALIDATION_STATUS.md](VALIDATION_STATUS.md) is the single source of truth for claim status. Other documents reference it; they do not restate conclusions independently.
 
 This repository documents a static structural analysis of the FSR 4.1.0 temporal upscaler: extracted weight blobs, shader/pass catalogs, data-layout reconstruction, and provider-DLL dispatch analysis from Ghidra, DXIL, and raw x86-64 disassembly.
+
+> **RESEARCH ONLY — NOT A DROP-IN REPLACEMENT.** The artifacts in this repository are for static analysis and research verification. They are not validated for game runtime use, not a supported replacement DLL, and not functionally equivalent to the original AMD binary. Do not deploy outside research environments.
 
 AMD's FidelityFX Super Resolution 4.1.0 ships as compiled Windows DLLs containing a neural network upscaler. The network's weights are opaque binary blobs. The pipeline architecture is undocumented. The shader dispatch sequence is hidden behind layers of API abstraction.
 

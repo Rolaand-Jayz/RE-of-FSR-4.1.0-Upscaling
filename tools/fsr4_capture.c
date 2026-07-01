@@ -4,11 +4,12 @@
  * Intercepts vkCmdDispatch to log FSR 4 compute passes and dump
  * InitializerBuffer contents. No system packages needed.
  *
- * Build:  gcc -shared -fPIC -O2 -o fsr4_capture.so fsr4_capture.c -ldl
- * Use:    LD_PRELOAD=/mnt/workdrive/fsr-re/tools/fsr4_capture.so ...
+ * Build:  gcc -shared -fPIC -O2 -Wall -Wextra -Wformat -Werror -o fsr4_capture.so fsr4_capture.c -ldl
+ * Use:    LD_PRELOAD=./tools/fsr4_capture.so ...
+ *         Set FSR4_CAPTURE_DIR to override the output directory.
  *
- * Output: /mnt/workdrive/fsr-re/runtime-capture/dispatch_log.txt
- *         /mnt/workdrive/fsr-re/runtime-capture/initializer_XXXX.bin
+ * Output: $FSR4_CAPTURE_DIR/dispatch_log.txt (default: ./runtime-capture/)
+ *         $FSR4_CAPTURE_DIR/initializer_XXXX.bin
  */
 
 #define _GNU_SOURCE
@@ -24,8 +25,9 @@
 #include <vulkan/vulkan.h>
 
 /* ── Configuration ─────────────────────────────────────────── */
-#define OUTPUT_DIR  "/mnt/workdrive/fsr-re/runtime-capture"
-#define LOG_FILE    OUTPUT_DIR "/dispatch_log.txt"
+#define OUTPUT_DIR_DEFAULT "./runtime-capture"
+static char OUTPUT_DIR[512] = OUTPUT_DIR_DEFAULT;
+static char LOG_FILE[600];
 #define MAX_CAPTURES 64
 
 /* ── Globals ───────────────────────────────────────────────── */
@@ -54,6 +56,13 @@ static int g_cb_track_count = 0;
 static void ensure_init(void) {
     if (g_initialized) return;
     g_initialized = 1;
+    
+    const char* env_dir = getenv("FSR4_CAPTURE_DIR");
+    if (env_dir && env_dir[0]) {
+        strncpy(OUTPUT_DIR, env_dir, sizeof(OUTPUT_DIR) - 1);
+        OUTPUT_DIR[sizeof(OUTPUT_DIR) - 1] = 0;
+    }
+    snprintf(LOG_FILE, sizeof(LOG_FILE), "%s/dispatch_log.txt", OUTPUT_DIR);
     
     mkdir(OUTPUT_DIR, 0755);
     

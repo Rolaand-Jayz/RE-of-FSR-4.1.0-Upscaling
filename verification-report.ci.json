@@ -1,76 +1,46 @@
 {
   "schema_version": 3,
-  "timestamp": "2026-07-01T03:55:05.343208+00:00",
-  "total": 88,
-  "passed": 87,
+  "timestamp": "2026-07-01T03:50:00.986571+00:00",
+  "total": 81,
+  "passed": 78,
   "failed": 0,
-  "skipped": 1,
+  "skipped": 3,
   "warned": 0,
   "results": [
     {
-      "name": "dll_v410.dll has expected byte size",
-      "status": "PASS",
-      "evidence": "size=15605520 expected=15605520"
+      "name": "dll_v410.dll shipping binary available",
+      "status": "SKIP",
+      "evidence": "not found: /tmp/fsr-re-clone/build/dll_v410.dll"
     },
     {
-      "name": "quality: extracted blob has expected size",
+      "name": "quality: committed blob has expected size",
       "status": "PASS",
-      "evidence": "size=131072 expected=131072 rva=0x91DB50 offset=0x91C950"
+      "evidence": "size=131072 expected=131072"
     },
     {
-      "name": "quality: re-extracted matches committed blob",
+      "name": "balanced: committed blob has expected size",
       "status": "PASS",
-      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+      "evidence": "size=131072 expected=131072"
     },
     {
-      "name": "balanced: extracted blob has expected size",
+      "name": "performance: committed blob has expected size",
       "status": "PASS",
-      "evidence": "size=131072 expected=131072 rva=0x943CC0 offset=0x942AC0"
+      "evidence": "size=131072 expected=131072"
     },
     {
-      "name": "balanced: re-extracted matches committed blob",
+      "name": "ultraperf: committed blob has expected size",
       "status": "PASS",
-      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+      "evidence": "size=131072 expected=131072"
     },
     {
-      "name": "performance: extracted blob has expected size",
+      "name": "native: committed blob has expected size",
       "status": "PASS",
-      "evidence": "size=131072 expected=131072 rva=0x963D20 offset=0x962B20"
+      "evidence": "size=131072 expected=131072"
     },
     {
-      "name": "performance: re-extracted matches committed blob",
+      "name": "drs: committed blob has expected size",
       "status": "PASS",
-      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
-    },
-    {
-      "name": "ultraperf: extracted blob has expected size",
-      "status": "PASS",
-      "evidence": "size=131072 expected=131072 rva=0x8D7570 offset=0x8D6370"
-    },
-    {
-      "name": "ultraperf: re-extracted matches committed blob",
-      "status": "PASS",
-      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
-    },
-    {
-      "name": "native: extracted blob has expected size",
-      "status": "PASS",
-      "evidence": "size=131072 expected=131072 rva=0x8FB700 offset=0x8FA500"
-    },
-    {
-      "name": "native: re-extracted matches committed blob",
-      "status": "PASS",
-      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
-    },
-    {
-      "name": "drs: extracted blob has expected size",
-      "status": "PASS",
-      "evidence": "size=131072 expected=131072 rva=0x8B5120 offset=0x8B3F20"
-    },
-    {
-      "name": "drs: re-extracted matches committed blob",
-      "status": "PASS",
-      "evidence": "md5=8e5c042e0c14cca83d56ed13df5f02dd"
+      "evidence": "size=131072 expected=131072"
     },
     {
       "name": "Exactly 2 unique blobs out of 6 presets",
@@ -173,14 +143,9 @@
       "evidence": "found 255 unique values"
     },
     {
-      "name": "All expected 4.1.0 DXIL model entry points are present",
-      "status": "PASS",
-      "evidence": "found 27/27 expected entry points; missing=[]"
-    },
-    {
-      "name": "No pass13 entry point is present in the extracted 4.1.0 DXIL corpus",
-      "status": "PASS",
-      "evidence": "pass13_matches=[]"
+      "name": "DXIL disassembly directory exists",
+      "status": "SKIP",
+      "evidence": "proprietary-derived DXIL disassembly not committed; /tmp/fsr-re-clone/build/llvm_ir/4_1_0"
     },
     {
       "name": "Blob format spec has zone definitions",

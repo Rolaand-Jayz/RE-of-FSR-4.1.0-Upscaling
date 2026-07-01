@@ -128,12 +128,27 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--dll-v410", type=Path, default=repo_root / "build/dll_v410.dll")
     ap.add_argument("--hlsl-dir", type=Path, default=None, help="Optional FSR 4.0.2 HLSL source directory")
-    ap.add_argument("--extracted-v410", type=Path, default=repo_root / "extracted/v410_initializers")
-    ap.add_argument("--extracted-v402", type=Path, default=repo_root / "extracted/v402_initializers")
+    ap.add_argument("--extracted-v410", type=Path, default=None,
+                    help="Path to v4.1.0 extracted blobs (default: extracted/v410_initializers/ or $WEIGHTS_DIR)")
+    ap.add_argument("--extracted-v402", type=Path, default=None,
+                    help="Path to v4.0.2 extracted blobs (default: extracted/v402_initializers/ or $WEIGHTS_DIR)")
     ap.add_argument("--dxil-dir", type=Path, default=repo_root / "build/llvm_ir/4_1_0")
     ap.add_argument("--spec", type=Path, default=repo_root / "spec/blob-format.json")
     ap.add_argument("--report", type=Path, default=repo_root / "verification-report.json")
     args = ap.parse_args()
+
+    # WEIGHTS_DIR: allow validators to use locally-extracted blobs
+    weights_dir = os.environ.get("WEIGHTS_DIR")
+    if args.extracted_v410 is None:
+        if weights_dir:
+            args.extracted_v410 = Path(weights_dir) / "v410_initializers"
+        else:
+            args.extracted_v410 = repo_root / "extracted/v410_initializers"
+    if args.extracted_v402 is None:
+        if weights_dir:
+            args.extracted_v402 = Path(weights_dir) / "v402_initializers"
+        else:
+            args.extracted_v402 = repo_root / "extracted/v402_initializers"
 
     print("=" * 60)
     print("FSR-RE VERIFICATION SUITE")

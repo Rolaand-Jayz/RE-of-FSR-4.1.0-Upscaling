@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "note": "Illustrative structure only. All hashes, handles, VAs, and resource IDs are PLACEHOLDER values and do not correspond to real hardware data.",
+  "frame_metadata": {
+    "gpu": "PLACEHOLDER_RADEON_RX_9070_XT",
+    "driver_version": "PLACEHOLDER_AMD_25.x.x",
+    "game": "PLACEHOLDER_GAME_TITLE",
+    "dll_hashes": {
+      "amd_fidelityfx_upscaler_dx12.dll": "PLACEHOLDER_SHA256",
+      "fsr_data.dll": "PLACEHOLDER_SHA256"
+    },
+    "capture_tool": "PLACEHOLDER_PIX_or_RenderDoc_VERSION",
+    "render_resolution": [1280, 720],
+    "output_resolution": [2560, 1440],
+    "quality_preset": "quality",
+    "frame_index": 0
+  },
+  "dispatches": [
+    {
+      "dispatch_index": 0,
+      "label": "prepass",
+      "pso_hash": "PLACEHOLDER_SHA256_OF_CS_BYTECODE",
+      "root_signature_hash": "PLACEHOLDER_SHA256_OF_ROOT_SIG",
+      "descriptor_table_handles": ["PLACEHOLDER_GPU_DESC_HANDLE_0", "PLACEHOLDER_GPU_DESC_HANDLE_1"],
+      "cbv_values": {
+        "cbv_0": {
+          "gpu_va": "PLACEHOLDER_GPU_VIRTUAL_ADDRESS",
+          "size_bytes": 96,
+          "hex_dump": "PLACEHOLDER_HEX_00000000_DEADBEEF_..."
+        }
+      },
+      "srv_resource_ids": ["PLACEHOLDER_SRV_RESOURCE_ID_0", "PLACEHOLDER_SRV_RESOURCE_ID_1"],
+      "uav_resource_ids": ["PLACEHOLDER_UAV_RESOURCE_ID_0"],
+      "barriers": [
+        { "resource_id": "PLACEHOLDER_UAV_RESOURCE_ID_0", "before": "COMMON", "after": "UNORDERED_ACCESS" }
+      ],
+      "dispatch_dimensions": [32, 1, 1],
+      "timestamp_ns": 0
+    },
+    {
+      "dispatch_index": 1,
+      "label": "pass1",
+      "pso_hash": "PLACEHOLDER_SHA256_OF_CS_BYTECODE",
+      "root_signature_hash": "PLACEHOLDER_SHA256_OF_ROOT_SIG",
+      "descriptor_table_handles": ["PLACEHOLDER_GPU_DESC_HANDLE_0", "PLACEHOLDER_GPU_DESC_HANDLE_1"],
+      "cbv_values": {
+        "cbv_0": {
+          "gpu_va": "PLACEHOLDER_GPU_VIRTUAL_ADDRESS",
+          "size_bytes": 80,
+          "hex_dump": "PLACEHOLDER_HEX_..."
+        }
+      },
+      "srv_resource_ids": ["PLACEHOLDER_SRV_RESOURCE_ID_0", "PLACEHOLDER_SRV_RESOURCE_ID_1", "PLACEHOLDER_SRV_RESOURCE_ID_2"],
+      "uav_resource_ids": ["PLACEHOLDER_UAV_RESOURCE_ID_0", "PLACEHOLDER_UAV_RESOURCE_ID_1"],
+      "barriers": [
+        { "resource_id": "PLACEHOLDER_UAV_RESOURCE_ID_0", "before": "UNORDERED_ACCESS", "after": "UNORDERED_ACCESS" }
+      ],
+      "dispatch_dimensions": [32, 1, 1],
+      "timestamp_ns": 120000
+    },
+    {
+      "dispatch_index": 2,
+      "label": "pass1_post",
+      "pso_hash": "PLACEHOLDER_SHA256_OF_CS_BYTECODE",
+      "root_signature_hash": "PLACEHOLDER_SHA256_OF_ROOT_SIG",
+      "descriptor_table_handles": ["PLACEHOLDER_GPU_DESC_HANDLE_0"],
+      "cbv_values": {
+        "cbv_0": {
+          "gpu_va": "PLACEHOLDER_GPU_VIRTUAL_ADDRESS",
+          "size_bytes": 96,
+          "hex_dump": "PLACEHOLDER_HEX_..."
+        }
+      },
+      "srv_resource_ids": ["PLACEHOLDER_SRV_RESOURCE_ID_0"],
+      "uav_resource_ids": ["PLACEHOLDER_UAV_RESOURCE_ID_0", "PLACEHOLDER_UAV_RESOURCE_ID_1"],
+      "barriers": [
+        { "resource_id": "PLACEHOLDER_UAV_RESOURCE_ID_0", "before": "UNORDERED_ACCESS", "after": "COPY_DEST" }
+      ],
+      "dispatch_dimensions": [32, 1, 1],
+      "timestamp_ns": 245000
+    }
+  ]
+}

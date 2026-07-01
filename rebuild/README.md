@@ -2,6 +2,8 @@
 
 This directory contains the pipeline for rebuilding `fsr_data.dll` (FSR 4.1.0) from reverse-engineered source and extracted weight blobs, then comparing the rebuilt file against the original by section.
 
+> **RESEARCH TOOL — NOT A DROP-IN REPLACEMENT.** The rebuilt DLL is for static comparison only. It is not validated for game runtime use, not functionally equivalent to the original, and not a supported replacement. Do not deploy outside research environments.
+
 **Important correction:** a previous version described a bit-identical proof. That was overstated. The old post-link patcher copied original section bodies, headers, and overlay bytes into the output before comparing hashes, which made MD5 equality circular. The current tooling does not patch original bytes into the rebuilt file; it emits a comparison report instead.
 
 ## The Four-Step Check
@@ -10,7 +12,7 @@ This directory contains the pipeline for rebuilding `fsr_data.dll` (FSR 4.1.0) f
 |------|------|-------------|
 | **1. Disassemble** | IDA / Ghidra | Reverse the original DLL to recover API logic, data layout, and section structure |
 | **2. Rebuild** | MinGW GCC | Compile reconstructed C source + extracted weight blobs into a new DLL |
-| **3. Compare** | `pe_patcher.py` | Report per-region hashes and byte differences without modifying rebuilt output |
+|| **3. Compare** | `compare_sections.py` | Report per-region hashes and byte differences without modifying rebuilt output |
 | **4. Verify** | `test_blob_lookup.py` | Confirm `fsr_data_find_blob` returns the correct blobs for quality/DRS by MD5 and SHA-256 |
 
 ## Build Prerequisites
@@ -33,7 +35,7 @@ This produces `fsr_data_prepatch.dll` — the independently rebuilt DLL.
 ### 2. Compare against the original without patching
 
 ```bash
-ORIGINAL_DLL=/path/to/original/fsr_data.dll python3 pe_patcher.py --rebuilt fsr_data_prepatch.dll
+ORIGINAL_DLL=/path/to/original/fsr_data.dll python3 compare_sections.py --rebuilt fsr_data_prepatch.dll
 ```
 
 This produces `section-comparison.json`. It does **not** produce or claim a patched bit-identical DLL.

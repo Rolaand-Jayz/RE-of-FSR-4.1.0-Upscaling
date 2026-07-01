@@ -3,9 +3,7 @@
 **Project:** FSR 4.1.0 neural-network reverse engineering
 **Repository:** `fsr-re`
 **Primary artifacts:** `build/dll_v410.dll`, `build/dll_v402.dll`, `ghidra-decompile/`, `reports/`, `spec/`, `runtime-capture/`
-**Status:** Current summary report; authoritative only where backed by the cited artifacts and bounded by the caveats below
-
-> *"Knowledge is power. Freedom of knowledge is empowerment."* — Rolaand Jayz
+**Status:** Current summary report; authoritative only where backed by the cited artifacts and bounded by the caveats below. For canonical validation status, see [VALIDATION_STATUS.md](../VALIDATION_STATUS.md).
 
 ---
 
