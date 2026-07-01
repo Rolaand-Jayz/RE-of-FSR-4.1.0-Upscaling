@@ -217,10 +217,7 @@ The pipeline per thread:
    e. Write activated result to shared buffer
 ```
 
-**Key insight:** The integer multiply-accumulate operates on the raw weight byte
-values. The result is a valid float32 bit pattern when reinterpreted via bitcast.
-This is the quantization scheme: the weight encoding is designed so that integer
-MAC on the codebook indices produces valid IEEE 754 float32 results.
+**Key insight:** The observed static pattern suggests that integer-domain arithmetic is arranged so that the accumulated i32 value is later reinterpretable as a float32 value for activation/output. This is the current best-supported interpretation of the quantization path, but exact signedness and complete MAC semantics still need a dedicated proof artifact.
 
 **Tracing the exact MAC:** In the SPIR-V IR for pass7 (blob_0079.spirv.ll):
 - Weight loads: lines 62-72, 223-233, 349-359 (one per kernel position)

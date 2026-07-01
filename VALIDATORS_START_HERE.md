@@ -10,13 +10,18 @@ If you want the shortest honest path through this repo, start with these artifac
 6. `reports/dxil-ir-pass-mapping.json` and `spec/dxil-entrypoint-inventory.json` — model-family entrypoint inventory.
 7. `rebuild/README.md` and `rebuild/test_blob_lookup.py` — bounded `fsr_data.dll` reconstruction evidence and blob-name verification.
 
-Public verification commands:
+Public verification commands (run from a clean checkout):
 
 ```bash
 python scripts/verify.py --report verification-report.ci.json
-python scripts/static_re_closure.py --repo-root . --sdk-root ../fsr4-sdk-402-source --out reports/
 python rebuild/test_blob_lookup.py
 python scripts/validate_claims.py
+```
+
+Optional SDK-dependent regeneration commands (require a local copy of the FSR 4.0.2 SDK):
+
+```bash
+python scripts/static_re_closure.py --repo-root . --sdk-root ../fsr4-sdk-402-source --out reports/
 ```
 
 Important caveats:
