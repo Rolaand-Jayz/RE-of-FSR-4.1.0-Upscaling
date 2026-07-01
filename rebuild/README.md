@@ -4,7 +4,7 @@ This directory contains the pipeline for rebuilding `fsr_data.dll` (FSR 4.1.0) f
 
 **Important correction:** a previous version described a bit-identical proof. That was overstated. The old post-link patcher copied original section bodies, headers, and overlay bytes into the output before comparing hashes, which made MD5 equality circular. The current tooling does not patch original bytes into the rebuilt file; it emits a comparison report instead.
 
-## The Two-Step Check
+## The Three-Step Check
 
 | Step | Tool | Description |
 |------|------|-------------|
@@ -43,6 +43,12 @@ This produces `section-comparison.json`. It does **not** produce or claim a patc
 jq '.all_regions_match_without_patching, .regions[] | {region, matches, differing_bytes, first_difference}' section-comparison.json
 ```
 
+### 4. Verify quality/DRS lookup names against blob hashes
+
+```bash
+python3 test_blob_lookup.py
+```
+
 ## Historical MD5 Hashes
 
 | File | MD5 | Size | Description |
@@ -57,14 +63,14 @@ The 369-byte size difference between the historical pre-patch and final files ca
 
 All blobs are located in `../extracted/v410_initializers/`:
 
-| Blob | Size | MD5 |
-|------|------|-----|
-| `quality.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` |
-| `balanced.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` |
-| `performance.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` |
-| `ultraperf.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` |
-| `native.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` |
-| `drs.bin` | 131,072 bytes | `8e5c042e0c14cca83d56ed13df5f02dd` |
+| Blob | Size | MD5 | SHA-256 |
+|------|------|-----|---------|
+| `quality.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` | `ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868` |
+| `balanced.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` | `ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868` |
+| `performance.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` | `ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868` |
+| `ultraperf.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` | `ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868` |
+| `native.bin` | 131,072 bytes | `6ccdb68fc828e0bef93fa32fd144c4f6` | `ce1bd5f19d4fc14f857c5fc810def7f45d5a935a62aa2ca5b5a59829a1d6c868` |
+| `drs.bin` | 131,072 bytes | `8e5c042e0c14cca83d56ed13df5f02dd` | `101d91f69e3f6121c2a6eb477ee5cbf6e7bf25f26b65c0a4dcd1ac04e57fe2e8` |
 
 Five quality-mode blobs share identical content (131,072 bytes of identical weights), while the DRS blob is distinct.
 
@@ -110,3 +116,4 @@ No bytes are copied from the original into the rebuilt file. If a region differs
 | `fsr_data.def` | Module definition file controlling exported symbols |
 | `pe_patcher.py` | PE section comparison tool; does not patch original bytes into rebuilt output |
 | `build.sh` | Build script producing the pre-patch DLL |
+| `test_blob_lookup.py` | Verifies that `fsr_data_find_blob("quality")` and `fsr_data_find_blob("drs")` return blobs with the expected MD5/SHA-256 hashes |

@@ -60,12 +60,12 @@ __attribute__((section(".rdata")))
 static const unsigned int _bsz = 0x20000;
 
 static const struct blob_entry entries[] = {
-    { drs_blob, &_bsz, "quality" },
-    { ultraperf_blob, &_bsz, "balanced" },
+    { quality_blob, &_bsz, "quality" },
+    { balanced_blob, &_bsz, "balanced" },
     { performance_blob, &_bsz, "performance" },
-    { balanced_blob, &_bsz, "ultraperf" },
+    { ultraperf_blob, &_bsz, "ultraperf" },
     { native_blob, &_bsz, "native" },
-    { quality_blob, &_bsz, "drs" },
+    { drs_blob, &_bsz, "drs" },
 };
 
 int fsr_data_version(void) { return 0x40100; }

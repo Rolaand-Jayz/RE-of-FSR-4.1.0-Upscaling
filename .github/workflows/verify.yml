@@ -16,3 +16,5 @@ jobs:
         run: python -m py_compile scripts/verify.py rebuild/pe_patcher.py
       - name: Documentation honesty guard
         run: python scripts/validate_claims.py
+      - name: Run public verification suite
+        run: python scripts/verify.py --report verification-report.ci.json

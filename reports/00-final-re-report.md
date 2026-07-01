@@ -3,7 +3,7 @@
 **Project:** FSR 4.1.0 neural-network reverse engineering
 **Repository:** `fsr-re`
 **Primary artifacts:** `build/dll_v410.dll`, `build/dll_v402.dll`, `ghidra-decompile/`, `reports/`, `spec/`, `runtime-capture/`
-**Status:** Authoritative technical report, with verification levels stated explicitly
+**Status:** Current summary report; authoritative only where backed by the cited artifacts and bounded by the caveats below
 
 > *"Knowledge is power. Freedom of knowledge is empowerment."* — Rolaand Jayz
 
@@ -37,11 +37,11 @@ This reverse engineering covers the FSR 4.1.0 **temporal upscaler** — the ML-b
 
 FSR 4.1.0 is a **27-dispatch compute pipeline** centered on the internal model name `fsr4_model_v07_fp8_no_scale`. The binary contains **6 initializer blobs** in `.rdata`, with **2 unique weight sets** after MD5 comparison. The provider layer, resource IDs, and constant-buffer layout are largely stable relative to 4.0.2, but the **weight-loading strategy changed fundamentally**: 4.1.0 uses a dynamic `InitializerBuffer` and runtime `rawBufferLoad`-based access rather than 4.0.2’s static embedded shader arrays.
 
-The architecture is **not cleanly proven end-to-end at runtime**. Static analysis strongly supports a sequential 27-pass pipeline with 12 model passes, but the exact 4.1.0 tensor-offset map is **not independently verified** from runtime data, and the role of the extra 222 FP32 (resolved: output composition biases) values remains unresolved. The report therefore separates:
+The architecture is **not cleanly proven end-to-end at runtime**. Static analysis strongly supports the 27-dispatch pipeline, the 27 DXIL model-family entrypoints, the 78/78 tensor-map plausibility result, and the extra 222 FP32 output-parameter region. Runtime capture is still missing. The report therefore separates:
 
-- **Verified facts**: binary size, model strings, pass strings, blob locations, blob sizes, resource IDs, constant-buffer stability, 2 unique presets, unchanged operator set.
-- **Static-only findings**: no skip connections detected, layer shape interpretation, pass classification, tensor schema resemblance.
-- **Unresolved items**: runtime cbuffer values, exact 4.1.0 tensor-offset map, semantics of the extra FP16 tail, runtime proof of skip/no-skip behavior.
+- **Verified facts**: binary size, model strings, DXIL entrypoint inventory, blob locations, blob sizes, resource IDs, constant-buffer stability, 2 unique presets, and the 222-FP32 extra region.
+- **Static-only findings**: no skip connections detected, layer shape interpretation, pass classification, and dispatch/order inference from host code.
+- **Unresolved items**: runtime cbuffer values, runtime proof of tensor-offset use, runtime proof of skip/no-skip behavior, and end-to-end execution validation.
 
 ---
 
@@ -81,7 +81,7 @@ The VKD3D shader dump under `runtime-capture/vkd3d-shaders/` contains the **inje
 | There are 6 initializer RVAs in `.rdata` | Ghidra LEA tracing + `pefile` resolution | **Verified** |
 | Each initializer blob is 131,072 bytes | PE analysis + allocator size match | **Verified** |
 | 5 presets share one blob; DRS uses a second blob | MD5 comparison of extracted blobs | **Verified** |
-| Blob layout is `7208 B FP16 + 122880 B FP8/UINT8 + 888 B FP16 + 96 B pad` | `reports/weight-extraction-report` + binary analysis | **Verified** |
+| Blob layout is `7208 B FP16 + 122880 B FP8/UINT8 + 888 B extra FP32 output params + 96 B pad` | `spec/blob-format.json` + `verification-report.json` + binary analysis | **Verified** |
 | FP8 range in 4.1.0 is effectively full 0–255 uint8 coverage | statistical analysis of extracted weights | **Verified** |
 
 ### 3.3 Provider layer and resource stability
@@ -140,15 +140,15 @@ These are the remaining gaps that prevent this from being a fully runtime-closed
 | Gap | Why it matters | Current status |
 |---|---|---|
 | Exact runtime cbuffer values for all 27 dispatches | Needed to prove the live tensor layout and per-pass offsets | **Unresolved** |
-| Exact 4.1.0 tensor-offset map | Needed to prove per-pass tensor wiring in the shipping binary | **Unresolved** |
-| Role of the 444 extra FP16 values | May explain quantization scaling or post-processing control | **Unresolved** |
+| Runtime proof of 4.1.0 tensor-offset use | Needed to prove the shipping binary uses the same live offsets inferred from static analysis | **Unresolved** |
+| Extra 222 FP32 output parameters beyond static parsing | Static parsing is strong, but runtime consumption is not yet directly captured | **Static role resolved; runtime capture unresolved** |
 | Runtime proof of no skip connections | Static evidence is strong, but not definitive | **Unresolved** |
 | End-to-end model reconstruction validation | Needed to prove functional equivalence by output, not just structure | **Unresolved** |
 
 ### What would close these gaps
 1. Runtime capture of resource bindings and cbuffers for every pass
 2. Extraction of the live weight offsets during execution
-3. Trace of the extra FP16 tail usage in the body/post passes
+3. Trace the extra 222 FP32 output-parameter region during runtime execution
 4. Reconstruction of the pipeline and comparison against known input/output pairs
 
 ---
@@ -178,7 +178,7 @@ FSR 4.1.0 is best described as:
 ### Confidence statement
 - **High confidence**: pass count, model naming, blob layout, resource IDs, 2 unique blobs, unchanged operator set
 - **Medium confidence**: broad architecture shape, skip absence, tensor-group interpretation
-- **Low confidence / unresolved**: exact runtime cbuffer values, 4.1.0 offset map, extra FP16 semantics
+- **Low confidence / unresolved**: exact runtime cbuffer values, runtime proof of 4.1.0 offset use, end-to-end execution validation
 
 ### Gold-standard rule for this repo
 A claim is only “done” when the report states **what is proven, how it was proven, and what remains unproven**. Anything less is just confident handwriting.

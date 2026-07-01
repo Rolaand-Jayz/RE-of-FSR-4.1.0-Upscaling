@@ -159,7 +159,7 @@ The decoder passes share the same signature but read from buffers and write to U
 - Operator sequence within each pass -- the LLVM IR is heavily optimized and operators are fused
 
 ### Can be done with runtime capture:
-- The D3D12 hook tool at /mnt/workdrive/fsr-re/tools/capture/ can intercept dispatch calls
+- The D3D12 hook tool under `tools/capture/` can intercept dispatch calls
 - Capturing cbuffer values + resource bindings for all 27 passes would give definitive tensor layout
 - Capturing rawBufferLoad offsets at runtime would map the weight access pattern
 

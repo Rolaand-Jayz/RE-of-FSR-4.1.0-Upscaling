@@ -64,7 +64,7 @@ AMD's posture toward open source is not merely permissive — it is one of the m
 
 ### amdgpu: Full Open-Source GPU Driver Stack
 
-AMD **open-sourced their entire GPU driver stack**. They replaced the proprietary Catalyst (fglrx) driver with the **amdgpu** open-source kernel driver, paired with MIT-licensed display code in Mesa. This wasn't a partial release or a neutered reference implementation — it was the production driver. AMD chose openness as a competitive strategy against NVIDIA's proprietary driver model.
+AMD has released major Linux GPU driver components and GPUOpen materials under open-source licenses. They replaced the proprietary Catalyst (fglrx) stack with the **amdgpu** kernel driver plus Mesa user-space components, making Linux graphics support far more open than the old closed-driver era. This was a major strategic shift toward openness, even though not every GPU-facing component is literally open-source.
 
 ### GPUOpen and the FidelityFX SDK
 
@@ -83,7 +83,7 @@ In **August 2025**, AMD accidentally published the **FSR 4 source code** on GPUO
 
 ### Zero DMCA Takedowns
 
-AMD has **never** issued a DMCA takedown notice targeting reverse engineering of their products. Not once. In an industry where Nintendo, Sony, and others routinely use DMCA takedowns against RE projects, AMD's zero-takedown track record is notable. This is consistent with a company that was itself built on reverse engineering and has chosen open source as a competitive strategy.
+I am not aware of a public AMD DMCA campaign targeting GPU reverse-engineering projects, but absence of public enforcement is not legal permission. Compared with companies that openly pursue takedowns against RE projects, AMD's public posture has been less aggressive, which is relevant context but not a license.
 
 ---
 

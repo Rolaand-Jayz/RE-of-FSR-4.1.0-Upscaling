@@ -20,7 +20,7 @@ from pathlib import Path
 from collections import defaultdict
 from datetime import datetime
 
-BASE = Path("/mnt/workdrive/fsr-re")
+BASE = Path(__file__).resolve().parents[2]
 CAPTURE_DIR = BASE / "runtime-capture"
 REPORTS = BASE / "reports"
 
@@ -315,7 +315,7 @@ def generate_report(capture_data, dispatch_analysis, buffer_analysis):
     report.append("1. Cross-reference dispatch dimensions against HLSL thread group sizes from 4.0.2")
     report.append("2. Parse cbuffer raw hex to extract per-pass weight offsets") 
     report.append("3. Build independent tensor offset map from runtime cbuffer data")
-    report.append("4. Verify 444 extra FP16 parameters are accessed by specific body passes")
+    report.append("4. Verify which passes access the 222 extra FP32 output parameters")
     
     report_text = "\n".join(report)
     

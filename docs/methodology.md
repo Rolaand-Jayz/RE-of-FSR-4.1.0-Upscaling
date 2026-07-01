@@ -77,7 +77,7 @@ This is the same pattern used by GPU RE projects like Asahi Linux and Panfrost: 
 **Key discoveries**:
 - **98.7% of bytes changed** — consistent with complete weight retrain, uniform across all layers
 - **122 → 255 unique weight values** — 4.0.2 used a limited FP8 codebook; 4.1.0 uses full uint8 range
-- **222 FP32 output composition biases** (888 bytes) appended after existing weights — purpose unconfirmed; possibly quantization scale factors
+- **222 FP32 output composition / scale parameters** (888 bytes) appended after existing weights — statically resolved at the blob-format level, though runtime capture is still missing
 - **Preset collapse** — quality is now controlled by spatial tiling/dispatch, not separate models
 
 ## Tools Used
@@ -107,7 +107,7 @@ Not everything worked on the first try:
 
 2. **Skip connections**: We have strong indirect evidence against skip connections (resource name table, PSV0 data, dispatch loop structure). However, we did not deploy the D3D12 capture tools to observe actual GPU resource bindings at runtime.
 
-3. **444 extra FP16 parameters**: We observed their existence and statistical properties but did not trace how they're consumed by the shader code. The "quantization scale factors" hypothesis is based on correlation with the improved FP8 range.
+3. **Runtime use of the 222 extra FP32 output parameters**: We can parse the 888-byte tail as 222 float32 values and the repo now documents it that way, but we still do not have runtime capture showing how every value is consumed.
 
 4. **Model correctness**: We did not reconstruct the model from extracted weights and verify its output matches FSR 4.1.0's actual upscaling behavior.
 

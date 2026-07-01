@@ -47,6 +47,12 @@ results: list[tuple[str, str, str]] = []
 
 def record(name: str, passed: bool, evidence: str) -> None:
     status = "PASS" if passed else "FAIL"
+    record_status(name, status, evidence)
+
+
+def record_status(name: str, status: str, evidence: str) -> None:
+    if status not in {"PASS", "FAIL", "SKIP", "WARN"}:
+        raise ValueError(f"invalid verification status: {status}")
     results.append((name, status, evidence))
     print(f"  [{status}] {name}")
     if evidence:
@@ -86,6 +92,13 @@ def finite_half_values(data: bytes) -> list[float]:
     return values
 
 
+def finite_float32_values(data: bytes) -> list[float]:
+    values = []
+    for i in range(0, len(data), 4):
+        values.append(struct.unpack("<f", data[i:i + 4])[0])
+    return values
+
+
 def validate_report_rows(rows: list[tuple[str, str, str]]) -> list[str]:
     errors: list[str] = []
     for name, status, evidence in rows:
@@ -101,6 +114,13 @@ def validate_report_rows(rows: list[tuple[str, str, str]]) -> list[str]:
 
 def existing_dir(path: Path | None) -> bool:
     return bool(path and path.exists() and path.is_dir())
+
+
+def relpath(path: Path, repo_root: Path) -> str:
+    try:
+        return path.resolve().relative_to(repo_root.resolve()).as_posix()
+    except Exception:
+        return str(path)
 
 
 def main() -> int:
@@ -121,32 +141,41 @@ def main() -> int:
     print()
 
     print("[V1] Blob extraction and MD5 verification")
-    if not args.dll_v410.exists():
-        record("dll_v410.dll exists", False, f"not found: {args.dll_v410}")
-        return finish(args.report)
-
-    dll_size = args.dll_v410.stat().st_size
-    record("dll_v410.dll has expected byte size", dll_size == EXPECTED_DLL_V410_SIZE, f"size={dll_size} expected={EXPECTED_DLL_V410_SIZE}")
-
     md5s: dict[str, str] = {}
     ref_blob = b""
-    for preset, rva in V410_RVAS.items():
-        offset = get_file_offset(args.dll_v410, rva)
-        if offset is None:
-            record(f"{preset}: RVA resolves to file offset", False, f"rva=0x{rva:X}")
-            continue
-        with args.dll_v410.open("rb") as f:
-            f.seek(offset)
-            blob = f.read(BLOB_SIZE_V410)
-        if preset == "quality":
-            ref_blob = blob
-        md5s[preset] = md5(blob)
-        record(f"{preset}: extracted blob has expected size", len(blob) == BLOB_SIZE_V410, f"size={len(blob)} expected={BLOB_SIZE_V410} rva=0x{rva:X} offset=0x{offset:X}")
-        extracted_path = args.extracted_v410 / f"{preset}.bin"
-        if extracted_path.exists():
-            record(f"{preset}: re-extracted matches committed blob", extracted_path.read_bytes() == blob, f"md5={md5s[preset]}")
-        else:
-            record(f"{preset}: committed blob exists", False, f"not found: {extracted_path}")
+    if args.dll_v410.exists():
+        dll_size = args.dll_v410.stat().st_size
+        record("dll_v410.dll has expected byte size", dll_size == EXPECTED_DLL_V410_SIZE, f"size={dll_size} expected={EXPECTED_DLL_V410_SIZE}")
+
+        for preset, rva in V410_RVAS.items():
+            offset = get_file_offset(args.dll_v410, rva)
+            if offset is None:
+                record(f"{preset}: RVA resolves to file offset", False, f"rva=0x{rva:X}")
+                continue
+            with args.dll_v410.open("rb") as f:
+                f.seek(offset)
+                blob = f.read(BLOB_SIZE_V410)
+            if preset == "quality":
+                ref_blob = blob
+            md5s[preset] = md5(blob)
+            record(f"{preset}: extracted blob has expected size", len(blob) == BLOB_SIZE_V410, f"size={len(blob)} expected={BLOB_SIZE_V410} rva=0x{rva:X} offset=0x{offset:X}")
+            extracted_path = args.extracted_v410 / f"{preset}.bin"
+            if extracted_path.exists():
+                record(f"{preset}: re-extracted matches committed blob", extracted_path.read_bytes() == blob, f"md5={md5s[preset]}")
+            else:
+                record(f"{preset}: committed blob exists", False, f"not found: {extracted_path}")
+    else:
+        record_status("dll_v410.dll shipping binary available", "SKIP", f"not found: {args.dll_v410}")
+        for preset in V410_RVAS:
+            extracted_path = args.extracted_v410 / f"{preset}.bin"
+            if extracted_path.exists():
+                blob = extracted_path.read_bytes()
+                if preset == "quality":
+                    ref_blob = blob
+                md5s[preset] = md5(blob)
+                record(f"{preset}: committed blob has expected size", len(blob) == BLOB_SIZE_V410, f"size={len(blob)} expected={BLOB_SIZE_V410}")
+            else:
+                record(f"{preset}: committed blob exists", False, f"not found: {extracted_path}")
 
     unique_md5 = set(md5s.values())
     record("Exactly 2 unique blobs out of 6 presets", len(unique_md5) == 2, f"found {len(unique_md5)} unique: {sorted(unique_md5)}")
@@ -168,7 +197,7 @@ def main() -> int:
         if offsets:
             record("Raw HLSL offsets parsed", True, f"max_offset={max(offsets)} blob_size={BLOB_SIZE_V410}")
     else:
-        record("Optional HLSL source directory not supplied; check skipped", True, "pass --hlsl-dir to enable this check")
+        record_status("Optional HLSL source directory not supplied", "SKIP", "pass --hlsl-dir to enable this check")
     print()
 
     print("[V3] Blob structure verification")
@@ -182,10 +211,10 @@ def main() -> int:
         record("Weight zone is 122,880 bytes", len(weight_zone) == 122880, f"size={len(weight_zone)}")
         record("Weight zone has broad uint8 distribution", len(set(weight_zone)) > 50, f"{len(set(weight_zone))} unique uint8 values")
         extra_zone = ref_blob[130088:130976]
-        extra_vals = finite_half_values(extra_zone)
+        extra_vals = finite_float32_values(extra_zone)
         extra_finite = sum(1 for v in extra_vals if abs(v) < 1e10)
         record("Extra zone is 888 bytes", len(extra_zone) == 888, f"size={len(extra_zone)}")
-        record("Extra zone FP16 values are finite/bounded", extra_finite > 400, f"{extra_finite}/444 finite")
+        record("Extra zone FP32 values are finite/bounded", extra_finite == len(extra_vals), f"{extra_finite}/{len(extra_vals)} finite")
         padding = ref_blob[BLOB_SIZE_V410 - 96:]
         record("Last 96 bytes are zero padding", padding == b"\x00" * 96, f"all_zero={padding == b'\x00' * 96}")
     print()
@@ -285,7 +314,7 @@ def main() -> int:
     ssa_trace = repo_root / "reports/atomic-ssa-trace.json"
     if decoded_addr.exists():
         dec = json.loads(decoded_addr.read_text())
-        record("Decoded buffer addressing report exists", dec.get("schema_version") == 1, str(decoded_addr))
+        record("Decoded buffer addressing report exists", dec.get("schema_version") == 1, relpath(decoded_addr, repo_root))
         spaces = {row.get("space") for row in dec.get("global_top_keys", [])}
         record("Decoded key spaces include operand/control/vector classes", {"operand_or_accumulator", "control_or_dimension_metadata", "lane_vector_or_output_slots"}.issubset(spaces), f"spaces={sorted(spaces)}")
         record("Decoded addressing report covers many packed keys", len(dec.get("global_top_keys", [])) >= 80, f"top_keys={len(dec.get('global_top_keys', []))}")
@@ -294,7 +323,7 @@ def main() -> int:
     if ssa_trace.exists():
         tr = json.loads(ssa_trace.read_text())
         entries = tr.get("entries", [])
-        record("Atomic SSA trace report exists", tr.get("schema_version") == 1, str(ssa_trace))
+        record("Atomic SSA trace report exists", tr.get("schema_version") == 1, relpath(ssa_trace, repo_root))
         record("Atomic SSA trace covers more than 100 shader variants", len(entries) > 100, f"entries={len(entries)}")
         has_prov = any(any("index_provenance" in ev or "new_provenance" in ev or "compare_provenance" in ev for ev in e.get("events", [])) for e in entries)
         record("Atomic SSA trace includes provenance trees", has_prov, "checked provenance fields")
@@ -305,7 +334,7 @@ def main() -> int:
     if resource_bindings.exists():
         rb = json.loads(resource_bindings.read_text())
         entries = rb.get("entries", [])
-        record("Resource binding artifact exists", rb.get("schema_version") == 1, str(resource_bindings))
+        record("Resource binding artifact exists", rb.get("schema_version") == 1, relpath(resource_bindings, repo_root))
         record("Resource binding artifact covers all model shader variants", len(entries) == 214, f"entries={len(entries)}")
         record("No DXIL handle uses are unmapped", len(rb.get("unmapped_handle_uses", [])) == 0, f"unmapped={len(rb.get('unmapped_handle_uses', []))}")
         main = [x for x in rb.get("summary", []) if x.get("class") == "main_pass"]
@@ -320,7 +349,7 @@ def main() -> int:
     pass_summaries = repo_root / "spec/pass-static-summaries.json"
     if affine_formulas.exists():
         af = json.loads(affine_formulas.read_text())
-        record("Affine SSA formula artifact exists", af.get("schema_version") == 1, str(affine_formulas))
+        record("Affine SSA formula artifact exists", af.get("schema_version") == 1, relpath(affine_formulas, repo_root))
         record("Affine SSA formula artifact covers more than 100 shader variants", af.get("entries_count", len(af.get("entries", []))) > 100, f"entries={af.get('entries_count', len(af.get('entries', [])))}")
         record("Affine SSA formula artifact has many formula families", len(af.get("global_formula_families", [])) >= 100, f"families={len(af.get('global_formula_families', []))}")
     else:
@@ -328,7 +357,7 @@ def main() -> int:
     if key_slots.exists():
         ks = json.loads(key_slots.read_text())
         slots = ks.get("slots", [])
-        record("Key slot semantics artifact exists", ks.get("schema_version") == 1, str(key_slots))
+        record("Key slot semantics artifact exists", ks.get("schema_version") == 1, relpath(key_slots, repo_root))
         observed_roles = {s.get("inferred_static_role") for s in slots}
         needed_roles = {"weight_index_indirection_slot", "lane_vector_slot", "control_weight_or_loop_bound"}
         record("Key slot semantics include critical static roles", needed_roles.issubset(observed_roles), f"roles={sorted(observed_roles)[:20]}")
@@ -338,7 +367,7 @@ def main() -> int:
         ps = json.loads(pass_summaries.read_text())
         passes = ps.get("passes", [])
         main = [p for p in passes if p.get("class") == "main_pass"]
-        record("Pass static summaries artifact exists", ps.get("schema_version") == 1, str(pass_summaries))
+        record("Pass static summaries artifact exists", ps.get("schema_version") == 1, relpath(pass_summaries, repo_root))
         record("Pass static summaries cover 27 entrypoints", len(passes) == 27, f"passes={len(passes)}")
         complete = all(all(p.get("static_completion", {}).values()) for p in main)
         record("Every main pass has static resource/op/atomic/formula/activation completion", complete, f"main_passes={len(main)}")
@@ -353,7 +382,7 @@ def main() -> int:
         main = [r for r in summary if r.get("class") == "main_pass"]
         patterns = act.get("global_pattern_counts", {})
         kinds = act.get("global_kind_counts", {})
-        record("Activation/nonlinearity artifact exists", act.get("schema_version") == 1, str(activation_report))
+        record("Activation/nonlinearity artifact exists", act.get("schema_version") == 1, relpath(activation_report, repo_root))
         record("Activation/nonlinearity artifact covers 27 entrypoints", act.get("unique_entrypoints") == 27 and len(summary) == 27, f"unique={act.get('unique_entrypoints')} summary={len(summary)}")
         record("Activation/nonlinearity artifact covers all 214 shader variants", act.get("shader_variants") == 214, f"variants={act.get('shader_variants')}")
         record("Activation/nonlinearity artifact includes compare/select evidence", kinds.get("llvm_fcmp", 0) > 0 and kinds.get("llvm_select", 0) > 0, f"kinds={kinds}")
@@ -369,7 +398,7 @@ def main() -> int:
     if topology_report.exists():
         topo = json.loads(topology_report.read_text())
         obs = topo.get("observations", {})
-        record("Static layer topology artifact exists", topo.get("schema_version") == 1, str(topology_report))
+        record("Static layer topology artifact exists", topo.get("schema_version") == 1, relpath(topology_report, repo_root))
         record("Static layer topology covers 27 entrypoints", topo.get("entrypoint_count") == 27, f"entrypoints={topo.get('entrypoint_count')}")
         record("Static layer topology identifies 12 main passes and 13 post stages", obs.get("main_passes") == 12 and obs.get("post_stages") == 13, f"observations={obs}")
         record("Static layer topology pairs every main pass with a post stage", obs.get("main_passes_with_post_stage") == 12, f"paired={obs.get('main_passes_with_post_stage')}")
@@ -384,7 +413,7 @@ def main() -> int:
         main = [r for r in summary if r.get("class") == "main_pass"]
         nodes = ar.get("global_node_kind_counts", {})
         sinks = ar.get("global_sink_counts", {})
-        record("Arithmetic dataflow slice artifact exists", ar.get("schema_version") == 1, str(arithmetic_report))
+        record("Arithmetic dataflow slice artifact exists", ar.get("schema_version") == 1, relpath(arithmetic_report, repo_root))
         record("Arithmetic dataflow slice artifact covers 27 entrypoints", ar.get("unique_entrypoints") == 27 and len(summary) == 27, f"unique={ar.get('unique_entrypoints')} summary={len(summary)}")
         record("Arithmetic dataflow slice artifact covers all 214 shader variants", ar.get("shader_variants") == 214, f"variants={ar.get('shader_variants')}")
         record("Arithmetic dataflow slices include raw stores and atomic sinks", sinks.get("rawBufferStore.values", 0) > 0 and sinks.get("atomicCompareExchange.operands", 0) > 0, f"sinks={sinks}")
@@ -395,26 +424,27 @@ def main() -> int:
     print()
 
 
-    return finish(args.report)
+    return finish(args.report, repo_root)
 
 
-def finish(report_path: Path) -> int:
+def finish(report_path: Path, repo_root: Path) -> int:
     errors = validate_report_rows(results)
     for error in errors:
         record("Verification report schema/consistency validation", False, error)
     # ============================================================
     # [V9] Static RE Closure: Tensor offsets + MAC formulas + HLSL xref
     # ============================================================
-    tov_path = Path("reports/tensor-offset-verification.json")
+    tov_path = repo_root / "reports/tensor-offset-verification.json"
     if tov_path.exists():
         tov = json.loads(tov_path.read_text())
-        record("Tensor offset verification: all 78 tensors pass",
+        record("Tensor offset plausibility artifact exists", True, relpath(tov_path, repo_root))
+        record("Tensor offset plausibility check: all 78 tensors parse into plausible typed values",
                tov.get("all_pass", False),
-               f"passed={tov.get('passed')}/{tov.get('tensor_count')}")
+               f"passed={tov.get('passed')}/{tov.get('tensor_count')} claim_scope={tov.get('claim_scope')} note={tov.get('note', '')}")
     else:
-        record("Tensor offset verification artifact exists", False, "not found")
+        record("Tensor offset plausibility artifact exists", False, "not found")
 
-    mac_path = Path("reports/mac-arithmetic-complete.json")
+    mac_path = repo_root / "reports/mac-arithmetic-complete.json"
     if mac_path.exists():
         mac = json.loads(mac_path.read_text())
         pass_count = len(mac.get("pass_operators", {}))
@@ -424,29 +454,33 @@ def finish(report_path: Path) -> int:
     else:
         record("MAC arithmetic artifact exists", False, "not found")
 
-    closure_path = Path("reports/static-re-closure.md")
+    closure_path = repo_root / "reports/static-re-closure.md"
     record("Static RE closure report exists",
            closure_path.exists(),
-           str(closure_path))
+           relpath(closure_path, repo_root))
 
-    host_path = Path("reports/host-cbuffer-dispatch.json")
+    host_path = repo_root / "reports/host-cbuffer-dispatch.json"
     record("Host cbuffer dispatch analysis exists",
            host_path.exists(),
-           str(host_path))
+           relpath(host_path, repo_root))
 
-    hlsli_path = Path("reports/hlsl-operator-analysis.json")
+    hlsli_path = repo_root / "reports/hlsl-operator-analysis.json"
     record("HLSL operator cross-reference exists",
            hlsli_path.exists(),
-           str(hlsli_path))
+           relpath(hlsli_path, repo_root))
 
     passed = sum(1 for _, s, _ in results if s == "PASS")
     failed = sum(1 for _, s, _ in results if s == "FAIL")
+    skipped = sum(1 for _, s, _ in results if s == "SKIP")
+    warned = sum(1 for _, s, _ in results if s == "WARN")
     report = {
-        "schema_version": 2,
+        "schema_version": 3,
         "timestamp": dt.datetime.now(dt.timezone.utc).isoformat(),
         "total": len(results),
         "passed": passed,
         "failed": failed,
+        "skipped": skipped,
+        "warned": warned,
         "results": [{"name": n, "status": s, "evidence": e} for n, s, e in results],
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -455,7 +489,7 @@ def finish(report_path: Path) -> int:
     print("=" * 60)
     print("VERIFICATION SUMMARY")
     print("=" * 60)
-    print(f"  {passed} PASSED / {failed} FAILED / {len(results)} TOTAL")
+    print(f"  {passed} PASSED / {failed} FAILED / {skipped} SKIPPED / {warned} WARN / {len(results)} TOTAL")
     if failed:
         print("FAILURES:")
         for name, status, evidence in results:
