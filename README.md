@@ -11,7 +11,7 @@ AMD's FidelityFX Super Resolution 4.1.0 ships as compiled Windows DLLs containin
 
 What is included:
 
-1. **Data DLL research** — Reconstructed C source and embedded extracted weight data. The historical post-link patcher that copied original PE regions has been removed from the proof path; MD5 equality after copying original bytes is not claimed as independent reconstruction evidence. Use `rebuild/pe_patcher.py` now as a section-comparison tool that reports hashes and differences without modifying rebuilt output.
+1. **Data DLL research** — Reconstructed C source and embedded extracted weight data. The historical post-link patcher that copied original PE regions has been removed from the proof path; MD5 equality after copying original bytes is not claimed as independent reconstruction evidence. Use `rebuild/compare_sections.py` as the current section-comparison tool that reports hashes and differences without modifying rebuilt output.
 
 2. **Provider DLL** — Disassembled the PSO creation function (`FUN_180025990`) that Ghidra could not decompile. Decoded the jump table, flag index table, and pass descriptor table. Mapped 30 unique shader blobs (verified by MD5 hash) to pass indices. Extracted resource binding layouts from LLVM IR.
 
@@ -328,8 +328,8 @@ fsr-re/
 │   ├── README.md                  Build instructions and bounded verification notes.
 │   ├── fsr_data.c                 Reconstructed C source from disassembly.
 │   ├── fsr_data.def               PE export definitions.
-│   ├── pe_patcher.py              Section comparison tool; does not copy original bytes.
-│   ├── pe_patcher_v2.py           Historical patcher; superseded by pe_patcher.py.
+│   ├── compare_sections.py       Section comparison tool; reports per-region hashes.
+│   ├── pe_patcher.py             Deprecated; exits immediately. Use compare_sections.py.
 │   ├── build.sh                   Full build + verify script.
 │   ├── fsr_data_prepatch.dll      Independently rebuilt DLL (893,019 bytes).
 │   └── fsr_data_final.dll         Historical patched artifact (893,388 bytes); not proof.

@@ -28,7 +28,7 @@ echo ""
 
 echo "STEP 2: Compare rebuilt DLL against original WITHOUT copying original bytes"
 echo ""
-python3 pe_patcher.py \
+python3 compare_sections.py \
   --original "$ORIGINAL_DLL" \
   --rebuilt "$SCRIPT_DIR/fsr_data_prepatch.dll" \
   --json-out "$SCRIPT_DIR/section-comparison.json"

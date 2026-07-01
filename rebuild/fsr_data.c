@@ -77,6 +77,7 @@ const struct blob_entry* fsr_data_get_blob(unsigned long long idx) {
 }
 const struct blob_entry* fsr_data_find_blob(const char* name) {
     int i;
+    if (!name) return (const struct blob_entry*)0;
     for (i = 0; i < 6; i++) {
         if (strcmp(entries[i].name, name) == 0) return &entries[i];
     }

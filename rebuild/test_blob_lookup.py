@@ -8,7 +8,7 @@ Verifies:
   - quality/balanced/performance/ultraperf/native share the same hash
   - drs returns a distinct hash
   - Invalid preset names return NULL
-  - NULL input returns NULL
+  - NULL pointer input returns NULL (tested via ctypes NULL pointer)
   - All blobs are exactly 131072 bytes
 """
 import ctypes
@@ -140,6 +140,15 @@ def main() -> int:
         errors += 1
     else:
         print(f'  OK: empty string returned NULL')
+
+    # --- Test 6: NULL pointer input ---
+    print('--- Test 6: NULL pointer input ---')
+    entry = lib.fsr_data_find_blob(None)
+    if entry:
+        print(f'  FAIL: NULL pointer returned non-NULL')
+        errors += 1
+    else:
+        print(f'  OK: NULL pointer returned NULL')
 
     # --- Summary ---
     print()

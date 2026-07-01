@@ -90,7 +90,7 @@ A more detailed threat model for redistributed binary data is in [RISK.md](RISK.
 
 ## What This Repository Contains
 
-The repository includes: original MIT-licensed analysis scripts, documentation, reconstructed C source, a PE analysis tool, architecture specifications derived from MIT-licensed FSR 4.0.2 source, extracted neural network weight blobs (~6 × 131 KB, AMD proprietary), and rebuild/comparison tooling that emits per-region comparison reports.
+The repository includes: original MIT-licensed analysis scripts, documentation, reconstructed C source, a PE analysis tool, architecture specifications derived from MIT-licensed FSR 4.0.2 source, extracted neural network weight blobs (~6 x 131 KB, AMD proprietary), and rebuild/comparison tooling that emits per-region comparison reports. The extracted weight blobs are included for research disclosure; redistribution rights are not granted by AMD and remain legally exposed.
 
 The original AMD FSR 4.1.0 DLL is not included. Ghidra decompilation projects and DXIL disassembly files are not included.
 
