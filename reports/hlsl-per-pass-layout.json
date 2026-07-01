@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "source": "fsr4_model_v07_fp8_no_scale_passes_1080.hlsl",
+  "source": "/mnt/workdrive/fsr4-sdk-402-source/Kits/FidelityFX/upscalers/fsr4/internal/shaders/fsr4_model_v07_fp8_no_scale_passes_1080.hlsl",
   "pass_count": 14,
   "layout": {
     "0": [],

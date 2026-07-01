@@ -57,8 +57,8 @@ FORBIDDEN = [
 ]
 
 # Files that may mention old problems ONLY with explicit correction wording nearby.
-# These files are still scanned — but matches are suppressed if correction text is present
-# anywhere in the file.
+# These files are still scanned — but matches are suppressed only when correction
+# text appears close to the matched overclaim.
 CORRECTION_FILES = {
     Path("rebuild/README.md"),
     Path("rebuild/pe_patcher.py"),
@@ -87,16 +87,14 @@ for path in TEXT_FILES:
         continue
     rel = path.relative_to(ROOT)
 
-    # Check if this is a correction-aware file
-    has_correction = (
-        rel in CORRECTION_FILES
-        and CORRECTION_PATTERN.search(text)
-    )
+    correction_aware = rel in CORRECTION_FILES
 
     for regex, message in FORBIDDEN:
         for match in regex.finditer(text):
-            if has_correction:
-                continue
+            if correction_aware:
+                window = text[max(0, match.start() - 300):match.end() + 300]
+                if CORRECTION_PATTERN.search(window):
+                    continue
             line = text.count("\n", 0, match.start()) + 1
             errors.append(f"{rel}:{line}: {message}: {match.group(0)!r}")
 

@@ -27,13 +27,13 @@
       "v410_unique_values": 255
     },
     {
-      "name": "extra_scale_factors",
+      "name": "extra_fp32_output_params",
       "offset": 130088,
       "size": 888,
-      "dtype": "float16",
-      "element_count": 444,
+      "dtype": "float32",
+      "element_count": 222,
       "tensor_count": null,
-      "description": "Additional FP16 parameters (v4.1.0 only). Likely per-layer quantization scale factors.",
+      "description": "Additional v4.1.0 FP32 output composition / scale parameters consumed by postpass.",
       "present_in": [
         "4.1.0"
       ],

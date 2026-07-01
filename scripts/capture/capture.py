@@ -27,7 +27,7 @@ import struct
 from pathlib import Path
 from datetime import datetime
 
-OUTPUT_DIR = Path("/mnt/workdrive/fsr-re/runtime-capture")
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "runtime-capture"
 
 
 def find_fsr4_dispatches(capture_path):

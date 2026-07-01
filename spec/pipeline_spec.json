@@ -19,11 +19,12 @@
       "balanced",
       "performance",
       "ultra_performance",
-      "ulra_quality",
+      "native",
       "drs"
     ],
     "shared_weights": true,
-    "weight_presets": 2
+    "weight_presets": 2,
+    "dispatch_order_note": "Descriptor-slot order is not runtime dispatch order. Runtime order in FUN_18000d5b0 is optional SPD/AutoExposure before the 27-pass loop, then optional RCAS and Debug View after the loop."
   },
   "pass_structure": {
     "prepass": {

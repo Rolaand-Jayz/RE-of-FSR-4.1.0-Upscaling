@@ -1,6 +1,8 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "source": "static_re_closure",
+  "claim_scope": "plausibility_check",
+  "note": "This validates that the 4.0.2-derived tensor map parses 4.1.0 blob regions into plausible typed values. It does not prove runtime offset use.",
   "blob_file": "extracted/v410_initializers/quality.bin",
   "blob_size": 131072,
   "tensor_count": 78,
@@ -8,7 +10,7 @@
   "failed": 0,
   "unknown": 0,
   "all_pass": true,
-  "method": "Parsed 4.1.0 quality blob using 4.0.2 HLSL-derived tensor offsets. Each tensor region validated for type-appropriate value distribution.",
+  "method": "Parsed the 4.1.0 quality blob using 4.0.2 HLSL-derived tensor offsets. Each region was checked only for type-appropriate plausible values, not for live runtime binding proof.",
   "results": [
     {
       "index": 0,

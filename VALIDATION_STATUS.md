@@ -106,7 +106,7 @@
 
 ### ✅ "no_scale" Designation
 - Means "no per-tensor scale tensor in the main weight path"
-- The 444 extra FP16 values in v4.1.0 are likely quantization scale factors
+- The extra 888-byte region in v4.1.0 is 222 FP32 output composition / scale parameters consumed by postpass
 - Not a claim that all scale-related parameters vanished
 
 ---

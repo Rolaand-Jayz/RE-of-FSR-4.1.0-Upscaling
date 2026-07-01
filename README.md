@@ -25,10 +25,10 @@ This repository is a research record: analysis, dead ends, methodology, extracte
 | Finding | Detail | Evidence |
 |:---|:---|:---|
 | **602 DXBC shader blobs** cataloged and classified | Full enumeration of every embedded compute shader | ✅ Verified — automated extraction + manual audit |
-| **27 unique model shaders + 3 conditional** | 27 main-loop passes (prepass + 12 model × 2 + postpass + SPD) + 3 conditional (RCAS, autoexposure, debug) | ✅ Verified — binary hash comparison |
+| **27 model-family entrypoints + 3 optional host slots** | DXIL inventory contains `prepass`, `pass1..pass12`, `pass0_post..pass12_post`, `postpass`; host descriptor table also has optional `rcas`, `spd_autoexposure`, `debug_view` slots | ✅ Verified — binary hash comparison + descriptor-table analysis |
 | **6 weight blobs** extracted, each 131,072 bytes | 5 identical (quality/balanced/performance/ultraperf/native), 1 unique (DRS) | ✅ Verified — MD5 hash comparison |
 | **Weight container format decoded** | 7,208B FP16 biases → 122,880B FP8/uint8-like weights → 888B extra (222 FP32 output biases) → 96B pad | ✅ Verified — container parsed, values validated, offsets match across all blobs |
-| **Pipeline: 27 main + 3 conditional passes** | 27-pass main loop + RCAS + SPD AutoExposure + Debug View | ✅ Verified — hardcoded loop count in dispatch function + Ghidra decompilation |
+| **Pipeline: 27 model-loop + conditional passes** | optional SPD AutoExposure before the 27-pass loop, then optional RCAS + Debug View after it; descriptor-slot order is separate | ✅ Verified — dispatch function + host-cbuffer analysis |
 | **All passes use (32,1,1) thread groups** | Wavefront-width 1D dispatch | ✅ Verified — LLVM IR `!dx.numthreads` metadata |
 | **Static resource binding map** | 9 register spaces identified with proposed semantic meaning | ⚠️ Static only — createHandle analysis across LLVM IR blobs; runtime descriptor bindings not captured |
 | **Constant buffer layout decoded** | 5-6 registers × 4 floats (80-96 bytes) per pass; even/odd pair pattern | ✅ Verified — cbufferLoadLegacy register indices from LLVM IR |
@@ -61,10 +61,13 @@ do {
 } while (lVar24 != 0);
 ```
 
-After the main loop, three conditional passes execute:
-- **RCAS** (index 27/0x1b) — sharpening
-- **SPD AutoExposure** (index 28/0x1c) — automatic exposure calculation
-- **Debug View** (index 29/0x1d) — debug visualization
+The descriptor-slot names and the runtime dispatch order are distinct. In `FUN_18000d5b0` the actual order is:
+- **SPD AutoExposure** before the 27-pass loop when auto exposure is enabled
+- **27 model-loop passes** (`pass_0` .. `pass_26`)
+- **RCAS** after the loop when sharpening is enabled
+- **Debug View** after the loop when the debug flag is enabled
+
+See [`docs/pass-index-to-entrypoint-map.md`](docs/pass-index-to-entrypoint-map.md) for the descriptor-index taxonomy versus DXIL entrypoint taxonomy.
 
 ### PSO Creation: FUN_180025990
 
@@ -296,7 +299,7 @@ fsr-re/
 │   ├── activation-lut-analysis.md FP8 decode and activation function analysis.
 │   ├── adversarial-review-2.md   Adversarial review — challenges assumptions.
 │   ├── architecture.md           Network topology, layer details, channel flow.
-│   ├── extra-params-analysis.md  Analysis of the 444 extra FP16 values.
+│   ├── extra-params-analysis.md  Analysis of the 222 extra FP32 output parameters.
 │   ├── methodology.md            Full methodology narrative — including dead ends.
 │   ├── offset-mapping.md         Complete tensor offset table.
 │   ├── pipeline-dispatch.md      Provider DLL dispatch analysis.
@@ -428,7 +431,7 @@ This project operates under established reverse engineering principles:
 - **FSR 4.0.2** is MIT-licensed by AMD on [GPUOpen](https://gpuopen.com/fidelityfx-superresolution/). We used it as a structural reference, which is explicitly permitted by the MIT license.
 - **FSR 4.1.0** analysis was performed via static analysis (Ghidra decompilation, DXIL disassembly, PE inspection, raw x86-64 disassembly) of a distributed binary. No license agreement was broken. No EULA was accepted. The binary was analyzed as-is, in transit, on the wire.
 - **The extracted weights** are numerical parameters produced by AMD's training pipeline. They are reproduced here for research and interoperability purposes.
-- **AMD's own founding story is reverse engineering.** AMD spent five years reverse-engineering Intel's 386 processor. They won in court. They've never issued a DMCA takedown for RE of their products. They open-sourced their entire GPU driver stack. They publish FSR under MIT. We applied AMD's own founding principle to their latest product.
+- **AMD's own founding story is reverse engineering.** AMD spent five years reverse-engineering Intel's 386 processor. They won in court. I am not aware of a public AMD DMCA campaign against GPU reverse-engineering projects, though that is not legal permission. AMD has released major Linux GPU driver components and GPUOpen materials under open-source licenses, and they publish prior FSR generations under MIT. We applied that interoperability-first tradition to their latest product.
 
 For the full legal analysis, AMD history, and honest risk assessment, see [`LEGAL.md`](LEGAL.md).
 

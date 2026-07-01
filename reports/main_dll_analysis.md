@@ -4,7 +4,7 @@
 
 We traced the static dispatch pipeline of `amd_fidelityfx_upscaler_dx12.dll` (15.6MB) from binary analysis:
 - **30 unique shader blobs** confirmed by MD5 hash
-- **27-pass main loop** + 3 conditional passes (RCAS, SPD AutoExposure, Debug View)
+- **27-pass model loop** plus conditional dispatches whose runtime order differs from descriptor-slot order
 - **Thread groups**: All passes use (32, 1, 1) — wavefront-width dispatch
 - **Resource binding map**: 9 register spaces identified with semantic meaning
 - **CBV layout**: 5-6 registers per pass (80-96 bytes), even/odd pass pair pattern
@@ -20,7 +20,13 @@ do {
     lVar24--;
 } while (lVar24 != 0);
 ```
-Then conditionally: RCAS → SPD AutoExposure → Debug View
+Actual dispatch order in `FUN_18000d5b0`: optional SPD AutoExposure before the 27-pass loop, then optional RCAS, then optional Debug View after the loop.
+
+These orderings are distinct and should not be conflated:
+- PSO / descriptor-slot index order: `pass_0` .. `pass_26`, `rcas`, `spd_autoexposure`, `debug_view`
+- Actual dispatch order: optional SPD AutoExposure → 27-pass model loop → optional RCAS → optional Debug View
+- Conditional execution order: SPD gate before the loop; RCAS/debug gates after the loop
+- DXIL entrypoint inventory order: `prepass`, `pass1..pass12`, `pass0_post..pass12_post`, `postpass`
 
 ### PSO Creation Function (FUN_180025990)
 Ghidra failed to decompile this function. We disassembled it from raw binary:

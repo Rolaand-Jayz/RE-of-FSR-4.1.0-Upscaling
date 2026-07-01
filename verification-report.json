@@ -1,9 +1,11 @@
 {
-  "schema_version": 2,
-  "timestamp": "2026-06-29T03:04:07.782783+00:00",
-  "total": 87,
+  "schema_version": 3,
+  "timestamp": "2026-07-01T03:34:26.631667+00:00",
+  "total": 88,
   "passed": 87,
   "failed": 0,
+  "skipped": 1,
+  "warned": 0,
   "results": [
     {
       "name": "dll_v410.dll has expected byte size",
@@ -106,8 +108,8 @@
       "evidence": "got=8e5c042e0c14cca83d56ed13df5f02dd expected=8e5c042e0c14cca83d56ed13df5f02dd"
     },
     {
-      "name": "Optional HLSL source directory not supplied; check skipped",
-      "status": "PASS",
+      "name": "Optional HLSL source directory not supplied",
+      "status": "SKIP",
       "evidence": "pass --hlsl-dir to enable this check"
     },
     {
@@ -136,9 +138,9 @@
       "evidence": "size=888"
     },
     {
-      "name": "Extra zone FP16 values are finite/bounded",
+      "name": "Extra zone FP32 values are finite/bounded",
       "status": "PASS",
-      "evidence": "444/444 finite"
+      "evidence": "222/222 finite"
     },
     {
       "name": "Last 96 bytes are zero padding",
@@ -196,7 +198,7 @@
       "evidence": "bytes_available=122880 expected=122880"
     },
     {
-      "name": "Zone 'extra_scale_factors' at 0x1FC28 has expected size",
+      "name": "Zone 'extra_fp32_output_params' at 0x1FC28 has expected size",
       "status": "PASS",
       "evidence": "bytes_available=888 expected=888"
     },
@@ -243,7 +245,7 @@
     {
       "name": "Decoded buffer addressing report exists",
       "status": "PASS",
-      "evidence": "/mnt/workdrive/fsr-re/reports/decoded-buffer-addressing.json"
+      "evidence": "reports/decoded-buffer-addressing.json"
     },
     {
       "name": "Decoded key spaces include operand/control/vector classes",
@@ -258,7 +260,7 @@
     {
       "name": "Atomic SSA trace report exists",
       "status": "PASS",
-      "evidence": "/mnt/workdrive/fsr-re/reports/atomic-ssa-trace.json"
+      "evidence": "reports/atomic-ssa-trace.json"
     },
     {
       "name": "Atomic SSA trace covers more than 100 shader variants",
@@ -273,7 +275,7 @@
     {
       "name": "Resource binding artifact exists",
       "status": "PASS",
-      "evidence": "/mnt/workdrive/fsr-re/spec/resource-bindings.json"
+      "evidence": "spec/resource-bindings.json"
     },
     {
       "name": "Resource binding artifact covers all model shader variants",
@@ -293,7 +295,7 @@
     {
       "name": "Affine SSA formula artifact exists",
       "status": "PASS",
-      "evidence": "/mnt/workdrive/fsr-re/reports/affine-ssa-formulas-summary.json"
+      "evidence": "reports/affine-ssa-formulas-summary.json"
     },
     {
       "name": "Affine SSA formula artifact covers more than 100 shader variants",
@@ -308,7 +310,7 @@
     {
       "name": "Key slot semantics artifact exists",
       "status": "PASS",
-      "evidence": "/mnt/workdrive/fsr-re/spec/key-slot-semantics.json"
+      "evidence": "spec/key-slot-semantics.json"
     },
     {
       "name": "Key slot semantics include critical static roles",
@@ -318,7 +320,7 @@
     {
       "name": "Pass static summaries artifact exists",
       "status": "PASS",
-      "evidence": "/mnt/workdrive/fsr-re/spec/pass-static-summaries.json"
+      "evidence": "spec/pass-static-summaries.json"
     },
     {
       "name": "Pass static summaries cover 27 entrypoints",
@@ -333,7 +335,7 @@
     {
       "name": "Activation/nonlinearity artifact exists",
       "status": "PASS",
-      "evidence": "/mnt/workdrive/fsr-re/reports/activation-nonlinearity-evidence.json"
+      "evidence": "reports/activation-nonlinearity-evidence.json"
     },
     {
       "name": "Activation/nonlinearity artifact covers 27 entrypoints",
@@ -368,7 +370,7 @@
     {
       "name": "Static layer topology artifact exists",
       "status": "PASS",
-      "evidence": "/mnt/workdrive/fsr-re/spec/static-layer-topology.json"
+      "evidence": "spec/static-layer-topology.json"
     },
     {
       "name": "Static layer topology covers 27 entrypoints",
@@ -388,7 +390,7 @@
     {
       "name": "Arithmetic dataflow slice artifact exists",
       "status": "PASS",
-      "evidence": "/mnt/workdrive/fsr-re/reports/arithmetic-dataflow-slices.json"
+      "evidence": "reports/arithmetic-dataflow-slices.json"
     },
     {
       "name": "Arithmetic dataflow slice artifact covers 27 entrypoints",
@@ -416,9 +418,14 @@
       "evidence": "main_passes=12"
     },
     {
-      "name": "Tensor offset verification: all 78 tensors pass",
+      "name": "Tensor offset plausibility artifact exists",
       "status": "PASS",
-      "evidence": "passed=78/78"
+      "evidence": "reports/tensor-offset-verification.json"
+    },
+    {
+      "name": "Tensor offset plausibility check: all 78 tensors parse into plausible typed values",
+      "status": "PASS",
+      "evidence": "passed=78/78 claim_scope=plausibility_check note=This validates that the 4.0.2-derived tensor map parses 4.1.0 blob regions into plausible typed values. It does not prove runtime offset use."
     },
     {
       "name": "MAC arithmetic formulas cover all passes",
