@@ -18,3 +18,5 @@ jobs:
         run: python scripts/validate_claims.py
       - name: Run public verification suite
         run: python scripts/verify.py --report verification-report.ci.json
+      - name: Verify rebuild blob lookup mapping
+        run: python rebuild/test_blob_lookup.py

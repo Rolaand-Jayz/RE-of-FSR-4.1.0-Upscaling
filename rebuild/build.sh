@@ -13,7 +13,9 @@ echo "Exports:    fsr_data.def"
 echo "Weights:    ../extracted/v410_initializers/"
 echo ""
 
-x86_64-w64-mingw32-gcc -shared -O2 \
+CC="${CC:-x86_64-w64-mingw32-gcc}"
+
+"$CC" -shared -O2 \
     -Wl,--image-base=0x370b10000 \
     -o fsr_data_prepatch.dll \
     fsr_data.c fsr_data.def

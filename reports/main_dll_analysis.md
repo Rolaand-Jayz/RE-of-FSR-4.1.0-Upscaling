@@ -132,12 +132,12 @@ Each cbuffer register is 4 × float32 = 16 bytes:
 
 ## Pass Pair Structure
 
-The 27 main passes form 12 pairs + 1 standalone:
+The 27 main-loop host descriptor slots form 13 even/odd descriptor pairs plus 1 standalone final slot:
 - Passes 0,1 = pair 0 (pre/post)
 - Passes 2,3 = pair 1 (pre/post)
 - ...
 - Passes 24,25 = pair 12 (pre/post)
-- Pass 26 = standalone final pass
+- Pass 26 = standalone final slot
 
 Odd passes (post) access CBV register 3, which even passes (pre) skip.
 

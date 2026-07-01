@@ -202,6 +202,25 @@ def main() -> int:
             print(f'\n  {op_name}: NOT FOUND')
 
     hlsl_path = shader_root / 'fsr4_model_v07_fp8_no_scale_passes_1080.hlsl'
+    if not hlsl_path.exists():
+        print(f'\nSKIP: HLSL source not found at {hlsl_path}')
+        print('Parts 2 and 3 require the FSR 4.0.2 SDK. Skipping SDK-dependent analysis.')
+        mac_path = out_dir / 'mac-arithmetic-formulas.json'
+        layout_path = out_dir / 'hlsl-per-pass-layout.json'
+        for p in (mac_path, layout_path):
+            p.write_text(json.dumps({
+                'status': 'SKIP',
+                'reason': 'SDK HLSL source not available. Re-run with --sdk-root pointing to a local FSR 4.0.2 SDK checkout.',
+            }, indent=2) + '\n')
+            print(f'Saved (SKIP): {repo_rel(p, repo_root)}')
+        print('\n' + '=' * 70)
+        print('STATIC RE CLOSURE COMPLETE (partial — SDK-dependent steps skipped)')
+        print('=' * 70)
+        print(f"Tensor offset plausibility check: {'ALL 78 PASS' if all_pass else 'FAILURES'}")
+        print('MAC formulas: SKIP (no SDK)')
+        print('Pass layouts: SKIP (no SDK)')
+        return 0 if all_pass else 1
+
     hlsl = hlsl_path.read_text()
     pass_operators = {}
     for m in re.finditer(r'#include\s+"([^"]+)"', hlsl):

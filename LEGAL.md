@@ -100,7 +100,8 @@ We are explicit about what is and is not included, and the licensing status of e
 | Architecture specs (JSON) | Original work derived from MIT-licensed 4.0.2 source | ✅ Yes |
 | FSR 4.0.2 HLSL reference data | Already MIT licensed by AMD (GPUOpen) | ✅ Yes |
 | **Extracted weight blobs** (6 × ~131KB `.bin` files) | AMD proprietary data, extracted for interoperability research | ✅ Yes |
-| **Rebuilt DLLs / comparison artifacts** | Reconstructed from RE work + extracted data; not licensed as AMD data | ✅ Yes |
+| Rebuild source/tooling and comparison scripts | Original work + extracted data dependency | ✅ Yes |
+| Compiled rebuilt DLL artifacts | Reconstructed from RE work + extracted data | Not committed by default |
 | Original FSR 4.1.0 DLL (AMD binary) | AMD proprietary | ❌ **Not included** |
 | Ghidra project / decompiled C++ | Contains proprietary decompilation of AMD code | ❌ **Not included** |
 | DXIL disassembly (`.ll` files) | Derived from proprietary shaders | ❌ **Not included** |

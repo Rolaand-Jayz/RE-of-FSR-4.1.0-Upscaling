@@ -4,7 +4,7 @@ This directory contains the pipeline for rebuilding `fsr_data.dll` (FSR 4.1.0) f
 
 **Important correction:** a previous version described a bit-identical proof. That was overstated. The old post-link patcher copied original section bodies, headers, and overlay bytes into the output before comparing hashes, which made MD5 equality circular. The current tooling does not patch original bytes into the rebuilt file; it emits a comparison report instead.
 
-## The Three-Step Check
+## The Four-Step Check
 
 | Step | Tool | Description |
 |------|------|-------------|

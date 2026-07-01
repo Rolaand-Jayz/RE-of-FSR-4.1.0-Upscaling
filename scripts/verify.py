@@ -266,7 +266,7 @@ def main() -> int:
         record("All expected 4.1.0 DXIL model entry points are present", found == expected_passes, f"found {len(found)}/{len(expected_passes)} expected entry points; missing={missing}")
         record("No pass13 entry point is present in the extracted 4.1.0 DXIL corpus", not unexpected_pass13, f"pass13_matches={unexpected_pass13}")
     else:
-        record("DXIL disassembly directory exists", False, str(args.dxil_dir))
+        record_status("DXIL disassembly directory exists", "SKIP", f"proprietary-derived DXIL disassembly not committed; {args.dxil_dir}")
     print()
 
     print("[V7] Blob format spec verification")

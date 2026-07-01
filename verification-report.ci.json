@@ -1,0 +1,451 @@
+{
+  "schema_version": 3,
+  "timestamp": "2026-07-01T03:55:05.343208+00:00",
+  "total": 88,
+  "passed": 87,
+  "failed": 0,
+  "skipped": 1,
+  "warned": 0,
+  "results": [
+    {
+      "name": "dll_v410.dll has expected byte size",
+      "status": "PASS",
+      "evidence": "size=15605520 expected=15605520"
+    },
+    {
+      "name": "quality: extracted blob has expected size",
+      "status": "PASS",
+      "evidence": "size=131072 expected=131072 rva=0x91DB50 offset=0x91C950"
+    },
+    {
+      "name": "quality: re-extracted matches committed blob",
+      "status": "PASS",
+      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "balanced: extracted blob has expected size",
+      "status": "PASS",
+      "evidence": "size=131072 expected=131072 rva=0x943CC0 offset=0x942AC0"
+    },
+    {
+      "name": "balanced: re-extracted matches committed blob",
+      "status": "PASS",
+      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "performance: extracted blob has expected size",
+      "status": "PASS",
+      "evidence": "size=131072 expected=131072 rva=0x963D20 offset=0x962B20"
+    },
+    {
+      "name": "performance: re-extracted matches committed blob",
+      "status": "PASS",
+      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "ultraperf: extracted blob has expected size",
+      "status": "PASS",
+      "evidence": "size=131072 expected=131072 rva=0x8D7570 offset=0x8D6370"
+    },
+    {
+      "name": "ultraperf: re-extracted matches committed blob",
+      "status": "PASS",
+      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "native: extracted blob has expected size",
+      "status": "PASS",
+      "evidence": "size=131072 expected=131072 rva=0x8FB700 offset=0x8FA500"
+    },
+    {
+      "name": "native: re-extracted matches committed blob",
+      "status": "PASS",
+      "evidence": "md5=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "drs: extracted blob has expected size",
+      "status": "PASS",
+      "evidence": "size=131072 expected=131072 rva=0x8B5120 offset=0x8B3F20"
+    },
+    {
+      "name": "drs: re-extracted matches committed blob",
+      "status": "PASS",
+      "evidence": "md5=8e5c042e0c14cca83d56ed13df5f02dd"
+    },
+    {
+      "name": "Exactly 2 unique blobs out of 6 presets",
+      "status": "PASS",
+      "evidence": "found 2 unique: ['6ccdb68fc828e0bef93fa32fd144c4f6', '8e5c042e0c14cca83d56ed13df5f02dd']"
+    },
+    {
+      "name": "quality MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "balanced MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "performance MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "ultraperf MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "native MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=6ccdb68fc828e0bef93fa32fd144c4f6 expected=6ccdb68fc828e0bef93fa32fd144c4f6"
+    },
+    {
+      "name": "drs MD5 matches known value",
+      "status": "PASS",
+      "evidence": "got=8e5c042e0c14cca83d56ed13df5f02dd expected=8e5c042e0c14cca83d56ed13df5f02dd"
+    },
+    {
+      "name": "Optional HLSL source directory not supplied",
+      "status": "SKIP",
+      "evidence": "pass --hlsl-dir to enable this check"
+    },
+    {
+      "name": "Bias zone is 7,208 bytes",
+      "status": "PASS",
+      "evidence": "size=7208"
+    },
+    {
+      "name": "FP16 bias values are finite/bounded",
+      "status": "PASS",
+      "evidence": "3604/3604 finite"
+    },
+    {
+      "name": "Weight zone is 122,880 bytes",
+      "status": "PASS",
+      "evidence": "size=122880"
+    },
+    {
+      "name": "Weight zone has broad uint8 distribution",
+      "status": "PASS",
+      "evidence": "255 unique uint8 values"
+    },
+    {
+      "name": "Extra zone is 888 bytes",
+      "status": "PASS",
+      "evidence": "size=888"
+    },
+    {
+      "name": "Extra zone FP32 values are finite/bounded",
+      "status": "PASS",
+      "evidence": "222/222 finite"
+    },
+    {
+      "name": "Last 96 bytes are zero padding",
+      "status": "PASS",
+      "evidence": "all_zero=True"
+    },
+    {
+      "name": "4.0.2 vs 4.1.0 byte change rate is in expected range",
+      "status": "PASS",
+      "evidence": "actual=98.7% (128387/130088 bytes)"
+    },
+    {
+      "name": "4.0.2 blob is 130,088 bytes",
+      "status": "PASS",
+      "evidence": "size=130088 expected=130088"
+    },
+    {
+      "name": "4.1.0 blob is 131,072 bytes",
+      "status": "PASS",
+      "evidence": "size=131072 expected=131072 diff=984"
+    },
+    {
+      "name": "4.0.2 lacks the 4.1.0 extra zone",
+      "status": "PASS",
+      "evidence": "remaining bytes=0"
+    },
+    {
+      "name": "4.1.0 weight zone has 255 unique uint8 values",
+      "status": "PASS",
+      "evidence": "found 255 unique values"
+    },
+    {
+      "name": "All expected 4.1.0 DXIL model entry points are present",
+      "status": "PASS",
+      "evidence": "found 27/27 expected entry points; missing=[]"
+    },
+    {
+      "name": "No pass13 entry point is present in the extracted 4.1.0 DXIL corpus",
+      "status": "PASS",
+      "evidence": "pass13_matches=[]"
+    },
+    {
+      "name": "Blob format spec has zone definitions",
+      "status": "PASS",
+      "evidence": "4 zones defined"
+    },
+    {
+      "name": "Zone 'fp16_params' at 0x0 has expected size",
+      "status": "PASS",
+      "evidence": "bytes_available=7208 expected=7208"
+    },
+    {
+      "name": "Zone 'fp8_weights' at 0x1C28 has expected size",
+      "status": "PASS",
+      "evidence": "bytes_available=122880 expected=122880"
+    },
+    {
+      "name": "Zone 'extra_fp32_output_params' at 0x1FC28 has expected size",
+      "status": "PASS",
+      "evidence": "bytes_available=888 expected=888"
+    },
+    {
+      "name": "Zone 'padding' at 0x1FFA0 has expected size",
+      "status": "PASS",
+      "evidence": "bytes_available=96 expected=96"
+    },
+    {
+      "name": "DXIL IR evidence artifact exists and covers 27 entrypoints",
+      "status": "PASS",
+      "evidence": "unique_entrypoints=27"
+    },
+    {
+      "name": "DXIL IR evidence covers 12 main passes",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Every main pass has rawBufferLoad evidence",
+      "status": "PASS",
+      "evidence": "checked resource_ops.rawBufferLoad.max > 0"
+    },
+    {
+      "name": "Atomic/buffer pattern artifact covers 12 main passes",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Every main pass has atomicCompareExchange address evidence",
+      "status": "PASS",
+      "evidence": "checked atomic_addr_total and atomic_addr_unique"
+    },
+    {
+      "name": "Every main pass has tertiary scale evidence",
+      "status": "PASS",
+      "evidence": "checked dx.op.tertiary scale constants"
+    },
+    {
+      "name": "DXIL entrypoint inventory agrees with 27 unique names",
+      "status": "PASS",
+      "evidence": "unique=27"
+    },
+    {
+      "name": "Decoded buffer addressing report exists",
+      "status": "PASS",
+      "evidence": "reports/decoded-buffer-addressing.json"
+    },
+    {
+      "name": "Decoded key spaces include operand/control/vector classes",
+      "status": "PASS",
+      "evidence": "spaces=['control_or_dimension_metadata', 'lane_vector_or_output_slots', 'operand_or_accumulator']"
+    },
+    {
+      "name": "Decoded addressing report covers many packed keys",
+      "status": "PASS",
+      "evidence": "top_keys=120"
+    },
+    {
+      "name": "Atomic SSA trace report exists",
+      "status": "PASS",
+      "evidence": "reports/atomic-ssa-trace.json"
+    },
+    {
+      "name": "Atomic SSA trace covers more than 100 shader variants",
+      "status": "PASS",
+      "evidence": "entries=174"
+    },
+    {
+      "name": "Atomic SSA trace includes provenance trees",
+      "status": "PASS",
+      "evidence": "checked provenance fields"
+    },
+    {
+      "name": "Resource binding artifact exists",
+      "status": "PASS",
+      "evidence": "spec/resource-bindings.json"
+    },
+    {
+      "name": "Resource binding artifact covers all model shader variants",
+      "status": "PASS",
+      "evidence": "entries=214"
+    },
+    {
+      "name": "No DXIL handle uses are unmapped",
+      "status": "PASS",
+      "evidence": "unmapped=0"
+    },
+    {
+      "name": "Every main pass has the four expected static resource roles",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Affine SSA formula artifact exists",
+      "status": "PASS",
+      "evidence": "reports/affine-ssa-formulas-summary.json"
+    },
+    {
+      "name": "Affine SSA formula artifact covers more than 100 shader variants",
+      "status": "PASS",
+      "evidence": "entries=174"
+    },
+    {
+      "name": "Affine SSA formula artifact has many formula families",
+      "status": "PASS",
+      "evidence": "families=200"
+    },
+    {
+      "name": "Key slot semantics artifact exists",
+      "status": "PASS",
+      "evidence": "spec/key-slot-semantics.json"
+    },
+    {
+      "name": "Key slot semantics include critical static roles",
+      "status": "PASS",
+      "evidence": "roles=['control_tile_selector', 'control_unknown_slot', 'control_weight_or_loop_bound', 'dimension_or_loop_metadata', 'expanded_control_slot', 'expanded_operand_slot', 'expanded_output_slot', 'lane_metadata_slot', 'lane_vector_slot', 'metadata_or_stride_slot', 'operand_unknown_slot', 'output_or_channel_slot', 'packed_control_pair', 'packed_pair_or_channel_slot', 'post_or_stride_slot', 'shape_or_stride_metadata', 'tile_operand_or_accumulator_slot', 'vector_unknown_slot', 'weight_index_indirection_slot']"
+    },
+    {
+      "name": "Pass static summaries artifact exists",
+      "status": "PASS",
+      "evidence": "spec/pass-static-summaries.json"
+    },
+    {
+      "name": "Pass static summaries cover 27 entrypoints",
+      "status": "PASS",
+      "evidence": "passes=27"
+    },
+    {
+      "name": "Every main pass has static resource/op/atomic/formula/activation completion",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Activation/nonlinearity artifact exists",
+      "status": "PASS",
+      "evidence": "reports/activation-nonlinearity-evidence.json"
+    },
+    {
+      "name": "Activation/nonlinearity artifact covers 27 entrypoints",
+      "status": "PASS",
+      "evidence": "unique=27 summary=27"
+    },
+    {
+      "name": "Activation/nonlinearity artifact covers all 214 shader variants",
+      "status": "PASS",
+      "evidence": "variants=214"
+    },
+    {
+      "name": "Activation/nonlinearity artifact includes compare/select evidence",
+      "status": "PASS",
+      "evidence": "kinds={'dxil_binary_extremum': 11166, 'dxil_unary_nonlinear': 11484, 'llvm_fcmp': 3456, 'llvm_select': 4476, 'llvm_icmp': 1714}"
+    },
+    {
+      "name": "Activation/nonlinearity artifact includes direct lower-clamp/ReLU candidates",
+      "status": "PASS",
+      "evidence": "patterns={'integer_lower_clamp_zero': 1008, 'nonlinear_or_control': 23041, 'direct_relu_or_lower_clamp_zero': 7344, 'direct_upper_clamp_one': 864, 'integer_upper_clamp_one': 39}"
+    },
+    {
+      "name": "Every main pass has activation/nonlinearity events",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Most main passes have direct lower-clamp/ReLU candidate evidence",
+      "status": "PASS",
+      "evidence": "direct_main=10/12; exceptions=['fsr4_model_v07_fp8_no_scale_pass3', 'fsr4_model_v07_fp8_no_scale_pass6']"
+    },
+    {
+      "name": "Static layer topology artifact exists",
+      "status": "PASS",
+      "evidence": "spec/static-layer-topology.json"
+    },
+    {
+      "name": "Static layer topology covers 27 entrypoints",
+      "status": "PASS",
+      "evidence": "entrypoints=27"
+    },
+    {
+      "name": "Static layer topology identifies 12 main passes and 13 post stages",
+      "status": "PASS",
+      "evidence": "observations={'main_passes': 12, 'post_stages': 13, 'main_passes_with_post_stage': 12, 'prepass_count': 1, 'final_postpass_count': 1}"
+    },
+    {
+      "name": "Static layer topology pairs every main pass with a post stage",
+      "status": "PASS",
+      "evidence": "paired=12"
+    },
+    {
+      "name": "Arithmetic dataflow slice artifact exists",
+      "status": "PASS",
+      "evidence": "reports/arithmetic-dataflow-slices.json"
+    },
+    {
+      "name": "Arithmetic dataflow slice artifact covers 27 entrypoints",
+      "status": "PASS",
+      "evidence": "unique=27 summary=27"
+    },
+    {
+      "name": "Arithmetic dataflow slice artifact covers all 214 shader variants",
+      "status": "PASS",
+      "evidence": "variants=214"
+    },
+    {
+      "name": "Arithmetic dataflow slices include raw stores and atomic sinks",
+      "status": "PASS",
+      "evidence": "sinks={'rawBufferStore.values': 81, 'atomicCompareExchange.operands': 226860}"
+    },
+    {
+      "name": "Arithmetic dataflow slices reach rawBufferLoad and arithmetic producers",
+      "status": "PASS",
+      "evidence": "nodes={'rawBufferLoad': 6024, 'add': 22926, 'mul': 4464, 'fadd': 186}"
+    },
+    {
+      "name": "Every main pass has arithmetic dataflow sink slices",
+      "status": "PASS",
+      "evidence": "main_passes=12"
+    },
+    {
+      "name": "Tensor offset plausibility artifact exists",
+      "status": "PASS",
+      "evidence": "reports/tensor-offset-verification.json"
+    },
+    {
+      "name": "Tensor offset plausibility check: all 78 tensors parse into plausible typed values",
+      "status": "PASS",
+      "evidence": "passed=78/78 claim_scope=plausibility_check note=This validates that the 4.0.2-derived tensor map parses 4.1.0 blob regions into plausible typed values. It does not prove runtime offset use."
+    },
+    {
+      "name": "MAC arithmetic formulas cover all passes",
+      "status": "PASS",
+      "evidence": "passes_documented=14"
+    },
+    {
+      "name": "Static RE closure report exists",
+      "status": "PASS",
+      "evidence": "reports/static-re-closure.md"
+    },
+    {
+      "name": "Host cbuffer dispatch analysis exists",
+      "status": "PASS",
+      "evidence": "reports/host-cbuffer-dispatch.json"
+    },
+    {
+      "name": "HLSL operator cross-reference exists",
+      "status": "PASS",
+      "evidence": "reports/hlsl-operator-analysis.json"
+    }
+  ]
+}
