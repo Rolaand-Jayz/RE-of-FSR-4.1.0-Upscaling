@@ -11,6 +11,7 @@ This directory contains the pipeline for rebuilding `fsr_data.dll` (FSR 4.1.0) f
 | **1. Disassemble** | IDA / Ghidra | Reverse the original DLL to recover API logic, data layout, and section structure |
 | **2. Rebuild** | MinGW GCC | Compile reconstructed C source + extracted weight blobs into a new DLL |
 | **3. Compare** | `pe_patcher.py` | Report per-region hashes and byte differences without modifying rebuilt output |
+| **4. Verify** | `test_blob_lookup.py` | Confirm `fsr_data_find_blob` returns the correct blobs for quality/DRS by MD5 and SHA-256 |
 
 ## Build Prerequisites
 
