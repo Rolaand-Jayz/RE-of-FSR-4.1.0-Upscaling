@@ -57,7 +57,7 @@ python3 test_blob_lookup.py
 | File | MD5 | Size | Description |
 |------|-----|------|-------------|
 | `fsr_data_prepatch.dll` | `cddca9acec4e79776cb180d2ee337dc6` | 893,019 bytes | GCC output from RE'd source + extracted blobs |
-| `fsr_data_final.dll` | `cb1aa61c71c33b25549ed59c1551d661` | 893,388 bytes | Historical patched artifact; not independent proof |
+| ~~`fsr_data_final.dll`~~ | ~~`cb1aa61c71c33b25549ed59c1551d661`~~ | ~~893,388 bytes~~ | **Removed from repo** — was the original AMD binary redistributed; hash retained for reference only |
 | **Original** | `cb1aa61c71c33b25549ed59c1551d661` | 893,388 bytes | AMD binary hash |
 
 The 369-byte size difference between the historical pre-patch and final files came from the original overlay copied into the patched file. Treat that as a diagnostic artifact, not evidence of independent reconstruction.
@@ -121,5 +121,6 @@ No bytes are copied from the original into the rebuilt file. If a region differs
 | `fsr_data.def` | Module definition file controlling exported symbols |
 | `compare_sections.py` | Section comparison tool; reports per-region hashes and byte differences. Does not modify rebuilt output |
 | `pe_patcher.py` | Deprecated; exits immediately. Use `compare_sections.py` instead |
+| `run_rebuild_section_comparison.sh` | Wrapper: compile + compare without copying original bytes |
 | `build.sh` | Build script producing the pre-patch DLL |
 | `test_blob_lookup.py` | Verifies that `fsr_data_find_blob("quality")` and `fsr_data_find_blob("drs")` return blobs with the expected MD5/SHA-256 hashes |

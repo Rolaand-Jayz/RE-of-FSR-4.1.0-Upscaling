@@ -14,4 +14,7 @@ The current comparison tool is compare_sections.py, which:
   - Does NOT claim bit-identical reconstruction
 """
 import sys
-sys.exit("pe_patcher.py is deprecated. Use: python compare_sections.py --rebuilt <dll>")
+sys.exit("pe_patcher.py is deprecated.\n"
+           "Use:\n"
+           "  ORIGINAL_DLL=/path/to/original/fsr_data.dll "
+           "python3 compare_sections.py --rebuilt fsr_data_prepatch.dll")

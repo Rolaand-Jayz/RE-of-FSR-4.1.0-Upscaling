@@ -13,7 +13,7 @@ This document is a traceability record. Every issue below was addressed by weake
 | 2 | Kernel sizes (3x3 / 4x4 / 5x4) stated as extracted dimensions | Wording changed from "are" to "consistent with" the phi-node counts | `docs/IMPLEMENTATION_GUIDE.md` |
 | 3 | "No attention mechanism" stated as a proven negative | Wording changed to "attention cannot be ruled out" | `docs/shader-internals.md`, `reports/architecture-map-v410.md` |
 | 4 | "U-Net-like architecture" asserted without skip-connection evidence | Wording changed to "bottleneck architecture with symmetric pass structure" | `docs/architecture.md`, `docs/shader-internals.md` |
-| 5 (circular proof) | Historical patcher copied original bytes into output before hashing; MD5 equality was circular | Patching behavior removed; tool now reports per-section hashes/differences without copying original bytes. Historical patched artifact retained only as a non-proof artifact | `rebuild/pe_patcher.py`, `rebuild/README.md`, `rebuild/full_rebuild_proof.sh` |
+| 5 (circular proof) | Historical patcher copied original bytes into output before hashing; MD5 equality was circular | Patching behavior removed; tool now reports per-section hashes/differences without copying original bytes. Historical patched artifact retained only as a non-proof artifact | `rebuild/pe_patcher.py`, `rebuild/README.md`, `rebuild/run_rebuild_section_comparison.sh` |
 
 ## Circular-Proof Resolution (Issue 5), Detail
 
@@ -21,7 +21,7 @@ The earlier data-DLL rebuild claimed hash equality as proof of independent recon
 
 Resolution applied:
 - `rebuild/pe_patcher.py` no longer copies original bytes. It compares an independently built DLL against the original and emits per-region hashes and byte differences (section-comparison behavior).
-- `rebuild/fsr_data_final.dll` (the historical patched artifact) is retained with an explicit notice that it is not independent proof.
+- ~~`rebuild/fsr_data_final.dll`~~ — removed from repo. It was the original AMD binary redistributed under a different name. The hash (`cb1aa61c71c33b25549ed59c1551d661`) is retained in `rebuild/README.md` for reference.
 - `scripts/validate_claims.py` enforces this forward: it scans all text files for overclaim language and fails CI on matches. New documentation files are scanned with no allowlist.
 
 ## Caveats Acknowledged but Not Closed

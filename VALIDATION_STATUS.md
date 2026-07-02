@@ -46,6 +46,9 @@ Runtime validation has not been performed and is the primary open gap.
   integer-only computation.
 
 ### ⚠️ Channel Dimensions (static, confidence 0.6)
+
+> **This validates parse plausibility, not live runtime addressing.**
+
 - Channel dimensions come from MIT-licensed 4.0.2 source, but their exact
   applicability to 4.1.0 blob regions is a plausibility check, not a runtime proof
 - encoder1: 7→16ch, encoder2: 16→32ch, encoder3: 32→64ch

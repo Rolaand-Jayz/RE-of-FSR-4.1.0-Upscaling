@@ -7,6 +7,22 @@ This repository documents a static structural analysis of the FSR 4.1.0 temporal
 
 > **RESEARCH ONLY — NOT A DROP-IN REPLACEMENT.** The artifacts in this repository are for static analysis and research verification. They are not validated for game runtime use, not a supported replacement DLL, and not functionally equivalent to the original AMD binary. Do not deploy outside research environments.
 
+---
+
+## Claim Ceiling
+
+This release proves **static extraction and static structural analysis only.**
+
+It does **not** prove:
+- runtime pass order
+- runtime descriptor bindings
+- runtime CBV values
+- runtime tensor offset use
+- functional equivalence to AMD's DLL
+- deployability as a replacement implementation
+
+---
+
 AMD's FidelityFX Super Resolution 4.1.0 ships as compiled Windows DLLs containing a neural network upscaler. The network's weights are opaque binary blobs. The pipeline architecture is undocumented. The shader dispatch sequence is hidden behind layers of API abstraction.
 
 What is included:
@@ -23,25 +39,27 @@ This repository is a research record: analysis, dead ends, methodology, extracte
 
 ## The Short Version
 
-| Finding | Detail | Evidence |
-|:---|:---|:---|
-| **602 DXBC shader blobs** cataloged and classified | Full enumeration of every embedded compute shader | ✅ Verified — automated extraction + manual audit |
-| **27 model-family entrypoints + 3 optional host slots** | DXIL inventory contains `prepass`, `pass1..pass12`, `pass0_post..pass12_post`, `postpass`; host descriptor table also has optional `rcas`, `spd_autoexposure`, `debug_view` slots | ✅ Verified — binary hash comparison + descriptor-table analysis |
-| **6 weight blobs** extracted, each 131,072 bytes | 5 identical (quality/balanced/performance/ultraperf/native), 1 unique (DRS) | ✅ Verified — MD5 hash comparison |
-| **Weight container format decoded** | 7,208B FP16 biases → 122,880B FP8/uint8-like weights → 888B extra (222 FP32 output biases) → 96B pad | ✅ Verified — container parsed, values validated, offsets match across all blobs |
-| **Pipeline: 27 model-loop + conditional passes** | optional SPD AutoExposure before the 27-pass loop, then optional RCAS + Debug View after it; descriptor-slot order is separate | ✅ Verified — dispatch function + host-cbuffer analysis |
-| **All passes use (32,1,1) thread groups** | Wavefront-width 1D dispatch | ✅ Verified — LLVM IR `!dx.numthreads` metadata |
-| **Static resource binding map** | 9 register spaces identified with proposed semantic meaning | ⚠️ Static only — createHandle analysis across LLVM IR blobs; runtime descriptor bindings not captured |
-| **Constant buffer layout decoded** | 5-6 registers × 4 floats (80-96 bytes) per pass; even/odd pair pattern | ✅ Verified — cbufferLoadLegacy register indices from LLVM IR |
-| **Architecture restructured** | 4.0.2's Pre/Body/Post replaced with Encoder/Orchestration/Body/Decoder pipeline | ⚠️ Static only — inferred from shader classification + offset mapping |
-| **Weight loading changed** | 4.0.2 embeds weights in shaders; 4.1.0 uses InitializerBuffer with dynamic loading | ✅ Verified — structural comparison with MIT-licensed 4.0.2 source |
-| **Data-section reconstruction tooling** | Reconstructed C source → MinGW cross-compile → section comparison | ⚠️ Bounded — section hashes must be reported separately; copied-byte MD5 equality is not used as proof |
-| **PSO creation function decoded** | FUN_180025990 decoded via raw x86-64 disassembly: jump table + flag index table + 30-entry descriptor table | ✅ Verified — objdump disassembly + PE section parsing |
+| Finding | Detail | Status | Evidence | Claim ID |
+|:---|:---|:---|:---|:---|
+| **602 DXBC shader blobs** cataloged and classified | Full enumeration of every embedded compute shader | ✅ STATIC-REPRODUCIBLE | automated extraction + manual audit | — |
+| **27 model-family entrypoints + 3 optional host slots** | DXIL inventory contains `prepass`, `pass1..pass12`, `pass0_post..pass12_post`, `postpass`; host descriptor table also has optional `rcas`, `spd_autoexposure`, `debug_view` slots | ✅ STATIC-REPRODUCIBLE | binary hash comparison + descriptor-table analysis | `dxil_entrypoints` |
+| **6 weight blobs** extracted, each 131,072 bytes | 5 identical (quality/balanced/performance/ultraperf/native), 1 unique (DRS) | ✅ STATIC-REPRODUCIBLE | MD5 hash comparison | `blob_extraction` |
+| **Weight container format decoded** | 7,208B FP16 biases → 122,880B FP8/uint8-like weights → 888B extra (222 FP32 output biases) → 96B pad | ✅ STATIC-REPRODUCIBLE | container parsed, values validated, offsets match across all blobs | `extra_fp32_region` |
+| **Static provider dispatch structure: 27-loop + optional SPD/RCAS/Debug** | optional SPD AutoExposure before the 27-pass loop, then optional RCAS + Debug View after it; descriptor-slot order is separate | STATIC-REPRODUCIBLE for binary control-flow; RUNTIME-NOT-OBSERVED for per-frame order | dispatch function + host-cbuffer analysis | `pipeline_dispatch_order` |
+| **All passes use (32,1,1) thread groups** | Wavefront-width 1D dispatch | ✅ STATIC-REPRODUCIBLE | LLVM IR `!dx.numthreads` metadata | — |
+| **Static resource binding map** | 9 register spaces identified with proposed semantic meaning | ⚠️ STATIC-INFERRED | createHandle analysis across LLVM IR blobs; runtime descriptor bindings not captured | — |
+| **Constant buffer layout decoded** | 5-6 registers × 4 floats (80-96 bytes) per pass; even/odd pair pattern | ✅ STATIC-REPRODUCIBLE | cbufferLoadLegacy register indices from LLVM IR | — |
+| **Static inferred topology** | 4.0.2's Pre/Body/Post appears replaced with Encoder/Orchestration/Body/Decoder pipeline | ⚠️ STATIC-INFERRED | inferred from shader classification + offset mapping | `architecture_topology` |
+| **Weight loading changed** | 4.0.2 embeds weights in shaders; 4.1.0 uses InitializerBuffer with dynamic loading | ✅ STATIC-REPRODUCIBLE | structural comparison with MIT-licensed 4.0.2 source | — |
+| **Data-section reconstruction tooling** | Reconstructed C source → MinGW cross-compile → section comparison | BOUNDED-REBUILD | section hashes reported separately; copied-byte MD5 equality is not used as proof | `data_dll_reconstruction` |
+| **PSO creation function decoded** | FUN_180025990 decoded via raw x86-64 disassembly: jump table + flag index table + 30-entry descriptor table | ✅ STATIC-REPRODUCIBLE | objdump disassembly + PE section parsing | — |
 
 ### Evidence Tags
 
-- ✅ **Verified** — confirmed by multiple independent methods (hash match, binary analysis, cross-reference)
-- ⚠️ **Static only** — inferred from disassembly/decompilation; not confirmed via runtime instrumentation
+- ✅ **STATIC-REPRODUCIBLE** — reproducible from committed static artifacts (hash match, binary analysis, cross-reference)
+- ⚠️ **STATIC-INFERRED** — inferred from disassembly/decompilation; not confirmed via runtime instrumentation
+
+> **Important:** descriptor-slot indices (`pass_0`..`pass_26`) and DXIL entrypoint names (`prepass`, `pass1`..`pass12`, `pass0_post`..`pass12_post`, `postpass`) are separate namespaces. This repo maps both, but does not claim a runtime-observed one-to-one bridge unless explicitly stated.
 
 ---
 
@@ -69,6 +87,8 @@ The descriptor-slot names and the runtime dispatch order are distinct. In `FUN_1
 - **Debug View** after the loop when the debug flag is enabled
 
 See [`docs/pass-index-to-entrypoint-map.md`](docs/pass-index-to-entrypoint-map.md) for the descriptor-index taxonomy versus DXIL entrypoint taxonomy.
+
+> **Important:** descriptor-slot indices and DXIL entrypoint names are separate namespaces. This repo maps both, but does not claim a runtime-observed one-to-one bridge unless explicitly stated. The tensor-offset map (78 tensors) validates parse plausibility, not live runtime addressing.
 
 ### PSO Creation: FUN_180025990
 
@@ -257,12 +277,12 @@ A full diagnostic script (`scripts/capture/diagnose_capture.sh`) was written tha
 ### What This Means for the Project
 
 The runtime capture gap is real. Our pipeline analysis now comes from:
-- ✅ Ghidra decompilation of the C++ dispatch function (27-iteration loop confirmed)
-- ✅ Raw x86-64 disassembly of the PSO creation function (Ghidra couldn't decompile it)
-- ✅ 30 unique shader blobs mapped by MD5 hash to pass indices
-- ✅ Complete resource binding layouts extracted from LLVM IR
-- ✅ Constant buffer register maps extracted from cbufferLoadLegacy patterns
-- ⚠️ Runtime dispatch sequence not confirmed (Proton blocks all capture methods)
+- ✅ STATIC-REPRODUCIBLE: Ghidra decompilation of the C++ dispatch function (27-iteration loop confirmed)
+- ✅ STATIC-REPRODUCIBLE: Raw x86-64 disassembly of the PSO creation function (Ghidra couldn't decompile it)
+- ✅ STATIC-REPRODUCIBLE: 30 unique shader blobs mapped by MD5 hash to pass indices
+- ✅ STATIC-REPRODUCIBLE: Complete resource binding layouts extracted from LLVM IR
+- ✅ STATIC-REPRODUCIBLE: Constant buffer register maps extracted from cbufferLoadLegacy patterns
+- ⚠️ RUNTIME-NOT-OBSERVED: Runtime dispatch sequence not confirmed (Proton blocks all capture methods)
 
 The data-DLL rebuild and per-section comparison support our **data extraction/layout** claims, but do not prove complete binary reconstruction. The binary analysis supports the published **pipeline structure** claims. The unconfirmed piece is whether actual runtime execution matches the static analysis — and Proton blocked the capture attempts made so far.
 
@@ -332,7 +352,7 @@ fsr-re/
 │   ├── pe_patcher.py             Deprecated; exits immediately. Use compare_sections.py.
 │   ├── build.sh                   Full build + verify script.
 │   ├── fsr_data_prepatch.dll      Independently rebuilt DLL (893,019 bytes).
-│   └── fsr_data_final.dll         Historical patched artifact (893,388 bytes); not proof.
+│   └── run_rebuild_section_comparison.sh  Compile + compare wrapper (renamed from full_rebuild_proof.sh).
 │
 ├── extracted/                 Weight blobs — the neural network data.
 │   ├── v410_initializers/         6 blobs × 131,072 bytes (4.1.0 weights).
