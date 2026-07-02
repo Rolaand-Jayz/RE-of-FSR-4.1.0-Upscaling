@@ -53,7 +53,7 @@ offset  size  description
 
 ## Shader Blob Verification
 
-All 30 blobs verified unique by MD5 hash:
+All 30 blobs confirmed unique by MD5 hash:
 
 | Pass | Name | Blob RVA | Size | MD5 (truncated) |
 |------|------|----------|------|------------------|

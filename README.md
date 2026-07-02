@@ -9,6 +9,15 @@ This repository documents a static structural analysis of the FSR 4.1.0 temporal
 
 ---
 
+## Quick Links
+
+- **[RELEASE_NOTES.md](RELEASE_NOTES.md)** — what this release includes and excludes.
+- **[HOSTILE_REVIEWER_START_HERE.md](HOSTILE_REVIEWER_START_HERE.md)** — if you think this repo overclaims, start here.
+- **[CURRENT_STATUS.md](CURRENT_STATUS.md)** — one-glance truth table.
+- **[REPRODUCING.md](REPRODUCING.md)** — how to verify the results.
+
+---
+
 ## Claim Ceiling
 
 This release proves **static extraction and static structural analysis only.**
@@ -27,9 +36,10 @@ AMD's FidelityFX Super Resolution 4.1.0 ships as compiled Windows DLLs containin
 
 What is included:
 
-1. **Data DLL research** — Reconstructed C source and embedded extracted weight data. The historical post-link patcher that copied original PE regions has been removed from the proof path; MD5 equality after copying original bytes is not claimed as independent reconstruction evidence. Use `rebuild/compare_sections.py` as the current section-comparison tool that reports hashes and differences without modifying rebuilt output.
+1. **Data DLL research** — Reconstructed C source and embedded extracted weight data. The historical post-link patcher that copied original PE regions has been removed from the proof path; MD5 equality after copying original bytes is not claimed as independent reconstruction evidence.
+Use `rebuild/compare_sections.py` as the current section-comparison tool that reports hashes and differences without modifying rebuilt output. See [`rebuild/section-comparison-explainer.md`](rebuild/section-comparison-explainer.md) for what the comparison does and does not prove.
 
-2. **Provider DLL** — Disassembled the PSO creation function (`FUN_180025990`) that Ghidra could not decompile. Decoded the jump table, flag index table, and pass descriptor table. Mapped 30 unique shader blobs (verified by MD5 hash) to pass indices. Extracted resource binding layouts from LLVM IR.
+2. **Provider DLL** — Disassembled the PSO creation function (`FUN_180025990`) that Ghidra could not decompile. Decoded the jump table, flag index table, and pass descriptor table. Mapped 30 unique shader blobs (confirmed by MD5 hash) to pass indices. Extracted resource binding layouts from LLVM IR.
 
 This repository is a research record: analysis, dead ends, methodology, extracted neural-network weights, pipeline specs, and tooling. Runtime execution remains unverified; exact per-pass arithmetic, buffer-address derivation, and weight-index mapping remain research gaps unless explicitly marked otherwise in a specific document.
 
@@ -50,6 +60,10 @@ This repository is a research record: analysis, dead ends, methodology, extracte
 | **Static resource binding map** | 9 register spaces identified with proposed semantic meaning | ⚠️ STATIC-INFERRED | createHandle analysis across LLVM IR blobs; runtime descriptor bindings not captured | — |
 | **Constant buffer layout decoded** | 5-6 registers × 4 floats (80-96 bytes) per pass; even/odd pair pattern | ✅ STATIC-REPRODUCIBLE | cbufferLoadLegacy register indices from LLVM IR | — |
 | **Static inferred topology** | 4.0.2's Pre/Body/Post appears replaced with Encoder/Orchestration/Body/Decoder pipeline | ⚠️ STATIC-INFERRED | inferred from shader classification + offset mapping | `architecture_topology` |
+| **Runtime pass order** | Actual per-frame dispatch sequence on GPU | ❌ RUNTIME-NOT-OBSERVED | no native D3D12 capture; Proton blocked all attempts | `runtime_pass_order` |
+| **Runtime CBV values** | Per-pass constant buffer values during execution | ❌ RUNTIME-NOT-OBSERVED | no native D3D12 capture | `runtime_cbv_values` |
+| **Runtime descriptor bindings** | Actual GPU descriptor-table bindings per dispatch | ❌ RUNTIME-NOT-OBSERVED | no native D3D12 capture | `runtime_descriptor_bindings` |
+| **Runtime tensor-offset use** | Whether cbuffer-loaded offsets match static inference at runtime | ❌ RUNTIME-NOT-OBSERVED (static offsets: PLAUSIBILITY-CHECK) | no runtime capture; static offsets from 4.0.2 HLSL source | `runtime_tensor_offsets` |
 | **Weight loading changed** | 4.0.2 embeds weights in shaders; 4.1.0 uses InitializerBuffer with dynamic loading | ✅ STATIC-REPRODUCIBLE | structural comparison with MIT-licensed 4.0.2 source | — |
 | **Data-section reconstruction tooling** | Reconstructed C source → MinGW cross-compile → section comparison | BOUNDED-REBUILD | section hashes reported separately; copied-byte MD5 equality is not used as proof | `data_dll_reconstruction` |
 | **PSO creation function decoded** | FUN_180025990 decoded via raw x86-64 disassembly: jump table + flag index table + 30-entry descriptor table | ✅ STATIC-REPRODUCIBLE | objdump disassembly + PE section parsing | — |
@@ -80,7 +94,7 @@ do {
 } while (lVar24 != 0);
 ```
 
-The descriptor-slot names and the runtime dispatch order are distinct. In `FUN_18000d5b0` the actual order is:
+The descriptor-slot names and the runtime dispatch order are distinct. In `FUN_18000d5b0` the static dispatch order is:
 - **SPD AutoExposure** before the 27-pass loop when auto exposure is enabled
 - **27 model-loop passes** (`pass_0` .. `pass_26`)
 - **RCAS** after the loop when sharpening is enabled
@@ -104,7 +118,7 @@ Each descriptor entry contains: shader blob size (DWORD), DXBC shader pointer (Q
 
 ### 30 Unique Shader Blobs
 
-All 30 pass shaders are unique, verified by MD5 hash:
+All 30 pass shaders are unique, confirmed by MD5 hash:
 
 | Pass | Name | Size | MD5 |
 |------|------|------|-----|
@@ -234,7 +248,8 @@ This isn't a failure section. It's a record of real engineering work that produc
 
 **Built with:** MinGW cross-compilation on Linux → `ffx_proxy.dll`
 
-**Status:** ⚠️ Written and compiled. Not deployed for live capture (would require renaming the original DLL and placing the proxy in the game directory, which we didn't attempt during the analysis phase). The proxy captures API-level parameters — dispatch descriptors, quality preset, context creation — but not actual GPU resource bindings. It would confirm *how many* dispatches occur, but not *what data* each one accesses.
+**Status:** ⚠️ Written and compiled. Not deployed for live capture (would require renaming the original DLL and placing the proxy in the game directory, which we didn't attempt during the analysis phase).
+The proxy captures API-level parameters — dispatch descriptors, quality preset, context creation — but not actual GPU resource bindings. It would confirm *how many* dispatches occur, but not *what data* each one accesses.
 
 ### Attempt 2: Vulkan LD_PRELOAD Shim (`fsr4_capture.c`)
 
@@ -249,7 +264,8 @@ This isn't a failure section. It's a record of real engineering work that produc
 LD_PRELOAD=<repo>/runtime-capture/fsr4_capture.so PROTON_FSR4_UPGRADE=1 DXIL_SPIRV_CONFIG=wmma_rdna3_workaround WINEDLLOVERRIDES=version=n,b %command%
 ```
 
-**Result:** ❌ The shim loaded (confirmed by `[INIT] FSR4 capture shim loaded` in `dispatch_log.txt`) but produced no dispatch data. The `LD_PRELOAD` hook propagated into Proton's wine process but the `vkCmdDispatch` intercept never fired. Likely cause: VKD3D-Proton's Vulkan dispatch goes through a code path that doesn't route through the standard `vkCmdDispatch` symbol, or the hook's `dlsym` resolution fails inside the Proton loader.
+**Result:** ❌ The shim loaded (confirmed by `[INIT] FSR4 capture shim loaded` in `dispatch_log.txt`) but produced no dispatch data. The `LD_PRELOAD` hook propagated into Proton's wine process but the `vkCmdDispatch` intercept never fired.
+Likely cause: VKD3D-Proton's Vulkan dispatch goes through a code path that doesn't route through the standard `vkCmdDispatch` symbol, or the hook's `dlsym` resolution fails inside the Proton loader.
 
 **What we learned:** `LD_PRELOAD` does survive into Proton's wine process (the init message documented evidence for it), but hooking Vulkan calls through VKD3D translation is unreliable. The hook fires in the host process but not necessarily inside the wine Vulkan wrapper.
 
@@ -268,7 +284,8 @@ ENABLE_VULKAN_RENDERDOC_CAPTURE=1 RENDERDOC_CAPTUREFILE=<repo>/runtime-capture/f
 
 ### Side Discovery: VKD3D Shader Dumps
 
-Setting `VKD3D_SHADER_DUMP_PATH` during the RenderDoc and shim attempts produced shader dumps — but they were **auxiliary post-processing shaders** (RCAS-like sharpening, depth/motion adaptive passes), not the FSR4 neural network core. The core model shaders compile through a different path that VKD3D doesn't dump, or they're pre-compiled SPIR-V embedded directly in the DLL.
+Setting `VKD3D_SHADER_DUMP_PATH` during the RenderDoc and shim attempts produced shader dumps — but they were **auxiliary post-processing shaders** (RCAS-like sharpening, depth/motion adaptive passes), not the FSR4 neural network core.
+The core model shaders compile through a different path that VKD3D doesn't dump, or they're pre-compiled SPIR-V embedded directly in the DLL.
 
 ### Diagnostic Tooling
 
@@ -284,7 +301,8 @@ The runtime capture gap is real. Our pipeline analysis now comes from:
 - ✅ STATIC-REPRODUCIBLE: Constant buffer register maps extracted from cbufferLoadLegacy patterns
 - ⚠️ RUNTIME-NOT-OBSERVED: Runtime dispatch sequence not confirmed (Proton blocks all capture methods)
 
-The data-DLL rebuild and per-section comparison support our **data extraction/layout** claims, but do not prove complete binary reconstruction. The binary analysis supports the published **pipeline structure** claims. The unconfirmed piece is whether actual runtime execution matches the static analysis — and Proton blocked the capture attempts made so far.
+The data-DLL rebuild and per-section comparison support our **data extraction/layout** claims, but do not prove complete binary reconstruction. The binary analysis supports the published **pipeline structure** claims.
+The unconfirmed piece is whether actual runtime execution matches the static analysis — and Proton blocked the capture attempts made so far.
 
 ---
 
@@ -292,9 +310,11 @@ The data-DLL rebuild and per-section comparison support our **data extraction/la
 
 Honest documentation means showing the gaps:
 
-0. **No frame generation analysis.** FSR 4.1.0 ships with both a temporal upscaler and frame generation. This RE covers the **upscaler only**. Frame generation is a separate pipeline with its own shaders, its own dispatch logic, and its own resource management. We did not analyze it. The scope was deliberate: the upscaler is the ML component, and understanding it was the goal.
+0. **No frame generation analysis.** FSR 4.1.0 ships with both a temporal upscaler and frame generation. This RE covers the **upscaler only**. Frame generation is a separate pipeline with its own shaders, its own dispatch logic, and its own resource management. We did not analyze it.
+The scope was deliberate: the upscaler is the ML component, and understanding it was the goal.
 
-1. **No runtime verification.** The game requires Proton. Proton's VKD3D translation layer absorbs all hooks, shims, and capture tools. We cannot confirm the static analysis by watching the code execute. This is the single largest credibility gap. Three independent capture methods were built and deployed — all blocked by Proton's Vulkan translation layer. **Runtime validation by someone with native Windows + D3D12 access is needed to close this gap.** See [Validation Status](#validation-status--call-for-collaborators) below.
+1. **No runtime verification.** The game requires Proton. Proton's VKD3D translation layer absorbs all hooks, shims, and capture tools. We cannot confirm the static analysis by watching the code execute. This is the single largest credibility gap.
+Three independent capture methods were built and deployed — all blocked by Proton's Vulkan translation layer. **Runtime validation by someone with native Windows + D3D12 access is needed to close this gap.** See [Validation Status](#validation-status--call-for-collaborators) below.
 
 2. **No bit-identical rebuild of the provider DLL.** The 15.6MB provider DLL contains compiled C++ code, linked libraries, and DXBC shader containers. Reproducing it bit-for-bit would require AMD's exact build environment, compiler version, and shader compiler. The evidence here is structural analysis, not a provider-binary rebuild.
 
@@ -302,7 +322,8 @@ Honest documentation means showing the gaps:
 
 4. **Root signature binary format not fully decoded.** The binding groups in the descriptor entries are FFX-internal structures, not raw D3D12_ROOT_PARAMETER structs. We decoded the shader-level resource bindings instead.
 
-5. **Per-instruction inference operations not fully decoded.** We decoded the activation function (ReLU, via FMax in DXIL IR), the FP8 weight decode mechanism (coherent atomic buffer I/O), pass complexity tiers, and temporal state flow (history buffer feedback). We did **not** decode every matrix multiply or convolution at the individual instruction level. The high-level architecture is understood; the per-pixel arithmetic within each pass is inferred from IR patterns, not traced instruction-by-instruction.
+5. **Per-instruction inference operations not fully decoded.** We decoded the activation function (ReLU, via FMax in DXIL IR), the FP8 weight decode mechanism (coherent atomic buffer I/O), pass complexity tiers, and temporal state flow (history buffer feedback).
+We did **not** decode every matrix multiply or convolution at the individual instruction level. The high-level architecture is understood; the per-pixel arithmetic within each pass is inferred from IR patterns, not traced instruction-by-instruction.
 
 ---
 
@@ -452,13 +473,15 @@ This project operates under established reverse engineering principles:
 - **FSR 4.0.2** is MIT-licensed by AMD on [GPUOpen](https://gpuopen.com/fidelityfx-superresolution/). We used it as a structural reference, which is explicitly permitted by the MIT license.
 - **FSR 4.1.0** analysis was performed via static analysis (Ghidra decompilation, DXIL disassembly, PE inspection, raw x86-64 disassembly) of a distributed binary. No license agreement was broken. No EULA was accepted. The binary was analyzed as-is, in transit, on the wire.
 - **The extracted weights** are numerical parameters produced by AMD's training pipeline. They are reproduced here for research and interoperability purposes.
-- **AMD's own founding story is reverse engineering.** AMD spent five years reverse-engineering Intel's 386 processor. They won in court. I am not aware of a public AMD DMCA campaign against GPU reverse-engineering projects, though that is not legal permission. AMD has released major Linux GPU driver components and GPUOpen materials under open-source licenses, and they publish prior FSR generations under MIT. We applied that interoperability-first tradition to their latest product.
+- **AMD's own founding story is reverse engineering.** AMD spent five years reverse-engineering Intel's 386 processor. They won in court. I am not aware of a public AMD DMCA campaign against GPU reverse-engineering projects, though that is not legal permission.
+AMD has released major Linux GPU driver components and GPUOpen materials under open-source licenses, and they publish prior FSR generations under MIT. We applied that interoperability-first tradition to their latest product.
 
 For the full legal analysis, AMD history, and honest risk assessment, see [`LEGAL.md`](LEGAL.md).
 
 This project is released under the **MIT License** — the same license AMD chose for FSR 4.0.2. We believe knowledge should be free. AMD apparently agreed, once.
 
-> **Licensing boundary:** The MIT license covers **authored code only** (scripts, documentation, specifications). The `extracted/*.bin` weight files, `dist/*.dll` reconstructed binaries, and `build/*.dll` provider DLLs contain **proprietary AMD-derived data** and are NOT MIT-licensed. See `LEGAL.md` for full analysis and per-directory `NOTICE.md` files.
+> **Licensing boundary:** The MIT license covers **authored code only** (scripts, documentation, specifications). The `extracted/*.bin` weight files, `dist/*.dll` reconstructed binaries, and `build/*.dll` provider DLLs contain **proprietary AMD-derived data** and are NOT MIT-licensed.
+See `LEGAL.md` for full analysis and per-directory `NOTICE.md` files.
 
 ---
 

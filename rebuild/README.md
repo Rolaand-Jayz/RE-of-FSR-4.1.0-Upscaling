@@ -14,6 +14,10 @@ This directory contains the pipeline for rebuilding `fsr_data.dll` (FSR 4.1.0) f
 | **2. Rebuild** | MinGW GCC | Compile reconstructed C source + extracted weight blobs into a new DLL |
 | **3. Compare** | `compare_sections.py` | Report per-region hashes and byte differences without modifying rebuilt output |
 | **4. Verify** | `test_blob_lookup.py` | Confirm `fsr_data_find_blob` returns the correct blobs for quality/DRS by MD5 and SHA-256 |
+| `fsr_data_prepatch.dll` | Independently rebuilt DLL (893,019 bytes) |
+| `NOTICE.md` | Per-directory licensing notice (proprietary AMD-derived data boundary) |
+| `patch_provider_weights.py` | Utility: patches weight bytes into a prebuilt DLL (research tooling, not core rebuild path) |
+| `section-comparison.json` | Machine-readable comparison output (see section-comparison-explainer.md) |
 
 ## Build Prerequisites
 
@@ -38,12 +42,12 @@ This produces `fsr_data_prepatch.dll` — the independently rebuilt DLL.
 ORIGINAL_DLL=/path/to/original/fsr_data.dll python3 compare_sections.py --rebuilt fsr_data_prepatch.dll
 ```
 
-This produces `section-comparison.json`. It does **not** produce or claim a patched bit-identical DLL.
+This produces `section-comparison.json (see [section-comparison-explainer.md](section-comparison-explainer.md) for what this does and does not prove)`. It does **not** produce or claim a patched bit-identical DLL.
 
 ### 3. Interpret the report
 
 ```bash
-jq '.all_regions_match_without_patching, .regions[] | {region, matches, differing_bytes, first_difference}' section-comparison.json
+jq '.all_regions_match_without_patching, .regions[] | {region, matches, differing_bytes, first_difference}' section-comparison.json (see [section-comparison-explainer.md](section-comparison-explainer.md) for what this does and does not prove)
 ```
 
 ### 4. Verify quality/DRS lookup names against blob hashes

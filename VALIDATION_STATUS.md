@@ -12,12 +12,12 @@
 
 | Symbol | Meaning | Claims.json status |
 |--------|---------|-------------------|
-| ✅ | Verified — reproducible from committed static artifacts | `verified_static` |
-| ⚠️ | Static-only — derived from binary analysis, not runtime-verified | `inferred` (high confidence) |
-| 🔶 | Inferred — reasonable conclusion from indirect evidence | `inferred` (lower confidence) |
-| ❌ | Unresolved — genuine gap, requires additional work | `unresolved` |
+| ✅ | **STATIC-REPRODUCIBLE** — reproducible from committed static artifacts | `static_reproducible` |
+| ⚠️ | **STATIC-INFERRED** — derived from binary analysis, not runtime-verified | `static_inferred` |
+| 🔶 | **PLAUSIBILITY-CHECK** — reasonable conclusion from indirect evidence | `plausibility_check` |
+| ❌ | **RUNTIME-NOT-OBSERVED** — genuine gap, requires runtime capture | `runtime_not_observed` |
 
-**Key distinction:** "Verified" in this repo means reproducible from static
+**Key distinction:** STATIC-REPRODUCIBLE means reproducible from static
 artifacts (committed blobs, DXIL IR, hash checks). It does NOT mean runtime-observed.
 Runtime validation has not been performed and is the primary open gap.
 
@@ -31,7 +31,7 @@ Runtime validation has not been performed and is the primary open gap.
 - Version v07 shared between 4.0.2 and 4.1.0 — matching entry point names
 - Build date: March 20, 2026 — from Ghidra debug string
 - Git commit: `abd3160` — from Ghidra debug string
-- Confidence: 0.98 (verified_static)
+- Confidence: 0.98 (STATIC-REPRODUCIBLE)
 
 ### 🔶 Network Topology (inferred, confidence 0.55)
 - Sequential encoder → bottleneck → decoder pipeline
@@ -79,29 +79,29 @@ Runtime validation has not been performed and is the primary open gap.
 
 ## Weight Data
 
-### ✅ Weight Blob Locations (verified_static, confidence 0.98)
+### ✅ Weight Blob Locations (STATIC-REPRODUCIBLE, confidence 0.98)
 - 6 blobs × 131,072 bytes each, found via LEA tracing in Ghidra
 - Only 2 unique blobs: 5 presets share identical weights, only DRS differs
-- MD5 + SHA-256 verified; re-extraction reproduces byte-for-byte
+- MD5 + SHA-256 confirmed; re-extraction reproduces byte-for-byte
 
-### ✅ Weight Extraction (verified_static, confidence 0.98)
+### ✅ Weight Extraction (STATIC-REPRODUCIBLE, confidence 0.98)
 - All 6 blobs extracted from DLL via pefile RVA resolution
 - Weight blobs byte-identical between workdrive copy and desktop repo
 
-### ⚠️ Data DLL Section Comparison (verified_static, confidence 0.6)
+### ⚠️ Data DLL Section Comparison (STATIC-REPRODUCIBLE, confidence 0.6)
 - `fsr_data.dll` reconstructed from C source + extracted weight blobs
-- Section hashes compared independently; data section matches by construction
+- Section hashes compared independently; the extracted weight blobs are embedded by construction; the PE .data section as a whole does not byte-match the original. The bounded claim is blob identity and lookup behavior, not section identity.
 - The historical "bit-identical" MD5 match depended on copying original PE regions
   before comparing — this is circular and is no longer claimed as proof
 - See `rebuild/README.md` for honest per-section comparison via `compare_sections.py`
 - **What this doesn't prove:** Byte equality is not claimed. Runtime API
   equivalence is untested.
 
-### ✅ Blob Format (verified_static, confidence 0.9)
+### ✅ Blob Format (STATIC-REPRODUCIBLE, confidence 0.9)
 - v4.0.2: 130,088 bytes (7,208 bytes FP16 biases + 122,880 bytes FP8 weights)
 - v4.1.0: 131,072 bytes (same zones + 888 bytes extra = 222 FP32 output biases + 96B pad)
 
-### ✅ Weight Retrain Confirmation (verified_static, confidence 0.99)
+### ✅ Weight Retrain Confirmation (STATIC-REPRODUCIBLE, confidence 0.99)
 - 98.7% of bytes changed between 4.0.2 and 4.1.0
 - 4.0.2: 122 unique FP8 values (clustered codebook)
 - 4.1.0: 255 unique FP8 values (full uint8 range)
@@ -133,11 +133,11 @@ Runtime validation has not been performed and is the primary open gap.
 - **What this doesn't prove:** Kernel sizes are inferred from phi-node counts,
   not extracted. The "consistent with" language is deliberate.
 
-### ✅ Post Passes = Pure Scatter (verified_static, confidence 0.97)
+### ✅ Post Passes = Pure Scatter (STATIC-REPRODUCIBLE, confidence 0.97)
 - All 13 post passes: 0 atomics, 0 weight loads, 0 float math, 2–5 rawBufferStore ops
 - Confirmed in DXIL IR — pure data rearrangement
 
-### ✅ "no_scale" Designation (verified_static)
+### ✅ "no_scale" Designation (STATIC-REPRODUCIBLE)
 - Means "no per-tensor scale tensor in the main weight path"
 - The extra 888-byte region in v4.1.0 is 222 FP32 output composition / scale parameters
   consumed by postpass
@@ -164,7 +164,7 @@ not a U-Net.
 
 ## Activation Functions
 
-### ✅ Exact Activation Function — ReLU (verified_static, confidence 0.99)
+### ✅ Exact Activation Function — ReLU (STATIC-REPRODUCIBLE, confidence 0.99)
 
 `dx.op.binary.f32(i32 35, x, 0.0)` = `FMax(x, 0.0)` = ReLU, present in 10 of 12 core passes.
 
@@ -203,12 +203,12 @@ softmax pattern. (Per adversarial review #2)
 
 | # | Gap | Status |
 |---|-----|--------|
-| ~~1~~ | ~~Activation variant~~ | ✅ RESOLVED: ReLU (DXIL+SPIR-V, 0.99) |
-| ~~2~~ | ~~Cbuffer offsets~~ | ⚠️ Substantially resolved from tensor-map (0.6 static) |
-| ~~3~~ | ~~Extra parameters~~ | ✅ RESOLVED: 222 FP32 output biases (0.9 verified) |
+| ~~1~~ | ~~Activation variant~~ | ✅ RESOLVED: ReLU (DXIL+SPIR-V, STATIC-REPRODUCIBLE) |
+| ~~2~~ | ~~Cbuffer offsets~~ | ⚠️ STATIC-INFERRED from tensor-map (0.6) |
+| ~~3~~ | ~~Extra parameters~~ | ✅ RESOLVED: 222 FP32 output biases (STATIC-REPRODUCIBLE) |
 | 4 | Provider DLL rebuild | ⚠️ Engineering task, not an analysis gap |
-| ~~5~~ | ~~Quantization mechanism~~ | 🔶 Inferred (0.7): integer-domain, exact semantics open |
-| 6 | **Runtime validation** | ❌ **UNRESOLVED — primary credibility gap** |
+| ~~5~~ | ~~Quantization mechanism~~ | 🔶 PLAUSIBILITY-CHECK: integer-domain, exact semantics open |
+| 6 | **Runtime validation** | ❌ **RUNTIME-NOT-OBSERVED — primary credibility gap** |
 | 7 | **Descriptor→entrypoint mapping** | ⚠️ Documented but not runtime-confirmed |
 
 **Static analysis is substantial but bounded.** It supports the published structural
@@ -224,18 +224,18 @@ CBV dumps, and resource transitions.
 
 | Area | Confidence | Status | Basis |
 |------|-----------|--------|-------|
-| Weight blob extraction + identity | 0.98 | verified_static | Direct LEA tracing, pefile, hash verification |
-| DXIL entrypoint inventory (27 passes) | 0.97 | verified_static | Binary-hash comparison |
-| Extra FP32 region (222 values) | 0.90 | verified_static | Finite/bounded FP32 parse |
-| Activation = ReLU | 0.99 | verified_static | DXIL FMax + SPIR-V maxnum (20 instances) |
-| Pipeline dispatch order | 0.75 | inferred | Ghidra decompilation; never runtime-observed |
-| Quantization scheme (INT8-compatible) | 0.70 | inferred | DXIL IR; exact semantics open |
-| No skip connections | 0.70 | inferred | 4 static sources; no runtime binding data |
-| Tensor offset map (78 tensors) | 0.60 | inferred | Plausibility parse, not runtime addressing |
-| Data DLL reconstruction | 0.60 | verified_static | Per-section comparison; no byte-equality claim |
-| Network architecture topology | 0.55 | inferred | DXIL patterns + 4.0.2 source; kernels hedged |
-| Runtime pass order | 0.00 | unresolved | No capture data |
-| Runtime CBV values | 0.00 | unresolved | No capture data |
+| Weight blob extraction + identity | 0.98 | STATIC-REPRODUCIBLE | Direct LEA tracing, pefile, hash verification |
+| DXIL entrypoint inventory (27 passes) | 0.97 | STATIC-REPRODUCIBLE | Binary-hash comparison |
+| Extra FP32 region (222 values) | 0.90 | STATIC-REPRODUCIBLE | Finite/bounded FP32 parse |
+| Activation = ReLU | 0.99 | STATIC-REPRODUCIBLE | DXIL FMax + SPIR-V maxnum (20 instances) |
+| Pipeline dispatch order | 0.75 | STATIC-INFERRED | Ghidra decompilation; never runtime-observed |
+| Quantization scheme (INT8-compatible) | 0.70 | STATIC-INFERRED | DXIL IR; exact semantics open |
+| No skip connections | 0.70 | STATIC-INFERRED | 4 static sources; no runtime binding data |
+| Tensor offset map (78 tensors) | 0.60 | STATIC-INFERRED | Plausibility parse, not runtime addressing |
+| Data DLL reconstruction | 0.60 | STATIC-REPRODUCIBLE | Per-section comparison; no byte-equality claim |
+| Network architecture topology | 0.55 | STATIC-INFERRED | DXIL patterns + 4.0.2 source; kernels hedged |
+| Runtime pass order | 0.00 | RUNTIME-NOT-OBSERVED | No capture data |
+| Runtime CBV values | 0.00 | RUNTIME-NOT-OBSERVED | No capture data |
 
 **Bottom line:** The static analysis is substantial but bounded. Runtime validation
 is the primary open gap. This is an acknowledged limitation, not a claim of completion.

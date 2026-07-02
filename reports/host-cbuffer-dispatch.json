@@ -170,7 +170,7 @@
 
   "confidence": {
     "FSR4Constants_layout": "High — directly decoded from text_00d5b0.c lines 291-336; matches 4.0.2 schema per repo reports.",
-    "dispatch_flow": "High — cross-verified across text_00d5b0/0083c0/00d380/004eb0/00b3c0/0041f0/033180.",
+    "dispatch_flow": "High — cross-confirmed across text_00d5b0/0083c0/00d380/004eb0/00b3c0/0041f0/033180.",
     "no_per_pass_weight_offset_cbuffer": "High — no host function writes a pass-indexed weight base offset; architecture-map + tensor-verification-report both flag 4.1.0 offsets as GPU-derived (Unresolved at runtime).",
     "exact_runtime_tensor_offsets": "Unresolved — requires runtime cbuffer+rawBufferLoad capture (see reports/00-final-re-report.md §5)."
   }

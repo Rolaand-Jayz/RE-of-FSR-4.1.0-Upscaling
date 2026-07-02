@@ -11,7 +11,7 @@ This guide reproduces the static verification suite results committed in `verifi
 | Ghidra | 11+ | Optional; manual re-decompilation |
 | RenderDoc / PIX | any | Optional; runtime capture only |
 
-The verification suite has no third-party Python dependencies for its core path. `scripts/extract_blobs.py` and `scripts/fp8_extract.py` optionally require `peile`/`pefile`.
+The verification suite has no third-party Python dependencies for its core path. `scripts/extract_blobs.py` and `scripts/fp8_extract.py` optionally require `pefile`/`pefile`.
 
 ## Expected Inputs
 
