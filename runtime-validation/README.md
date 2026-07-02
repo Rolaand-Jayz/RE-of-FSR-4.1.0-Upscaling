@@ -2,6 +2,10 @@
 
 This directory defines what a native D3D12 runtime capture must contain to upgrade the repository's static claims to runtime-observed status. No valid runtime capture currently exists.
 
+> **Runtime validation is not required for this static-evidence release.**
+> It is required only to upgrade claims from STATIC-INFERRED to RUNTIME-OBSERVED.
+> This is the upgrade path for future runtime-observed claims. It is not a prerequisite for this static evidence release.
+
 ## What a valid capture requires
 
 - Operating system: native Windows with D3D12 (no Proton, no VKD3D translation layer).
@@ -22,7 +26,7 @@ The capture attempts in `runtime-capture/` and `tools/` were performed on Linux 
 - `srv_resource_ids`, `uav_resource_ids`
 - `barriers`, `dispatch_dimensions`, `timestamp_ns`
 
-Plus `frame_metadata` (GPU, driver, game, DLL SHA-256 hashes, capture tool). `sample-capture.redacted.json` shows the schema applied to three illustrative dispatches (prepass, pass1, pass1_post) with PLACEHOLDER values.
+Plus `frame_metadata` (GPU, driver, game, DLL SHA-256 hashes, capture tool). `schema-example-not-real-capture.redacted.json` shows the schema applied to three illustrative dispatches (prepass, pass1, pass1_post) with PLACEHOLDER values.
 
 ## How to submit a capture
 

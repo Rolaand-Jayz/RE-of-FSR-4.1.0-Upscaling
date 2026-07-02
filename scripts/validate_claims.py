@@ -62,7 +62,7 @@ FORBIDDEN = [
 CORRECTION_FILES = {
     Path("rebuild/README.md"),
     Path("rebuild/pe_patcher.py"),
-    Path("rebuild/full_rebuild_proof.sh"),
+    Path("rebuild/run_rebuild_section_comparison.sh"),
     Path("LEGAL.md"),
     Path("VALIDATION_STATUS.md"),
 }

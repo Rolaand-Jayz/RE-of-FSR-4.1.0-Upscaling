@@ -19,8 +19,8 @@ The original proprietary DLLs are NOT redistributed. Place a local copy under `b
 
 | File | Known size | SHA-256 | MD5 |
 |---|---|---|---|
-| `amd_fidelityfx_upscaler_dx12.dll` | 15,605,520 bytes | PLACEHOLDER — confirm against your local copy | not recorded |
-| `fsr_data.dll` | 893,388 bytes | PLACEHOLDER — confirm against your local copy | `cb1aa61c71c33b25549ed59c1551d661` |
+| `amd_fidelityfx_upscaler_dx12.dll` | 15,605,520 bytes | SHA-256 not published — source packages vary by distribution; record your local SHA-256 in replication reports | not recorded |
+| `fsr_data.dll` | 893,388 bytes | `9190608e7f5edcdec060e8b00f3eb6bc4c675feee94d687162da6968f26c0491` | `cb1aa61c71c33b25549ed59c1551d661` |
 
 The `WEIGHTS_DIR` environment variable points at a directory holding a locally extracted blob set (default: `extracted/v410_initializers`). Set it to validate a non-default extraction path:
 

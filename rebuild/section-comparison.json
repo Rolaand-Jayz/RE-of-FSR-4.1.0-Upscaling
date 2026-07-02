@@ -1,5 +1,5 @@
 {
-  "original": "rebuild/fsr_data_final.dll",
+  "original": "rebuild/fsr_data_final.dll (removed from repo \u2014 was the original AMD binary; hash retained below)",
   "rebuilt": "rebuild/fsr_data_prepatch.dll",
   "original_sha256": "9190608e7f5edcdec060e8b00f3eb6bc4c675feee94d687162da6968f26c0491",
   "rebuilt_sha256": "a30b12b6f7d68d9f82e5a1de729d0a5a9f20fce73db76b45125f18e71596da5e",

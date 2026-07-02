@@ -1,11 +1,47 @@
 {
-  "schema_version": 3,
-  "timestamp": "2026-07-01T05:26:51.834822+00:00",
+  "schema_version": 4,
+  "generated_by": "scripts/verify.py",
+  "generated_at": "2026-07-02T02:07:02.915890+00:00",
+  "source_commit": "22a893f45c68408abc82ea7370f1a1038f95ca84",
+  "command": "python scripts/verify.py",
+  "timestamp": "2026-07-02T02:07:02.915900+00:00",
   "total": 88,
   "passed": 87,
   "failed": 0,
   "skipped": 1,
   "warned": 0,
+  "summary_by_kind": {
+    "hash_identity": {
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "warned": 0
+    },
+    "static_consistency": {
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "warned": 0
+    },
+    "runtime_observed": {
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "warned": 0
+    },
+    "plausibility": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "warned": 0
+    },
+    "static_inventory": {
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0,
+      "warned": 0
+    }
+  },
   "results": [
     {
       "name": "dll_v410.dll has expected byte size",

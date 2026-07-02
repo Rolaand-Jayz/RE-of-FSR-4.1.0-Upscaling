@@ -17,6 +17,7 @@ import json
 import os
 import re
 import struct
+import subprocess
 import sys
 from pathlib import Path
 
@@ -110,6 +111,37 @@ def validate_report_rows(rows: list[tuple[str, str, str]]) -> list[str]:
             if m and int(m.group(1)) != int(m.group(2)):
                 errors.append(f"Contradictory PASS: {name!r} with evidence {evidence!r}")
     return errors
+
+
+def categorize_check(name: str) -> str:
+    """Classify a verification check into an evidence-strength category."""
+    n = name.lower()
+    if any(k in n for k in ["md5", "sha-256", "sha256", "re-extracted matches",
+                            "has expected byte size", "byte change rate",
+                            "exactly 2 unique blobs", "unique uint8 values",
+                            "lacks the 4.1.0", "4.0.2 blob is", "4.1.0 blob is",
+                            "committed blob has expected size",
+                            "shipping binary available"]):
+        return "hash_identity"
+    if any(k in n for k in ["plausib", "tensor offset", "78 tensors",
+                            "hlsl pass files", "raw hlsl offsets",
+                            "broad uint8 distribution"]):
+        return "plausibility"
+    if any(k in n for k in ["not supplied", "runtime", "capture"]):
+        return "runtime_observed"
+    if any(k in n for k in ["exists", "covers", "artifact", "present",
+                            "entry point", "entrypoint", "main pass",
+                            "all expected", "closure", "dispatch analysis",
+                            "cross-reference", "formula", "key slot",
+                            "summary", "pass static", "no pass13",
+                            "post stage", "paired", "topology",
+                            "slices include", "sink slices", "activation",
+                            "compare/select", "lower-clamp", "nonlinearity",
+                            "arithmetic", "affine", "mac arithmetic",
+                            "host cbuffer", "decoded", "ssa trace",
+                            "resource binding", "no dxil handle"]):
+        return "static_inventory"
+    return "static_consistency"
 
 
 def existing_dir(path: Path | None) -> bool:
@@ -488,14 +520,42 @@ def finish(report_path: Path, repo_root: Path) -> int:
     failed = sum(1 for _, s, _ in results if s == "FAIL")
     skipped = sum(1 for _, s, _ in results if s == "SKIP")
     warned = sum(1 for _, s, _ in results if s == "WARN")
+    # Build summary grouped by evidence category
+    summary_by_kind = {}
+    for n, s, e in results:
+        kind = categorize_check(n)
+        if kind not in summary_by_kind:
+            summary_by_kind[kind] = {"passed": 0, "failed": 0, "skipped": 0, "warned": 0}
+        if s == "PASS":
+            summary_by_kind[kind]["passed"] += 1
+        elif s == "FAIL":
+            summary_by_kind[kind]["failed"] += 1
+        elif s == "SKIP":
+            summary_by_kind[kind]["skipped"] += 1
+        elif s == "WARN":
+            summary_by_kind[kind]["warned"] += 1
+
+    # Capture provenance for the generated report
+    try:
+        source_commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=repo_root, stderr=subprocess.DEVNULL
+        ).decode().strip()
+    except Exception:
+        source_commit = "unknown"
+
     report = {
-        "schema_version": 3,
+        "schema_version": 4,
+        "generated_by": "scripts/verify.py",
+        "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "source_commit": source_commit,
+        "command": "python scripts/verify.py",
         "timestamp": dt.datetime.now(dt.timezone.utc).isoformat(),
         "total": len(results),
         "passed": passed,
         "failed": failed,
         "skipped": skipped,
         "warned": warned,
+        "summary_by_kind": summary_by_kind,
         "results": [{"name": n, "status": s, "evidence": e} for n, s, e in results],
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
