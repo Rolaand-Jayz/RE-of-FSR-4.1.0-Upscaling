@@ -22,7 +22,7 @@ Previous documentation stated:
 `rawBufferLoad.i32` with full 4-component mask (`i8 15`), then stores them
 directly into `[8 x float]` alloca slots. This is 4 bytes per value, not 2.
 
-### Postpass Consumption (DXIL-verified)
+### Postpass Consumption (DXIL-confirmed)
 
 Three access points into the extra region, confirmed in all 48 postpass variants:
 

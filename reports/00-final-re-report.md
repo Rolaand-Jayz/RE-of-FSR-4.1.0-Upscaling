@@ -12,13 +12,13 @@
 This report is considered complete only if it answers all of the following:
 
 1. What is the FSR 4.1.0 architecture, as far as the evidence supports?
-2. What parts are directly verified versus inferred from static analysis?
+2. What parts are statically confirmed versus inferred from static analysis?
 3. Which findings are proven by multiple independent methods?
-4. Which claims remain unresolved or only partially verified?
+4. Which claims remain unresolved or only partially confirmed?
 5. What artifacts prove the claims, and where are they stored?
 
 ### Completion criteria
-- Every major claim is labeled as **Verified**, **Static-only**, **Inferred**, or **Unresolved**.
+- Every major claim is labeled as **STATIC-REPRODUCIBLE**, **Static-only**, **Inferred**, or **Unresolved**.
 - Every important number is backed by an artifact path or analysis report.
 - No claim is presented as runtime-proof unless runtime evidence exists.
 - The report distinguishes the **core FSR4 network** from the **auxiliary sharpen/postprocess shaders** captured through VKD3D.
@@ -37,7 +37,7 @@ FSR 4.1.0 is a **27-dispatch compute pipeline** centered on the internal model n
 
 The architecture is **not cleanly proven end-to-end at runtime**. Static analysis strongly supports the 27-dispatch pipeline, the 27 DXIL model-family entrypoints, the 78/78 tensor-map plausibility result, and the extra 222 FP32 output-parameter region. Runtime capture is still missing. The report therefore separates:
 
-- **Verified facts**: binary size, model strings, DXIL entrypoint inventory, blob locations, blob sizes, resource IDs, constant-buffer stability, 2 unique presets, and the 222-FP32 extra region.
+- **STATIC-REPRODUCIBLE facts**: binary size, model strings, DXIL entrypoint inventory, blob locations, blob sizes, resource IDs, constant-buffer stability, 2 unique presets, and the 222-FP32 extra region.
 - **Static-only findings**: no skip connections detected, layer shape interpretation, pass classification, and dispatch/order inference from host code.
 - **Unresolved items**: runtime cbuffer values, runtime proof of tensor-offset use, runtime proof of skip/no-skip behavior, and end-to-end execution validation.
 
@@ -63,40 +63,40 @@ The VKD3D shader dump under `runtime-capture/vkd3d-shaders/` contains the **inje
 
 ---
 
-## 3. Verified Findings
+## 3. confirmed Findings
 
 ### 3.1 Core model identity
 | Claim | Evidence | Status |
 |---|---|---|
-| Internal model name is `fsr4_model_v07_fp8_no_scale` | DLL strings; 4.0.2 source naming; provider diff | **Verified** |
-| Pass naming covers `prepass`, `pass1..pass12`, `pass0_post..pass12_post`, `postpass` | `strings` on the FSR4 DLL | **Verified** |
-| Total pass count is 27 dispatches per frame | provider diff + pass naming set | **Verified** |
-| Core model is sequential rather than graph-like in the provider layer | Ghidra provider decompilation + dispatch loop structure | **Verified at static/provider level** |
+| Internal model name is `fsr4_model_v07_fp8_no_scale` | DLL strings; 4.0.2 source naming; provider diff | **STATIC-REPRODUCIBLE** |
+| Pass naming covers `prepass`, `pass1..pass12`, `pass0_post..pass12_post`, `postpass` | `strings` on the FSR4 DLL | **STATIC-REPRODUCIBLE** |
+| Total pass count is 27 dispatches per frame | provider diff + pass naming set | **STATIC-REPRODUCIBLE** |
+| Core model is sequential rather than graph-like in the provider layer | Ghidra provider decompilation + dispatch loop structure | **STATIC-REPRODUCIBLE at static/provider level** |
 
 ### 3.2 Weight blob layout
 | Claim | Evidence | Status |
 |---|---|---|
-| There are 6 initializer RVAs in `.rdata` | Ghidra LEA tracing + `pefile` resolution | **Verified** |
-| Each initializer blob is 131,072 bytes | PE analysis + allocator size match | **Verified** |
-| 5 presets share one blob; DRS uses a second blob | MD5 comparison of extracted blobs | **Verified** |
-| Blob layout is `7208 B FP16 + 122880 B FP8/UINT8 + 888 B extra FP32 output params + 96 B pad` | `spec/blob-format.json` + `verification-report.json` + binary analysis | **Verified** |
-| FP8 range in 4.1.0 is effectively full 0–255 uint8 coverage | statistical analysis of extracted weights | **Verified** |
+| There are 6 initializer RVAs in `.rdata` | Ghidra LEA tracing + `pefile` resolution | **STATIC-REPRODUCIBLE** |
+| Each initializer blob is 131,072 bytes | PE analysis + allocator size match | **STATIC-REPRODUCIBLE** |
+| 5 presets share one blob; DRS uses a second blob | MD5 comparison of extracted blobs | **STATIC-REPRODUCIBLE** |
+| Blob layout is `7208 B FP16 + 122880 B FP8/UINT8 + 888 B extra FP32 output params + 96 B pad` | `spec/blob-format.json` + `verification-report.json` + binary analysis | **STATIC-REPRODUCIBLE** |
+| FP8 range in 4.1.0 is effectively full 0–255 uint8 coverage | statistical analysis of extracted weights | **STATIC-REPRODUCIBLE** |
 
 ### 3.3 Provider layer and resource stability
 | Claim | Evidence | Status |
 |---|---|---|
-| Resource IDs are unchanged from 4.0.2 to 4.1.0 | `reports/provider-diff-report.md` | **Verified** |
-| Main constant-buffer layout is structurally identical | `text_00d5b0.c` decompilation + 4.0.2 source comparison | **Verified** |
-| Scratch buffer size is resolution-dependent in 4.1.0 | provider diff report | **Verified** |
-| 4.1.0 keeps the same basic operator library as 4.0.2 | `reports/ml2code-runtime-diff.md` | **Verified** |
+| Resource IDs are unchanged from 4.0.2 to 4.1.0 | `reports/provider-diff-report.md` | **STATIC-REPRODUCIBLE** |
+| Main constant-buffer layout is structurally identical | `text_00d5b0.c` decompilation + 4.0.2 source comparison | **STATIC-REPRODUCIBLE** |
+| Scratch buffer size is resolution-dependent in 4.1.0 | provider diff report | **STATIC-REPRODUCIBLE** |
+| 4.1.0 keeps the same basic operator library as 4.0.2 | `reports/ml2code-runtime-diff.md` | **STATIC-REPRODUCIBLE** |
 
 ### 3.4 Shader-dump validation
 | Claim | Evidence | Status |
 |---|---|---|
-| VKD3D shader dump was successfully captured | `runtime-capture/vkd3d-shaders/` exists with `.dxil`, `.spv`, `.rs`, `.hlsl` | **Verified** |
-| The captured HLSL files are the injected sharpen/postprocess layer, not the core FSR4 network | inspection of generated HLSL files; runtime naming is expected for a host-side injected pass | **Verified** |
-| The sharpen/RCAS-style naming is not a contradiction; it is the expected host-side disguise for the FSR-enabled runtime path | `vkd3d-shader-*.hlsl` source inspection | **Verified** |
-| The FSR4 core network remains in the DLL, not in the captured auxiliary HLSL dump | string evidence + dump inspection | **Verified** |
+| VKD3D shader dump was successfully captured | `runtime-capture/vkd3d-shaders/` exists with `.dxil`, `.spv`, `.rs`, `.hlsl` | **STATIC-REPRODUCIBLE** |
+| The captured HLSL files are the injected sharpen/postprocess layer, not the core FSR4 network | inspection of generated HLSL files; runtime naming is expected for a host-side injected pass | **STATIC-REPRODUCIBLE** |
+| The sharpen/RCAS-style naming is not a contradiction; it is the expected host-side disguise for the FSR-enabled runtime path | `vkd3d-shader-*.hlsl` source inspection | **STATIC-REPRODUCIBLE** |
+| The FSR4 core network remains in the DLL, not in the captured auxiliary HLSL dump | string evidence + dump inspection | **STATIC-REPRODUCIBLE** |
 
 ---
 
@@ -121,7 +121,7 @@ No skip connections were detected in the static analysis, but this is **not runt
 - **Runtime proof: missing**
 
 ### 4.3 Tensor schema transfer
-The 4.0.2 tensor schema in `spec/tensor-map.json` is a useful reference, but **it does not directly transfer as a verified 4.1.0 runtime map**. The independent tensor verification report shows the mismatch explicitly:
+The 4.0.2 tensor schema in `spec/tensor-map.json` is a useful reference, but **it does not directly transfer as a confirmed 4.1.0 runtime map**. The independent tensor verification report shows the mismatch explicitly:
 
 - `Matched offsets`: 1
 - `Assumed map only`: 77
@@ -238,4 +238,4 @@ The RE is **substantially complete at the structural level (runtime validation p
 
 **What "strongly supported" means:** structural claims are backed by binary evidence where cited. The data-DLL rebuild and comparison support extraction/layout claims; they do not prove independent data-section reconstruct (not bit-identical)ion. The DXIL IR analysis supports architecture and activation-function claims. What it does **not** mean: the analysis has been confirmed at runtime. Runtime validation on native Windows D3D12 is the next step for full credibility, and a small number of contributors with the right hardware could close this gap.
 
-If this repo is going to be the new benchmark, this report is the contract: **verified facts first, static inference labeled, unresolved items never hidden**.
+If this repo is going to be the new benchmark, this report is the contract: **confirmed facts first, static inference labeled, unresolved items never hidden**.

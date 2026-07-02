@@ -13,7 +13,7 @@ Both were resolved entirely through static DXIL/SPIR-V IR analysis — no runtim
 > "Exact activation variant (ReLU vs ReLU6) needs LUT content capture at runtime.
 > All 12 core passes have zero float-domain activation ops in IR; activation is LUT-folded."
 
-### Resolution: ✅ Verified — Activation is **ReLU** (`FMax(x, 0.0)`)
+### Resolution: ✅ STATIC-REPRODUCIBLE — Activation is **ReLU** (`FMax(x, 0.0)`)
 
 ### Root Cause of Previous Error
 
@@ -117,7 +117,7 @@ The activation is applied in the inner convolution loop:
 | pass0-12_post | 0 each | 0 each   | No activation (barrier passes) |
 | postpass    | 37       | 3        | Output composition |
 
-**Confidence: 99%** — cross-verified via two independent IR representations (DXIL + SPIR-V).
+**Confidence: 99%** — cross-confirmed via two independent IR representations (DXIL + SPIR-V).
 
 ---
 
@@ -126,7 +126,7 @@ The activation is applied in the inner convolution loop:
 ### Previous Status: ❌ Unresolved
 > "LUT mechanism runtime verification needs D3D12 hook deployment in Proton/VKD3D."
 
-### Resolution: ✅ Verified — `atomicCompareExchange` is a coherent buffer I/O mechanism
+### Resolution: ✅ STATIC-REPRODUCIBLE — `atomicCompareExchange` is a coherent buffer I/O mechanism
 
 ### The Mechanism
 
@@ -207,7 +207,7 @@ Both previously-open gaps are now fully resolved through static analysis:
 
 | Gap | Previous Status | Resolution | Confidence |
 |-----|----------------|------------|------------|
-| Activation variant | ❌ Runtime-only | ✅ ReLU — FMax(x, 0.0), verified DXIL+SPIR-V | 99% |
+| Activation variant | ❌ Runtime-only | ✅ ReLU — FMax(x, 0.0), STATIC-REPRODUCIBLE (DXIL+SPIR-V) | 99% |
 | LUT mechanism | ❌ Runtime-only | ✅ Coherent atomic buffer I/O, no LUT | 98% |
 
 The static analysis has resolved the five original analysis gaps (activation, LUT mechanism, cbuffer offsets, extra parameters, skip connections). However, runtime validation remains an open credibility gap: the static findings have not been confirmed by observing the upscaler execute in real time. Exact per-pass MAC arithmetic and weight-index mapping also remain research gaps.

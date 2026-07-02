@@ -38,7 +38,7 @@ Using pefile, we resolved each LEA target to a file offset. The PE section layou
 | `.rdata` | 0x3a000 | 0x38e00 |
 | `.data` | 0x15f000 | 0x15d400 |
 
-All 6 weight blobs are in `.rdata`. ✅ *Cross-verified: Ghidra LEA targets AND pefile RVA resolution agree.*
+All 6 weight blobs are in `.rdata`. ✅ *Cross-confirmed: Ghidra LEA targets AND pefile RVA resolution agree.*
 
 ### Step 3: Extract the blobs
 
@@ -57,7 +57,7 @@ Native       0x8fb700   0x8fa500       Shared (5 presets)
 DRS          0x8b5120   0x8b3f20       Different (unique)
 ```
 
-✅ *Verified: MD5 comparison confirms 2 unique blobs out of 6.*
+✅ *STATIC-REPRODUCIBLE: MD5 comparison confirms 2 unique blobs out of 6.*
 
 ## Blob Structure
 

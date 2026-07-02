@@ -351,7 +351,7 @@ The dispatch explicitly branches on `supportsWmma`:
 ### 4.1.0
 The `supportsWmma` check is stored at context offset `+0x21D`. The dispatch size computation in `FUN_1800083c0` uses **3 different data tables** (preset 0, 1, 2) rather than a WMMA/non-WMMA branch. The WMMA flag influences which preset data table is selected for dispatch sizing.
 
-The dispatch no longer has an explicit if/else for WMMA — instead, the preset data tables encode the correct group sizes for the hardware capability. This is a **cleaner design** but functionally equivalent.
+The dispatch no longer has an explicit if/else for WMMA — instead, the preset data tables encode the correct group sizes for the hardware capability. This is a **cleaner design** that achieves the same dispatch outcome through data tables instead of branch logic.
 
 ---
 

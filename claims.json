@@ -1,12 +1,12 @@
 {
   "registry_version": 1,
   "generated": "2026-07-01",
-  "description": "Machine-queryable evidence-strength registry. Each claim records its status, confidence, supporting files, what additional evidence would upgrade it, and any known open counterexamples. Statuses: verified_static (reproducible from committed/static artifacts), runtime_observed (seen in a native D3D12 capture), inferred (derived indirectly), unresolved (no evidence gathered).",
+  "description": "Machine-queryable evidence-strength registry. Each claim records its status, confidence, supporting files, what additional evidence would upgrade it, and any known open counterexamples. Statuses: static_reproducible (reproducible from committed/static artifacts), runtime_observed (seen in a native D3D12 capture), static_inferred (derived indirectly), runtime_not_observed (no evidence gathered).",
   "claims": [
     {
       "claim_id": "blob_extraction",
       "description": "Six weight blobs of 131072 bytes each are extractable from amd_fidelityfx_upscaler_dx12.dll at the documented RVAs and reproduce byte-for-byte across re-extraction.",
-      "status": "verified_static",
+      "status": "static_reproducible",
       "confidence": 0.98,
       "evidence_files": [
         "scripts/verify.py",
@@ -20,7 +20,7 @@
     {
       "claim_id": "weight_identity",
       "description": "The five standard presets (quality, balanced, performance, ultraperf, native) are byte-identical; the DRS preset is a separately trained network (96.1% byte difference).",
-      "status": "verified_static",
+      "status": "static_reproducible",
       "confidence": 0.97,
       "evidence_files": [
         "scripts/verify.py",
@@ -33,7 +33,7 @@
     {
       "claim_id": "dxil_entrypoints",
       "description": "The DXIL corpus contains exactly 27 model entry points (prepass, pass1..pass12, pass0_post..pass12_post, postpass) with no pass13.",
-      "status": "verified_static",
+      "status": "static_reproducible",
       "confidence": 0.97,
       "evidence_files": [
         "spec/dxil-entrypoint-inventory.json",
@@ -46,7 +46,7 @@
     {
       "claim_id": "pipeline_dispatch_order",
       "description": "Static dispatch runs a 27-iteration loop with optional SPD AutoExposure before and RCAS/Debug View after.",
-      "status": "inferred",
+      "status": "static_inferred",
       "confidence": 0.75,
       "evidence_files": [
         "reports/main_dll_analysis.md",
@@ -59,7 +59,7 @@
     {
       "claim_id": "tensor_offset_map",
       "description": "The 4.0.2-derived 78-tensor offset map parses 4.1.0 blob regions into plausible typed values.",
-      "status": "inferred",
+      "status": "static_inferred",
       "confidence": 0.6,
       "evidence_files": [
         "reports/tensor-offset-verification.json",
@@ -72,7 +72,7 @@
     {
       "claim_id": "architecture_topology",
       "description": "The network is a bottleneck architecture with symmetric pass structure; per-pass kernels are consistent with 3x3/4x4/5x4 from phi-node counts.",
-      "status": "inferred",
+      "status": "static_inferred",
       "confidence": 0.55,
       "evidence_files": [
         "reports/architecture-map-v410.md",
@@ -86,7 +86,7 @@
     {
       "claim_id": "runtime_pass_order",
       "description": "The runtime per-frame dispatch order matches the static 27-loop analysis.",
-      "status": "unresolved",
+      "status": "runtime_not_observed",
       "confidence": 0.0,
       "evidence_files": [],
       "needs": "Native Windows D3D12 capture conforming to runtime-validation/schema.json.",
@@ -95,7 +95,7 @@
     {
       "claim_id": "runtime_cbv_values",
       "description": "Per-pass constant-buffer values at runtime match the static 5/6-register (80/96-byte) layout.",
-      "status": "unresolved",
+      "status": "runtime_not_observed",
       "confidence": 0.0,
       "evidence_files": [
         "reports/hlsl-per-pass-layout.json"
@@ -106,7 +106,7 @@
     {
       "claim_id": "data_dll_reconstruction",
       "description": "The data DLL can be rebuilt from RE'd source + extracted blobs and its data sections compared against the original per-region.",
-      "status": "verified_static",
+      "status": "static_reproducible",
       "confidence": 0.6,
       "evidence_files": [
         "rebuild/README.md",
@@ -120,7 +120,7 @@
     {
       "claim_id": "extra_fp32_region",
       "description": "Each 4.1.0 blob contains an 888-byte region of 222 finite FP32 values not present in 4.0.2, followed by 96 bytes of zero padding.",
-      "status": "verified_static",
+      "status": "static_reproducible",
       "confidence": 0.9,
       "evidence_files": [
         "verification-report.json",
@@ -133,7 +133,7 @@
     {
       "claim_id": "quantization_scheme",
       "description": "Weights use an FP8 codebook decoded through a 256-entry atomicCompareExchange table with 0x100 stride; the mechanism appears to function as a side-effect-free table read.",
-      "status": "inferred",
+      "status": "static_inferred",
       "confidence": 0.7,
       "evidence_files": [
         "docs/activation-lut-analysis.md",

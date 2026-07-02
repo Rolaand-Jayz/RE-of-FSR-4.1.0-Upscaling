@@ -42,8 +42,8 @@ do {
 } while (lVar24 != 0);
 ```
 
-- **27 dispatches per frame** (0x1b = 27) ✅ *Verified: literal constant in decompiled code*
-- Each pass context: 36,456 bytes (0x8e68) ✅ *Verified: stride in loop advancement*
+- **27 dispatches per frame** (0x1b = 27) ✅ *STATIC-REPRODUCIBLE: literal constant in decompiled code*
+- Each pass context: 36,456 bytes (0x8e68) ✅ *STATIC-REPRODUCIBLE: stride in loop advancement*
 - Total pass context: ~984 KB
 - Breakdown: 1 prepass + 12 model + 12 model_post + 1 postpass + 1 SPD
 
@@ -127,7 +127,7 @@ Three tile config tables (3 base resolutions × 17 passes) encode the spatial st
 | 15 | 1.0× | 1080×1920 | Postpass |
 | 16 | 1.0× | 1080×1920 | Postpass |
 
-Bottleneck autoencoder with spatial pyramid: 1.0 → 0.5 → 0.25 → 0.125 → 0.25 → 0.5 → 1.0. ✅ *Verified: decoded directly from static data tables.*
+Bottleneck autoencoder with spatial pyramid: 1.0 → 0.5 → 0.25 → 0.125 → 0.25 → 0.5 → 1.0. ✅ *STATIC-REPRODUCIBLE: decoded directly from static data tables.*
 
 ## Identical PSV0 Bindings
 

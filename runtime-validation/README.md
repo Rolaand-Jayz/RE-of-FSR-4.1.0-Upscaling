@@ -15,7 +15,8 @@ This directory defines what a native D3D12 runtime capture must contain to upgra
 
 ## Why the current capture is insufficient
 
-The capture attempts in `runtime-capture/` and `tools/` were performed on Linux via Proton/VKD3D. All three methods (FFX proxy DLL, Vulkan `LD_PRELOAD` shim, RenderDoc full capture) failed to capture the FSR4 neural-network dispatches. The Vulkan translation layer either did not route the hooks or captured auxiliary post-processing shaders rather than the FSR4 model core. A Linux/Proton path captures the wrong shaders and cannot validate the static D3D12 analysis.
+The capture attempts in `runtime-capture/` and `tools/` were performed on Linux via Proton/VKD3D. All three methods (FFX proxy DLL, Vulkan `LD_PRELOAD` shim, RenderDoc full capture) failed to capture the FSR4 neural-network dispatches.
+The Vulkan translation layer either did not route the hooks or captured auxiliary post-processing shaders rather than the FSR4 model core. A Linux/Proton path captures the wrong shaders and cannot validate the static D3D12 analysis.
 
 ## What schema.json defines
 
@@ -26,7 +27,7 @@ The capture attempts in `runtime-capture/` and `tools/` were performed on Linux 
 - `srv_resource_ids`, `uav_resource_ids`
 - `barriers`, `dispatch_dimensions`, `timestamp_ns`
 
-Plus `frame_metadata` (GPU, driver, game, DLL SHA-256 hashes, capture tool). `schema-example-not-real-capture.redacted.json` shows the schema applied to three illustrative dispatches (prepass, pass1, pass1_post) with PLACEHOLDER values.
+Plus `frame_metadata` (GPU, driver, game, DLL SHA-256 hashes, capture tool). `schema-example-not-real-capture.redacted.json` shows the schema applied to three illustrative dispatches (prepass, pass1, pass1_post) with example placeholder values.
 
 ## How to submit a capture
 

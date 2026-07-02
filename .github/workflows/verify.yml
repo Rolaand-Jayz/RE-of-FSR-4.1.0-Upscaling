@@ -25,31 +25,54 @@ jobs:
           python -m py_compile rebuild/test_blob_lookup.py
           python -m py_compile scripts/validate_claims.py
 
-      - name: Documentation honesty guard
+      - name: Claim honesty guardrail
         run: python scripts/validate_claims.py
 
-      - name: Run public verification suite
-        run: python scripts/verify.py --report verification-report.ci.json
-
-      - name: Verify rebuild blob lookup mapping
-        run: python rebuild/test_blob_lookup.py
-
-      - name: JSON validity check
+      - name: JSON validity (canonical files)
         run: |
-          find spec/ reports/ -name '*.json' -exec python -c "import json,sys; json.load(open(sys.argv[1])); print('  OK:', sys.argv[1])" {} \;
-          for f in evidence-manifest.json claims.json verification-report.json; do
-            [ -f "$f" ] && python -c "import json; json.load(open('$f'))" && echo "  OK: $f"
+          for f in claims.json evidence-manifest.json verification-report.json rebuild/section-comparison.json; do
+            python -m json.tool "$f" > /dev/null && echo "  OK: $f"
           done
+          find spec/ reports/ -name '*.json' -exec python -c "import json,sys; json.load(open(sys.argv[1])); print('  OK:', sys.argv[1])" {} \;
 
-      - name: Shell script lint (shellcheck)
+      - name: Run public verification (make verify-public)
+        run: make verify-public
+
+      - name: Dangerous phrase guard
         run: |
-          find . -name '*.sh' -not -path './.git/*' -exec shellcheck {} \; || true
+          # Fail if overclaim phrases appear as positive claims
+          # (negated uses like "not a drop-in replacement" are allowed)
+          OVERCLAIM="bit.identical.{0,40}proof"
+          hits=$(grep -RniE "actual order|runtime-proven|complete reconstruction|$OVERCLAIM" \
+            README.md CURRENT_STATUS.md VALIDATION_STATUS.md docs reports spec rebuild runtime-validation \
+            2>/dev/null | grep -viE "not |overstated|removed|no longer|circular|deprecated|historical|was " || true)
+          if [ -n "$hits" ]; then
+            echo "DANGEROUS PHRASES DETECTED (non-negated):"
+            echo "$hits"
+            exit 1
+          fi
 
-      - name: C capture tool syntax check
+      - name: Collapsed Markdown guard
+        run: |
+          # Fail if primary .md files have evidence collapsed into 450+ char lines
+          hits=$(grep -rn ".\{450,\}" --include='*.md' README.md CURRENT_STATUS.md VALIDATION_STATUS.md REPRODUCING.md VALIDATORS_START_HERE.md rebuild/README.md runtime-validation/README.md 2>/dev/null || true)
+          if [ -n "$hits" ]; then
+            echo "COLLAPSED MARKDOWN DETECTED (450+ char lines):"
+            echo "$hits"
+            exit 1
+          fi
+
+      - name: ShellCheck (informational only — not blocking)
+        continue-on-error: true
+        run: |
+          find . -name '*.sh' -not -path './.git/*' -exec shellcheck {} \;
+
+      - name: C capture tool syntax smoke test (best effort)
+        continue-on-error: true
         run: |
           for f in tools/ffx_d3d12_capture.c tools/ffx_capture_proxy.c; do
             gcc -fsyntax-only -I/usr/include/w32api -I/usr/include \
               -D_WIN32 -D_WIN64 -D__GNUC__ \
               "$f" 2>/dev/null && echo "  OK: $f (syntax)" \
-              || echo "  SKIP: $f (Windows headers unavailable on Linux)"
+              || echo "  SKIP: $f (Windows headers unavailable on Linux — best effort only)"
           done

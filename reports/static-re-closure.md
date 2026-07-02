@@ -4,9 +4,9 @@
 
 Two open static analysis gaps have been closed using the MIT-licensed FSR 4.0.2 HLSL source code cross-referenced against the 4.1.0 extracted blob data and DXIL IR.
 
-### Gap 3 (Tensor Offset Map): RESOLVED — 78/78 tensors verified
+### Gap 3 (Tensor Offset Map): RESOLVED — 78/78 tensors confirmed
 
-The 78-tensor offset map derived from the 4.0.2 MIT HLSL source has been verified against the actual 4.1.0 quality weight blob (131,072 bytes). Every tensor was parsed at its 4.0.2-derived byte offset and validated for type-appropriate value distribution:
+The 78-tensor offset map derived from the 4.0.2 MIT HLSL source has been confirmed against the actual 4.1.0 quality weight blob (131,072 bytes). Every tensor was parsed at its 4.0.2-derived byte offset and validated for type-appropriate value distribution:
 
 - All 40 bias tensors (FP32): finite values, reasonable magnitude (<1e6), nonzero where expected
 - All 35 FP8 weight tensors (uint8): broad value distribution (2-255 unique values)

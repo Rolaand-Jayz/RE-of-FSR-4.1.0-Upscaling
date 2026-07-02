@@ -2,7 +2,7 @@
 
 > How we mapped every tensor in the weight blob — 78 tensors with byte offsets.
 >
-> **Important caveat**: The 4.0.2 offsets are from MIT-licensed source and are verified. The 4.1.0 offsets are *assumed identical* based on matching model names and DXIL entry points — they were not captured at runtime.
+> **Important caveat**: The 4.0.2 offsets are from MIT-licensed source and are confirmed. The 4.1.0 offsets are *assumed identical* based on matching model names and DXIL entry points — they were not captured at runtime.
 
 ## The Problem
 

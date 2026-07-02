@@ -7,7 +7,7 @@
 > **Evidence status:** Claims in this document are derived from static
 > analysis (DXIL IR, LLVM IR, binary disassembly). No claim here has been
 > validated via runtime instrumentation unless explicitly marked
-> `runtime_observed`. Default evidence tier: `verified_static` or `inferred`.
+> `runtime_not_observed` (no capture data gathered yet). Default evidence tier: `static_reproducible` or `static_inferred`.
 > See [VALIDATION_STATUS.md](../VALIDATION_STATUS.md) for the canonical
 > evidence-tier registry.
 
@@ -175,7 +175,7 @@ The low 24 bits of each offset are the actual byte offset within the region.
 
 ## 4. Shader Implementation Details
 
-### 4.1 DXIL Opcode Reference (Verified)
+### 4.1 DXIL Opcode Reference (STATIC-REPRODUCIBLE)
 
 These opcodes are type-overloaded. The same number means different operations
 for different types:
@@ -244,7 +244,7 @@ float activated = max(value, 0.0);
 Applied in the inner convolution loop, between the accumulation result and the
 output buffer write. Passes 3 and 6 (pointwise convolutions) have no activation.
 
-Cross-verified via DXIL (`binary.f32(35, x, 0.0)`) and SPIR-V (`llvm.maxnum.f32(x, 0.0)`).
+Cross-confirmed via DXIL (`binary.f32(35, x, 0.0)`) and SPIR-V (`llvm.maxnum.f32(x, 0.0)`).
 
 ### 4.4 CBV Architecture
 
@@ -294,7 +294,7 @@ float pq_eotf(float N) {
 }
 ```
 
-**Verified from IR constants:**
+**Confirmed from IR constants:**
 - `1/m2 = 0.012683313515656` → matches `0x3F89F9B580000000`
 - `1/m1 = 6.277394636015326` → matches `0x40191C0D60000000`
 - `c1 = 0.8359375` → matches `0xBFEAC00000000000` (negated for subtraction)
@@ -366,7 +366,7 @@ float3 history = textureLoad(history_tex, coords);  // FP16 → FP32
 float3 output = history * (1.0 - blend_factor) + composed * blend_factor;
 ```
 
-**Sigmoid implementation** (verified from IR):
+**Sigmoid implementation** (confirmed from IR):
 ```
 blend = 1 - 1/(1 + exp2(-x * log2(e)))
       = 1 - 1/(1 + 2^(-x * 1.4427))
@@ -455,7 +455,7 @@ To write HLSL compute shaders from these notes (currently incomplete — see Rem
 - [ ] Implement CBV constant layout per pass (§4.4)
 
 ### Phase 2: Prepass
-- [ ] Implement PQ EOTF (§5.2) — exact constants verified
+- [ ] Implement PQ EOTF (§5.2) — exact constants confirmed
 - [ ] Implement coordinate transform using CBV slot 1
 - [ ] Implement 2×2 neighborhood sampling
 - [ ] Write FP16 output to UAV 2:3
@@ -489,7 +489,7 @@ To write HLSL compute shaders from these notes (currently incomplete — see Rem
 
 2. **Buffer offset computation** — RESOLVED
    - Weight offsets: `threadGroupStorageByteOffset` from HLSL tensor declarations
-   - All 78 tensor offsets verified against 4.1.0 blob data (78/78 pass)
+   - All 78 tensor offsets confirmed against 4.1.0 blob data (78/78 pass)
    - See reports/tensor-offset-verification.json
 
 3. **Weight blob indexing** — RESOLVED

@@ -101,7 +101,7 @@ def verify_weights(provider_path, weights_dir):
 
     print()
     if all_match:
-        print("✓ All weight blobs verified — extraction matches shipping binary")
+        print("✓ All weight blobs confirmed — extraction matches shipping binary")
     else:
         print("✗ Weight verification FAILED — see above")
     return all_match
