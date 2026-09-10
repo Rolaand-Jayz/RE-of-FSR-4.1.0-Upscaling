@@ -1,5 +1,27 @@
 # FSR 4.1.0 — Static Reverse-Engineering Notes
 
+> **Evidence-driven research artifact · Runtime claims intentionally bounded**
+
+This repository investigates the ML-based FSR 4.1 temporal upscaler through static structural analysis: extracted weight blobs, shader/pass catalogs, data-layout reconstruction, provider-DLL dispatch analysis, Ghidra/DXIL/raw-disassembly tooling, and reproducible verification artifacts.
+
+It is not a drop-in replacement, not a supported replacement DLL, and not proof of functional equivalence. The public claim ceiling is explicit: distinguish `STATIC-REPRODUCIBLE`, `STATIC-INFERRED`, and `RUNTIME-NOT-OBSERVED`.
+
+## Why this matters
+
+The work bridges AMD/FSR reverse engineering and later Temporal Forge research. It shows how to recover useful structure from opaque binaries while preserving uncertainty instead of promoting plausible interpretation into runtime fact.
+
+## What is actually established
+
+The repository catalogs 602 DXBC shader blobs, six 131,072-byte weight blobs, static provider dispatch structures, resource-binding layouts, constant-buffer access patterns, and reproducible extraction/comparison tooling. Runtime dispatch order, live descriptor bindings, runtime CBV values, and functional equivalence remain unobserved unless a specific document says otherwise.
+
+## Verification path
+
+Start with [CURRENT_STATUS.md](CURRENT_STATUS.md), [VALIDATION_STATUS.md](VALIDATION_STATUS.md), [RELEASE_NOTES.md](RELEASE_NOTES.md), and [REPRODUCING.md](REPRODUCING.md). The hostile-reviewer material is intentionally retained because the limitations and failed validation paths are part of the evidence.
+
+## Lineage
+
+This research informed the FSR-related implementation direction in [Temporal Forge Player](https://github.com/Rolaand-Jayz/temporal_forge_player). It does not claim that later methodology or runtime conclusions existed during the original analysis.
+
 > **Current status:** See [CURRENT_STATUS.md](CURRENT_STATUS.md) for a one-glance truth table.
 > **Canonical validation source:** [VALIDATION_STATUS.md](VALIDATION_STATUS.md) is the single source of truth for claim status. Other documents reference it; they do not restate conclusions independently.
 
