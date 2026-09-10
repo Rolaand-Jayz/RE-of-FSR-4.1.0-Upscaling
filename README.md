@@ -482,7 +482,7 @@ The 4.0.2 source was essential for:
 - Validating weight blob layout and FP8 quantization format
 - Establishing the provider-layer contract that 4.1.0 inherits
 
-**Repository:** [fsr4-sdk-402-source](https://github.com/rolaandjayz/fsr4-sdk-402-source) — AMD FidelityFX SDK 2.0.0, FSR 4.0.2 (ML-Upscaler), MIT-licensed.
+**Repository:** [fsr4-sdk-402-source](https://github.com/Rolaand-Jayz/FSR-4.0.2-reference) — AMD FidelityFX SDK 2.0.0, FSR 4.0.2 (ML-Upscaler), MIT-licensed.
 
 > The FSR 4.0.2 source and this RE project are separate repositories. The 4.0.2 source is AMD's original work, published under MIT. This RE project is our original analysis work, also released under MIT.
 
