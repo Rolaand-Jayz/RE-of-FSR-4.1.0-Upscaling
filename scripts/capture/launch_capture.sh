@@ -9,7 +9,7 @@
 set -e
 
 CAPTURE_DIR="/tmp/fsr-capture"
-GAME_DIR="/home/rolaandjayz/.steam/steam/steamapps/common/FINAL FANTASY VII REBIRTH"
+GAME_DIR="${FF7R_GAME_DIR:?Set FF7R_GAME_DIR to your local FF7 Rebirth install}"
 GAME_EXE="End/Binaries/Win64/ff7rebirth.exe"
 
 # Check RenderDoc

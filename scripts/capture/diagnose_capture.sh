@@ -9,8 +9,8 @@ echo "================================================"
 RD_SO="/usr/lib/librenderdoc.so"
 CAPTURE_SO="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}/tools/fsr4_capture.so"
 PROXY_DLL="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}/tools/ffx_proxy.dll"
-FF7R_DLL="/home/rolaandjayz/.local/share/Steam/steamapps/common/FINAL FANTASY VII REBIRTH/End/Binaries/Win64/amd_fidelityfx_upscaler_dx12.dll"
-FF7R_DIR="/home/rolaandjayz/.local/share/Steam/steamapps/common/FINAL FANTASY VII REBIRTH"
+FF7R_DIR="${FF7R_GAME_DIR:?Set FF7R_GAME_DIR to your local FF7 Rebirth install}"
+FF7R_DLL="${FF7R_UPSCALER_DLL:-$FF7R_DIR/End/Binaries/Win64/amd_fidelityfx_upscaler_dx12.dll}"
 
 PASS=0
 FAIL=0

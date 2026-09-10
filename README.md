@@ -20,7 +20,7 @@ Start with [CURRENT_STATUS.md](CURRENT_STATUS.md), [VALIDATION_STATUS.md](VALIDA
 
 ## Lineage
 
-This research informed the FSR-related implementation direction in [Temporal Forge Player](https://github.com/Rolaand-Jayz/temporal_forge_player). It does not claim that later methodology or runtime conclusions existed during the original analysis.
+This research informed the FSR-related implementation direction in [Temporal Forge Player](https://github.com/Rolaand-Jayz/Temporal-Forge-Player). It does not claim that later methodology or runtime conclusions existed during the original analysis.
 
 > **Current status:** See [CURRENT_STATUS.md](CURRENT_STATUS.md) for a one-glance truth table.
 > **Canonical validation source:** [VALIDATION_STATUS.md](VALIDATION_STATUS.md) is the single source of truth for claim status. Other documents reference it; they do not restate conclusions independently.

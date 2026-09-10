@@ -10,20 +10,20 @@
 #
 set -e
 
-BASE="/mnt/workdrive/fsr-re"
+BASE="${FSR_RE_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 CAPTURE_DIR="$BASE/runtime-capture"
 TOOLS="$BASE/tools"
 
 # Game paths
-FF7R_DIR="/home/rolaandjayz/.local/share/Steam/steamapps/common/FINAL FANTASY VII REBIRTH"
+FF7R_DIR="${FF7R_GAME_DIR:?Set FF7R_GAME_DIR to your local FF7 Rebirth install}"
 FF7R_EXE="End/Binaries/Win64/ff7rebirth.exe"
 FF7R_UPSCALER_DLL="$FF7R_DIR/End/Binaries/Win64/amd_fidelityfx_upscaler_dx12.dll"
 
-SPLIT_DIR="/home/rolaandjayz/.local/share/Steam/steamapps/common/Split Fiction"
+SPLIT_DIR="${SPLIT_GAME_DIR:?Set SPLIT_GAME_DIR to your local Split Fiction install}"
 SPLIT_EXE="Split/Binaries/Win64/SplitFiction.exe"
 
 RENDERDOC_SO="/usr/lib/librenderdoc.so"
-PROTON_DIR="/home/rolaandjayz/.local/share/Steam/steamapps/common/Proton 11.0"
+PROTON_DIR="${PROTON_DIR:-$HOME/.local/share/Steam/steamapps/common/Proton 11.0}"
 
 mkdir -p "$CAPTURE_DIR"
 
