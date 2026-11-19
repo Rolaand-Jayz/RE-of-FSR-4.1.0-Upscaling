@@ -1,0 +1,21 @@
+name: Question
+description: Ask about the analysis, the evidence, or how to reproduce a result.
+title: "[question] "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Related files or claims
+      description: File paths or claim_id values from claims.json, if any.
+  - type: textarea
+    id: checked
+    attributes:
+      label: What you already checked
+      description: For example CURRENT_STATUS.md, VALIDATION_STATUS.md, REPRODUCING.md, or LEGAL.md.

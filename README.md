@@ -472,6 +472,14 @@ If that's you, open an issue. This work deserves to be validated, and validation
 
 ---
 
+## Contributing
+
+Reproductions, runtime captures, counter-evidence, and corrections are welcome.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the legal boundaries and claim-labeling rules contributions are reviewed against.
+This project follows the [Contributor Covenant](CODE_OF_CONDUCT.md).
+
+---
+
 ## FSR 4.0.2 Source Reference
 
 Our reverse engineering of FSR 4.1.0 used the MIT-licensed **FSR 4.0.2 source code** as a structural reference. AMD published this code on [GPUOpen](https://gpuopen.com/) under the MIT license — it is explicitly permitted for any use, including analysis and interoperability research.

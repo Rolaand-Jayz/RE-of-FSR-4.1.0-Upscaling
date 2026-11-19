@@ -1,0 +1,64 @@
+name: Reproduction or correction
+description: Report a reproduction of the verification results, or a correction to a claim or file.
+title: "[repro] "
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Report type
+      options:
+        - Reproduction (results match)
+        - Reproduction (results differ)
+        - Correction to a claim or document
+    validations:
+      required: true
+  - type: textarea
+    id: affected
+    attributes:
+      label: Claim or file affected
+      description: The claim_id from claims.json and/or the file path. Quote the wording at issue if this is a correction.
+    validations:
+      required: true
+  - type: dropdown
+    id: label
+    attributes:
+      label: Evidence label
+      description: The tag your evidence supports, using the definitions in CURRENT_STATUS.md.
+      options:
+        - STATIC-REPRODUCIBLE
+        - STATIC-INFERRED
+        - PLAUSIBILITY-CHECK
+        - RUNTIME-NOT-OBSERVED
+        - BOUNDED-REBUILD
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps
+      description: Exact commands run, in order. See REPRODUCING.md.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, MinGW version if rebuild steps were run, and whether a local DLL was supplied (give its SHA-256, not the file). For runtime evidence, add GPU, driver, and capture tool.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Result
+      description: Full output, including FAIL and SKIP lines. Say what this result does not prove.
+      render: text
+    validations:
+      required: true
+  - type: checkboxes
+    id: legal
+    attributes:
+      label: Legal boundaries
+      options:
+        - label: I have not attached AMD binaries, decompiled or disassembled AMD source, or material obtained under NDA (see LEGAL.md).
+          required: true

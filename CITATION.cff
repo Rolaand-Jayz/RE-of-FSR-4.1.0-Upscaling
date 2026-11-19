@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you reference this research record, please cite it as below."
+title: "FSR 4.1.0: static reverse-engineering notes (research record)"
+type: software
+authors:
+  - alias: Rolaand-Jayz
+repository-code: "https://github.com/Rolaand-Jayz/RE-of-FSR-4.1.0-Upscaling"
+license: MIT
+date-released: "2026-11-19"
+keywords:
+  - reverse engineering
+  - static binary analysis
+  - neural upscaling
+  - FidelityFX Super Resolution
+  - reproducibility
