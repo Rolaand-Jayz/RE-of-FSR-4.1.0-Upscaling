@@ -202,7 +202,7 @@ verify_setup() {
         echo "    OK: $PROTON_DIR"
     else
         echo "    Checking alternatives..."
-        ls /home/user/.local/share/Steam/steamapps/common/ | grep -i proton 2>/dev/null || echo "    No Proton found"
+        ls "$HOME"/.local/share/Steam/steamapps/common/ | grep -i proton 2>/dev/null || echo "    No Proton found"
     fi
     
     echo ""
